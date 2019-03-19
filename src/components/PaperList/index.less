@@ -1,0 +1,72 @@
+.paperList {
+
+  border: 1px solid #e5e6e9;
+  box-shadow: 0 2px 6px hsla(0, 0%, 78%, 0.4);
+  border-radius: 2px;
+
+  .paper{
+    border-bottom: 1px solid #e8e8e8;
+    padding: 15px;
+  }
+
+  h3:hover {
+    color: #108ee9;
+    cursor: pointer;
+  }
+
+  .paperBasic {
+    display: flex;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    .paperItem{
+      margin-right: 18px;
+      .sourceHref{
+        display: none;
+      }
+    }
+    .paperItem:hover{
+      .sourceHref{
+        display:inline;
+      }
+    }
+
+    .paperIcon {
+      font-weight: bold;
+      font-size: 16px;
+      margin-right: 10px;
+      margin-top: 4px;
+    }
+  }
+
+  .team {
+    margin-top: 8px;
+    margin-bottom: 8px;
+    .teamAvatar {
+      margin-left: 2px;
+      margin-right: 2px;
+      cursor: pointer;
+    }
+    .paperIcon {
+      font-weight: bold;
+      font-size: 16px;
+      margin-right: 8px;
+      margin-top: 4px;
+    }
+  }
+
+  .abstract{
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .tags {
+    margin-top: 4px;
+    div {
+      margin-top: 4px;
+      margin-bottom: 4px;
+    }
+  }
+
+}

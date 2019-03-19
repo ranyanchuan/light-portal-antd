@@ -1,0 +1,84 @@
+.relationChart {
+  background-color: #031f2d;
+  .relationContent{
+    width: 100%;
+    height: 800px;
+  }
+
+  .rightSalary{
+    //width: 300px;
+    //margin-right: 10px;
+    display: flex;
+    justify-content: flex-end;
+    .searchTitle {
+      display: flex;
+      justify-content: start;
+      margin-top: 30px;
+      margin-bottom: 20px;
+      margin-right: 10px;
+      .search {
+        display: flex;
+        justify-content: flex-start;
+        width: 100%;
+        .inputStyle {
+          width: 100%;
+        }
+
+        :global {
+          .ant-btn {
+            border-radius: 0px 4px 4px 0px;
+          }
+          .ant-input {
+            border-radius: 4px 0px 0px 4px;
+          }
+        }
+
+      }
+    }
+  }
+
+
+  .topHonor {
+    border: 1px solid #fff;
+    padding: 8px;
+    margin-right: 10px;
+    .cupItem {
+      margin: 8px;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      .cupIcon {
+        //font-size: 18px;
+        color: #fff;
+        border: 1px solid #fff;
+        padding: 5px;
+        border-radius: 30px;
+      }
+      .cupFont {
+        color: #fff;
+        //border: 1px solid #fff;
+        font-size: 16px;
+        padding: 6px;
+        margin-left: 2px;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        overflow: hidden;
+      }
+    }
+    .page {
+      margin-top: 20px;
+      //width: 100%;
+      margin-bottom: 20px;
+      //text-align: center;
+      :global{
+        .ant-pagination{
+          a{
+            color: #108ee9;
+          }
+        }
+      }
+
+    }
+  }
+
+}

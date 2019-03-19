@@ -1,0 +1,167 @@
+
+.home {
+  min-width: 1200px;
+  .aim {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    div {
+      color: #0569bf;
+      font-size: 25px;
+      margin-right: 5px;
+      margin-left: 5px;
+    }
+  }
+
+  .searchTitle {
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+    .search {
+      display: flex;
+      justify-content: flex-start;
+      .inputStyle {
+        width: 530px;
+      }
+
+      :global {
+        .ant-btn {
+          border-radius: 0px 4px 4px 0px;
+        }
+        .ant-input {
+          border-radius: 4px 0px 0px 4px;
+        }
+      }
+
+    }
+  }
+  .star {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+    .bar {
+      width: 600px;
+    }
+    .starName {
+      margin-left: 10px;
+
+    }
+  }
+
+  .content {
+    display: flex;
+    justify-content: center;
+    margin: 40px 80px 60px 80px;
+    .new {
+      height: 350px;
+      width: 580px;
+      img {
+        height: 380px;
+        width: 580px;
+      }
+    }
+
+    .infos {
+      padding: 20px 15px;
+      margin-left: 15px;
+      border: 1px solid #e5e5e5;
+      -webkit-box-shadow: 4px 4px 40px rgba(0, 0, 0, .05);
+      box-shadow: 4px 4px 40px rgba(0, 0, 0, .05);
+      width: 580px;
+      :global {
+        .ant-list {
+          .ant-list-item-meta-description {
+            width: 580px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+          .ant-avatar {
+            height: 60px !important;
+            width: 90px !important;
+            border-radius: 0px !important;
+
+          }
+        }
+      }
+      .actionHref {
+        display: flex;
+        justify-content: space-between;
+      }
+      .common{
+        height: 278px;
+        overflow: auto;
+        .commonItem {
+          margin: 8px 0px;
+          span {
+            font-size: 18px;
+          }
+          a {
+            margin-left: 8px;
+          }
+          i {
+            font-size: 18px;
+          }
+        }
+      }
+
+
+    }
+  }
+
+  .statistics {
+    margin-bottom: 20px;
+    padding-bottom: 55px;
+    font-weight: 300;
+    color: #fff;
+    background-image: url(//shadow.elemecdn.com/faas/napos-kaidian/static/img/header-bg.ab21e48.jpg);
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-size: cover;
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .number {
+        font-size: 100px;
+        color: #fff000;
+        letter-spacing: -4px;
+
+      }
+      .unit {
+        margin-left: -10px;
+        font-size: 30px;
+        color: #fff000;
+      }
+      .divider {
+        margin-left: 50px;
+        margin-right: 50px;
+      }
+      .titleName {
+        text-align: center;
+        font-size: 18px;
+        margin-top: -25px;
+      }
+
+    }
+  }
+
+  .rank {
+    margin-top: -10px;
+    height: 285px;
+    width: 100%;
+  }
+
+  .dataKing {
+    display: flex;
+    justify-content: center;
+    margin: 40px 80px 60px 80px;
+    .dataKingIframe{
+      //margin: 0px 103px 0px 93px;
+      width: 1210px;
+      height: 480px;
+    }
+  }
+
+}
