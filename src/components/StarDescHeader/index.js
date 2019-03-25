@@ -4,7 +4,7 @@
 import React from 'react';
 import { connect } from 'dva';
 
-import { Button, Form, Input, Select, Row, Col, Avatar } from 'antd';
+import { Button, Form, Input, Icon, Row, Badge, Avatar } from 'antd';
 import SkillChart from 'components/SkillChart/index';
 import StarDescBasicBasketball from 'components/StarDescBasic/basketball';
 import styles from './index.less';
@@ -60,18 +60,82 @@ class StarDescHeader extends React.Component {
         {/*头像信息*/}
         <div className={styles.leftBasic}>
           <img src={avatar} alt=""/>
-          <div style={{ marginTop: '15px' }}>
-            <h3 className={styles.name}>{basicName}</h3>
+
+          {/*<Avatar icon="user" size={190} src={avatar} shape="square"/>*/}
+
+          {/*<div style={{ marginTop: '15px' }}>*/}
+          {/*<h3 className={styles.name}>{basicName}</h3>*/}
+          {/*</div>*/}
+          {/*<div style={{ textAlign: 'center' }}>*/}
+          {/*<a href={baiduUrl}>百度百科</a>*/}
+          {/*{wikiUrl &&*/}
+          {/*<span>*/}
+          {/*<span className={styles.line}>|</span>*/}
+          {/*<a href={wikiUrl}>维基百科</a>*/}
+          {/*</span>*/}
+          {/*}*/}
+          {/*</div>*/}
+          {/*<Button type="primary" shape="round" ghost>关注</Button>*/}
+
+          {/*<Button type="primary" shape="round" icon="download" size="md">Download</Button>*/}
+
+          {/*<div style={{ fontSize: '20px', textAlign: 'right' }}>*/}
+            {/*<div>*/}
+            {/*<span>*/}
+              {/*<Icon type="heart" theme="twoTone" twoToneColor="#eb2f96"/>*/}
+              {/*<span style={{ fontSize: '12px' }}>50000</span>*/}
+            {/*</span>*/}
+            {/*</div>*/}
+
+            {/*/!*<span style={{float:'right',color:'blue',fontSize:'12px'}}>*!/*/}
+            {/*/!*更多*!/*/}
+            {/*/!*</span>*!/*/}
+
+          {/*</div>*/}
+
+          <div>
+            <Button type="primary" shape="round" style={{width:'100%'}}>点击关注</Button>
           </div>
-          <div style={{ textAlign: 'center' }}>
-            <a href={baiduUrl}>百度百科</a>
-            {wikiUrl &&
-            <span>
-                <span className={styles.line}>|</span>
-                <a href={wikiUrl}>维基百科</a>
-            </span>
-            }
+          <div style={{ margin: '5px', paddingLeft: '5px',}}>
+            <Avatar icon="user" size={24} style={{ margin: '1px 2px' }}/>
+            <Avatar icon="user" size={24} style={{ margin: '1px 2px' }}/>
+            <Avatar icon="user" size={24} style={{ margin: '1px 2px' }}/>
+            <Avatar icon="user" size={24} style={{ margin: '1px 2px' }}/>
+            <Avatar icon="user" size={24} style={{ margin: '1px 2px' }}/>
+            <Avatar icon="user" size={24} style={{ margin: '1px 2px' }}/>
+            <Avatar icon="user" size={24} style={{ margin: '1px 2px' }}/>
+            <Avatar icon="user" size={24} style={{ margin: '1px 2px' }}/>
+            <Avatar icon="user" size={24} style={{ margin: '1px 2px' }}/>
+            <Avatar icon="user" size={24} style={{ margin: '1px 2px' }}/>
+            <Avatar icon="user" size={24} style={{ margin: '1px 2px' }}/>
+            <Avatar icon="user" size={24} style={{ margin: '1px 2px' }}/>
+            <Avatar icon="user" size={24} style={{ margin: '1px 2px' }}/>
+            <Avatar icon="user" size={24} style={{ margin: '1px 2px' }}/>
+            <Avatar icon="user" size={24} style={{ margin: '1px 2px' }}/>
+            <Avatar icon="user" size={24} style={{ margin: '1px 2px' }}/>
+            <Avatar icon="user" size={24} style={{ margin: '1px 2px' }}/>
+            <Avatar icon="user" size={24} style={{ margin: '1px 2px' }}/>
+            <Avatar icon="user" size={24} style={{ margin: '1px 2px' }}/>
+            <Avatar icon="user" size={24} style={{ margin: '1px 2px' }}/>
+            <Avatar icon="user" size={24} style={{ margin: '1px 2px' }}/>
+            <Avatar icon="user" size={24} style={{ margin: '1px 2px' }}/>
+            <Avatar icon="user" size={24} style={{ margin: '1px 2px' }}/>
+            <Avatar icon="user" size={24} style={{ margin: '1px 2px' }}/>
+            <Avatar icon="user" size={24} style={{ margin: '1px 2px' }}/>
+            <Avatar icon="user" size={24} style={{ margin: '1px 2px' }}/>
+            <Avatar icon="user" size={24} style={{ margin: '1px 2px' }}/>
+            <Avatar icon="user" size={24} style={{ margin: '1px 2px' }}/>
+            <Avatar icon="user" size={24} style={{ margin: '1px 2px' }}/>
+            <Avatar icon="user" size={24} style={{ margin: '1px 2px' }}/>
+            <Avatar icon="user" size={24} style={{ margin: '1px 2px' }}/>
+
           </div>
+
+          <div style={{textAlign:'center'}}>
+          <Button onClick={this.onLoadMore} size="small">加载更多</Button>
+          </div>
+
+
         </div>
 
         {/*个人基本档案*/}

@@ -10,6 +10,9 @@
     width: 260px;
     border: 1px solid #ebedf0;
     //border: 1px solid #999;
+    height: 300px;
+    overflow-y: scroll;
+    overflow-x: hidden;
     .name {
       text-align: center;
     }
@@ -23,11 +26,18 @@
   }
 
 
+  .leftBasic ::-webkit-scrollbar-thumb{
+    background-color: #108ee9;
+  }
+
+
   .rightSimilar {
     border: 1px solid #ebedf0;
-    padding: 8px 8px 6px 8px;
+    padding: 8px 15px 6px 8px;
     width: 316px;
-
+    height: 300px;
+    //overflow-y: scroll;
+    //overflow-x: visible;
     .titleSimilar {
       padding-bottom: 8px;
       color: #999;
@@ -36,7 +46,7 @@
     .similar {
       //border: 1px solid #999;
 
-      width: 300px;
+      width: 285px;
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
