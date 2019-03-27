@@ -30,7 +30,7 @@ class School extends React.Component {
           {...formItemLayout}
           label="学校"
         >
-          {getFieldDecorator('tags')(
+          {getFieldDecorator('school')(
             <Select
               mode="tags"
               style={{ width: '100%' }}

@@ -172,7 +172,7 @@ class ScoreModal extends React.Component {
             className={styles.scoreForm}
             onSubmit={this.handleSearch}
           >
-            <Row gutter={24} >
+            <Row gutter={24}>
               <Col span={6}>
                 <Form.Item
                   {...formItemLayout}
@@ -412,8 +412,15 @@ class ScoreModal extends React.Component {
               </Col>
             </Row>
           </Form>
-          <Table columns={this.columns} dataSource={this.data} className={styles.newsTable} size="small"
-                 style={{ marginTop: '15px' }}/>
+
+          <Table
+            columns={this.columns}
+            dataSource={this.data}
+            className={styles.newsTable}
+            size="small"
+            style={{ marginTop: '15px' }}
+          />
+
         </Modal>
       </div>
     );

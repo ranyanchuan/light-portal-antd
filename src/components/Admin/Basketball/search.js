@@ -76,22 +76,6 @@ class SearchBasketball extends React.Component {
         >
           <Row gutter={24}>
             <Col span={8}>
-              <Organization
-                formItemLayout={formItemLayout}
-                form={form}
-              />
-            </Col>
-
-            <Col span={8}>
-              <Team
-                formItemLayout={formItemLayout}
-                form={form}
-              />
-            </Col>
-            <Col span={8}>
-              <Nationality formItemLayout={formItemLayout}  form={form}/>
-            </Col>
-            <Col span={8}>
               <Form.Item
                 {...formItemLayout}
                 label="名字"
@@ -107,6 +91,24 @@ class SearchBasketball extends React.Component {
             <Col span={8}>
               <City formItemLayout={formItemLayout}  form={form}/>
             </Col>
+
+            <Col span={8}>
+              <Organization
+                formItemLayout={formItemLayout}
+                form={form}
+              />
+            </Col>
+
+            <Col span={8}>
+              <Team
+                formItemLayout={formItemLayout}
+                form={form}
+              />
+            </Col>
+            <Col span={8}>
+              <Nationality formItemLayout={formItemLayout}  form={form}/>
+            </Col>
+
           </Row>
           <Row>
             <Col span={24} style={{ textAlign: 'right' }}>

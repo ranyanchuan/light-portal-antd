@@ -8,33 +8,33 @@ import { Button, Input, Layout, Menu, Icon, List } from 'antd';
 
 import Header from 'components/header/';
 import Footer from 'components/footer';
-import News from './news/';
-import Basketball from './basketball/';
 
-import styles from './index.less';
+import styles from './LayoutAdmin.less';
 
 
 const { Sider, Content } = Layout;
 const SubMenu = Menu.SubMenu;
 
 
-class Admin extends React.Component {
+class LayoutAdmin extends React.Component {
 
   state = {
-    selectKey: this.props.location.query.tag || 'news',
+    selectKey: 'news',
   };
 
 
-  selectedKey = (item) => {
-    const { key } = item;
+  onClickMenu=(param)=>{
+    console.log('param',param)
+    const { key } = param;
     this.setState({ selectKey: key });
-    this.props.history.push('/admin?tag=' + key);
-  };
+    this.props.history.push('/admin/'+key);
+  }
+
 
 
   render() {
 
-    const { selectKey } = this.state;
+    const { selectKey } = this.props;
 
     return (
       <div className={styles.admin}>
@@ -48,13 +48,13 @@ class Admin extends React.Component {
                 <Menu
                   onClick={this.onClickMenu}
                   style={{ width: 256 }}
-                  defaultSelectedKeys={['recommend']}
+                  defaultSelectedKeys={selectKey}
                   defaultOpenKeys={['player']}
                   mode="inline"
                 >
-                  <Menu.Item key="recommend"><Icon type="fire"/>新闻</Menu.Item>
+                  <Menu.Item key="news"><Icon type="fire"/>新闻</Menu.Item>
                   <SubMenu key="player" title={<span><span className="iconfont icon-yundong"/><span>远动员</span></span>}>
-                    <Menu.Item key="篮球"><span className="iconfont icon-lanqiu"/>篮球</Menu.Item>
+                    <Menu.Item key="basketball"><span className="iconfont icon-lanqiu"/>篮球</Menu.Item>
                     <Menu.Item key="足球"><span className="iconfont icon-svggeshi-"/>足球</Menu.Item>
                     <Menu.Item key="乒乓球"><span className="iconfont icon-PingPong"/>乒乓球</Menu.Item>
                     <Menu.Item key="羽毛球"><span className="iconfont icon-yumaoqiu"/>羽毛球</Menu.Item>
@@ -93,8 +93,6 @@ class Admin extends React.Component {
                     <Menu.Item key="音乐"><span className="iconfont icon-yinyue"/>音乐</Menu.Item>
                     <Menu.Item key="模特"><span className="iconfont icon-moteshezhi-"/>模特</Menu.Item>
                   </SubMenu>
-
-
                   <SubMenu key="company" title={<span><span className="iconfont icon-qi"/><span>企业</span></span>}>
                     <Menu.Item key="互联网"><span className="iconfont icon-hulianwang"/>互联网</Menu.Item>
                     <Menu.Item key="金融"><span className="iconfont icon-jinrong"/>金融</Menu.Item>
@@ -102,15 +100,14 @@ class Admin extends React.Component {
                     <Menu.Item key="土木工程"><span className="iconfont icon-jianzhu"/>土木工程</Menu.Item>
                   </SubMenu>
                 </Menu>
-
               </Sider>
             </div>
             <Content>
               <div className={styles.content}>
-              {selectKey === 'news' && <News/>}
-              {selectKey === 'basketball' && <Basketball/>}
+                {
+                  this.props.children
+                }
               </div>
-
             </Content>
           </Layout>
           <Footer/>
@@ -120,4 +117,4 @@ class Admin extends React.Component {
   }
 }
 
-export default Admin;
+export default LayoutAdmin;

@@ -5,8 +5,6 @@ import Organization from 'components/Organization/basketball';
 import Team from 'components/Team/basketball';
 import Tag from 'components/Tag/basketball';
 
-
-
 import styles from './index.less';
 
 const { MonthPicker, RangePicker } = DatePicker;

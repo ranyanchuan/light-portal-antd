@@ -3,16 +3,20 @@
  * Created by ranyanchuan on 2018/3/11.
  */
 import React from 'react';
-import { Button, Input, Layout, Menu, Table, Divider, Tag } from 'antd';
+import { Button, Input, Tabs, Menu, Table, Divider, Tag, Avatar } from 'antd';
 
-import Search from './search';
-import BasicModal from './basicModal';
-import RelationModal from './relationModal';
-import ScoreModal from './scoreModal';
-import HonorModal from './honorModal';
-import SalaryModal from './salaryModal';
+import LayoutAdmin from 'components/Admin/LayoutAdmin';
+import Search from 'components/Admin/Basketball/search';
+import Score from 'components/Admin/Basketball/Score';
+import BasicModal from 'components/Admin/Basketball/basicModal';
+import RelationModal from 'components/Admin/Basketball/relationModal';
+import ScoreModal from 'components/Admin/Basketball/scoreModal';
+import HonorModal from 'components/Admin/Basketball/honorModal';
+import SalaryModal from 'components/Admin/Basketball/salaryModal';
 
 import styles from './index.less';
+
+const {TabPane} = Tabs;
 
 class AdminBasketball extends React.Component {
 
@@ -29,96 +33,174 @@ class AdminBasketball extends React.Component {
   };
 
 
-  columns = [{
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
-    render: text => <a href="javascript:;">{text}</a>,
-  }, {
-    title: '年龄',
-    dataIndex: 'age',
-    key: 'age',
-    sorter: (a, b) => a.age - b.age,
-  }, {
-    title: 'Address',
-    dataIndex: 'address',
-    key: 'address',
-  }, {
-    title: '标签',
-    key: 'tags',
-    dataIndex: 'tags',
-    render: tags => (
-      <span>
-      {tags.map(tag => <Tag color="blue" key={tag}>{tag}</Tag>)}
-    </span>
-    ),
-  }, {
-    title: '操作',
-    key: 'action',
-    render: (text, record) => (
-      <span>
-      <a href="javascript:;">详情</a>
-      <Divider type="vertical"/>
-      <a href="javascript:;">删除</a>
-    </span>
-    ),
-  }];
+  // 保存基本信息
+  onClickSaveBasic = (data) => {
+    console.log('onClickSaveBasic', data);
 
-  data = [{
-    key: '1',
-    name: 'John Brown',
-    age: 32,
-    address: 'New York No. 1 Lake Park',
-    tags: ['nice', 'developer'],
-  }, {
-    key: '2',
-    name: 'Jim Green',
-    age: 42,
-    address: 'London No. 1 Lake Park',
-    tags: ['loser'],
-  }, {
-    key: '3',
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park',
-    tags: ['cool', 'teacher'],
-  }, {
-    key: '4',
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park',
-    tags: ['cool', 'teacher'],
-  }, {
-    key: '5',
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park',
-    tags: ['cool', 'teacher'],
-  }, {
-    key: '6',
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park',
-    tags: ['cool', 'teacher'],
-  }, {
-    key: '7',
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park',
-    tags: ['cool', 'teacher'],
-  }, {
-    key: '8',
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park',
-    tags: ['cool', 'teacher'],
-  }, {
-    key: '9',
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park',
-    tags: ['cool', 'teacher'],
-  }];
+  };
+
+  // 改变tab
+  onChangeTab=(param)=>{
+    console.log('param', param);
+  }
+
+  columns = [
+
+    {
+      title: '头像',
+      dataIndex: 'avatar',
+      key: 'avatar',
+      render: avatar => (<Avatar src={avatar}/>),
+    },
+    {
+      title: '名字',
+      dataIndex: 'name',
+      key: 'name',
+      render: (text,item) =>{
+        const {name_cn}=item;
+        const title=text?(name_cn?(text+"("+name_cn+")"):text):name_cn;
+        return <a href="javascript:;">{title}</a>
+      },
+    },
+
+    {
+      title: '性别',
+      dataIndex: 'gender',
+      key: 'gender',
+    },
+    {
+      title: '年龄',
+      dataIndex: 'age',
+      key: 'age',
+    },
+
+    {
+      title: '国籍',
+      dataIndex: 'nationality',
+      key: 'nationality',
+    },
+    {
+      title: '城市',
+      dataIndex: 'city',
+      key: 'city',
+    },
+    {
+      title: '组织',
+      dataIndex: 'organization',
+      key: 'organization',
+      render: text => <span>{text && Array.isArray(text)? text.join(" | "):""}</span>,
+    },
+    {
+      title: '球队',
+      dataIndex: 'team',
+      key: 'team',
+      render: text => <span>{text && Array.isArray(text)? text.join(" | "):""}</span>,
+    },
+
+
+
+    {
+      title: '学校',
+      dataIndex: 'school',
+      key: 'school',
+      render: text => <span>{text && Array.isArray(text)? text.join(" | "):""}</span>,
+    },
+
+    ];
+
+  data = [
+    {
+      key: '1',
+      id:'xxxx',
+      avatar:'http://www.stat-nba.com/image/playerImage/526.jpg',
+      name: 'John Brown',
+      name_cn: '詹姆斯',
+      nationality: '美国',
+      city:'洛杉矶',
+      organization: ['NBA','CBA'],
+      team: ['骑士队','湖人队'],
+      gender:'男',
+      school: ['清华大学', '北京大学'],
+      age: 32,
+
+    },
+    {
+      key: '2',
+      id:'xxxx',
+      avatar:'http://www.stat-nba.com/image/playerImage/526.jpg',
+      name: 'John Brown',
+      name_cn: '詹姆斯',
+      nationality: '美国',
+      city:'洛杉矶',
+      organization: ['NBA','CBA'],
+      team: ['骑士队','湖人队'],
+      gender:'男',
+      school: ['清华大学', '北京大学'],
+      age: 32,
+
+    },
+    {
+      key: '3',
+      id:'xxxx',
+      avatar:'http://www.stat-nba.com/image/playerImage/526.jpg',
+      name: 'John Brown',
+      name_cn: '詹姆斯',
+      nationality: '美国',
+      city:'洛杉矶',
+      organization: ['NBA','CBA'],
+      team: ['骑士队','湖人队'],
+      gender:'男',
+      school: ['清华大学', '北京大学'],
+      age: 32,
+
+    },
+    {
+      key: '4',
+      id:'xxxx',
+      avatar:'http://www.stat-nba.com/image/playerImage/526.jpg',
+      name: 'John Brown',
+      name_cn: '詹姆斯',
+      nationality: '美国',
+      city:'洛杉矶',
+      organization: ['NBA','CBA'],
+      team: ['骑士队','湖人队'],
+      gender:'男',
+      school: ['清华大学', '北京大学'],
+      age: 32,
+
+    },
+    {
+      key: '5',
+      id:'xxxx',
+      avatar:'http://www.stat-nba.com/image/playerImage/526.jpg',
+      name: 'John Brown',
+      name_cn: '詹姆斯',
+      nationality: '美国',
+      city:'洛杉矶',
+      organization: ['NBA','CBA'],
+      team: ['骑士队','湖人队'],
+      gender:'男',
+      school: ['清华大学', '北京大学'],
+      age: 32,
+
+    },
+    {
+      key: '6',
+      id:'xxxx',
+      avatar:'http://www.stat-nba.com/image/playerImage/526.jpg',
+      name: 'John Brown',
+      name_cn: '詹姆斯',
+      nationality: '美国',
+      city:'洛杉矶',
+      organization: ['NBA','CBA'],
+      team: ['骑士队','湖人队'],
+      gender:'男',
+      school: ['清华大学', '北京大学'],
+      age: 32,
+    },
+
+
+  ];
 
   onSelectChange = (selectedRowKeys) => {
     console.log('selectedRowKeys changed: ', selectedRowKeys);
@@ -127,18 +209,18 @@ class AdminBasketball extends React.Component {
 
 
   showModal = (param) => {
-    const {modalVisible}=this.state;
-    for(let item in modalVisible){
-      modalVisible[item]=false;
+    const { modalVisible } = this.state;
+    for (let item in modalVisible) {
+      modalVisible[item] = false;
     }
-    modalVisible[param]=true;
+    modalVisible[param] = true;
     this.setState({ modalVisible });
   };
 
   hideModal = () => {
-    const {modalVisible}=this.state;
-    for(let item in modalVisible){
-      modalVisible[item]=false;
+    const { modalVisible } = this.state;
+    for (let item in modalVisible) {
+      modalVisible[item] = false;
     }
     this.setState({ modalVisible });
   };
@@ -146,32 +228,50 @@ class AdminBasketball extends React.Component {
   render() {
 
     const { loading, selectedRowKeys, modalVisible } = this.state;
-    const { relModVis, basModVis,scoModVis,honModVis,salModVis } = modalVisible;
+    const { relModVis, basModVis, scoModVis, honModVis, salModVis } = modalVisible;
     const rowSelection = {
       selectedRowKeys,
       onChange: this.onSelectChange,
       type: 'radio',
     };
     return (
-      <div className={styles.adminBasketball}>
-        <Search/>
-        <div className="table-operations">
-          <Button onClick={this.showModal.bind(this, 'basModVis')}>添加信息</Button>
-          <Button onClick={this.clearFilters}>编辑信息</Button>
-          <Button onClick={this.showModal.bind(this, 'scoModVis')}>比分数据</Button>
-          <Button onClick={this.showModal.bind(this, 'relModVis')}>查看关系</Button>
-          <Button onClick={this.showModal.bind(this, 'honModVis')}>查看荣誉</Button>
-          <Button onClick={this.showModal.bind(this,'salModVis')}>生涯薪金</Button>
+      <LayoutAdmin {...this.props} selectKey={['basketball']}>
+        <div className={styles.adminBasketball}>
+          <Search/>
+          <div className="table-operations">
+            <Button onClick={this.showModal.bind(this, 'basModVis')} save={this.onClickSaveBasic}>添加</Button>
+            <Button onClick={this.clearFilters}>编辑</Button>
+            <Button onClick={this.clearFilters}>详情</Button>
+            <Button onClick={this.clearFilters}>删除</Button>
+          </div>
+          <BasicModal hideModal={this.hideModal} visible={basModVis}/>
+          <RelationModal hideModal={this.hideModal} visible={relModVis}/>
+          <ScoreModal hideModal={this.hideModal} visible={scoModVis}/>
+          <HonorModal hideModal={this.hideModal} visible={honModVis}/>
+          <SalaryModal hideModal={this.hideModal} visible={salModVis}/>
+          <Table
+            size="small"
+            rowSelection={rowSelection}
+            columns={this.columns}
+            dataSource={this.data}
+            className={styles.newsTable}/>
+
+          {/*子表数据*/}
+          <Tabs defaultActiveKey="1" onChange={this.onChangeTab}>
+            <TabPane tab="比分数据" key="1">
+              <Score />
+            </TabPane>
+            <TabPane tab="查看关系" key="2">Content of Tab Pane 2</TabPane>
+            <TabPane tab="查看荣誉" key="3">Content of Tab Pane 3</TabPane>
+            <TabPane tab="生涯薪金" key="4">Content of Tab Pane 3</TabPane>
+          </Tabs>
+
+
         </div>
-        <BasicModal hideModal={this.hideModal} visible={basModVis}/>
-        <RelationModal hideModal={this.hideModal} visible={relModVis}/>
-        <ScoreModal hideModal={this.hideModal} visible={scoModVis}/>
-        <HonorModal hideModal={this.hideModal} visible={honModVis}/>
-        <SalaryModal hideModal={this.hideModal} visible={salModVis}/>
-        <Table rowSelection={rowSelection} columns={this.columns} dataSource={this.data} className={styles.newsTable}/>
-      </div>
+      </LayoutAdmin>
     );
   }
 }
 
 export default AdminBasketball;
+

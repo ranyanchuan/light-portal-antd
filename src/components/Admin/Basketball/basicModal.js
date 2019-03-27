@@ -35,15 +35,11 @@ class basicModal extends React.Component {
 
   //  提交form信息弹框
   handleSubmit = (e) => {
-    // this.props.hideModal();
-    console.log('-----');
     e.preventDefault();
-
     this.props.form.validateFields((err, fieldsValue) => {
       console.log('fieldsValue', fieldsValue);
-
       if (err) {
-        return;
+        this.props.save(fieldsValue)
       }
     });
   };
@@ -52,7 +48,7 @@ class basicModal extends React.Component {
     console.log(`selected ${value}`);
   };
 
-
+  // 文件上传
   normFile = (e) => {
     console.log('Upload event:', e);
     if (Array.isArray(e)) {
@@ -77,11 +73,6 @@ class basicModal extends React.Component {
       width: { rules: [{ type: 'number'}] },
     };
 
-    const children = [];
-    for (let i = 10; i < 36; i++) {
-      children.push(<Option key={i.toString(36) + i}>{i.toString(36) + i}</Option>);
-    }
-
 
     return (
       <div className={styles.basicModal}>
@@ -95,8 +86,6 @@ class basicModal extends React.Component {
           width="860px"
         >
           <Form onSubmit={this.handleSubmit}>
-
-
             <Row>
               <Col span={12}>
                 <Organization
@@ -113,10 +102,7 @@ class basicModal extends React.Component {
                   form={form}
                 />
               </Col>
-            </Row>
 
-
-            <Row>
               <Col span={12}>
                 <Form.Item
                   {...formItemLayout}
@@ -129,16 +115,14 @@ class basicModal extends React.Component {
               <Col span={12}>
                 <Form.Item
                   {...formItemLayout}
-                  label="Name"
+                  label="英文名"
                 >
                   {getFieldDecorator('name', config.name)(
                     <Input placeholder="请输入英文姓名"/>,
                   )}
                 </Form.Item>
               </Col>
-            </Row>
 
-            <Row>
               <Col span={12}>
                 <Form.Item
                   {...formItemLayout}
@@ -163,9 +147,7 @@ class basicModal extends React.Component {
                   )}
                 </Form.Item>
               </Col>
-            </Row>
 
-            <Row>
               <Col span={12}>
                 <Form.Item
                   {...formItemLayout}
@@ -185,9 +167,7 @@ class basicModal extends React.Component {
                   )}
                 </Form.Item>
               </Col>
-            </Row>
 
-            <Row>
               <Col span={12}>
                 <Form.Item
                   {...formItemLayout}
@@ -207,20 +187,14 @@ class basicModal extends React.Component {
                   )}
                 </Form.Item>
               </Col>
-            </Row>
 
-
-            <Row>
               <Col span={12}>
                 <Tag formItemLayout={formItemLayout}  form={form}/>
               </Col>
               <Col span={12}>
                 <Position  formItemLayout={formItemLayout}  form={form}/>
               </Col>
-            </Row>
 
-
-            <Row>
               <Col span={12}>
                 <School formItemLayout={formItemLayout}  form={form}/>
               </Col>
@@ -235,10 +209,7 @@ class basicModal extends React.Component {
                 )}
               </Form.Item>
               </Col>
-            </Row>
 
-
-            <Row>
               <Col span={12}>
                 <Nationality formItemLayout={formItemLayout}  form={form}/>
               </Col>
@@ -246,9 +217,7 @@ class basicModal extends React.Component {
               <Col span={12}>
                 <City formItemLayout={formItemLayout}  form={form}/>
               </Col>
-            </Row>
 
-            <Row>
               <Col span={12}>
                 <Form.Item
                   {...formItemLayout}
@@ -268,9 +237,7 @@ class basicModal extends React.Component {
                   )}
                 </Form.Item>
               </Col>
-            </Row>
 
-            <Row>
               <Col span={12}>
                 <Shirt formItemLayout={formItemLayout}  form={form}/>
                </Col>
@@ -284,9 +251,7 @@ class basicModal extends React.Component {
                   )}
                 </Form.Item>
               </Col>
-            </Row>
 
-            <Row>
               <Col span={12}>
                 <Form.Item
                   {...formItemLayout}
@@ -307,7 +272,6 @@ class basicModal extends React.Component {
                   </div>
                 </Form.Item>
               </Col>
-
               <Col span={12}>
                 <Form.Item
                   {...formItemLayout}
@@ -324,6 +288,6 @@ class basicModal extends React.Component {
       </div>
     );
   }
-  }
+}
 
-    export default basicModal;
+export default basicModal;

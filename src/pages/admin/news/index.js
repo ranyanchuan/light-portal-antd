@@ -5,8 +5,8 @@
 import React from 'react';
 import { Button, Input, Dropdown, Menu, Table, Divider, Tag } from 'antd';
 
-import Search from './search';
-import NewsModal from './newModal';
+import LayoutAdmin from 'components/Admin/LayoutAdmin';
+import Search from 'components/Admin/News/Search';
 
 import styles from './index.less';
 
@@ -154,6 +154,7 @@ class AdminNews extends React.Component {
     );
 
     return (
+      <LayoutAdmin {...this.props} selectKey={['news']}>
       <div className={styles.adminNews}>
         <Search/>
         <div className="table-operations">
@@ -163,9 +164,10 @@ class AdminNews extends React.Component {
             <Button>导出excel</Button>
           </Dropdown>
         </div>
-        <NewsModal hideModal={this.hideModal} visible={visible}/>
+        {/*<NewsModal hideModal={this.hideModal} visible={visible}/>*/}
         <Table rowSelection={rowSelection} columns={this.columns} dataSource={this.data} className={styles.newsTable}/>
       </div>
+      </LayoutAdmin>
     );
   }
 }
