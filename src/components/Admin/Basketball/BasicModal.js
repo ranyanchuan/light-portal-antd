@@ -74,6 +74,27 @@ class basicModal extends React.Component {
     };
 
 
+    const fileProps = {
+      name: 'file',
+      multiple: true,
+      action: 'http://127.0.0.1:27000/api/file/add/',
+      headers: {
+        authorization: 'authorization-text',
+      },
+      onChange(info) {
+        const status = info.file.status;
+        // if (status !== 'uploading') {
+        //   console.log(info.file, info.fileList);
+        // }
+        // if (status === 'done') {
+        //   message.success(`${info.file.name} file uploaded successfully.`);
+        // } else if (status === 'error') {
+        //   message.error(`${info.file.name} file upload failed.`);
+        // }
+      },
+    };
+
+
     return (
       <div className={styles.basicModal}>
         <Modal
@@ -262,7 +283,7 @@ class basicModal extends React.Component {
                       valuePropName: 'fileList',
                       getValueFromEvent: this.normFile,
                     })(
-                      <Upload.Dragger name="files" action="/upload.do">
+                      <Upload.Dragger {...fileProps}>
                         <p className="ant-upload-drag-icon" style={{ marginBottom: 25 }}>
                           <Icon type="inbox"/>
                         </p>

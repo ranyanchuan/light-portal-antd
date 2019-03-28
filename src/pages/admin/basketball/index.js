@@ -6,13 +6,11 @@ import React from 'react';
 import { Button, Input, Tabs, Menu, Table, Divider, Tag, Avatar } from 'antd';
 
 import LayoutAdmin from 'components/Admin/LayoutAdmin';
-import Search from 'components/Admin/Basketball/search';
+import Search from 'components/Admin/Basketball/Search';
 import Score from 'components/Admin/Basketball/Score';
-import BasicModal from 'components/Admin/Basketball/basicModal';
-import RelationModal from 'components/Admin/Basketball/relationModal';
-import ScoreModal from 'components/Admin/Basketball/scoreModal';
-import HonorModal from 'components/Admin/Basketball/honorModal';
-import SalaryModal from 'components/Admin/Basketball/salaryModal';
+import Relation from 'components/Admin/Basketball/Relation';
+import Honor from 'components/Admin/Basketball/Honor';
+import Salary from 'components/Admin/Basketball/Salary';
 
 import styles from './index.less';
 
@@ -244,28 +242,27 @@ class AdminBasketball extends React.Component {
             <Button onClick={this.clearFilters}>详情</Button>
             <Button onClick={this.clearFilters}>删除</Button>
           </div>
-          <BasicModal hideModal={this.hideModal} visible={basModVis}/>
-          <RelationModal hideModal={this.hideModal} visible={relModVis}/>
-          <ScoreModal hideModal={this.hideModal} visible={scoModVis}/>
-          <HonorModal hideModal={this.hideModal} visible={honModVis}/>
-          <SalaryModal hideModal={this.hideModal} visible={salModVis}/>
           <Table
             size="small"
             rowSelection={rowSelection}
             columns={this.columns}
             dataSource={this.data}
             className={styles.newsTable}/>
-
           {/*子表数据*/}
           <Tabs defaultActiveKey="1" onChange={this.onChangeTab}>
             <TabPane tab="比分数据" key="1">
               <Score />
             </TabPane>
-            <TabPane tab="查看关系" key="2">Content of Tab Pane 2</TabPane>
-            <TabPane tab="查看荣誉" key="3">Content of Tab Pane 3</TabPane>
-            <TabPane tab="生涯薪金" key="4">Content of Tab Pane 3</TabPane>
+            <TabPane tab="查看关系" key="2">
+              <Relation />
+            </TabPane>
+            <TabPane tab="查看荣誉" key="3">
+              <Honor />
+            </TabPane>
+            <TabPane tab="生涯薪金" key="4">
+              <Salary />
+            </TabPane>
           </Tabs>
-
 
         </div>
       </LayoutAdmin>

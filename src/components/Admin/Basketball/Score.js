@@ -12,15 +12,13 @@ import {
   Row,
   Col,
   Table,
-  Tag,
-  Divider,
-  Avatar, InputNumber
+  InputNumber
 } from 'antd';
 
 import { uuid } from 'utils';
 import moment from 'moment';
 
-import styles from './scoreModal.less';
+import styles from './index.less';
 
 const { MonthPicker, RangePicker } = DatePicker;
 const Option = Select.Option;
@@ -68,7 +66,6 @@ class ScoreModal extends React.Component {
       }
     });
     this.setState({visible:false});
-
   };
 
   onChangeTags = (value) => {
@@ -619,8 +616,6 @@ class ScoreModal extends React.Component {
           rowSelection={rowSelection}
           columns={this.columns}
           dataSource={this.data}
-          className={styles.newsTable}
-          style={{ marginTop: '15px' }}
           scroll={{ x: 1700, y: 300 }}
         />
       </div>
