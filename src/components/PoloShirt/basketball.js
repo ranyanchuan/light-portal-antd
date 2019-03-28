@@ -13,7 +13,7 @@ import { uuid } from 'utils';
 
 class BasketballShirt extends React.Component {
   render() {
-    const { formItemLayout, form ,defValue} = this.props;
+    const { formItemLayout, form ,defValue,disabled=false} = this.props;
     const { getFieldDecorator } = form;
 
     const children = [];
@@ -33,6 +33,7 @@ class BasketballShirt extends React.Component {
           })(
             <Select
               mode="tags"
+              disabled={disabled}
               style={{ width: '100%' }}
               placeholder="请为选择球衣"
               onChange={this.onChangeTags}

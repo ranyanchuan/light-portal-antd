@@ -204,6 +204,15 @@ class AdminBasketball extends React.Component {
     this.setState({ basModVis:true,basModStatus:'add' });
   };
 
+  // 编辑弹框
+  onClickEdit=()=>{
+    this.setState({ basModVis:true,basModStatus:'edit' });
+  }
+  // 详情弹框
+  onClickDesc=()=>{
+    this.setState({ basModVis:true,basModStatus:'desc' });
+  }
+
   // 关闭弹框
   onClickClose = () => {
     this.setState({ basModVis:false,basModStatus:'add' });
@@ -259,8 +268,8 @@ class AdminBasketball extends React.Component {
           <Search/>
           <div className="table-operations">
             <Button onClick={this.onClickAdd}>添加</Button>
-            <Button onClick={this.clearFilters}>编辑</Button>
-            <Button onClick={this.clearFilters}>详情</Button>
+            <Button onClick={this.onClickEdit}>编辑</Button>
+            <Button onClick={this.onClickDesc}>详情</Button>
             <Button onClick={this.clearFilters}>删除</Button>
           </div>
           <Table
@@ -289,7 +298,7 @@ class AdminBasketball extends React.Component {
             status={basModStatus}
             onClose={this.onClickClose}
             onSave={this.onClickSaveBasic}
-            basicData={basicData}
+            basicData={basModStatus!=='add' ? basicData:{}}
           />
         </div>
       </LayoutAdmin>

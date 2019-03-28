@@ -10,7 +10,7 @@ import styles from './index.less';
 
 class City extends React.Component {
   render() {
-    const { formItemLayout, form,defValue } = this.props;
+    const { formItemLayout, form,defValue,disabled=false } = this.props;
     const { getFieldDecorator } = form;
 
     const dataSource = ['北京', '上海', '广州', '重庆', '贵阳'];
@@ -25,6 +25,7 @@ class City extends React.Component {
             initialValue:defValue || '北京'
           })(
             <AutoComplete
+              disabled={disabled}
               style={{ width: '100%' }}
               dataSource={dataSource}
               filterOption={(inputValue, option) => option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1}

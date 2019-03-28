@@ -15,7 +15,7 @@ const Option = Select.Option;
 
 class School extends React.Component {
   render() {
-    const { formItemLayout, form,defValue } = this.props;
+    const { formItemLayout, form,defValue,disabled=false } = this.props;
     const { getFieldDecorator } = form;
 
     const tags = ['清华大学', '北京大学', '北京体育大学', '剑桥大学', '哈佛大学', ];
@@ -35,6 +35,7 @@ class School extends React.Component {
           })(
             <Select
               mode="tags"
+              disabled={disabled}
               style={{ width: '100%' }}
               placeholder="请选择或输入学校"
               onChange={this.onChangeTags}

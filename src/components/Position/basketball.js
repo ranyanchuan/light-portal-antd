@@ -12,7 +12,7 @@ const Option = Select.Option;
 
 class BasketballPos extends React.Component {
   render() {
-    const { formItemLayout, form,required=false,defValue } = this.props;
+    const { formItemLayout, form,required=false,defValue,disabled=false } = this.props;
     const { getFieldDecorator } = form;
 
     return (
@@ -28,6 +28,7 @@ class BasketballPos extends React.Component {
           })(
             <Select
               mode="tags"
+              disabled={disabled}
               style={{ width: '100%' }}
               placeholder="请选择明星球场位置"
               onChange={this.onChangeTags}
