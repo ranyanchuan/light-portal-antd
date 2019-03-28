@@ -12,7 +12,7 @@ const Option = Select.Option;
 
 class BasketballPos extends React.Component {
   render() {
-    const { formItemLayout, form,required=false } = this.props;
+    const { formItemLayout, form,required=false,defValue } = this.props;
     const { getFieldDecorator } = form;
 
     return (
@@ -23,6 +23,8 @@ class BasketballPos extends React.Component {
         >
           {getFieldDecorator('position', {
             rules: [{ required, message: '请选择明星球场位置' }],
+            initialValue:defValue
+
           })(
             <Select
               mode="tags"

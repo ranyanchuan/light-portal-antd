@@ -2,28 +2,19 @@
  * Created by ranyanchuan on 2018/3/11.
  */
 import React from 'react';
-import { connect } from 'dva';
-import { Form, Select } from 'antd';
-import { uuid } from 'utils';
+import { AutoComplete, Form } from 'antd';
 
 import styles from './index.less';
-
-const Option = Select.Option;
 
 
 @Form.create()
 
 class Nationality extends React.Component {
   render() {
-    const { formItemLayout, form } = this.props;
+    const { formItemLayout, form,defValue } = this.props;
     const { getFieldDecorator } = form;
 
-    const tags = ['中国', '美国', '日本', '法国', '英国', ];
-    const children = [];
-    children.push(<Option key={uuid()} value="">请选择</Option>);
-    for (const item of tags) {
-      children.push(<Option key={uuid()} value={item}>{item}</Option>);
-    }
+    const dataSource = ['中国', '美国', '日本', '法国', '英国', ];
 
     return (
       <div className={styles.organization}>
@@ -31,15 +22,14 @@ class Nationality extends React.Component {
           {...formItemLayout}
           label="国籍"
         >
-          {getFieldDecorator('nationality')(
-            <Select
-              // mode="tags"
+          {getFieldDecorator('nationality',{
+            initialValue:defValue || '中国'
+          })(
+            <AutoComplete
               style={{ width: '100%' }}
-              placeholder="请选择或输入国籍"
-              onChange={this.onChangeTags}
-            >
-              {children}
-            </Select>,
+              dataSource={dataSource}
+              filterOption={(inputValue, option) => option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1}
+            />
           )}
         </Form.Item>
       </div>

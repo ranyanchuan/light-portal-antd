@@ -11,6 +11,7 @@ import Score from 'components/Admin/Basketball/Score';
 import Relation from 'components/Admin/Basketball/Relation';
 import Honor from 'components/Admin/Basketball/Honor';
 import Salary from 'components/Admin/Basketball/Salary';
+import BasicModal from 'components/Admin/Basketball/BasicModal';
 
 import styles from './index.less';
 
@@ -21,20 +22,14 @@ class AdminBasketball extends React.Component {
   state = {
     selectedRowKeys: ['1'], // Check here to configure the default column
     loading: false,
-    modalVisible: {
-      basModVis: false,
-      relModVis: false,
-      scoModVis: false,
-      honModVis: false,
-      salModVis: false,
-    },
+    basModVis:false,
+    basModStatus:'add'
   };
 
 
   // 保存基本信息
   onClickSaveBasic = (data) => {
     console.log('onClickSaveBasic', data);
-
   };
 
   // 改变tab
@@ -43,7 +38,6 @@ class AdminBasketball extends React.Component {
   }
 
   columns = [
-
     {
       title: '头像',
       dataIndex: 'avatar',
@@ -205,15 +199,16 @@ class AdminBasketball extends React.Component {
     this.setState({ selectedRowKeys });
   };
 
-
-  showModal = (param) => {
-    const { modalVisible } = this.state;
-    for (let item in modalVisible) {
-      modalVisible[item] = false;
-    }
-    modalVisible[param] = true;
-    this.setState({ modalVisible });
+  // 添加弹框
+  onClickAdd = () => {
+    this.setState({ basModVis:true,basModStatus:'add' });
   };
+
+  // 关闭弹框
+  onClickClose = () => {
+    this.setState({ basModVis:false,basModStatus:'add' });
+  };
+
 
   hideModal = () => {
     const { modalVisible } = this.state;
@@ -225,19 +220,45 @@ class AdminBasketball extends React.Component {
 
   render() {
 
-    const { loading, selectedRowKeys, modalVisible } = this.state;
-    const { relModVis, basModVis, scoModVis, honModVis, salModVis } = modalVisible;
+    const { basModVis, selectedRowKeys, basModStatus } = this.state;
     const rowSelection = {
       selectedRowKeys,
       onChange: this.onSelectChange,
       type: 'radio',
     };
+    const basicData={
+      avatar:'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+      name_cn:'詹姆斯',
+      name:'lbl',
+      gender:'女',
+      birthday:'2018-01-02',
+      height:20,
+      weight:20,
+      email:'xt2011@163.com',
+      phone:'15612341234',
+      hometown:'清河小营桥',
+      wiki_baidu:'www.baidu.com',
+      wiki:'www.wiki.com',
+      debut:'克利夫兰骑士队',
+      abstract:'adfafd xxxxxafs  xxxx',
+      nationality:'美国',
+      city:'上海',
+      organization:['NBA','CBA'],
+      team:['湖人队','勇士队'],
+      tags:['lbj','划水詹'],
+      position:['中锋'],
+      school:['清华大学','北京大学'],
+      polo_shirts:['1号','2号'],
+
+    }
+
+
     return (
       <LayoutAdmin {...this.props} selectKey={['basketball']}>
         <div className={styles.adminBasketball}>
           <Search/>
           <div className="table-operations">
-            <Button onClick={this.showModal.bind(this, 'basModVis')} save={this.onClickSaveBasic}>添加</Button>
+            <Button onClick={this.onClickAdd}>添加</Button>
             <Button onClick={this.clearFilters}>编辑</Button>
             <Button onClick={this.clearFilters}>详情</Button>
             <Button onClick={this.clearFilters}>删除</Button>
@@ -263,7 +284,13 @@ class AdminBasketball extends React.Component {
               <Salary />
             </TabPane>
           </Tabs>
-
+          <BasicModal
+            visible={basModVis}
+            status={basModStatus}
+            onClose={this.onClickClose}
+            onSave={this.onClickSaveBasic}
+            basicData={basicData}
+          />
         </div>
       </LayoutAdmin>
     );

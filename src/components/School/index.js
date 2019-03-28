@@ -15,7 +15,7 @@ const Option = Select.Option;
 
 class School extends React.Component {
   render() {
-    const { formItemLayout, form } = this.props;
+    const { formItemLayout, form,defValue } = this.props;
     const { getFieldDecorator } = form;
 
     const tags = ['清华大学', '北京大学', '北京体育大学', '剑桥大学', '哈佛大学', ];
@@ -25,12 +25,14 @@ class School extends React.Component {
     }
 
     return (
-      <div className={styles.organization}>
+      <div>
         <Form.Item
           {...formItemLayout}
           label="学校"
         >
-          {getFieldDecorator('school')(
+          {getFieldDecorator('school',{
+            initialValue:defValue
+          })(
             <Select
               mode="tags"
               style={{ width: '100%' }}

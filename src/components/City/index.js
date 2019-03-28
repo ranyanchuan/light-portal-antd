@@ -2,27 +2,18 @@
  * Created by ranyanchuan on 2018/3/11.
  */
 import React from 'react';
-import { connect } from 'dva';
-import { Form, Select } from 'antd';
-import { uuid } from 'utils';
+import { Form,AutoComplete } from 'antd';
 
 import styles from './index.less';
-
-const Option = Select.Option;
-
 
 @Form.create()
 
 class City extends React.Component {
   render() {
-    const { formItemLayout, form } = this.props;
+    const { formItemLayout, form,defValue } = this.props;
     const { getFieldDecorator } = form;
 
-    const tags = ['北京', '上海', '广州', '重庆', '贵阳'];
-    const children = [];
-    for (const item of tags) {
-      children.push(<Option key={uuid()} value={item}>{item}</Option>);
-    }
+    const dataSource = ['北京', '上海', '广州', '重庆', '贵阳'];
 
     return (
       <div>
@@ -30,15 +21,14 @@ class City extends React.Component {
           {...formItemLayout}
           label="城市"
         >
-          {getFieldDecorator('city')(
-            <Select
-              // mode="tags"
+          {getFieldDecorator('city',{
+            initialValue:defValue || '北京'
+          })(
+            <AutoComplete
               style={{ width: '100%' }}
-              placeholder="请选择或输入城市/省份"
-              onChange={this.onChangeTags}
-            >
-              {children}
-            </Select>,
+              dataSource={dataSource}
+              filterOption={(inputValue, option) => option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1}
+            />
           )}
         </Form.Item>
       </div>

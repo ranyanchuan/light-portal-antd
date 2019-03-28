@@ -13,13 +13,13 @@ import { uuid } from 'utils';
 
 class BasketballShirt extends React.Component {
   render() {
-    const { formItemLayout, form } = this.props;
+    const { formItemLayout, form ,defValue} = this.props;
     const { getFieldDecorator } = form;
 
     const children = [];
-    children.push(<Option key={uuid()} value={'00'}>00号</Option>);
+    children.push(<Option key={uuid()} value={'00号'}>00号</Option>);
     for (let i=0;i<100;i+=1) {
-      children.push(<Option key={uuid()} value={i.toString()}>{i+"号"}</Option>);
+      children.push(<Option key={uuid()} value={i.toString()+'号'}>{i+"号"}</Option>);
     }
 
     return (
@@ -28,7 +28,9 @@ class BasketballShirt extends React.Component {
           {...formItemLayout}
           label="球衣"
         >
-          {getFieldDecorator('polo_shirts')(
+          {getFieldDecorator('polo_shirts',{
+            initialValue:defValue
+          })(
             <Select
               mode="tags"
               style={{ width: '100%' }}

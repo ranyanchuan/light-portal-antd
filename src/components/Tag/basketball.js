@@ -14,7 +14,7 @@ import { uuid } from 'utils';
 
 class BasketballTag extends React.Component {
   render() {
-    const { formItemLayout, form } = this.props;
+    const { formItemLayout, form ,defValue} = this.props;
     const { getFieldDecorator } = form;
 
     const tags = ['勒布朗-詹姆斯', 'King James', 'LBJ', '天选之子', 'Lecarry', '勒布朗多', '划水詹', '帮主', '三旬老汉', '天之骄子', '小皇帝', '詹皇', '全能詹', '旧主杀手', '六步朗', '一星四射', '一猩四射'];
@@ -29,7 +29,10 @@ class BasketballTag extends React.Component {
           {...formItemLayout}
           label="标签"
         >
-          {getFieldDecorator('tags')(
+          {getFieldDecorator('tags',{
+            initialValue:defValue
+
+          })(
             <Select
               mode="tags"
               style={{ width: '100%' }}

@@ -12,7 +12,7 @@ const Option = Select.Option;
 
 class BasketballOrg extends React.Component {
   render() {
-    const { formItemLayout, form,required=false } = this.props;
+    const { formItemLayout, form,required=false,defValue } = this.props;
     const { getFieldDecorator } = form;
 
     return (
@@ -23,7 +23,8 @@ class BasketballOrg extends React.Component {
         >
           {getFieldDecorator('organization', {
             rules: [{ required, message: '请选择组织' }],
-          })(
+            initialValue:defValue
+            })(
             <Select
               mode="tags"
               style={{ width: '100%' }}
