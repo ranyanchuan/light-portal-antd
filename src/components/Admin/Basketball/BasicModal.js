@@ -39,6 +39,7 @@ class BasicModal extends React.Component {
   hideModal = () => {
     this.setState({ imageUrl: '' });
     this.props.onClose();
+    this.props.form.resetFields();
   };
 
   //  提交form信息弹框
@@ -57,7 +58,7 @@ class BasicModal extends React.Component {
           fieldsValue.birthday = moment(fieldsValue.birthday).format(ruleDate);
         }
         this.props.onSave(fieldsValue);
-        this.setState({ imageUrl: '' });
+        this.hideModal();
       }
     });
   };

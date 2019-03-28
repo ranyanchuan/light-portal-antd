@@ -258,7 +258,6 @@ class AdminBasketball extends React.Component {
       position:['中锋'],
       school:['清华大学','北京大学'],
       polo_shirts:['1号','2号'],
-
     }
 
 
