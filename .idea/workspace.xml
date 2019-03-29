@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="059cf7d0-ef89-48cb-9855-11b2eeca7f89" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Admin/Basketball/Relation.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Admin/Basketball/Relation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Admin/Basketball/Score.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Admin/Basketball/Score.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Admin/Basketball/Honor.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Admin/Basketball/Honor.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Admin/Basketball/Salary.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Admin/Basketball/Salary.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/admin/basketball/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/basketball/index.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -45,7 +44,7 @@
           <entry key="gitkeep" value="2" />
           <entry key="html" value="3" />
           <entry key="jpg" value="2" />
-          <entry key="js" value="553" />
+          <entry key="js" value="558" />
           <entry key="json" value="10" />
           <entry key="less" value="140" />
           <entry key="lock" value="2" />
@@ -61,7 +60,7 @@
           <entry key="HTML" value="3" />
           <entry key="Image" value="2" />
           <entry key="JSON" value="18" />
-          <entry key="JavaScript" value="553" />
+          <entry key="JavaScript" value="558" />
           <entry key="Less" value="140" />
           <entry key="PLAIN_TEXT" value="12" />
           <entry key="TypeScript" value="1" />
@@ -77,7 +76,7 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="css" value="3" />
-          <entry key="js" value="27023" />
+          <entry key="js" value="27145" />
           <entry key="json" value="13" />
           <entry key="less" value="4073" />
           <entry key="txt" value="22" />
@@ -87,7 +86,7 @@
         <counts>
           <entry key="CSS" value="3" />
           <entry key="JSON" value="13" />
-          <entry key="JavaScript" value="27023" />
+          <entry key="JavaScript" value="27145" />
           <entry key="Less" value="4073" />
           <entry key="PLAIN_TEXT" value="22" />
         </counts>
@@ -95,7 +94,7 @@
     </session>
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.76633525">
+    <splitter split-orientation="horizontal" split-proportion="0.4325284">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="false">
@@ -125,10 +124,10 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/components/Admin/Basketball/Relation.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="505">
+                <state relative-caret-position="2252">
                   <caret line="221" column="35" selection-start-line="221" selection-start-column="35" selection-end-line="221" selection-end-column="35" />
                   <folding>
                     <element signature="e#0#26#0" expanded="true" />
@@ -138,28 +137,11 @@
               </provider>
             </entry>
           </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/pages/admin/basketball/index.js">
+            <entry file="file://$PROJECT_DIR$/src/components/Admin/Basketball/Honor.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="191">
-                  <caret line="319" column="39" lean-forward="true" selection-start-line="319" selection-start-column="39" selection-end-line="319" selection-end-column="39" />
-                  <folding>
-                    <element signature="n#!!doc" expanded="true" />
-                    <element signature="e#82#108#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/components/Admin/Basketball/BasicModal.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="417">
-                  <caret line="32" column="30" selection-start-line="32" selection-start-column="22" selection-end-line="32" selection-end-column="30" />
+                <state relative-caret-position="439">
+                  <caret line="125" column="4" selection-start-line="125" selection-start-column="4" selection-end-line="129" selection-end-column="25" />
                   <folding>
                     <element signature="e#0#26#0" expanded="true" />
                   </folding>
@@ -167,26 +149,29 @@
               </provider>
             </entry>
           </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/components/Nationality/index.js">
+            <entry file="file://$PROJECT_DIR$/src/pages/admin/basketball/index.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="390">
-                  <caret line="26" column="13" lean-forward="true" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
+                <state relative-caret-position="267">
+                  <caret line="417" column="37" selection-start-line="417" selection-start-column="22" selection-end-line="417" selection-end-column="37" />
                   <folding>
-                    <element signature="e#48#74#0" expanded="true" />
+                    <element signature="n#!!doc" expanded="true" />
+                    <element signature="e#82#108#0" expanded="true" />
+                    <element signature="e#5893#7045#0" />
                   </folding>
                 </state>
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/components/PoloShirt/basketball.js">
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/components/Admin/Basketball/Salary.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="45">
-                  <caret line="3" column="7" lean-forward="true" selection-start-line="3" selection-start-column="7" selection-end-line="3" selection-end-column="7" />
-                  <folding>
-                    <element signature="e#48#74#0" expanded="true" />
-                  </folding>
+                <state relative-caret-position="414">
+                  <caret line="221" column="66" selection-start-line="221" selection-start-column="66" selection-end-line="221" selection-end-column="66" />
                 </state>
               </provider>
             </entry>
@@ -194,10 +179,11 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/components/Admin/Basketball/Score.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-5194">
-                  <caret line="56" column="4" lean-forward="true" selection-start-line="56" selection-start-column="4" selection-end-line="57" />
+                <state relative-caret-position="377">
+                  <caret line="365" column="37" lean-forward="true" selection-start-line="365" selection-start-column="37" selection-end-line="365" selection-end-column="37" />
                   <folding>
                     <element signature="e#0#26#0" expanded="true" />
+                    <element signature="e#1808#3953#0" />
                   </folding>
                 </state>
               </provider>
@@ -262,6 +248,7 @@
       <replace>InputNumber  defaultValue={0}</replace>
       <replace>start_date</replace>
       <replace>8</replace>
+      <replace>relation:</replace>
     </replaceStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$</dir>
@@ -308,8 +295,6 @@
         <option value="$PROJECT_DIR$/.umirc.js" />
         <option value="$PROJECT_DIR$/src/components/Admin/Basketball/basicModal.js" />
         <option value="$PROJECT_DIR$/src/pages/admin/basketball/index.less" />
-        <option value="$PROJECT_DIR$/src/components/Admin/Basketball/Honor.js" />
-        <option value="$PROJECT_DIR$/src/components/Admin/Basketball/Salary.js" />
         <option value="$PROJECT_DIR$/src/components/Admin/Basketball/index.less" />
         <option value="$PROJECT_DIR$/src/components/Admin/LayoutAdmin.less" />
         <option value="$PROJECT_DIR$/src/components/Organization/basketball.js" />
@@ -322,8 +307,10 @@
         <option value="$PROJECT_DIR$/src/components/Nationality/index.js" />
         <option value="$PROJECT_DIR$/src/components/Admin/Basketball/BasicModal.js" />
         <option value="$PROJECT_DIR$/src/components/Admin/Basketball/Score.js" />
-        <option value="$PROJECT_DIR$/src/pages/admin/basketball/index.js" />
         <option value="$PROJECT_DIR$/src/components/Admin/Basketball/Relation.js" />
+        <option value="$PROJECT_DIR$/src/components/Admin/Basketball/Honor.js" />
+        <option value="$PROJECT_DIR$/src/pages/admin/basketball/index.js" />
+        <option value="$PROJECT_DIR$/src/components/Admin/Basketball/Salary.js" />
       </list>
     </option>
   </component>
@@ -616,12 +603,12 @@
       <workItem from="1553736828060" duration="9325000" />
       <workItem from="1553755212563" duration="10231000" />
       <workItem from="1553776041179" duration="6794000" />
-      <workItem from="1553848740827" duration="2359000" />
+      <workItem from="1553848740827" duration="3885000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="412835000" />
+    <option name="totallyTimeSpent" value="414361000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="941" extended-state="6" />
@@ -641,7 +628,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.012956419" />
+      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.18963486" />
       <window_info anchor="bottom" id="TypeScript" order="11" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -869,23 +856,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Admin/Basketball/salaryModal.js" />
-    <entry file="file://$PROJECT_DIR$/src/components/Admin/Basketball/Honor.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
-          <caret line="190" column="20" lean-forward="true" selection-start-line="181" selection-start-column="14" selection-end-line="190" selection-end-column="20" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Admin/Basketball/Salary.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="174">
-          <caret line="131" column="1" lean-forward="true" selection-start-line="131" selection-start-column="1" selection-end-line="131" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Admin/Basketball/index.less">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
@@ -949,10 +919,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Admin/Basketball/Score.js">
+    <entry file="file://$PROJECT_DIR$/src/components/Admin/Basketball/Relation.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-5194">
-          <caret line="56" column="4" lean-forward="true" selection-start-line="56" selection-start-column="4" selection-end-line="57" />
+        <state relative-caret-position="2252">
+          <caret line="221" column="35" selection-start-line="221" selection-start-column="35" selection-end-line="221" selection-end-column="35" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+            <element signature="e#1253#1753#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Admin/Basketball/BasicModal.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="417">
+          <caret line="32" column="30" selection-start-line="32" selection-start-column="22" selection-end-line="32" selection-end-column="30" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
@@ -979,35 +960,43 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Admin/Basketball/BasicModal.js">
+    <entry file="file://$PROJECT_DIR$/src/components/Admin/Basketball/Score.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="417">
-          <caret line="32" column="30" selection-start-line="32" selection-start-column="22" selection-end-line="32" selection-end-column="30" />
+        <state relative-caret-position="377">
+          <caret line="365" column="37" lean-forward="true" selection-start-line="365" selection-start-column="37" selection-end-line="365" selection-end-column="37" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
+            <element signature="e#1808#3953#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/admin/basketball/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="319" column="39" lean-forward="true" selection-start-line="319" selection-start-column="39" selection-end-line="319" selection-end-column="39" />
+        <state relative-caret-position="267">
+          <caret line="417" column="37" selection-start-line="417" selection-start-column="22" selection-end-line="417" selection-end-column="37" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="e#82#108#0" expanded="true" />
+            <element signature="e#5893#7045#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Admin/Basketball/Relation.js">
+    <entry file="file://$PROJECT_DIR$/src/components/Admin/Basketball/Honor.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="505">
-          <caret line="221" column="35" selection-start-line="221" selection-start-column="35" selection-end-line="221" selection-end-column="35" />
+        <state relative-caret-position="439">
+          <caret line="125" column="4" selection-start-line="125" selection-start-column="4" selection-end-line="129" selection-end-column="25" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
-            <element signature="e#1253#1753#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Admin/Basketball/Salary.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="221" column="66" selection-start-line="221" selection-start-column="66" selection-end-line="221" selection-end-column="66" />
         </state>
       </provider>
     </entry>

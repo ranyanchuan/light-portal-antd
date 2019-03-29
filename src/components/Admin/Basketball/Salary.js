@@ -21,6 +21,7 @@ import { uuid } from 'utils';
 
 import styles from './index.less';
 import { Upload } from 'antd/lib/upload';
+import moment from 'moment';
 
 const { MonthPicker, RangePicker } = DatePicker;
 const Option = Select.Option;
@@ -42,15 +43,25 @@ class Salary extends React.Component {
   };
 
   // 打开弹框
-  showModal = () => {
-    this.setState({ visible: true });
+  onClickAdd = () => {
+    this.setState({ visible: true, status: 'add' });
   };
 
-  //  关闭添加信息弹框
-  hideModal = () => {
-    this.setState({ visible: false });
+
+  // 编辑弹框
+  onClickEdit = () => {
+    this.setState({ visible: true, status: 'edit' });
+  };
+  // 详情弹框
+  onClickDesc = () => {
+    this.setState({ visible: true, status: 'desc' });
   };
 
+  // 关闭弹框
+  onClickClose = () => {
+    this.setState({ visible: false, status: '' });
+    this.props.form.resetFields();
+  };
   //  提交form信息弹框
   handleSubmit = (e) => {
     // this.props.hideModal();
@@ -97,53 +108,12 @@ class Salary extends React.Component {
     }
     ];
 
-  data = [
-    {
-      key: '1',
-      start_date: '2018-01-01',
-      end_date: '2018-12-31',
-      money: '1000',
-      unit: '$',
-      comment:'xxx',
-    },
-    {
-      key: '2',
-      start_date: '2018-01-01',
-      end_date: '2018-12-31',
-      money: '1000',
-      unit: '$',
-      comment:'xxx',
-    },
-    {
-      key: '3',
-      start_date: '2018-01-01',
-      end_date: '2018-12-31',
-      money: '1000',
-      unit: '$',
-      comment:'xxx',
-    },
-    {
-      key: '4',
-      start_date: '2018-01-01',
-      end_date: '2018-12-31',
-      money: '1000',
-      unit: '$',
-      comment:'xxx',
-    },
-    {
-      key: '5',
-      start_date: '2018-01-01',
-      end_date: '2018-12-31',
-      money: '1000',
-      unit: '$',
-      comment:'xxx',
-    },
-  ];
+
 
 
   render() {
-    const { form } = this.props;
-    const { selectedRowKeys, visible } = this.state;
+    const { form ,salaryDataArray} = this.props;
+    const { selectedRowKeys, visible,status } = this.state;
     const { getFieldDecorator } = form;
 
     const rowSelection = {
@@ -157,19 +127,16 @@ class Salary extends React.Component {
       wrapperCol: { sm: { span: 19 } },
     };
 
-    const config = {
-      honor: { rules: [{ required: true, message: '请填写荣誉' }] },
-
-    };
-
+    const disabled = status === 'desc' ? true : false;
+    const salaryData = status !== 'add' ? salaryDataArray[0] : {};
 
     return (
       <div className={styles.raltionModal}>
 
         <div className="table-operations">
-          <Button onClick={this.showModal}>添加</Button>
-          <Button onClick={this.clearFilters}>编辑</Button>
-          <Button onClick={this.clearFilters}>详情</Button>
+          <Button onClick={this.onClickAdd}>添加</Button>
+          <Button onClick={this.onClickEdit}>编辑</Button>
+          <Button onClick={this.onClickDesc}>详情</Button>
           <Button onClick={this.clearFilters}>删除</Button>
         </div>
 
@@ -177,8 +144,10 @@ class Salary extends React.Component {
           title="查看荣誉"
           visible={visible}
           onOk={this.handleSubmit}
-          onCancel={this.hideModal}
+          onCancel={this.onClickClose}
           width="760px"
+          okText="确认"
+          cancelText="取消"
         >
 
           <Form onSubmit={this.handleSubmit}>
@@ -188,8 +157,10 @@ class Salary extends React.Component {
                   {...formItemLayout}
                   label="开始"
                 >
-                  {getFieldDecorator('sDate')(
-                    <DatePicker placeholder="请选择日期" style={{ width: '100%' }}/>,
+                  {getFieldDecorator('sDate',{
+                    initialValue: salaryData.sDate ? moment(salaryData.sDate) : null,
+                  })(
+                    <DatePicker disabled={disabled} placeholder="请选择日期" style={{ width: '100%' }}/>,
                   )}
                 </Form.Item>
               </Col>
@@ -199,8 +170,10 @@ class Salary extends React.Component {
                   {...formItemLayout}
                   label="结束"
                 >
-                  {getFieldDecorator('eDate')(
-                    <DatePicker placeholder="请选择日期" style={{ width: '100%' }}/>,
+                  {getFieldDecorator('eDate',{
+                    initialValue: salaryData.eDate ? moment(salaryData.eDate) : null,
+                  })(
+                    <DatePicker disabled={disabled} placeholder="请选择日期" style={{ width: '100%' }}/>,
                   )}
                 </Form.Item>
               </Col>
@@ -209,8 +182,10 @@ class Salary extends React.Component {
                   {...formItemLayout}
                   label="资薪"
                 >
-                  {getFieldDecorator('money')(
-                    <InputNumber min={0} placeholder="请输入或者选择资薪" style={{ width: '100%' }}/>,
+                  {getFieldDecorator('money',{
+                    initialValue: salaryData.money ? salaryData.money: '0',
+                  })(
+                    <InputNumber disabled={disabled} min={0} placeholder="请输入或者选择资薪" style={{ width: '100%' }}/>,
                   )}
                 </Form.Item>
               </Col>
@@ -221,8 +196,10 @@ class Salary extends React.Component {
                   label="单位"
                   hasFeedback
                 >
-                  {getFieldDecorator('unit')(
-                    <Select placeholder="请选择资薪单位">
+                  {getFieldDecorator('unit',{
+                    initialValue: salaryData.unit ? salaryData.unit: '',
+                  })(
+                    <Select placeholder="请选择资薪单位" disabled={disabled}>
                       <Option value="￥">人民币 ￥</Option>
                       <Option value="$">美元 $</Option>
                       <Option value="€">欧元 €</Option>
@@ -238,8 +215,11 @@ class Salary extends React.Component {
                   {...formItemLayout}
                   label="备注"
                 >
-                  {getFieldDecorator('content')(
-                    <Input placeholder="请填写备注"/>,
+                  {getFieldDecorator('content',{
+                    initialValue: salaryData.content ? salaryData.content: '',
+
+                  })(
+                    <Input placeholder="请填写备注" disabled={disabled}/>,
                   )}
                 </Form.Item>
               </Col>
@@ -249,8 +229,7 @@ class Salary extends React.Component {
         </Modal>
         <Table
           columns={this.columns}
-          dataSource={this.data}
-          className={styles.newsTable}
+          dataSource={salaryDataArray}
           size="small"
           rowSelection={rowSelection}
         />

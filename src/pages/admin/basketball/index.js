@@ -304,6 +304,88 @@ class AdminBasketball extends React.Component {
       }];
 
 
+    const honorData=[{
+      key: '1',
+      date: '2018-11-01',
+      title: '11-12赛季总冠军(迈阿密热火)',
+      comment:'xxxxxxxxx'
+    }, {
+      key: '2',
+      date: '2018-11-01',
+      title: '11-12赛季总冠军(迈阿密热火)',
+      comment:'xxxxxxxxx'
+
+    }, {
+      key: '3',
+      date: '2018-11-01',
+      title: '11-12赛季总冠军(迈阿密热火)',
+      comment:'xxxxxxxxx'
+
+    }, {
+      key: '4',
+      date: '2018-11-01',
+      title: '11-12赛季总冠军(迈阿密热火)',
+      comment:'xxxxxxxxx'
+
+    }, {
+      key: '5',
+      date: '2018-11-01',
+      title: '11-12赛季总冠军(迈阿密热火)',
+      comment:'xxxxxxxxx'
+
+    }, {
+      key: '6',
+      date: '2018-11-01',
+      title: '11-12赛季总冠军(迈阿密热火)',
+      comment:'xxxxxxxxx'
+
+    }];
+
+
+    const salaryData = [
+      {
+        key: '1',
+        start_date: '2018-01-01',
+        end_date: '2018-12-31',
+        money: '1000',
+        unit: '$',
+        comment:'xxx',
+      },
+      {
+        key: '2',
+        start_date: '2018-01-01',
+        end_date: '2018-12-31',
+        money: '1000',
+        unit: '$',
+        comment:'xxx',
+      },
+      {
+        key: '3',
+        start_date: '2018-01-01',
+        end_date: '2018-12-31',
+        money: '1000',
+        unit: '$',
+        comment:'xxx',
+      },
+      {
+        key: '4',
+        start_date: '2018-01-01',
+        end_date: '2018-12-31',
+        money: '1000',
+        unit: '$',
+        comment:'xxx',
+      },
+      {
+        key: '5',
+        start_date: '2018-01-01',
+        end_date: '2018-12-31',
+        money: '1000',
+        unit: '$',
+        comment:'xxx',
+      },
+    ];
+
+
 
     return (
       <LayoutAdmin {...this.props} selectKey={['basketball']}>
@@ -330,10 +412,10 @@ class AdminBasketball extends React.Component {
               <Relation relationDataArray={relationData}/>
             </TabPane>
             <TabPane tab="查看荣誉" key="3">
-              <Honor />
+              <Honor honorDataArray={honorData}/>
             </TabPane>
             <TabPane tab="生涯薪金" key="4">
-              <Salary />
+              <Salary salaryDataArray={salaryData}/>
             </TabPane>
           </Tabs>
           <BasicModal

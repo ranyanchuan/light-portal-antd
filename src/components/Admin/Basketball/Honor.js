@@ -6,6 +6,7 @@ import { uuid } from 'utils';
 
 import styles from './index.less';
 import { Upload } from 'antd/lib/upload';
+import moment from 'moment';
 
 const { MonthPicker, RangePicker } = DatePicker;
 const Option = Select.Option;
@@ -31,13 +32,24 @@ class Honor extends React.Component {
   };
 
   // 打开弹框
-  showModal=()=>{
-    this.setState({visible:true});
-  }
+  onClickAdd = () => {
+    this.setState({ visible: true, status: 'add' });
+  };
 
-  //  关闭添加信息弹框
-  hideModal = () => {
-    this.setState({visible:false});
+
+  // 编辑弹框
+  onClickEdit = () => {
+    this.setState({ visible: true, status: 'edit' });
+  };
+  // 详情弹框
+  onClickDesc = () => {
+    this.setState({ visible: true, status: 'desc' });
+  };
+
+  // 关闭弹框
+  onClickClose = () => {
+    this.setState({ visible: false, status: '' });
+    this.props.form.resetFields();
   };
 
   //  提交form信息弹框
@@ -71,51 +83,15 @@ class Honor extends React.Component {
       title: '备注',
       key: 'comment',
       dataIndex: 'comment',
+    }
+    ];
 
 
-    }];
-
-  data = [{
-    key: '1',
-    date: '2018-11-01',
-    title: '11-12赛季总冠军(迈阿密热火)',
-    comment:'xxxxxxxxx'
-  }, {
-    key: '2',
-    date: '2018-11-01',
-    title: '11-12赛季总冠军(迈阿密热火)',
-    comment:'xxxxxxxxx'
-
-  }, {
-    key: '3',
-    date: '2018-11-01',
-    title: '11-12赛季总冠军(迈阿密热火)',
-    comment:'xxxxxxxxx'
-
-  }, {
-    key: '4',
-    date: '2018-11-01',
-    title: '11-12赛季总冠军(迈阿密热火)',
-    comment:'xxxxxxxxx'
-
-  }, {
-    key: '5',
-    date: '2018-11-01',
-    title: '11-12赛季总冠军(迈阿密热火)',
-    comment:'xxxxxxxxx'
-
-  }, {
-    key: '6',
-    date: '2018-11-01',
-    title: '11-12赛季总冠军(迈阿密热火)',
-    comment:'xxxxxxxxx'
-
-  }];
 
 
   render() {
-    const {  form } = this.props;
-    const {selectedRowKeys,visible}=this.state;
+    const {  form ,honorDataArray} = this.props;
+    const {selectedRowKeys,visible,status}=this.state;
     const { getFieldDecorator } = form;
 
     const rowSelection = {
@@ -129,21 +105,18 @@ class Honor extends React.Component {
       wrapperCol: { sm: { span: 19 } },
     };
 
-    const config = {
-      honor: { rules: [{ required: true, message: '请填写荣誉' }] },
 
-    };
-
-
+    const disabled = status === 'desc' ? true : false;
+    const honorData = status !== 'add' ? honorDataArray[0] : {};
 
 
     return (
-      <div className={styles.raltionModal}>
+      <div>
 
         <div className="table-operations">
-          <Button onClick={this.showModal}>添加</Button>
-          <Button onClick={this.clearFilters}>编辑</Button>
-          <Button onClick={this.clearFilters}>详情</Button>
+          <Button onClick={this.onClickAdd}>添加</Button>
+          <Button onClick={this.onClickEdit}>编辑</Button>
+          <Button onClick={this.onClickDesc}>详情</Button>
           <Button onClick={this.clearFilters}>删除</Button>
         </div>
 
@@ -151,8 +124,10 @@ class Honor extends React.Component {
           title="查看荣誉"
           visible={visible}
           onOk={this.handleSubmit}
-          onCancel={this.hideModal}
+          onCancel={this.onClickClose}
           width="760px"
+          okText="确认"
+          cancelText="取消"
         >
 
           <Form onSubmit={this.handleSubmit}>
@@ -162,8 +137,10 @@ class Honor extends React.Component {
                   {...formItemLayout}
                   label="日期"
                 >
-                  {getFieldDecorator('date')(
-                    <DatePicker placeholder="请选择日期" style={{ width: '100%' }}/>,
+                  {getFieldDecorator('date',{
+                    initialValue: honorData.date ? moment(honorData.date) : null,
+                  })(
+                    <DatePicker placeholder="请选择日期" style={{ width: '100%' }} disabled={disabled}/>,
                   )}
                 </Form.Item>
               </Col>
@@ -173,8 +150,11 @@ class Honor extends React.Component {
                   {...formItemLayout}
                   label="荣誉"
                 >
-                  {getFieldDecorator('honor',config.honor)(
-                    <Input placeholder="请填写明星荣誉"/>,
+                  {getFieldDecorator('title',{
+                    rules: [{ required: true }],
+                    initialValue: honorData.title || '',
+                  })(
+                    <Input placeholder="请填写明星荣誉" disabled={disabled}/>,
                   )}
                 </Form.Item>
               </Col>
@@ -184,8 +164,10 @@ class Honor extends React.Component {
                   {...formItemLayout}
                   label="备注"
                 >
-                  {getFieldDecorator('content')(
-                    <Input placeholder="请填写备注"/>,
+                  {getFieldDecorator('comment',{
+                    initialValue: honorData.comment || '',
+                  })(
+                    <Input placeholder="请填写备注" disabled={disabled}/>,
                   )}
                 </Form.Item>
               </Col>
@@ -194,8 +176,7 @@ class Honor extends React.Component {
         </Modal>
         <Table
           columns={this.columns}
-          dataSource={this.data}
-          className={styles.newsTable}
+          dataSource={honorDataArray}
           size="small"
           rowSelection={rowSelection}
         />
