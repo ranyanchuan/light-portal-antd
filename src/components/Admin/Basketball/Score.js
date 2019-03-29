@@ -8,22 +8,17 @@ import {
   Button,
   Modal,
   Select,
-  Tabs,
   Row,
   Col,
   Table,
   InputNumber,
 } from 'antd';
 
-import { uuid } from 'utils';
 import moment from 'moment';
-
 import styles from './index.less';
 
-const { MonthPicker, RangePicker } = DatePicker;
 const Option = Select.Option;
-const { TextArea } = Input;
-const TabPane = Tabs.TabPane;
+
 const ruleTime = 'HH:mm';
 const ruleDate = 'YYYY-MM-DD';
 

@@ -261,6 +261,50 @@ class AdminBasketball extends React.Component {
     }
 
 
+
+
+
+    const relationData = [
+      {
+        key: '1',
+        name: 'Stephen Curry',
+        name_cn: '斯蒂芬-库里',
+        avatar: 'http://www.stat-nba.com/image/playerImage/526.jpg',
+        relation: ['朋友', '队友'],
+      }, {
+        key: '2',
+        name: 'Kevin Durant',
+        name_cn: '凯文-杜兰特',
+        avatar: 'http://www.stat-nba.com/image/playerImage/779.jpg',
+        relation: ['朋友', '队友'],
+      }, {
+        key: '3',
+        name: 'James Harden',
+        name_cn: '詹姆斯-哈登',
+        avatar: 'http://www.stat-nba.com/image/playerImage/1628.jpg',
+        relation: ['朋友', '队友'],
+      }, {
+        key: '4',
+        name: 'Russell Westbrook',
+        name_cn: '拉塞尔-威斯布鲁克',
+        avatar: 'http://www.stat-nba.com/image/playerImage/3920.jpg',
+        relation: ['朋友', '队友'],
+      }, {
+        key: '5',
+        name: 'Michael Jordan ',
+        name_cn: '迈克尔-乔丹',
+        avatar: 'http://www.stat-nba.com/image/playerImage/1717.jpg',
+        relation: ['朋友', '队友'],
+      }, {
+        key: '6',
+        name: 'Shaquille O\'Neal ',
+        name_cn: '沙奎尔-奥尼尔',
+        avatar: 'http://www.stat-nba.com/image/playerImage/2716.jpg',
+        relation: ['朋友', '队友'],
+      }];
+
+
+
     return (
       <LayoutAdmin {...this.props} selectKey={['basketball']}>
         <div className={styles.adminBasketball}>
@@ -283,7 +327,7 @@ class AdminBasketball extends React.Component {
               <Score />
             </TabPane>
             <TabPane tab="查看关系" key="2">
-              <Relation />
+              <Relation relationDataArray={relationData}/>
             </TabPane>
             <TabPane tab="查看荣誉" key="3">
               <Honor />
