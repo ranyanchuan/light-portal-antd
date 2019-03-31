@@ -23,7 +23,7 @@ class Nationality extends React.Component {
           label="国籍"
         >
           {getFieldDecorator('nationality',{
-            initialValue:defValue || '中国'
+            initialValue:defValue || ''
           })(
             <AutoComplete
               style={{ width: '100%' }}

@@ -38,9 +38,9 @@ export default {
 
   proxy: {
     '/api': {
-      // target: 'http://127.0.0.1:8888/',
+      target: 'http://127.0.0.1:27000/',
       // target: 'http://192.168.43.30:8888/',
-      target: 'http://192.144.173.229:27000/',
+      // target: 'http://192.144.173.229:27000/',
       changeOrigin: true,
       // pathRewrite: { "^/api" : ""}
     },

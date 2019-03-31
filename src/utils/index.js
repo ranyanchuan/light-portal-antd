@@ -35,6 +35,20 @@ export function randomNum(m, n) {
 }
 
 
+export  function clearQuotationMark(data) {
+  // json的值将被临时储存在这个变量中
+  let keyValue = "";
+  // 处理好的json字符串
+  for (let key in data) {
+    keyValue += key + ':' +  JSON.stringify(data[key]) + ',';
+  }
+  // 去除最后一个逗号
+  keyValue = keyValue.substring(0,keyValue.length - 1);
+  return  "{" + keyValue + "}";
+
+}
+
+
 /**
  * 生成雷达图
  *

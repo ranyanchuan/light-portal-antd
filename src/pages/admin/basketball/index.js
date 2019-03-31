@@ -3,6 +3,8 @@
  * Created by ranyanchuan on 2018/3/11.
  */
 import React from 'react';
+import { connect } from 'dva';
+
 import { Button, Input, Tabs, Menu, Table, Divider, Tag, Avatar } from 'antd';
 
 import LayoutAdmin from 'components/Admin/LayoutAdmin';
@@ -13,29 +15,103 @@ import Honor from 'components/Admin/Basketball/Honor';
 import Salary from 'components/Admin/Basketball/Salary';
 import BasicModal from 'components/Admin/Basketball/BasicModal';
 
+import { clearQuotationMark } from 'utils';
+
+
 import styles from './index.less';
 
-const {TabPane} = Tabs;
+const { TabPane } = Tabs;
+
+@connect((state) => ({
+  adminBasketball: state.adminBasketball,
+}))
 
 class AdminBasketball extends React.Component {
 
   state = {
     selectedRowKeys: ['1'], // Check here to configure the default column
     loading: false,
-    basModVis:false,
-    basModStatus:'add'
+    basModVis: false,
+    basModStatus: 'add',
+  };
+
+
+  componentDidMount() {
+    this.getStarData();
+  }
+
+  /**
+   * 获取最热球星
+   */
+  getStarData = () => {
+    // const gql = `
+    //     query {
+    //            list(category:["basketball"]){
+    //              id:_id,
+    //              avatar,
+    //              name,
+    //              name_cn,
+    //              gender,
+    //              birthday,
+    //              nationality,
+    //              city,
+    //              school,
+    //            }
+    //          }
+    //     `;
+
+    const gql = `
+        query {
+               list{
+                 id:_id,
+                 avatar,
+                 name,
+                 name_cn,
+                 gender,
+                 birthday,
+                 nationality,
+                 city,
+                 school,
+                 organization,
+                 team,
+               }
+             }
+        `;
+    this.props.dispatch({
+      type: 'adminBasketball/queryBasic',
+      payload: { gql, category: 'basketball' },
+      callback: (response) => {
+        const { data } = response;
+        const { list } = data;
+        this.setState({ stars: list });
+      },
+    });
   };
 
 
   // 保存基本信息
   onClickSaveBasic = (data) => {
-    console.log('onClickSaveBasic', data);
+    const jsonStr = clearQuotationMark(data);
+    const gql = `mutation{addStar(list:${jsonStr}){_id,name}}`;
+    this.props.dispatch({
+      type: 'adminBasketball/addBasic',
+      payload: { gql },
+      callback: (res) => {
+        this.setState({ loading: false });
+        console.log(res);
+        const { addStar } = res.data;
+        if (addStar.length > 0) {
+          console.log('添加成功,');
+        }
+      },
+    });
   };
 
+
   // 改变tab
-  onChangeTab=(param)=>{
+  onChangeTab = (param) => {
     console.log('param', param);
-  }
+  };
 
   columns = [
     {
@@ -48,10 +124,10 @@ class AdminBasketball extends React.Component {
       title: '名字',
       dataIndex: 'name',
       key: 'name',
-      render: (text,item) =>{
-        const {name_cn}=item;
-        const title=text?(name_cn?(text+"("+name_cn+")"):text):name_cn;
-        return <a href="javascript:;">{title}</a>
+      render: (text, item) => {
+        const { name_cn } = item;
+        const title = text ? (name_cn ? (text + '(' + name_cn + ')') : text) : name_cn;
+        return <a href="javascript:;">{title}</a>;
       },
     },
 
@@ -61,9 +137,9 @@ class AdminBasketball extends React.Component {
       key: 'gender',
     },
     {
-      title: '年龄',
-      dataIndex: 'age',
-      key: 'age',
+      title: '出生日期',
+      dataIndex: 'birthday',
+      key: 'birthday',
     },
 
     {
@@ -80,113 +156,112 @@ class AdminBasketball extends React.Component {
       title: '组织',
       dataIndex: 'organization',
       key: 'organization',
-      render: text => <span>{text && Array.isArray(text)? text.join(" | "):""}</span>,
+      render: text => <span>{text && Array.isArray(text) ? text.join(' | ') : ''}</span>,
     },
     {
       title: '球队',
       dataIndex: 'team',
       key: 'team',
-      render: text => <span>{text && Array.isArray(text)? text.join(" | "):""}</span>,
+      render: text => <span>{text && Array.isArray(text) ? text.join(' | ') : ''}</span>,
     },
-
 
 
     {
       title: '学校',
       dataIndex: 'school',
       key: 'school',
-      render: text => <span>{text && Array.isArray(text)? text.join(" | "):""}</span>,
+      render: text => <span>{text && Array.isArray(text) ? text.join(' | ') : ''}</span>,
     },
 
-    ];
+  ];
 
   data = [
     {
       key: '1',
-      id:'xxxx',
-      avatar:'http://www.stat-nba.com/image/playerImage/526.jpg',
+      id: 'xxxx',
+      avatar: 'http://www.stat-nba.com/image/playerImage/526.jpg',
       name: 'John Brown',
       name_cn: '詹姆斯',
       nationality: '美国',
-      city:'洛杉矶',
-      organization: ['NBA','CBA'],
-      team: ['骑士队','湖人队'],
-      gender:'男',
+      city: '洛杉矶',
+      organization: ['NBA', 'CBA'],
+      team: ['骑士队', '湖人队'],
+      gender: '男',
       school: ['清华大学', '北京大学'],
       age: 32,
 
     },
     {
       key: '2',
-      id:'xxxx',
-      avatar:'http://www.stat-nba.com/image/playerImage/526.jpg',
+      id: 'xxxx',
+      avatar: 'http://www.stat-nba.com/image/playerImage/526.jpg',
       name: 'John Brown',
       name_cn: '詹姆斯',
       nationality: '美国',
-      city:'洛杉矶',
-      organization: ['NBA','CBA'],
-      team: ['骑士队','湖人队'],
-      gender:'男',
+      city: '洛杉矶',
+      organization: ['NBA', 'CBA'],
+      team: ['骑士队', '湖人队'],
+      gender: '男',
       school: ['清华大学', '北京大学'],
       age: 32,
 
     },
     {
       key: '3',
-      id:'xxxx',
-      avatar:'http://www.stat-nba.com/image/playerImage/526.jpg',
+      id: 'xxxx',
+      avatar: 'http://www.stat-nba.com/image/playerImage/526.jpg',
       name: 'John Brown',
       name_cn: '詹姆斯',
       nationality: '美国',
-      city:'洛杉矶',
-      organization: ['NBA','CBA'],
-      team: ['骑士队','湖人队'],
-      gender:'男',
+      city: '洛杉矶',
+      organization: ['NBA', 'CBA'],
+      team: ['骑士队', '湖人队'],
+      gender: '男',
       school: ['清华大学', '北京大学'],
       age: 32,
 
     },
     {
       key: '4',
-      id:'xxxx',
-      avatar:'http://www.stat-nba.com/image/playerImage/526.jpg',
+      id: 'xxxx',
+      avatar: 'http://www.stat-nba.com/image/playerImage/526.jpg',
       name: 'John Brown',
       name_cn: '詹姆斯',
       nationality: '美国',
-      city:'洛杉矶',
-      organization: ['NBA','CBA'],
-      team: ['骑士队','湖人队'],
-      gender:'男',
+      city: '洛杉矶',
+      organization: ['NBA', 'CBA'],
+      team: ['骑士队', '湖人队'],
+      gender: '男',
       school: ['清华大学', '北京大学'],
       age: 32,
 
     },
     {
       key: '5',
-      id:'xxxx',
-      avatar:'http://www.stat-nba.com/image/playerImage/526.jpg',
+      id: 'xxxx',
+      avatar: 'http://www.stat-nba.com/image/playerImage/526.jpg',
       name: 'John Brown',
       name_cn: '詹姆斯',
       nationality: '美国',
-      city:'洛杉矶',
-      organization: ['NBA','CBA'],
-      team: ['骑士队','湖人队'],
-      gender:'男',
+      city: '洛杉矶',
+      organization: ['NBA', 'CBA'],
+      team: ['骑士队', '湖人队'],
+      gender: '男',
       school: ['清华大学', '北京大学'],
       age: 32,
 
     },
     {
       key: '6',
-      id:'xxxx',
-      avatar:'http://www.stat-nba.com/image/playerImage/526.jpg',
+      id: 'xxxx',
+      avatar: 'http://www.stat-nba.com/image/playerImage/526.jpg',
       name: 'John Brown',
       name_cn: '詹姆斯',
       nationality: '美国',
-      city:'洛杉矶',
-      organization: ['NBA','CBA'],
-      team: ['骑士队','湖人队'],
-      gender:'男',
+      city: '洛杉矶',
+      organization: ['NBA', 'CBA'],
+      team: ['骑士队', '湖人队'],
+      gender: '男',
       school: ['清华大学', '北京大学'],
       age: 32,
     },
@@ -201,21 +276,21 @@ class AdminBasketball extends React.Component {
 
   // 添加弹框
   onClickAdd = () => {
-    this.setState({ basModVis:true,basModStatus:'add' });
+    this.setState({ basModVis: true, basModStatus: 'add' });
   };
 
   // 编辑弹框
-  onClickEdit=()=>{
-    this.setState({ basModVis:true,basModStatus:'edit' });
-  }
+  onClickEdit = () => {
+    this.setState({ basModVis: true, basModStatus: 'edit' });
+  };
   // 详情弹框
-  onClickDesc=()=>{
-    this.setState({ basModVis:true,basModStatus:'desc' });
-  }
+  onClickDesc = () => {
+    this.setState({ basModVis: true, basModStatus: 'desc' });
+  };
 
   // 关闭弹框
   onClickClose = () => {
-    this.setState({ basModVis:false,basModStatus:'add' });
+    this.setState({ basModVis: false, basModStatus: 'add' });
   };
 
 
@@ -229,39 +304,37 @@ class AdminBasketball extends React.Component {
 
   render() {
 
+    const { basicObj } = this.props.adminBasketball;
     const { basModVis, selectedRowKeys, basModStatus } = this.state;
     const rowSelection = {
       selectedRowKeys,
       onChange: this.onSelectChange,
       type: 'radio',
     };
-    const basicData={
-      avatar:'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-      name_cn:'詹姆斯',
-      name:'lbl',
-      gender:'女',
-      birthday:'2018-01-02',
-      height:20,
-      weight:20,
-      email:'xt2011@163.com',
-      phone:'15612341234',
-      hometown:'清河小营桥',
-      wiki_baidu:'www.baidu.com',
-      wiki:'www.wiki.com',
-      debut:'克利夫兰骑士队',
-      abstract:'adfafd xxxxxafs  xxxx',
-      nationality:'美国',
-      city:'上海',
-      organization:['NBA','CBA'],
-      team:['湖人队','勇士队'],
-      tags:['lbj','划水詹'],
-      position:['中锋'],
-      school:['清华大学','北京大学'],
-      polo_shirts:['1号','2号'],
-    }
-
-
-
+    const basicData = {
+      avatar: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+      name_cn: '詹姆斯',
+      name: 'lbl',
+      gender: '女',
+      birthday: '2018-01-02',
+      height: 20,
+      weight: 20,
+      email: 'xt2011@163.com',
+      phone: '15612341234',
+      hometown: '清河小营桥',
+      wiki_baidu: 'www.baidu.com',
+      wiki: 'www.wiki.com',
+      debut: '克利夫兰骑士队',
+      abstract: 'adfafd xxxxxafs  xxxx',
+      nationality: '美国',
+      city: '上海',
+      organization: ['NBA', 'CBA'],
+      team: ['湖人队', '勇士队'],
+      tags: ['lbj', '划水詹'],
+      position: ['中锋'],
+      school: ['清华大学', '北京大学'],
+      polo_shirts: ['1号', '2号'],
+    };
 
 
     const relationData = [
@@ -304,40 +377,40 @@ class AdminBasketball extends React.Component {
       }];
 
 
-    const honorData=[{
+    const honorData = [{
       key: '1',
       date: '2018-11-01',
       title: '11-12赛季总冠军(迈阿密热火)',
-      comment:'xxxxxxxxx'
+      comment: 'xxxxxxxxx',
     }, {
       key: '2',
       date: '2018-11-01',
       title: '11-12赛季总冠军(迈阿密热火)',
-      comment:'xxxxxxxxx'
+      comment: 'xxxxxxxxx',
 
     }, {
       key: '3',
       date: '2018-11-01',
       title: '11-12赛季总冠军(迈阿密热火)',
-      comment:'xxxxxxxxx'
+      comment: 'xxxxxxxxx',
 
     }, {
       key: '4',
       date: '2018-11-01',
       title: '11-12赛季总冠军(迈阿密热火)',
-      comment:'xxxxxxxxx'
+      comment: 'xxxxxxxxx',
 
     }, {
       key: '5',
       date: '2018-11-01',
       title: '11-12赛季总冠军(迈阿密热火)',
-      comment:'xxxxxxxxx'
+      comment: 'xxxxxxxxx',
 
     }, {
       key: '6',
       date: '2018-11-01',
       title: '11-12赛季总冠军(迈阿密热火)',
-      comment:'xxxxxxxxx'
+      comment: 'xxxxxxxxx',
 
     }];
 
@@ -349,7 +422,7 @@ class AdminBasketball extends React.Component {
         end_date: '2018-12-31',
         money: '1000',
         unit: '$',
-        comment:'xxx',
+        comment: 'xxx',
       },
       {
         key: '2',
@@ -357,7 +430,7 @@ class AdminBasketball extends React.Component {
         end_date: '2018-12-31',
         money: '1000',
         unit: '$',
-        comment:'xxx',
+        comment: 'xxx',
       },
       {
         key: '3',
@@ -365,7 +438,7 @@ class AdminBasketball extends React.Component {
         end_date: '2018-12-31',
         money: '1000',
         unit: '$',
-        comment:'xxx',
+        comment: 'xxx',
       },
       {
         key: '4',
@@ -373,7 +446,7 @@ class AdminBasketball extends React.Component {
         end_date: '2018-12-31',
         money: '1000',
         unit: '$',
-        comment:'xxx',
+        comment: 'xxx',
       },
       {
         key: '5',
@@ -381,11 +454,12 @@ class AdminBasketball extends React.Component {
         end_date: '2018-12-31',
         money: '1000',
         unit: '$',
-        comment:'xxx',
+        comment: 'xxx',
       },
     ];
 
-
+    console.log(basicObj)
+    console.log("vvv",(basicObj && basicObj.list) ? basicData.list : [])
 
     return (
       <LayoutAdmin {...this.props} selectKey={['basketball']}>
@@ -401,12 +475,12 @@ class AdminBasketball extends React.Component {
             size="small"
             rowSelection={rowSelection}
             columns={this.columns}
-            dataSource={this.data}
+            dataSource={(basicObj && basicObj.list) ? basicObj.list : []}
             className={styles.newsTable}/>
           {/*子表数据*/}
           <Tabs defaultActiveKey="1" onChange={this.onChangeTab}>
             <TabPane tab="比分数据" key="1">
-              <Score />
+              <Score/>
             </TabPane>
             <TabPane tab="查看关系" key="2">
               <Relation relationDataArray={relationData}/>
@@ -423,7 +497,7 @@ class AdminBasketball extends React.Component {
             status={basModStatus}
             onClose={this.onClickClose}
             onSave={this.onClickSaveBasic}
-            basicData={basModStatus!=='add' ? basicData:{}}
+            basicData={basModStatus !== 'add' ? basicData : {}}
           />
         </div>
       </LayoutAdmin>

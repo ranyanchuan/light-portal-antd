@@ -22,7 +22,7 @@ class City extends React.Component {
           label="城市"
         >
           {getFieldDecorator('city',{
-            initialValue:defValue || '北京'
+            initialValue:defValue || ''
           })(
             <AutoComplete
               disabled={disabled}

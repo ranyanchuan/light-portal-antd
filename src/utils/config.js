@@ -6,5 +6,7 @@ module.exports = {
   api: {
     getStar: '/api/star/query/:category',
     getScore: '/api/score/query/:category',
+    addBasic: '/api/star/basic/add/',
+    queryBasic: '/api/star/basic/query/',
   },
 };

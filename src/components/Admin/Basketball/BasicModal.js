@@ -47,7 +47,7 @@ class BasicModal extends React.Component {
     e.preventDefault();
     this.props.form.validateFields((err, fieldsValue) => {
       console.log('fieldsValue', fieldsValue);
-      if (err) {
+      if (!err) {
         const { imageUrl } = this.state;
         // 添加头像url
         if (imageUrl) {
@@ -57,7 +57,10 @@ class BasicModal extends React.Component {
         if (fieldsValue.birthday) {
           fieldsValue.birthday = moment(fieldsValue.birthday).format(ruleDate);
         }
-        this.props.onSave(fieldsValue);
+        // 额外信息，固定值
+        const attach ={occupation:'basketball',category:'player'};
+        // this.props.onSave({...fieldsValue});
+        this.props.onSave({...fieldsValue,...attach});
         this.hideModal();
       }
     });
@@ -107,18 +110,15 @@ class BasicModal extends React.Component {
   render() {
     const { visible, form, status, basicData = {} } = this.props;
 
-
     const { getFieldDecorator } = form;
     // 获取头像
     const { imageUrl } = this.state;
-
     //label 和输入框比例
     const formItemLayout = {
       labelCol: { sm: { span: 4 } },
       wrapperCol: { sm: { span: 19 } },
     };
 
-    console.log("basicData",basicData,status)
     const disabled=status==='desc'? true:false;
 
     const uploadButton = (
@@ -392,6 +392,9 @@ class BasicModal extends React.Component {
               </Col>
 
             </Row>
+
+
+
           </Form>
         </Modal>
       </div>
