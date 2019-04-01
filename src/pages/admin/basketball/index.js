@@ -5,7 +5,7 @@
 import React from 'react';
 import { connect } from 'dva';
 
-import { Button, Input, Tabs, Menu, Table, Divider, Tag, Avatar } from 'antd';
+import { Button, Input, Tabs, Menu, Table, Divider, Tag, Avatar, Pagination } from 'antd';
 
 import LayoutAdmin from 'components/Admin/LayoutAdmin';
 import Search from 'components/Admin/Basketball/Search';
@@ -37,32 +37,18 @@ class AdminBasketball extends React.Component {
 
 
   componentDidMount() {
-    this.getStarData();
+    this.getStarData({});
   }
 
   /**
    * 获取最热球星
    */
-  getStarData = () => {
-    // const gql = `
-    //     query {
-    //            list(category:["basketball"]){
-    //              id:_id,
-    //              avatar,
-    //              name,
-    //              name_cn,
-    //              gender,
-    //              birthday,
-    //              nationality,
-    //              city,
-    //              school,
-    //            }
-    //          }
-    //     `;
-
+  getStarData = (param) => {
+    const { pageIndex = 0, size = 10 } = param;
+    const jsonStr = `(pageIndex:${pageIndex},size:${size})`;
     const gql = `
         query {
-               list{
+               list${jsonStr}{
                  id:_id,
                  avatar,
                  name,
@@ -75,15 +61,18 @@ class AdminBasketball extends React.Component {
                  organization,
                  team,
                }
+               count${jsonStr}
              }
         `;
+
+
     this.props.dispatch({
       type: 'adminBasketball/queryBasic',
-      payload: { gql, category: 'basketball' },
+      payload: { gql, pageIndex, size },
       callback: (response) => {
-        const { data } = response;
-        const { list } = data;
-        this.setState({ stars: list });
+        // const { list } = response;
+        // this.setState({ stars: list });
+        console.log('response', response);
       },
     });
   };
@@ -294,6 +283,11 @@ class AdminBasketball extends React.Component {
   };
 
 
+  onChangeBasicPage = (param) => {
+    console.log('param', param);
+  };
+
+
   hideModal = () => {
     const { modalVisible } = this.state;
     for (let item in modalVisible) {
@@ -302,9 +296,18 @@ class AdminBasketball extends React.Component {
     this.setState({ modalVisible });
   };
 
+  onChange=()=>{
+    console.log("00000")
+  }
+
   render() {
 
-    const { basicObj } = this.props.adminBasketball;
+    const { basicObj={} } = this.props.adminBasketball;
+    console.log('basicObj', basicObj);
+    const {pageIndex,count,size}=basicObj;
+
+
+
     const { basModVis, selectedRowKeys, basModStatus } = this.state;
     const rowSelection = {
       selectedRowKeys,
@@ -458,8 +461,6 @@ class AdminBasketball extends React.Component {
       },
     ];
 
-    console.log(basicObj)
-    console.log("vvv",(basicObj && basicObj.list) ? basicData.list : [])
 
     return (
       <LayoutAdmin {...this.props} selectKey={['basketball']}>
@@ -471,12 +472,24 @@ class AdminBasketball extends React.Component {
             <Button onClick={this.onClickDesc}>详情</Button>
             <Button onClick={this.clearFilters}>删除</Button>
           </div>
+          { basicObj &&
           <Table
             size="small"
+            rowKey={record => record.id}
             rowSelection={rowSelection}
             columns={this.columns}
             dataSource={(basicObj && basicObj.list) ? basicObj.list : []}
-            className={styles.newsTable}/>
+            pagination={{
+              current: pageIndex,
+              total: count,
+              pageSize: size
+            }}
+            onChange={this.onChangeBasicPage}
+            className={styles.newsTable}
+          />
+          }
+
+
           {/*子表数据*/}
           <Tabs defaultActiveKey="1" onChange={this.onChangeTab}>
             <TabPane tab="比分数据" key="1">
