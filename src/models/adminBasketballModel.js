@@ -28,8 +28,18 @@ export default {
       }
       const res = { payload, data };
       yield put({ type: 'getBasicSuccess', res });
-
     },
+
+
+
+    // 添加篮球明星基本信息
+    * updateBasic({ payload, callback }, { call, put }) {
+      const res = yield call(adminBasketballService.updateBasic, payload);
+      if (callback) callback(res);
+      // yield put({ type: 'addBasicSuccess', res });
+    },
+
+
 
 
   },

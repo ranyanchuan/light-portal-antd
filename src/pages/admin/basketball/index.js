@@ -80,11 +80,29 @@ class AdminBasketball extends React.Component {
 
   // 保存基本信息
   onClickSaveBasic = (data) => {
-    const jsonStr = clearQuotationMark(data);
-    const gql = `mutation{addStar(list:${jsonStr}){_id,name}}`;
+    // const jsonStr = clearQuotationMark(data);
+    // const gql = `mutation{addStar(list:${jsonStr}){_id,name}}`;
+    // this.props.dispatch({
+    //   type: 'adminBasketball/addBasic',
+    //   payload: { gql },
+    //   callback: (res) => {
+    //     this.setState({ loading: false });
+    //     console.log(res);
+    //     const { addStar } = res.data;
+    //     if (addStar.length > 0) {
+    //       console.log('添加成功,');
+    //     }
+    //   },
+    // });
+
+    const payload = {
+      condition: { _id: '5ca1b98a606ada07a84766ed' },
+      content: data,
+    };
+
     this.props.dispatch({
-      type: 'adminBasketball/addBasic',
-      payload: { gql },
+      type: 'adminBasketball/updateBasic',
+      payload,
       callback: (res) => {
         this.setState({ loading: false });
         console.log(res);
@@ -94,6 +112,8 @@ class AdminBasketball extends React.Component {
         }
       },
     });
+
+
   };
 
 
@@ -164,99 +184,6 @@ class AdminBasketball extends React.Component {
 
   ];
 
-  data = [
-    {
-      key: '1',
-      id: 'xxxx',
-      avatar: 'http://www.stat-nba.com/image/playerImage/526.jpg',
-      name: 'John Brown',
-      name_cn: '詹姆斯',
-      nationality: '美国',
-      city: '洛杉矶',
-      organization: ['NBA', 'CBA'],
-      team: ['骑士队', '湖人队'],
-      gender: '男',
-      school: ['清华大学', '北京大学'],
-      age: 32,
-
-    },
-    {
-      key: '2',
-      id: 'xxxx',
-      avatar: 'http://www.stat-nba.com/image/playerImage/526.jpg',
-      name: 'John Brown',
-      name_cn: '詹姆斯',
-      nationality: '美国',
-      city: '洛杉矶',
-      organization: ['NBA', 'CBA'],
-      team: ['骑士队', '湖人队'],
-      gender: '男',
-      school: ['清华大学', '北京大学'],
-      age: 32,
-
-    },
-    {
-      key: '3',
-      id: 'xxxx',
-      avatar: 'http://www.stat-nba.com/image/playerImage/526.jpg',
-      name: 'John Brown',
-      name_cn: '詹姆斯',
-      nationality: '美国',
-      city: '洛杉矶',
-      organization: ['NBA', 'CBA'],
-      team: ['骑士队', '湖人队'],
-      gender: '男',
-      school: ['清华大学', '北京大学'],
-      age: 32,
-
-    },
-    {
-      key: '4',
-      id: 'xxxx',
-      avatar: 'http://www.stat-nba.com/image/playerImage/526.jpg',
-      name: 'John Brown',
-      name_cn: '詹姆斯',
-      nationality: '美国',
-      city: '洛杉矶',
-      organization: ['NBA', 'CBA'],
-      team: ['骑士队', '湖人队'],
-      gender: '男',
-      school: ['清华大学', '北京大学'],
-      age: 32,
-
-    },
-    {
-      key: '5',
-      id: 'xxxx',
-      avatar: 'http://www.stat-nba.com/image/playerImage/526.jpg',
-      name: 'John Brown',
-      name_cn: '詹姆斯',
-      nationality: '美国',
-      city: '洛杉矶',
-      organization: ['NBA', 'CBA'],
-      team: ['骑士队', '湖人队'],
-      gender: '男',
-      school: ['清华大学', '北京大学'],
-      age: 32,
-
-    },
-    {
-      key: '6',
-      id: 'xxxx',
-      avatar: 'http://www.stat-nba.com/image/playerImage/526.jpg',
-      name: 'John Brown',
-      name_cn: '詹姆斯',
-      nationality: '美国',
-      city: '洛杉矶',
-      organization: ['NBA', 'CBA'],
-      team: ['骑士队', '湖人队'],
-      gender: '男',
-      school: ['清华大学', '北京大学'],
-      age: 32,
-    },
-
-
-  ];
 
   onSelectChange = (selectedRowKeys) => {
     console.log('selectedRowKeys changed: ', selectedRowKeys);
@@ -296,16 +223,15 @@ class AdminBasketball extends React.Component {
     this.setState({ modalVisible });
   };
 
-  onChange=()=>{
-    console.log("00000")
-  }
+  onChange = () => {
+    console.log('00000');
+  };
 
   render() {
 
-    const { basicObj={} } = this.props.adminBasketball;
+    const { basicObj = {} } = this.props.adminBasketball;
     console.log('basicObj', basicObj);
-    const {pageIndex,count,size}=basicObj;
-
+    const { pageIndex, count, size } = basicObj;
 
 
     const { basModVis, selectedRowKeys, basModStatus } = this.state;
@@ -472,7 +398,7 @@ class AdminBasketball extends React.Component {
             <Button onClick={this.onClickDesc}>详情</Button>
             <Button onClick={this.clearFilters}>删除</Button>
           </div>
-          { basicObj &&
+          {basicObj &&
           <Table
             size="small"
             rowKey={record => record.id}
@@ -482,7 +408,7 @@ class AdminBasketball extends React.Component {
             pagination={{
               current: pageIndex,
               total: count,
-              pageSize: size
+              pageSize: size,
             }}
             onChange={this.onChangeBasicPage}
             className={styles.newsTable}

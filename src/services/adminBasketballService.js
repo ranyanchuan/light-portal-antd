@@ -27,3 +27,11 @@ export async function queryBasic(payload) {
   });
 }
 
+// 更新basic 基本信息
+export async function updateBasic(payload) {
+  return request(api.updateBasic, {
+    method: 'POST',
+    body: JSON.stringify(payload),
+  });
+}
+

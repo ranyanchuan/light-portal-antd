@@ -8,5 +8,6 @@ module.exports = {
     getScore: '/api/score/query/:category',
     addBasic: '/api/star/basic/add/',
     queryBasic: '/api/star/basic/query/',
+    updateBasic: '/api/star/basic/update/',
   },
 };
