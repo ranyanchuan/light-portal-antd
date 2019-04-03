@@ -5,7 +5,7 @@
 import React from 'react';
 import { connect } from 'dva';
 
-import { Button, Input, Tabs, Menu, Table, Divider, Tag, Avatar, Pagination } from 'antd';
+import { Button, Modal, Tabs, Menu, Table, Divider, Tag, Avatar, Pagination } from 'antd';
 
 import LayoutAdmin from 'components/Admin/LayoutAdmin';
 import Search from 'components/Admin/Basketball/Search';
@@ -21,6 +21,8 @@ import { clearQuotationMark } from 'utils';
 import styles from './index.less';
 
 const { TabPane } = Tabs;
+const confirm = Modal.confirm;
+
 
 @connect((state) => ({
   adminBasketball: state.adminBasketball,
@@ -30,7 +32,9 @@ const { TabPane } = Tabs;
 class AdminBasketball extends React.Component {
 
   state = {
-    selectedRowKeys: ['1'], // Check here to configure the default column
+    selectedRowKeys: [], // 选中行key
+    selectedRowObj: {}, // 选中行对象
+
     loading: false,
     basModVis: false,
     basModStatus: 'add',
@@ -71,9 +75,11 @@ class AdminBasketball extends React.Component {
       type: 'adminBasketball/queryBasic',
       payload: { gql, pageIndex, size },
       callback: (response) => {
-        // const { list } = response;
-        // this.setState({ stars: list });
-        console.log('response', response);
+        const { list } = response;
+        if(list && list.length>0){
+          const {id}=list[0];
+          this.setState({ selectedRowKeys: [id],selectedRowObj:list[0] });
+        }
       },
     });
   };
@@ -82,21 +88,30 @@ class AdminBasketball extends React.Component {
   // 保存基本信息
   onClickSaveBasic = (data) => {
 
+    const {basModStatus,selectedRowObj}=this.state;
 
-    const {basModStatus}=this.state;
     let payload = data;
-    let type="common/add";
+    let type="";
+
     if(basModStatus==='edit'){
       payload={};
       type="common/upd";
-      payload.condition={ _id: '5ca3f06e9569a9031b939aa8' };
+      payload.condition={ _id: selectedRowObj['id'] };
       payload.content= data;
     }
     // 添加类型
     if(basModStatus==='add'){
+      type="common/add";
       payload.occupation=['basketball'];
       payload.category=['player'];
     }
+
+    // 删除类型
+    if(basModStatus==='del'){
+      type="common/del";
+      payload['_id']= selectedRowObj['id'];
+    }
+
     // 添加操作表名
     payload.table='star';
 
@@ -106,7 +121,6 @@ class AdminBasketball extends React.Component {
       payload,
       callback: (res) => {
         this.setState({ loading: false });
-        console.log(res);
         const {status}=res;
         if(status==='success'){
           this.getStarData();
@@ -115,8 +129,6 @@ class AdminBasketball extends React.Component {
         }
       },
     });
-
-
   };
 
 
@@ -187,11 +199,32 @@ class AdminBasketball extends React.Component {
 
   ];
 
-
-  onSelectChange = (selectedRowKeys) => {
-    console.log('selectedRowKeys changed: ', selectedRowKeys);
-    this.setState({ selectedRowKeys });
+  // 更新选中的数据
+  onSelectChange = (selectedRowKeys,selectedRowObjs) => {
+    this.setState({ selectedRowKeys,selectedRowObj:selectedRowObjs[0] });
   };
+
+
+  // 删除基本确定弹框
+
+  showDeleteConfirm=()=> {
+    this.setState({basModStatus: 'del' });
+    const _this=this;
+    confirm({
+      title: '您确定要删除吗',
+      content: '',
+      okText: 'Yes',
+      okType: 'danger',
+      cancelText: 'No',
+      onOk() {
+        _this.onClickSaveBasic({});
+      },
+      onCancel() {
+        console.log('Cancel');
+      },
+    });
+  }
+
 
   // 添加弹框
   onClickAdd = () => {
@@ -212,9 +245,11 @@ class AdminBasketball extends React.Component {
     this.setState({ basModVis: false, basModStatus: 'add' });
   };
 
-
-  onChangeBasicPage = (param) => {
-    console.log('param', param);
+  // 修改分页
+  onChangeBasicPage = (data) => {
+    const {current,pageSize}=data;
+    const param={pageIndex:current-1, size :pageSize};
+    this.getStarData(param);
   };
 
 
@@ -233,40 +268,14 @@ class AdminBasketball extends React.Component {
   render() {
 
     const { basicObj = {} } = this.props.adminBasketball;
-    console.log('basicObj', basicObj);
     const { pageIndex, count, size } = basicObj;
 
-    const { basModVis, selectedRowKeys, basModStatus } = this.state;
+    const { basModVis, selectedRowKeys, basModStatus,selectedRowObj} = this.state;
     const rowSelection = {
       selectedRowKeys,
       onChange: this.onSelectChange,
       type: 'radio',
     };
-    const basicData = {
-      avatar: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-      name_cn: '詹姆斯',
-      name: 'lbl',
-      gender: '女',
-      birthday: '2018-01-02',
-      height: 20,
-      weight: 20,
-      email: 'xt2011@163.com',
-      phone: '15612341234',
-      hometown: '清河小营桥',
-      wiki_baidu: 'www.baidu.com',
-      wiki: 'www.wiki.com',
-      debut: '克利夫兰骑士队',
-      abstract: 'adfafd xxxxxafs  xxxx',
-      nationality: '美国',
-      city: '上海',
-      organization: ['NBA', 'CBA'],
-      team: ['湖人队', '勇士队'],
-      tags: ['lbj', '划水詹'],
-      position: ['中锋'],
-      school: ['清华大学', '北京大学'],
-      polo_shirts: ['1号', '2号'],
-    };
-
 
     const relationData = [
       {
@@ -398,7 +407,7 @@ class AdminBasketball extends React.Component {
             <Button onClick={this.onClickAdd}>添加</Button>
             <Button onClick={this.onClickEdit}>编辑</Button>
             <Button onClick={this.onClickDesc}>详情</Button>
-            <Button onClick={this.clearFilters}>删除</Button>
+            <Button onClick={this.showDeleteConfirm}>删除</Button>
           </div>
           {basicObj &&
           <Table
@@ -408,7 +417,7 @@ class AdminBasketball extends React.Component {
             columns={this.columns}
             dataSource={(basicObj && basicObj.list) ? basicObj.list : []}
             pagination={{
-              current: pageIndex,
+              current: pageIndex+1,
               total: count,
               pageSize: size,
             }}
@@ -438,7 +447,7 @@ class AdminBasketball extends React.Component {
             status={basModStatus}
             onClose={this.onClickClose}
             onSave={this.onClickSaveBasic}
-            basicData={basModStatus !== 'add' ? basicData : {}}
+            basicData={basModStatus !== 'add' ? selectedRowObj : {}}
           />
         </div>
       </LayoutAdmin>

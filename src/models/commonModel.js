@@ -14,9 +14,9 @@ export default {
 
     // 通用删除
     * del({ payload, callback }, { call, put }) {
-      const {data} = yield call(commonService.delCommon, payload);
+      const res = yield call(commonService.delCommon, payload);
       if (callback){
-        callback(data);
+        callback(res);
       }
     },
     // 通用更新
