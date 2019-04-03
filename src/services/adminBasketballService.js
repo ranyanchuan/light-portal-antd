@@ -9,13 +9,6 @@ export async function getStar(payload) {
   });
 }
 
-// 添加明星基本信息
-export async function addBasic(payload) {
-  return request(api.addBasic, {
-    method: 'POST',
-    body: JSON.stringify(payload),
-  });
-}
 
 // 获取basic 基本信息
 export async function queryBasic(payload) {
@@ -26,11 +19,4 @@ export async function queryBasic(payload) {
   });
 }
 
-// 更新basic 基本信息
-export async function updateBasic(payload) {
-  return request(api.updateBasic, {
-    method: 'POST',
-    body: JSON.stringify(payload),
-  });
-}
 

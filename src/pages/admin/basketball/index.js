@@ -24,6 +24,7 @@ const { TabPane } = Tabs;
 
 @connect((state) => ({
   adminBasketball: state.adminBasketball,
+  common: state.common,
 }))
 
 class AdminBasketball extends React.Component {
@@ -80,28 +81,15 @@ class AdminBasketball extends React.Component {
 
   // 保存基本信息
   onClickSaveBasic = (data) => {
-    // const jsonStr = clearQuotationMark(data);
-    // const gql = `mutation{addStar(list:${jsonStr}){_id,name}}`;
-    // this.props.dispatch({
-    //   type: 'adminBasketball/addBasic',
-    //   payload: { gql },
-    //   callback: (res) => {
-    //     this.setState({ loading: false });
-    //     console.log(res);
-    //     const { addStar } = res.data;
-    //     if (addStar.length > 0) {
-    //       console.log('添加成功,');
-    //     }
-    //   },
-    // });
+
 
     const {basModStatus}=this.state;
     let payload = data;
-    let type="adminBasketball/addBasic";
+    let type="common/add";
     if(basModStatus==='edit'){
       payload={};
-      type="adminBasketball/updateBasic";
-      payload.condition={ _id: '5ca1b98a606ada07a84766ed' };
+      type="adminBasketball/upd";
+      payload.condition={ _id: '5ca3f06e9569a9031b939aa8' };
       payload.content= data;
     }
     // 添加类型
@@ -109,6 +97,8 @@ class AdminBasketball extends React.Component {
       payload.occupation=['basketball'];
       payload.category=['player'];
     }
+    // 添加操作表名
+    payload.table='star';
 
     // 添加或者更新明星基本数据
     this.props.dispatch({
