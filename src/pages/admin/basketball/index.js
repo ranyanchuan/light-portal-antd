@@ -43,7 +43,7 @@ class AdminBasketball extends React.Component {
   /**
    * 获取最热球星
    */
-  getStarData = (param) => {
+  getStarData = (param={}) => {
     const { pageIndex = 0, size = 10 } = param;
     const jsonStr = `(pageIndex:${pageIndex},size:${size})`;
     const gql = `
@@ -95,20 +95,33 @@ class AdminBasketball extends React.Component {
     //   },
     // });
 
-    const payload = {
-      condition: { _id: '5ca1b98a606ada07a84766ed' },
-      content: data,
-    };
+    const {basModStatus}=this.state;
+    let payload = data;
+    let type="adminBasketball/addBasic";
+    if(basModStatus==='edit'){
+      payload={};
+      type="adminBasketball/updateBasic";
+      payload.condition={ _id: '5ca1b98a606ada07a84766ed' };
+      payload.content= data;
+    }
+    // 添加类型
+    if(basModStatus==='add'){
+      payload.occupation=['basketball'];
+      payload.category=['player'];
+    }
 
+    // 添加或者更新明星基本数据
     this.props.dispatch({
-      type: 'adminBasketball/updateBasic',
+      type,
       payload,
       callback: (res) => {
         this.setState({ loading: false });
         console.log(res);
-        const { addStar } = res.data;
-        if (addStar.length > 0) {
-          console.log('添加成功,');
+        const {status}=res;
+        if(status==='success'){
+          this.getStarData();
+        }else{
+          console.log('更新失败');
         }
       },
     });
@@ -232,7 +245,6 @@ class AdminBasketball extends React.Component {
     const { basicObj = {} } = this.props.adminBasketball;
     console.log('basicObj', basicObj);
     const { pageIndex, count, size } = basicObj;
-
 
     const { basModVis, selectedRowKeys, basModStatus } = this.state;
     const rowSelection = {

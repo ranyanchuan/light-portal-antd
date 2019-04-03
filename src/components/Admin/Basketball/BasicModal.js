@@ -57,10 +57,8 @@ class BasicModal extends React.Component {
         if (fieldsValue.birthday) {
           fieldsValue.birthday = moment(fieldsValue.birthday).format(ruleDate);
         }
-        // 额外信息，固定值
-        const attach ={occupation:'basketball',category:'player'};
         // this.props.onSave({...fieldsValue});
-        this.props.onSave({...fieldsValue,...attach});
+        this.props.onSave(fieldsValue);
         this.hideModal();
       }
     });

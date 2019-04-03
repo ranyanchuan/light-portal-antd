@@ -11,10 +11,9 @@ export async function getStar(payload) {
 
 // 添加明星基本信息
 export async function addBasic(payload) {
-  const {gql}=payload;
   return request(api.addBasic, {
     method: 'POST',
-    body: JSON.stringify({gql}),
+    body: JSON.stringify(payload),
   });
 }
 
