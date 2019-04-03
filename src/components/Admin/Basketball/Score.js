@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { connect } from 'dva';
+
 import {
   Form,
   DatePicker,
@@ -23,9 +25,10 @@ const ruleTime = 'HH:mm';
 const ruleDate = 'YYYY-MM-DD';
 
 @Form.create()
-// @connect((state) => ({
-//   homePage: state.homePage,
-// }))
+@connect((state) => ({
+  adminBasketball: state.adminBasketball,
+  common: state.common,
+}))
 
 class ScoreModal extends React.Component {
   state = {
@@ -79,7 +82,35 @@ class ScoreModal extends React.Component {
           fieldsValue.time = moment(fieldsValue.time).format(ruleTime);
         }
 
-        console.log(fieldsValue);
+        const {status}=this.state;
+        const {basicRow}=this.props;
+        let payload = fieldsValue;
+        let type="";
+        // 添加类型
+        if(status==='add'){
+          type="common/add";
+          const {id}=basicRow;
+          payload.basicId=id;
+
+        }
+        // 添加操作表名
+        payload.table='score';
+
+        // 添加或者更新明星基本数据
+        this.props.dispatch({
+          type,
+          payload,
+          callback: (res) => {
+            this.setState({ loading: false });
+            const {status}=res;
+            if(status==='success'){
+              this.getStarData();
+            }else{
+              console.log('更新失败');
+            }
+          },
+        });
+
         this.onClickClose();
       }
     });
@@ -203,7 +234,6 @@ class ScoreModal extends React.Component {
       key: 'score',
       fixed: 'right',
       width: 50,
-
     },
   ];
 

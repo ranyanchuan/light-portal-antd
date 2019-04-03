@@ -430,16 +430,16 @@ class AdminBasketball extends React.Component {
           {/*子表数据*/}
           <Tabs defaultActiveKey="1" onChange={this.onChangeTab}>
             <TabPane tab="比分数据" key="1">
-              <Score/>
+              <Score basicRow={selectedRowObj}/>
             </TabPane>
             <TabPane tab="查看关系" key="2">
-              <Relation relationDataArray={relationData}/>
+              <Relation relationDataArray={relationData} basicRow={selectedRowObj}/>
             </TabPane>
             <TabPane tab="查看荣誉" key="3">
-              <Honor honorDataArray={honorData}/>
+              <Honor honorDataArray={honorData} basicRow={selectedRowObj}/>
             </TabPane>
             <TabPane tab="生涯薪金" key="4">
-              <Salary salaryDataArray={salaryData}/>
+              <Salary salaryDataArray={salaryData} basicRow={selectedRowObj}/>
             </TabPane>
           </Tabs>
           <BasicModal
