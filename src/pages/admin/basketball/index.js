@@ -88,7 +88,7 @@ class AdminBasketball extends React.Component {
     let type="common/add";
     if(basModStatus==='edit'){
       payload={};
-      type="adminBasketball/upd";
+      type="common/upd";
       payload.condition={ _id: '5ca3f06e9569a9031b939aa8' };
       payload.content= data;
     }

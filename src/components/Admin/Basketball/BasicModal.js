@@ -57,7 +57,6 @@ class BasicModal extends React.Component {
         if (fieldsValue.birthday) {
           fieldsValue.birthday = moment(fieldsValue.birthday).format(ruleDate);
         }
-        // this.props.onSave({...fieldsValue});
         this.props.onSave(fieldsValue);
         this.hideModal();
       }
@@ -69,13 +68,6 @@ class BasicModal extends React.Component {
     add: '添加基本信息',
     edit: '编辑基本信息',
     desc: '查看基本信息',
-  };
-
-  // 将图片转换成base64
-  getBase64 = (img, callback) => {
-    const reader = new FileReader();
-    reader.addEventListener('load', () => callback(reader.result));
-    reader.readAsDataURL(img);
   };
 
   // 文件上传请处理
@@ -96,11 +88,6 @@ class BasicModal extends React.Component {
       const { url } = response;
       // 服务器端 头像地址
       this.setState({ imageUrl: url[0] });
-
-      // this.getBase64(info.file.originFileObj, imageUrl => this.setState({
-      //   imageUrl,
-      //   loading: false,
-      // }));
     }
   };
 

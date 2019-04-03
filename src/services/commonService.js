@@ -5,6 +5,7 @@ import { api } from '../utils/config';
 export async function addCommon(payload) {
   const {table}=payload;
   delete payload.table;
+  debugger
   return request(api.addCommon.replace(':table', table), {
     method: 'POST',
     body: JSON.stringify(payload),
