@@ -24,6 +24,13 @@ export default {
       const res = yield call(commonService.updCommon, payload);
       if (callback) callback(res);
     },
+
+    // 通用查询
+    * query({ payload, callback }, { call, put }) {
+      const res = yield call(commonService.queryCommon, payload);
+      if (callback) callback(res);
+    },
+
   },
 };
 

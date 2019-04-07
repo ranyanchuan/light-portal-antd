@@ -35,13 +35,23 @@ class ScoreModal extends React.Component {
     expand: false,
     visible: false,
     status: '',
-    selectedRowKeys: ['1'], // Check here to configure the default column
+    selectedRowKeys: [], // 选中行key
+    selectedRowObj: {}, // 选中行对象
   };
 
 
-  onSelectChange = (selectedRowKeys) => {
-    console.log('selectedRowKeys changed: ', selectedRowKeys);
-    this.setState({ selectedRowKeys });
+  componentWillReceiveProps(nextProps) {
+    const { scoreDataObj } = nextProps;
+    const { list = [] } = scoreDataObj || {};
+    if (list.length > 0) {
+      const { _id } = list[0];
+      this.setState({ selectedRowKeys: [_id], selectedRowObj: list[0] });
+    }
+  }
+
+  // 更新选中的数据
+  onSelectChange = (selectedRowKeys, selectedRowObjs) => {
+    this.setState({ selectedRowKeys, selectedRowObj: selectedRowObjs[0] });
   };
 
   // 打开弹框
@@ -68,6 +78,7 @@ class ScoreModal extends React.Component {
   //  提交form信息弹框
   handleSubmit = (e) => {
     // this.props.hideModal();
+    const { selectedRowObj } = this.state;
     e.preventDefault();
     this.props.form.validateFields((err, fieldsValue) => {
       console.log('fieldsValue', fieldsValue);
@@ -82,34 +93,28 @@ class ScoreModal extends React.Component {
           fieldsValue.time = moment(fieldsValue.time).format(ruleTime);
         }
 
-        const {status}=this.state;
-        const {basicRow}=this.props;
-        let payload = fieldsValue;
-        let type="";
+        const { status,selectedRowObj } = this.state;
+        const { basicRow,onSave } = this.props;
+
+        let payload = {};
+        // 主表id
+        const { id } = basicRow;
         // 添加类型
-        if(status==='add'){
-          type="common/add";
-          const {id}=basicRow;
-          payload.basicId=id;
+        if (status === 'add') {
+          payload=fieldsValue;
+          payload.type = 'common/add';
+          payload.basicId = id;
+        }
+
+        if (status === 'edit') {
+          payload.type = 'common/upd';
+          payload.condition = { _id: selectedRowObj['_id'] };
+          payload.content = fieldsValue;
 
         }
         // 添加操作表名
-        payload.table='score';
-
-        // 添加或者更新明星基本数据
-        this.props.dispatch({
-          type,
-          payload,
-          callback: (res) => {
-            this.setState({ loading: false });
-            const {status}=res;
-            if(status==='success'){
-              this.getStarData();
-            }else{
-              console.log('更新失败');
-            }
-          },
-        });
+        payload.table = 'score';
+        onSave(payload);
 
         this.onClickClose();
       }
@@ -128,10 +133,14 @@ class ScoreModal extends React.Component {
       key: 'date',
       fixed: 'left',
       width: 110,
-    }, {
-      title: '结果',
-      dataIndex: 'result',
-      key: 'result',
+      render: (text) => {
+        return text ? moment(text).format(ruleDate) : '';
+      },
+    },
+    {
+      title: '胜利',
+      dataIndex: 'contest_status',
+      key: 'contest_status',
       width: 50,
     }, {
       title: '首发',
@@ -143,11 +152,18 @@ class ScoreModal extends React.Component {
       dataIndex: 'time',
       key: 'time',
       width: 80,
-    }, {
+    },
+    {
+      title: '球队',
+      dataIndex: 'team',
+      key: 'team',
+      width: 100,
+    },
+    {
       title: '对手',
       dataIndex: 'opponent',
       key: 'opponent',
-      width: 80,
+      width: 100,
     }, {
       title: '对手分',
       dataIndex: 'opponent_score',
@@ -237,105 +253,6 @@ class ScoreModal extends React.Component {
     },
   ];
 
-  data = [
-    {
-      key: '1',
-      date: '2018-01-02',
-      result: '输',
-      first_time: '是',
-      time: '20:22',
-      opponent: '勇士队',
-      team_score: 120,
-      three_num: 120,
-      three_point: 120,
-      two_num: 120,
-      two_point: 120,
-      free_num: 120,
-      free_point: 120,
-      before_rebound: 120,
-      after_rebound: 120,
-      opponent_score: 120,
-      assist: 120,
-      steal: 120,
-      block_shot: 120,
-      turnover: 120,
-      foul: 120,
-      score: 120,
-    },
-    {
-      key: '4',
-      date: '2018-01-02',
-      result: '输',
-      first_time: '是',
-      time: '20:22',
-      opponent: '勇士队',
-      team_score: 120,
-      three_num: 120,
-      three_point: 120,
-      two_num: 120,
-      two_point: 120,
-      free_num: 120,
-      free_point: 120,
-      before_rebound: 120,
-      after_rebound: 120,
-      opponent_score: 120,
-      assist: 120,
-      steal: 120,
-      block_shot: 120,
-      turnover: 120,
-      foul: 120,
-      score: 120,
-    },
-    {
-      key: '2',
-      date: '2018-01-02',
-      result: '输',
-      first_time: '是',
-      time: '20:22',
-      opponent: '勇士队',
-      team_score: 120,
-      three_num: 120,
-      three_point: 120,
-      two_num: 120,
-      two_point: 120,
-      free_num: 120,
-      free_point: 120,
-      before_rebound: 120,
-      after_rebound: 120,
-      opponent_score: 120,
-      assist: 120,
-      steal: 120,
-      block_shot: 120,
-      turnover: 120,
-      foul: 120,
-      score: 120,
-    },
-    {
-      key: '3',
-      date: '2018-01-02',
-      result: '输',
-      first_time: '是',
-      time: '20:22',
-      opponent: '勇士队',
-      team_score: 120,
-      three_num: 120,
-      three_point: 120,
-      two_num: 120,
-      two_point: 120,
-      free_num: 120,
-      free_point: 120,
-      before_rebound: 120,
-      after_rebound: 120,
-      opponent_score: 120,
-      assist: 120,
-      steal: 120,
-      block_shot: 120,
-      turnover: 120,
-      foul: 120,
-      score: 120,
-    },
-  ];
-
 
   // 标题对象
   titleObj = {
@@ -345,9 +262,12 @@ class ScoreModal extends React.Component {
   };
 
   render() {
-    const { form } = this.props;
-    const { visible, selectedRowKeys, status } = this.state;
+    const { form, scoreDataObj } = this.props;
+
+
+    const { visible, selectedRowKeys, selectedRowObj, status } = this.state;
     const { getFieldDecorator } = form;
+
 
     const rowSelection = {
       selectedRowKeys,
@@ -363,8 +283,8 @@ class ScoreModal extends React.Component {
 
 
     const disabled = status === 'desc' ? true : false;
-    const scoreData = status !== 'add' ? this.data[0] : {};
-    console.log("scoreData",status,scoreData)
+    //  选中的数据
+    const scoreData = status !== 'add' ? selectedRowObj : {};
 
 
     return (
@@ -396,10 +316,27 @@ class ScoreModal extends React.Component {
                   {...formItemLayout}
                   label="比赛日期"
                 >
-                  {getFieldDecorator('date',{
+                  {getFieldDecorator('date', {
                     initialValue: scoreData.date ? moment(scoreData.date) : moment(),
                   })(
                     <DatePicker disabled={disabled} style={{ width: '100%' }} placeholder="请选择日期"/>,
+                  )}
+                </Form.Item>
+              </Col>
+
+
+              <Col span={8}>
+                <Form.Item
+                  {...formItemLayout}
+                  label="球队"
+                >
+                  {getFieldDecorator('team',
+                    {
+                      rules: [{ required: true }],
+                      initialValue: scoreData.team || '',
+                    },
+                  )(
+                    <Input disabled={disabled} placeholder="请输入球队名"/>,
                   )}
                 </Form.Item>
               </Col>
@@ -687,9 +624,10 @@ class ScoreModal extends React.Component {
 
         <Table
           size="small"
+          rowKey={record => record._id}
           rowSelection={rowSelection}
           columns={this.columns}
-          dataSource={this.data}
+          dataSource={(scoreDataObj && scoreDataObj.list) ? scoreDataObj.list : []}
           scroll={{ x: 1700, y: 300 }}
         />
       </div>

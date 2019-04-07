@@ -8,6 +8,7 @@ module.exports = {
     addCommon: '/api/common/add/:table',
     delCommon: '/api/common/del/:table',
     updCommon: '/api/common/update/:table',
+    queryCommon: '/api/common/query/:table',
 
     getStar: '/api/star/query/:category',
     getScore: '/api/score/query/:category',

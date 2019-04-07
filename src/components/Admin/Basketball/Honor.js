@@ -22,9 +22,21 @@ class Honor extends React.Component {
   state = {
     expand: false,
     visible: false,
-    selectedRowKeys: ['1'], // Check here to configure the default column
+    selectedRowKeys: [], // 选中行key
+    selectedRowObj: {}, // 选中行对象
 
   };
+
+
+  componentWillReceiveProps(nextProps) {
+    const { scoreDataObj } = nextProps;
+    const { list = [] } = scoreDataObj || {};
+    if (list.length > 0) {
+      const { _id } = list[0];
+      this.setState({ selectedRowKeys: [_id], selectedRowObj: list[0] });
+    }
+  }
+
 
   onSelectChange = (selectedRowKeys) => {
     console.log('selectedRowKeys changed: ', selectedRowKeys);
@@ -63,7 +75,7 @@ class Honor extends React.Component {
         return;
       }
     });
-    this.setState({visible:false});
+    this.setState({ visible: false });
   };
 
   onChangeTags = (value) => {
@@ -83,15 +95,13 @@ class Honor extends React.Component {
       title: '备注',
       key: 'comment',
       dataIndex: 'comment',
-    }
-    ];
-
-
+    },
+  ];
 
 
   render() {
-    const {  form ,honorDataArray} = this.props;
-    const {selectedRowKeys,visible,status}=this.state;
+    const { form, honorDataArray } = this.props;
+    const { selectedRowKeys, visible, status } = this.state;
     const { getFieldDecorator } = form;
 
     const rowSelection = {
@@ -137,7 +147,7 @@ class Honor extends React.Component {
                   {...formItemLayout}
                   label="日期"
                 >
-                  {getFieldDecorator('date',{
+                  {getFieldDecorator('date', {
                     initialValue: honorData.date ? moment(honorData.date) : null,
                   })(
                     <DatePicker placeholder="请选择日期" style={{ width: '100%' }} disabled={disabled}/>,
@@ -150,7 +160,7 @@ class Honor extends React.Component {
                   {...formItemLayout}
                   label="荣誉"
                 >
-                  {getFieldDecorator('title',{
+                  {getFieldDecorator('title', {
                     rules: [{ required: true }],
                     initialValue: honorData.title || '',
                   })(
@@ -164,7 +174,7 @@ class Honor extends React.Component {
                   {...formItemLayout}
                   label="备注"
                 >
-                  {getFieldDecorator('comment',{
+                  {getFieldDecorator('comment', {
                     initialValue: honorData.comment || '',
                   })(
                     <Input placeholder="请填写备注" disabled={disabled}/>,

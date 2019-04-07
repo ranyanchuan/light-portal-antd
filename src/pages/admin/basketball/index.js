@@ -38,6 +38,10 @@ class AdminBasketball extends React.Component {
     loading: false,
     basModVis: false,
     basModStatus: 'add',
+
+    scoreDataObj: null, // 比分数据
+
+
   };
 
 
@@ -48,7 +52,7 @@ class AdminBasketball extends React.Component {
   /**
    * 获取最热球星
    */
-  getStarData = (param={}) => {
+  getStarData = (param = {}) => {
     const { pageIndex = 0, size = 10 } = param;
     const jsonStr = `(pageIndex:${pageIndex},size:${size})`;
     const gql = `
@@ -76,10 +80,31 @@ class AdminBasketball extends React.Component {
       payload: { gql, pageIndex, size },
       callback: (response) => {
         const { list } = response;
-        if(list && list.length>0){
-          const {id}=list[0];
-          this.setState({ selectedRowKeys: [id],selectedRowObj:list[0] });
+        if (list && list.length > 0) {
+          const { id } = list[0];
+          this.setState({ selectedRowKeys: [id], selectedRowObj: list[0] });
+          // 获取比分数据
+          this.getScoreData({ basicId: id });
         }
+      },
+    });
+  };
+
+
+  /**
+   * 获取比赛分数
+   */
+  getScoreData = (param = {}) => {
+    const { pageIndex = 0, size = 10, basicId } = param;
+
+    // 添加操作表名
+    const payload = { basicId, pageIndex, size, table: 'score' };
+    this.props.dispatch({
+      type: 'common/query',
+      payload,
+      callback: (response) => {
+        this.setState({ scoreDataObj: response });
+        // 获取比分数据
       },
     });
   };
@@ -88,32 +113,32 @@ class AdminBasketball extends React.Component {
   // 保存基本信息
   onClickSaveBasic = (data) => {
 
-    const {basModStatus,selectedRowObj}=this.state;
+    const { basModStatus, selectedRowObj } = this.state;
 
     let payload = data;
-    let type="";
+    let type = '';
 
-    if(basModStatus==='edit'){
-      payload={};
-      type="common/upd";
-      payload.condition={ _id: selectedRowObj['id'] };
-      payload.content= data;
+    if (basModStatus === 'edit') {
+      payload = {};
+      type = 'common/upd';
+      payload.condition = { _id: selectedRowObj['id'] };
+      payload.content = data;
     }
     // 添加类型
-    if(basModStatus==='add'){
-      type="common/add";
-      payload.occupation=['basketball'];
-      payload.category=['player'];
+    if (basModStatus === 'add') {
+      type = 'common/add';
+      payload.occupation = ['basketball'];
+      payload.category = ['player'];
     }
 
     // 删除类型
-    if(basModStatus==='del'){
-      type="common/del";
-      payload['_id']= selectedRowObj['id'];
+    if (basModStatus === 'del') {
+      type = 'common/del';
+      payload['_id'] = selectedRowObj['id'];
     }
 
     // 添加操作表名
-    payload.table='star';
+    payload.table = 'star';
 
     // 添加或者更新明星基本数据
     this.props.dispatch({
@@ -121,14 +146,38 @@ class AdminBasketball extends React.Component {
       payload,
       callback: (res) => {
         this.setState({ loading: false });
-        const {status}=res;
-        if(status==='success'){
-          this.getStarData();
-        }else{
+        const { status } = res;
+        if (status === 'success') {
+          this.getStarData({});
+        } else {
           console.log('更新失败');
         }
       },
     });
+  };
+
+
+  //  保存更新数据
+  onSaveScore = (payload) => {
+    const { type } = payload;
+    delete  payload.type;
+    debugger
+    // 添加或者更新明星基本数据
+    this.props.dispatch({
+      type,
+      payload,
+      callback: (res) => {
+        this.setState({ loading: false });
+        const { status } = res;
+        debugger;
+        if (status === 'success') {
+          this.getScoreData({});
+        } else {
+          console.log('更新失败');
+        }
+      },
+    });
+
   };
 
 
@@ -200,16 +249,15 @@ class AdminBasketball extends React.Component {
   ];
 
   // 更新选中的数据
-  onSelectChange = (selectedRowKeys,selectedRowObjs) => {
-    this.setState({ selectedRowKeys,selectedRowObj:selectedRowObjs[0] });
+  onSelectChange = (selectedRowKeys, selectedRowObjs) => {
+    this.setState({ selectedRowKeys, selectedRowObj: selectedRowObjs[0] });
   };
 
 
   // 删除基本确定弹框
-
-  showDeleteConfirm=()=> {
-    this.setState({basModStatus: 'del' });
-    const _this=this;
+  showDeleteConfirm = () => {
+    this.setState({ basModStatus: 'del' });
+    const _this = this;
     confirm({
       title: '您确定要删除吗',
       content: '',
@@ -223,7 +271,7 @@ class AdminBasketball extends React.Component {
         console.log('Cancel');
       },
     });
-  }
+  };
 
 
   // 添加弹框
@@ -247,8 +295,8 @@ class AdminBasketball extends React.Component {
 
   // 修改分页
   onChangeBasicPage = (data) => {
-    const {current,pageSize}=data;
-    const param={pageIndex:current-1, size :pageSize};
+    const { current, pageSize } = data;
+    const param = { pageIndex: current - 1, size: pageSize };
     this.getStarData(param);
   };
 
@@ -270,7 +318,7 @@ class AdminBasketball extends React.Component {
     const { basicObj = {} } = this.props.adminBasketball;
     const { pageIndex, count, size } = basicObj;
 
-    const { basModVis, selectedRowKeys, basModStatus,selectedRowObj} = this.state;
+    const { basModVis, selectedRowKeys, basModStatus, selectedRowObj, scoreDataObj } = this.state;
     const rowSelection = {
       selectedRowKeys,
       onChange: this.onSelectChange,
@@ -417,7 +465,7 @@ class AdminBasketball extends React.Component {
             columns={this.columns}
             dataSource={(basicObj && basicObj.list) ? basicObj.list : []}
             pagination={{
-              current: pageIndex+1,
+              current: pageIndex + 1,
               total: count,
               pageSize: size,
             }}
@@ -430,7 +478,7 @@ class AdminBasketball extends React.Component {
           {/*子表数据*/}
           <Tabs defaultActiveKey="1" onChange={this.onChangeTab}>
             <TabPane tab="比分数据" key="1">
-              <Score basicRow={selectedRowObj}/>
+              <Score scoreDataObj={scoreDataObj} onSave={this.onSaveScore} basicRow={selectedRowObj}/>
             </TabPane>
             <TabPane tab="查看关系" key="2">
               <Relation relationDataArray={relationData} basicRow={selectedRowObj}/>

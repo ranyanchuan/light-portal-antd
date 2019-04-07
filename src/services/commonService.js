@@ -32,3 +32,13 @@ export async function delCommon(payload) {
   });
 }
 
+// 查询
+export async function queryCommon(payload) {
+  const {table}=payload;
+  delete payload.table;
+  return request(api.queryCommon.replace(':table', table), {
+    method: 'POST',
+    body: JSON.stringify(payload),
+  });
+}
+
