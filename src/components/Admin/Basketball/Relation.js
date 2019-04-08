@@ -22,13 +22,55 @@ class Relation extends React.Component {
     visible: false,
     selectedRowKeys: ['1'], // Check here to configure the default column
     status:'',
-    imageUrl:this.props.relationDataArray[0].avatar,
+    imageUrl:'',
+    selectedRowObj: {}, // 选中行对象
+
   };
+
+  componentWillReceiveProps(nextProps) {
+    const { relationData } = nextProps;
+    const { list = [] } = relationData || {};
+    if (list.length > 0) {
+      const { _id ,imageUrl} = list[0];
+      this.setState({ selectedRowKeys: [_id], selectedRowObj: list[0],imageUrl });
+    }
+  }
+
 
   onSelectChange = (selectedRowKeys) => {
     console.log('selectedRowKeys changed: ', selectedRowKeys);
     this.setState({ selectedRowKeys });
   };
+
+
+  // 标题对象
+  titleObj = {
+    add: '添加关系',
+    edit: '编辑关系',
+    desc: '查看关系',
+  };
+
+  // 文件上传请处理
+  beforeUpload = () => {
+
+  };
+
+
+  // 文件上传成处理
+  handleChange = (info) => {
+    if (info.file.status === 'uploading') {
+      this.setState({ loading: true });
+      return;
+    }
+    if (info.file.status === 'done') {
+      // Get this url from response in real world.
+      const { response } = info.fileList[0];
+      const { url } = response;
+      // 服务器端 头像地址
+      this.setState({ imageUrl: url[0],loading:false });
+    }
+  };
+
 
   // 打开弹框
   onClickAdd = () => {
@@ -59,17 +101,40 @@ class Relation extends React.Component {
     this.props.form.validateFields((err, fieldsValue) => {
       console.log('fieldsValue', fieldsValue);
 
-      if (err) {
-        return;
+      if (!err) {
+        const { status,selectedRowObj,imageUrl } = this.state;
+        const { basicRow,onSave } = this.props;
+
+        let payload = {};
+        // 主表id
+        const { id } = basicRow;
+        fieldsValue.imageUrl=imageUrl;
+        // 添加类型
+        if (status === 'add') {
+          payload=fieldsValue;
+          payload.type = 'common/add';
+          payload.basicId = id;
+        }
+
+        if (status === 'edit') {
+          payload.type = 'common/upd';
+          payload.condition = { _id: selectedRowObj['_id'] };
+          payload.content = fieldsValue;
+
+        }
+        // 添加操作表名
+        payload.table = 'relation';
+        onSave(payload);
+        console.log("payload",payload)
+        // onSave(payload);
+
       }
+      debugger
     });
     this.setState({visible:false});
   };
 
 
-  onChangeTags = (value) => {
-    console.log(`selected ${value}`);
-  };
 
   columns = [
     {
@@ -98,8 +163,8 @@ class Relation extends React.Component {
 
 
   render() {
-    const {  form,relationDataArray} = this.props;
-    const {visible,selectedRowKeys,imageUrl,status}=this.state;
+    const {  form,relativeDataObj} = this.props;
+    const {visible,selectedRowKeys,imageUrl,selectedRowObj,status}=this.state;
 
     const { getFieldDecorator } = form;
 
@@ -125,8 +190,10 @@ class Relation extends React.Component {
 
 
     const disabled=status==='desc'? true:false;
-    const relationData = status !== 'add' ? relationDataArray[0] : {};
-    console.log("scoreData",status,relationData)
+    //  选中的数据
+    const relationData = status !== 'add' ? selectedRowObj : {};
+
+    console.log("scoreData",relativeDataObj)
 
 
     const uploadButton = (
@@ -173,7 +240,7 @@ class Relation extends React.Component {
                 <Col span={24}>
                   <Form.Item
                     {...formItemLayout}
-                    label="中文名"
+                    label="英文名"
                   >
                     {getFieldDecorator('name', {
                       initialValue: relationData.name || '',
@@ -196,7 +263,6 @@ class Relation extends React.Component {
                         disabled={disabled}
                         mode="tags"
                         placeholder="请选择或关系"
-                        onChange={this.onChangeTags}
                       >
                         {relationChildren}
                       </Select>,
@@ -231,7 +297,7 @@ class Relation extends React.Component {
 
         <Table
           columns={this.columns}
-          dataSource={relationDataArray}
+          dataSource={(relativeDataObj && relativeDataObj.list) ? relativeDataObj.list : []}
           rowSelection={rowSelection}
           size="small"
           style={{marginTop:'15px'}} />

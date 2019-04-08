@@ -69,6 +69,15 @@ class ScoreModal extends React.Component {
     this.setState({ visible: true, status: 'desc' });
   };
 
+  // 删除
+  onClickDel=()=>{
+    const {showDelCon}=this.props;
+    const { selectedRowObj } = this.state;
+    let payload = {type:'common/del',_id:selectedRowObj['_id'],table:'score'};
+    showDelCon(payload);
+  }
+
+
   // 关闭弹框
   onClickClose = () => {
     this.setState({ visible: false, status: '' });
@@ -293,7 +302,7 @@ class ScoreModal extends React.Component {
           <Button onClick={this.onClickAdd}>添加</Button>
           <Button onClick={this.onClickEdit}>编辑</Button>
           <Button onClick={this.onClickDesc}>详情</Button>
-          <Button onClick={this.clearFilters}>删除</Button>
+          <Button onClick={this.onClickDel}>删除</Button>
         </div>
 
         <Modal

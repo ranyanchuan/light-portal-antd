@@ -41,6 +41,8 @@ class AdminBasketball extends React.Component {
 
     scoreDataObj: null, // 比分数据
 
+    relativeDataObj: null, // 关系数据
+
 
   };
 
@@ -85,10 +87,54 @@ class AdminBasketball extends React.Component {
           this.setState({ selectedRowKeys: [id], selectedRowObj: list[0] });
           // 获取比分数据
           this.getScoreData({ basicId: id });
+
+          this.getTableData({ basicId: id ,table:'relation'})
         }
       },
     });
   };
+
+
+  // 获取表格数据
+  getTableData = (payload) => {
+    const { table } = payload;
+    this.props.dispatch({
+      type: 'common/query',
+      payload,
+      callback: (response) => {
+        if (table === 'relation') {
+          this.setState({ relativeDataObj: response });
+        }
+
+      },
+    });
+  };
+
+
+  // 添加 || 更新
+  onSave=(payload)=>{
+    const { type } = payload;
+    delete  payload.type;
+    // 添加或者更新明星基本数据
+    this.props.dispatch({
+      type,
+      payload,
+      callback: (res) => {
+        this.setState({ loading: false });
+        const { status } = res;
+        if (status === 'success') {
+          const {table}=payload;
+          if(table==='relation'){
+            const {table}=payload;
+            this.getTableData({table});
+          }
+        } else {
+          console.log('更新失败');
+        }
+      },
+    });
+
+  }
 
 
   /**
@@ -96,7 +142,6 @@ class AdminBasketball extends React.Component {
    */
   getScoreData = (param = {}) => {
     const { pageIndex = 0, size = 10, basicId } = param;
-
     // 添加操作表名
     const payload = { basicId, pageIndex, size, table: 'score' };
     this.props.dispatch({
@@ -161,7 +206,6 @@ class AdminBasketball extends React.Component {
   onSaveScore = (payload) => {
     const { type } = payload;
     delete  payload.type;
-    debugger
     // 添加或者更新明星基本数据
     this.props.dispatch({
       type,
@@ -169,7 +213,6 @@ class AdminBasketball extends React.Component {
       callback: (res) => {
         this.setState({ loading: false });
         const { status } = res;
-        debugger;
         if (status === 'success') {
           this.getScoreData({});
         } else {
@@ -177,13 +220,21 @@ class AdminBasketball extends React.Component {
         }
       },
     });
-
   };
-
 
   // 改变tab
   onChangeTab = (param) => {
-    console.log('param', param);
+
+    const { selectedRowObj } = this.state;
+    const { id: basicId } = selectedRowObj;
+    const payload = { pageIndex: 0, size: 10, basicId };
+    // 获取关系数据
+    if (param === '2') {
+      payload.table = 'relative';
+      this.getTableData(payload);
+    }
+
+
   };
 
   columns = [
@@ -254,6 +305,32 @@ class AdminBasketball extends React.Component {
   };
 
 
+  // 删除弹框确认
+  showDelCon = (payload) => {
+
+    const _this = this;
+    confirm({
+      title: '您确定要删除吗',
+      content: '',
+      okText: 'Yes',
+      okType: 'danger',
+      cancelText: 'No',
+      onOk() {
+        const { table } = _this.state;
+        if (table === 'score') {
+          _this.onSaveScore(payload);
+        }
+
+      },
+      onCancel() {
+        console.log('Cancel');
+      },
+    });
+
+
+  };
+
+
   // 删除基本确定弹框
   showDeleteConfirm = () => {
     this.setState({ basModStatus: 'del' });
@@ -318,12 +395,15 @@ class AdminBasketball extends React.Component {
     const { basicObj = {} } = this.props.adminBasketball;
     const { pageIndex, count, size } = basicObj;
 
-    const { basModVis, selectedRowKeys, basModStatus, selectedRowObj, scoreDataObj } = this.state;
+    const { basModVis, selectedRowKeys, basModStatus, selectedRowObj, scoreDataObj,relativeDataObj } = this.state;
     const rowSelection = {
       selectedRowKeys,
       onChange: this.onSelectChange,
       type: 'radio',
     };
+
+
+    console.log("relativeDataObj",relativeDataObj)
 
     const relationData = [
       {
@@ -476,12 +556,23 @@ class AdminBasketball extends React.Component {
 
 
           {/*子表数据*/}
-          <Tabs defaultActiveKey="1" onChange={this.onChangeTab}>
+          <Tabs defaultActiveKey="2" onChange={this.onChangeTab}>
             <TabPane tab="比分数据" key="1">
-              <Score scoreDataObj={scoreDataObj} onSave={this.onSaveScore} basicRow={selectedRowObj}/>
+              <Score
+                scoreDataObj={scoreDataObj}
+                onSave={this.onSaveScore}
+                basicRow={selectedRowObj}
+                showDelCon={this.showDelCon}
+              />
             </TabPane>
             <TabPane tab="查看关系" key="2">
-              <Relation relationDataArray={relationData} basicRow={selectedRowObj}/>
+              <Relation
+                relativeDataObj={relativeDataObj}
+                basicRow={selectedRowObj}
+                showDelCon={this.showDelCon}
+                onSave={this.onSave}
+
+              />
             </TabPane>
             <TabPane tab="查看荣誉" key="3">
               <Honor honorDataArray={honorData} basicRow={selectedRowObj}/>
