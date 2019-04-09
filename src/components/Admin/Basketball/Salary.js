@@ -150,7 +150,7 @@ class Salary extends React.Component {
 
 
   render() {
-    const { form, salaryDataObj } = this.props;
+    const { form, salaryDataObj, basicRow } = this.props;
     const { visible, selectedRowKeys, selectedRowObj, status } = this.state;
     const { getFieldDecorator } = form;
 
@@ -170,13 +170,14 @@ class Salary extends React.Component {
     const salaryData = status !== 'add' ? selectedRowObj : {};
 
     const btnDisable = (salaryDataObj.list && salaryDataObj.list.length > 0) ? false : true;
-
+    // 添加按钮disabled
+    const addBtnDisable = basicRow ? false : true;
 
     return (
       <div className={styles.salaryModal}>
 
         <div className="table-operations">
-          <Button onClick={this.onShowModal.bind(this, 'add')}>添加</Button>
+          <Button onClick={this.onShowModal.bind(this, 'add')} disabled={addBtnDisable}>添加</Button>
           <Button onClick={this.onShowModal.bind(this, 'edit')} disabled={btnDisable}>编辑</Button>
           <Button onClick={this.onShowModal.bind(this, 'desc')} disabled={btnDisable}>详情</Button>
           <Button onClick={this.onClickDel} disabled={btnDisable}>删除</Button>

@@ -169,7 +169,7 @@ class Relation extends React.Component {
 
 
   render() {
-    const { form, relationDataObj } = this.props;
+    const { form, relationDataObj,basicRow } = this.props;
     const { visible, selectedRowKeys, imageUrl, selectedRowObj, status } = this.state;
 
     const { getFieldDecorator } = form;
@@ -199,7 +199,8 @@ class Relation extends React.Component {
     const relationData = status !== 'add' ? selectedRowObj : {};
 
     const btnDisable = (relationDataObj.list && relationDataObj.list.length > 0) ? false : true;
-
+    // 添加按钮disabled
+    const addBtnDisable = basicRow ? false : true;
 
     const uploadButton = (
       <div>
@@ -213,7 +214,7 @@ class Relation extends React.Component {
       <div className={styles.relationModal}>
 
         <div className="table-operations">
-          <Button onClick={this.onShowModal.bind(this, 'add')} >添加</Button>
+          <Button onClick={this.onShowModal.bind(this, 'add')} disabled={addBtnDisable}>添加</Button>
           <Button onClick={this.onShowModal.bind(this, 'edit')} disabled={btnDisable}>编辑</Button>
           <Button onClick={this.onShowModal.bind(this, 'desc')} disabled={btnDisable}>详情</Button>
           <Button onClick={this.onClickDel} disabled={btnDisable}>删除</Button>
