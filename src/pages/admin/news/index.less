@@ -1,36 +1,39 @@
+.adminNew {
 
-.admin {
-  .header{
-    position: fixed;
-    width: 100%;
-    z-index: 10;
+  .newsTable {
+    margin-top: 20px;
   }
-  .layout {
-    background-color: #fff;
-
-    .leftMenu {
-      margin-top: 55px;
-      position: fixed;
-      z-index: 10;
+  :global {
+    .table-operations {
+      margin-top: 16px;
+      margin-bottom: 16px;
     }
 
-    :global {
-      .ant-layout-sider {
-        background-color: #fff;
-      }
-      .iconfont {
-        font-size: 16px;
-        margin-right: 10px;
-        //font-weight: bold;
-        //color: #999;
-      }
+    .table-operations > button {
+      margin-right: 8px;
     }
-    .content {
-      padding-left: 280px;
-      background-color: #fff;
-      margin-bottom: 20px;
-      margin-right: 20px;
-      margin-top: 50px;
+
+  }
+
+}
+
+//----search----
+.basketballSearch {
+  margin-top: 8px;
+  :global {
+    .ant-advanced-search-form {
+      padding: 24px;
+      background: #fbfbfb;
+      border: 1px solid #d9d9d9;
+      border-radius: 6px;
+    }
+
+    .ant-advanced-search-form .ant-form-item {
+      display: flex;
+    }
+
+    .ant-advanced-search-form .ant-form-item-control-wrapper {
+      flex: 1;
     }
 
   }

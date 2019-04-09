@@ -19,40 +19,50 @@ class AdminNews extends React.Component {
   };
 
 
-  columns = [{
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
-    render: text => <a href="javascript:;">{text}</a>,
-  }, {
-    title: 'Age',
-    dataIndex: 'age',
-    key: 'age',
-    sorter: (a, b) => a.age - b.age,
-  }, {
-    title: 'Address',
-    dataIndex: 'address',
-    key: 'address',
-  }, {
-    title: 'Tags',
-    key: 'tags',
-    dataIndex: 'tags',
-    render: tags => (
-      <span>
-      {tags.map(tag => <Tag color="blue" key={tag}>{tag}</Tag>)}
-    </span>
-    ),
-  }, {
-    title: 'Action',
-    key: 'action',
-    render: (text, record) => (
-      <span>
-      <a href="javascript:;">详情</a>
-      <Divider type="vertical"/>
-      <a href="javascript:;">删除</a>
-    </span>
-    ),
-  }];
+
+  // 展示弹框
+  onShowModal = (status) => {
+    this.setState({ visible: true, status });
+  };
+
+
+
+  columns = [
+    {
+      title: '作者',
+      dataIndex: 'name',
+      key: 'name',
+      render: text => <a href="javascript:;">{text}</a>,
+    }, {
+      title: '标题',
+      dataIndex: 'age',
+      key: 'age',
+    }, {
+      title: '类型',
+      dataIndex: 'address',
+      key: 'address',
+    },
+    {
+      title: '日期',
+      dataIndex: 'address',
+      key: 'address',
+    },
+    {
+      title: '封面',
+      dataIndex: 'address',
+      key: 'address',
+    },
+    {
+      title: '标签',
+      key: 'tags',
+      dataIndex: 'tags',
+      render: tags => (
+        <span>
+        {tags.map(tag => <Tag color="blue" key={tag}>{tag}</Tag>)}
+        </span>
+      ),
+    },
+  ];
 
   data = [{
     key: '1',
@@ -136,37 +146,32 @@ class AdminNews extends React.Component {
       onChange: this.onSelectChange,
     };
 
-    const menu = (
-      <Menu>
-        <Menu.Item>
-          <div>当前</div>
-        </Menu.Item>
-        <Menu.Item>
-          <div>100</div>
-        </Menu.Item>
-        <Menu.Item>
-          <div>200</div>
-        </Menu.Item>
-        <Menu.Item>
-          <div>500</div>
-        </Menu.Item>
-      </Menu>
-    );
+
+
+
+    const addBtnDisable=false;
+    const btnDisable=false;
 
     return (
       <LayoutAdmin {...this.props} selectKey={['news']}>
-      <div className={styles.adminNews}>
-        <Search/>
-        <div className="table-operations">
-          <Button onClick={this.showModal}>添加新闻</Button>
-          <Button onClick={this.clearFilters}>批量删除</Button>
-          <Dropdown overlay={menu} placement="bottomCenter">
-            <Button>导出excel</Button>
-          </Dropdown>
+        <div className={styles.adminNew}>
+          <Search/>
+          <div className="table-operations">
+            <Button onClick={this.onShowModal.bind(this, 'add')} disabled={addBtnDisable}>添加</Button>
+            <Button onClick={this.onShowModal.bind(this, 'edit')} disabled={btnDisable}>编辑</Button>
+            <Button onClick={this.onShowModal.bind(this, 'desc')} disabled={btnDisable}>详情</Button>
+            <Button onClick={this.onClickDel} disabled={btnDisable}>删除</Button>
+          </div>
+          {/*<NewsModal hideModal={this.hideModal} visible={visible}/>*/}
+          <Table
+            rowSelection={rowSelection}
+            columns={this.columns}
+            dataSource={this.data}
+            className={styles.newsTable}
+            size="small"
+
+          />
         </div>
-        {/*<NewsModal hideModal={this.hideModal} visible={visible}/>*/}
-        <Table rowSelection={rowSelection} columns={this.columns} dataSource={this.data} className={styles.newsTable}/>
-      </div>
       </LayoutAdmin>
     );
   }

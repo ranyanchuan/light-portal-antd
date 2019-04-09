@@ -154,7 +154,6 @@ class newModal extends React.Component {
               </div>
             </Form.Item>
 
-
             <Form.Item
               {...formItemLayout}
               label="详情"

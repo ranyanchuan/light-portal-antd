@@ -55,13 +55,90 @@ class Search extends React.Component {
 
 
   render() {
+
+    const { form } = this.props;
+    const { getFieldDecorator } = form;
+
+    const formItemLayout = {
+      labelCol: { sm: { span: 4 } },
+      wrapperCol: { sm: { span: 19 } },
+    };
+
     return (
       <div className={styles.newSearch}>
         <Form
           className="ant-advanced-search-form"
           onSubmit={this.handleSearch}
         >
-          <Row gutter={24}>{this.getFields()}</Row>
+
+          <Row gutter={24}>
+            <Col span={8}>
+              <Form.Item
+                {...formItemLayout}
+                label="作者"
+              >
+                {getFieldDecorator('author')(
+                  <Input placeholder="请输入中文姓名"/>,
+                )}
+              </Form.Item>
+            </Col>
+
+            <Col span={8}>
+              <Form.Item
+                {...formItemLayout}
+                label="类型"
+              >
+                {getFieldDecorator('occupation')(
+                  <Input placeholder="请输入中文姓名"/>,
+                )}
+              </Form.Item>
+            </Col>
+
+            <Col span={8}>
+              <Form.Item
+                {...formItemLayout}
+                label="职业"
+              >
+                {getFieldDecorator('occupation')(
+                  <Input placeholder="请输入中文姓名"/>,
+                )}
+              </Form.Item>
+            </Col>
+
+            <Col span={8}>
+              <Form.Item
+                {...formItemLayout}
+                label="标题"
+              >
+                {getFieldDecorator('name_cn')(
+                  <Input placeholder="请输入中文姓名"/>,
+                )}
+              </Form.Item>
+            </Col>
+
+            <Col span={8}>
+              <Form.Item
+                {...formItemLayout}
+                label="日期"
+              >
+                {getFieldDecorator('name_cn')(
+                  <Input placeholder="请输入中文姓名"/>,
+                )}
+              </Form.Item>
+            </Col>
+
+            <Col span={8}>
+              <Form.Item
+                {...formItemLayout}
+                label="标签"
+              >
+                {getFieldDecorator('name_cn')(
+                  <Input placeholder="请输入中文姓名"/>,
+                )}
+              </Form.Item>
+            </Col>
+          </Row>
+
           <Row>
             <Col span={24} style={{ textAlign: 'right' }}>
               <Button type="primary" htmlType="submit">查询</Button>
