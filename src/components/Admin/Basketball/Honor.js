@@ -123,8 +123,8 @@ class Honor extends React.Component {
       dataIndex: 'title',
     }, {
       title: '备注',
-      key: 'comment',
-      dataIndex: 'comment',
+      key: 'remark',
+      dataIndex: 'remark',
     },
   ];
 
@@ -158,15 +158,17 @@ class Honor extends React.Component {
     const disabled = status === 'desc' ? true : false;
     const honorData = status !== 'add' ? selectedRowObj : {};
 
+    const btnDisable = (honorDataObj.list && honorDataObj.list.length > 0) ? false : true;
+
 
     return (
       <div>
 
         <div className="table-operations">
-          <Button onClick={this.onShowModal.bind(this, 'add')}>添加</Button>
-          <Button onClick={this.onShowModal.bind(this, 'edit')}>编辑</Button>
-          <Button onClick={this.onShowModal.bind(this, 'desc')}>详情</Button>
-          <Button onClick={this.onClickDel}>删除</Button>
+          <Button onClick={this.onShowModal.bind(this, 'add')} >添加</Button>
+          <Button onClick={this.onShowModal.bind(this, 'edit')}  disabled={btnDisable}>编辑</Button>
+          <Button onClick={this.onShowModal.bind(this, 'desc')}  disabled={btnDisable}>详情</Button>
+          <Button onClick={this.onClickDel}  disabled={btnDisable}>删除</Button>
         </div>
 
         <Modal
@@ -212,8 +214,8 @@ class Honor extends React.Component {
                   {...formItemLayout}
                   label="备注"
                 >
-                  {getFieldDecorator('comment', {
-                    initialValue: honorData.comment || '',
+                  {getFieldDecorator('remark', {
+                    initialValue:  honorData.remark || '',
                   })(
                     <Input placeholder="请填写备注" disabled={disabled}/>,
                   )}

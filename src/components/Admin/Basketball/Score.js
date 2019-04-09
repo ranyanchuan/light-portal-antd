@@ -1,7 +1,4 @@
 import React from 'react';
-
-import { connect } from 'dva';
-
 import {
   Form,
   DatePicker,
@@ -25,11 +22,6 @@ const ruleTime = 'HH:mm';
 const ruleDate = 'YYYY-MM-DD';
 
 @Form.create()
-// @connect((state) => ({
-//   adminBasketball: state.adminBasketball,
-//   common: state.common,
-// }))
-
 class ScoreModal extends React.Component {
   state = {
     visible: false,
@@ -287,14 +279,15 @@ class ScoreModal extends React.Component {
     //  选中的数据
     const scoreData = status !== 'add' ? selectedRowObj : {};
 
+    const btnDisable = (scoreDataObj.list && scoreDataObj.list.length > 0) ? false : true;
 
     return (
       <div className={styles.scoreModal}>
         <div className="table-operations">
           <Button onClick={this.onShowModal.bind(this, 'add')}>添加</Button>
-          <Button onClick={this.onShowModal.bind(this, 'edit')}>编辑</Button>
-          <Button onClick={this.onShowModal.bind(this, 'desc')}>详情</Button>
-          <Button onClick={this.onClickDel}>删除</Button>
+          <Button onClick={this.onShowModal.bind(this, 'edit')} disabled={btnDisable}>编辑</Button>
+          <Button onClick={this.onShowModal.bind(this, 'desc')} disabled={btnDisable}>详情</Button>
+          <Button onClick={this.onClickDel} disabled={btnDisable}>删除</Button>
         </div>
 
         <Modal

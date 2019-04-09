@@ -198,6 +198,9 @@ class Relation extends React.Component {
     //  选中的数据
     const relationData = status !== 'add' ? selectedRowObj : {};
 
+    const btnDisable = (relationDataObj.list && relationDataObj.list.length > 0) ? false : true;
+
+
     const uploadButton = (
       <div>
         <Icon type={this.state.loading ? 'loading' : 'plus'}/>
@@ -207,13 +210,13 @@ class Relation extends React.Component {
 
 
     return (
-      <div className={styles.raltionModal}>
+      <div className={styles.relationModal}>
 
         <div className="table-operations">
-          <Button onClick={this.onShowModal.bind(this, 'add')}>添加</Button>
-          <Button onClick={this.onShowModal.bind(this, 'edit')}>编辑</Button>
-          <Button onClick={this.onShowModal.bind(this, 'desc')}>详情</Button>
-          <Button onClick={this.onClickDel}>删除</Button>
+          <Button onClick={this.onShowModal.bind(this, 'add')} >添加</Button>
+          <Button onClick={this.onShowModal.bind(this, 'edit')} disabled={btnDisable}>编辑</Button>
+          <Button onClick={this.onShowModal.bind(this, 'desc')} disabled={btnDisable}>详情</Button>
+          <Button onClick={this.onClickDel} disabled={btnDisable}>删除</Button>
         </div>
         <Modal
           title={this.titleObj[status]}

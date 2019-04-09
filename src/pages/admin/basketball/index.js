@@ -34,7 +34,7 @@ const ruleDate = 'YYYY-MM-DD';
 class AdminBasketball extends React.Component {
 
   state = {
-    defaultActiveKey: 'score', // 默认选中tab
+    defaultActiveKey: 'salary', // 默认选中tab
     selectedRowKeys: [], // 选中行key
     selectedRowObj: {}, // 选中行对象
 
@@ -46,6 +46,7 @@ class AdminBasketball extends React.Component {
     relationDataObj: {}, // 关系数据
     starDataObj: {}, // 基本数据
     honorDataObj: {}, // 荣誉数据
+    salaryDataObj: {}, // 资薪数据
 
   };
 
@@ -275,8 +276,15 @@ class AdminBasketball extends React.Component {
   // 修改分页
   onChangeBasicPage = (data) => {
     const { current, pageSize } = data;
-    const param = { pageIndex: current - 1, size: pageSize };
-    this.getStarData(param);
+    const param = {
+      pageIndex: current - 1,
+      size: pageSize,
+      table: 'star',
+      occupation: ['basketball'],
+      category: ['player'],
+    };
+    // 获取分页数据
+    this.getTableData(param);
   };
 
 
@@ -291,58 +299,14 @@ class AdminBasketball extends React.Component {
 
   render() {
 
-    const { basModVis, selectedRowKeys, basModStatus, defaultActiveKey, selectedRowObj, starDataObj, scoreDataObj, relationDataObj,honorDataObj } = this.state;
+    const { basModVis, selectedRowKeys, basModStatus, defaultActiveKey, selectedRowObj, starDataObj, scoreDataObj, relationDataObj, honorDataObj, salaryDataObj } = this.state;
     const rowSelection = {
       selectedRowKeys,
       onChange: this.onSelectChange,
       type: 'radio',
     };
 
-    const salaryData = [
-      {
-        key: '1',
-        start_date: '2018-01-01',
-        end_date: '2018-12-31',
-        money: '1000',
-        unit: '$',
-        comment: 'xxx',
-      },
-      {
-        key: '2',
-        start_date: '2018-01-01',
-        end_date: '2018-12-31',
-        money: '1000',
-        unit: '$',
-        comment: 'xxx',
-      },
-      {
-        key: '3',
-        start_date: '2018-01-01',
-        end_date: '2018-12-31',
-        money: '1000',
-        unit: '$',
-        comment: 'xxx',
-      },
-      {
-        key: '4',
-        start_date: '2018-01-01',
-        end_date: '2018-12-31',
-        money: '1000',
-        unit: '$',
-        comment: 'xxx',
-      },
-      {
-        key: '5',
-        start_date: '2018-01-01',
-        end_date: '2018-12-31',
-        money: '1000',
-        unit: '$',
-        comment: 'xxx',
-      },
-    ];
-
-
-    console.log('basicDateObj', starDataObj);
+    const btnDisable = (starDataObj.list && starDataObj.list.length > 0) ? false : true;
 
 
     return (
@@ -351,16 +315,16 @@ class AdminBasketball extends React.Component {
           <Search/>
           <div className="table-operations">
             <Button onClick={this.onShowModal.bind(this, 'add')}>添加</Button>
-            <Button onClick={this.onShowModal.bind(this, 'edit')}>编辑</Button>
-            <Button onClick={this.onShowModal.bind(this, 'desc')}>详情</Button>
-            <Button onClick={this.onClickDel}>删除</Button>
+            <Button onClick={this.onShowModal.bind(this, 'edit')} disabled={btnDisable}>编辑</Button>
+            <Button onClick={this.onShowModal.bind(this, 'desc')} disabled={btnDisable}>详情</Button>
+            <Button onClick={this.onClickDel} disabled={btnDisable}>删除</Button>
           </div>
           <Table
             size="small"
             rowKey={record => record._id}
             rowSelection={rowSelection}
             columns={this.columns}
-            dataSource={starDataObj.list && starDataObj.list.length > 0 ? starDataObj.list : []}
+            dataSource={starDataObj.list ? starDataObj.list : []}
             pagination={{
               current: starDataObj.pageIndex + 1,
               total: starDataObj.count,
@@ -401,7 +365,13 @@ class AdminBasketball extends React.Component {
               />
             </TabPane>
             <TabPane tab="生涯薪金" key="salary">
-              <Salary salaryDataArray={salaryData} basicRow={selectedRowObj}/>
+              <Salary
+                salaryDataObj={salaryDataObj}
+                basicRow={selectedRowObj}
+                showDelCon={this.showDelCon}
+                onActionTable={this.onActionTable}
+                getTableData={this.getTableData}
+              />
             </TabPane>
           </Tabs>
           <BasicModal

@@ -1,9 +1,8 @@
 import React from 'react';
-
+import moment from 'moment';
 import {
   Form,
   DatePicker,
-  Icon,
   Input,
   Button,
   Modal,
@@ -11,85 +10,118 @@ import {
   Row,
   Col,
   Table,
-  Tag,
-  Divider,
-  Avatar,
   InputNumber,
 } from 'antd';
 
-import { uuid } from 'utils';
-
 import styles from './index.less';
-import { Upload } from 'antd/lib/upload';
-import moment from 'moment';
 
-const { MonthPicker, RangePicker } = DatePicker;
 const Option = Select.Option;
-const { TextArea } = Input;
-
+const ruleDate = 'YYYY-MM-DD';
 
 @Form.create()
 class Salary extends React.Component {
   state = {
-    expand: false,
     visible: false,
-    selectedRowKeys: ['1'], // Check here to configure the default column
-
+    status: '',
+    selectedRowKeys: [], // 选中行key
+    selectedRowObj: {}, // 选中行对象
   };
 
-  onSelectChange = (selectedRowKeys) => {
-    console.log('selectedRowKeys changed: ', selectedRowKeys);
-    this.setState({ selectedRowKeys });
+  componentWillReceiveProps(nextProps) {
+    const { salaryDataObj } = nextProps;
+    const { list = [] } = salaryDataObj || {};
+    if (list.length > 0) {
+      const { _id } = list[0];
+      this.setState({ selectedRowKeys: [_id], selectedRowObj: list[0] });
+    }
+  }
+
+  // 更新选中的数据
+  onSelectChange = (selectedRowKeys, selectedRowObjs) => {
+    this.setState({ selectedRowKeys, selectedRowObj: selectedRowObjs[0] });
   };
 
-  // 打开弹框
-  onClickAdd = () => {
-    this.setState({ visible: true, status: 'add' });
+
+  // 展示弹框
+  onShowModal = (status) => {
+    this.setState({ visible: true, status });
   };
 
+  // 删除
+  onClickDel = () => {
+    const { showDelCon } = this.props;
+    const { selectedRowObj } = this.state;
+    let payload = { type: 'common/del', _id: selectedRowObj['_id'], table: 'salary' };
+    showDelCon(payload);
+  };
 
-  // 编辑弹框
-  onClickEdit = () => {
-    this.setState({ visible: true, status: 'edit' });
-  };
-  // 详情弹框
-  onClickDesc = () => {
-    this.setState({ visible: true, status: 'desc' });
-  };
 
   // 关闭弹框
   onClickClose = () => {
     this.setState({ visible: false, status: '' });
     this.props.form.resetFields();
   };
+
   //  提交form信息弹框
   handleSubmit = (e) => {
     // this.props.hideModal();
     e.preventDefault();
     this.props.form.validateFields((err, fieldsValue) => {
       console.log('fieldsValue', fieldsValue);
+      if (!err) {
+        // 日期格式
+        if (fieldsValue.eDate) {
+          fieldsValue.eDate = moment(fieldsValue.eDate).format(ruleDate);
+        }
+        // 日期格式
+        if (fieldsValue.sDate) {
+          fieldsValue.sDate = moment(fieldsValue.sDate).format(ruleDate);
+        }
 
-      if (err) {
-        return;
+        const { status, selectedRowObj } = this.state;
+        const { basicRow, onActionTable } = this.props;
+
+        let payload = {};
+        // 主表_id
+        const { _id } = basicRow;
+        // 添加
+        if (status === 'add') {
+          payload = fieldsValue;
+          payload.type = 'common/add';
+          payload.basicId = _id;
+        }
+        // 编辑
+        if (status === 'edit') {
+          payload.type = 'common/upd';
+          payload.condition = { _id: selectedRowObj['_id'] };
+          payload.content = fieldsValue;
+
+        }
+        // 添加操作表名
+        payload.table = 'salary';
+        onActionTable(payload);
+        this.onClickClose();
       }
     });
-    this.setState({ visible: false });
   };
 
-  onChangeTags = (value) => {
-    console.log(`selected ${value}`);
-  };
 
   columns = [
     {
       title: '开始日期',
-      dataIndex: 'start_date',
-      key: 'start_date',
+      dataIndex: 'sDate',
+      key: 'sDate',
+      render: (text) => {
+        return text ? moment(text).format(ruleDate) : '';
+      },
     },
     {
       title: '结束日期',
-      dataIndex: 'end_date',
-      key: 'end_date',
+      dataIndex: 'eDate',
+      key: 'eDate',
+      render: (text) => {
+        return text ? moment(text).format(ruleDate) : '';
+      },
     },
     {
       title: '资薪',
@@ -103,17 +135,23 @@ class Salary extends React.Component {
     },
     {
       title: '备注',
-      dataIndex: 'comment',
-      key: 'comment',
-    }
-    ];
+      dataIndex: 'remark',
+      key: 'remark',
+    },
+  ];
 
 
+  // 标题对象
+  titleObj = {
+    add: '添加资薪数据',
+    edit: '编辑资薪数据',
+    desc: '查看资薪数据',
+  };
 
 
   render() {
-    const { form ,salaryDataArray} = this.props;
-    const { selectedRowKeys, visible,status } = this.state;
+    const { form, salaryDataObj } = this.props;
+    const { visible, selectedRowKeys, selectedRowObj, status } = this.state;
     const { getFieldDecorator } = form;
 
     const rowSelection = {
@@ -128,20 +166,24 @@ class Salary extends React.Component {
     };
 
     const disabled = status === 'desc' ? true : false;
-    const salaryData = status !== 'add' ? salaryDataArray[0] : {};
+    //  选中的数据
+    const salaryData = status !== 'add' ? selectedRowObj : {};
+
+    const btnDisable = (salaryDataObj.list && salaryDataObj.list.length > 0) ? false : true;
+
 
     return (
-      <div className={styles.raltionModal}>
+      <div className={styles.salaryModal}>
 
         <div className="table-operations">
-          <Button onClick={this.onClickAdd}>添加</Button>
-          <Button onClick={this.onClickEdit}>编辑</Button>
-          <Button onClick={this.onClickDesc}>详情</Button>
-          <Button onClick={this.clearFilters}>删除</Button>
+          <Button onClick={this.onShowModal.bind(this, 'add')}>添加</Button>
+          <Button onClick={this.onShowModal.bind(this, 'edit')} disabled={btnDisable}>编辑</Button>
+          <Button onClick={this.onShowModal.bind(this, 'desc')} disabled={btnDisable}>详情</Button>
+          <Button onClick={this.onClickDel} disabled={btnDisable}>删除</Button>
         </div>
 
         <Modal
-          title="查看荣誉"
+          title={this.titleObj[status]}
           visible={visible}
           onOk={this.handleSubmit}
           onCancel={this.onClickClose}
@@ -157,7 +199,7 @@ class Salary extends React.Component {
                   {...formItemLayout}
                   label="开始"
                 >
-                  {getFieldDecorator('sDate',{
+                  {getFieldDecorator('sDate', {
                     initialValue: salaryData.sDate ? moment(salaryData.sDate) : null,
                   })(
                     <DatePicker disabled={disabled} placeholder="请选择日期" style={{ width: '100%' }}/>,
@@ -170,7 +212,7 @@ class Salary extends React.Component {
                   {...formItemLayout}
                   label="结束"
                 >
-                  {getFieldDecorator('eDate',{
+                  {getFieldDecorator('eDate', {
                     initialValue: salaryData.eDate ? moment(salaryData.eDate) : null,
                   })(
                     <DatePicker disabled={disabled} placeholder="请选择日期" style={{ width: '100%' }}/>,
@@ -182,8 +224,8 @@ class Salary extends React.Component {
                   {...formItemLayout}
                   label="资薪"
                 >
-                  {getFieldDecorator('money',{
-                    initialValue: salaryData.money ? salaryData.money: '0',
+                  {getFieldDecorator('money', {
+                    initialValue: salaryData.money ? salaryData.money : '0',
                   })(
                     <InputNumber disabled={disabled} min={0} placeholder="请输入或者选择资薪" style={{ width: '100%' }}/>,
                   )}
@@ -196,8 +238,8 @@ class Salary extends React.Component {
                   label="单位"
                   hasFeedback
                 >
-                  {getFieldDecorator('unit',{
-                    initialValue: salaryData.unit ? salaryData.unit: '',
+                  {getFieldDecorator('unit', {
+                    initialValue: salaryData.unit ? salaryData.unit : '',
                   })(
                     <Select placeholder="请选择资薪单位" disabled={disabled}>
                       <Option value="￥">人民币 ￥</Option>
@@ -215,9 +257,8 @@ class Salary extends React.Component {
                   {...formItemLayout}
                   label="备注"
                 >
-                  {getFieldDecorator('content',{
-                    initialValue: salaryData.content ? salaryData.content: '',
-
+                  {getFieldDecorator('remark', {
+                    initialValue: salaryData.remark || '',
                   })(
                     <Input placeholder="请填写备注" disabled={disabled}/>,
                   )}
@@ -228,8 +269,15 @@ class Salary extends React.Component {
           </Form>
         </Modal>
         <Table
+          rowKey={record => record._id}
           columns={this.columns}
-          dataSource={salaryDataArray}
+          dataSource={salaryDataObj.list ? salaryDataObj.list : []}
+          pagination={{
+            current: salaryDataObj.pageIndex + 1,
+            total: salaryDataObj.count,
+            pageSize: salaryDataObj.size,
+          }}
+          onChange={this.onChangePage}
           size="small"
           rowSelection={rowSelection}
         />
