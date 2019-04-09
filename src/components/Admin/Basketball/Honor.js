@@ -25,6 +25,7 @@ class Honor extends React.Component {
 
   };
 
+  queryInfo = { occupation: ['basketball'], category: ['player'] };
 
   componentWillReceiveProps(nextProps) {
     const { honorDataObj } = nextProps;
@@ -36,7 +37,7 @@ class Honor extends React.Component {
   }
 
 
-  onSelectChange = (selectedRowKeys,selectedRowObjs) => {
+  onSelectChange = (selectedRowKeys, selectedRowObjs) => {
     this.setState({ selectedRowKeys, selectedRowObj: selectedRowObjs[0] });
   };
 
@@ -52,7 +53,6 @@ class Honor extends React.Component {
     let payload = { type: 'common/del', _id: selectedRowObj['_id'], table: 'honor' };
     showDelCon(payload);
   };
-
 
 
   // 关闭弹框
@@ -80,7 +80,7 @@ class Honor extends React.Component {
         const { _id } = basicRow;
         // 添加类型
         if (status === 'add') {
-          payload = fieldsValue;
+          payload = { ...fieldsValue, ...this.queryInfo };
           payload.type = 'common/add';
           payload.basicId = _id;
         }
@@ -138,7 +138,7 @@ class Honor extends React.Component {
 
 
   render() {
-    const { form, honorDataObj,basicRow } = this.props;
+    const { form, honorDataObj, basicRow } = this.props;
     const { visible, selectedRowKeys, selectedRowObj, status } = this.state;
 
     const { getFieldDecorator } = form;
@@ -161,16 +161,16 @@ class Honor extends React.Component {
     const btnDisable = (honorDataObj.list && honorDataObj.list.length > 0) ? false : true;
 
     // 添加按钮disabled
-    const addBtnDisable = basicRow ? false : true;
+    const addBtnDisable = basicRow._id ? false : true;
 
     return (
       <div>
 
         <div className="table-operations">
-          <Button onClick={this.onShowModal.bind(this, 'add')} disabled={addBtnDisable} >添加</Button>
-          <Button onClick={this.onShowModal.bind(this, 'edit')}  disabled={btnDisable}>编辑</Button>
-          <Button onClick={this.onShowModal.bind(this, 'desc')}  disabled={btnDisable}>详情</Button>
-          <Button onClick={this.onClickDel}  disabled={btnDisable}>删除</Button>
+          <Button onClick={this.onShowModal.bind(this, 'add')} disabled={addBtnDisable}>添加</Button>
+          <Button onClick={this.onShowModal.bind(this, 'edit')} disabled={btnDisable}>编辑</Button>
+          <Button onClick={this.onShowModal.bind(this, 'desc')} disabled={btnDisable}>详情</Button>
+          <Button onClick={this.onClickDel} disabled={btnDisable}>删除</Button>
         </div>
 
         <Modal
@@ -217,7 +217,7 @@ class Honor extends React.Component {
                   label="备注"
                 >
                   {getFieldDecorator('remark', {
-                    initialValue:  honorData.remark || '',
+                    initialValue: honorData.remark || '',
                   })(
                     <Input placeholder="请填写备注" disabled={disabled}/>,
                   )}

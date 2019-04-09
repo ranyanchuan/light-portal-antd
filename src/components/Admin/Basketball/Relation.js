@@ -1,15 +1,13 @@
 import React from 'react';
 
-import { Form, DatePicker, Icon, Input, Button, Modal, Select, Row, Col, Table, Tag, Upload, Avatar } from 'antd';
+import { Form, Icon, Input, Button, Modal, Select, Row, Col, Table, Tag, Upload, Avatar } from 'antd';
 
 import { uuid } from 'utils';
 import { api } from 'utils/config';
 
 import styles from './index.less';
 
-const { MonthPicker, RangePicker } = DatePicker;
 const Option = Select.Option;
-const { TextArea } = Input;
 
 
 @Form.create()
@@ -27,6 +25,9 @@ class Relation extends React.Component {
     selectedRowObj: {}, // 选中行对象
 
   };
+
+  queryInfo = { occupation: ['basketball'], category: ['player'] };
+
 
   componentWillReceiveProps(nextProps) {
 
@@ -112,7 +113,7 @@ class Relation extends React.Component {
         fieldsValue.imageUrl = imageUrl;
         // 添加类型
         if (status === 'add') {
-          payload = fieldsValue;
+          payload = { ...fieldsValue, ...this.queryInfo };
           payload.type = 'common/add';
           payload.basicId = _id;
         }
@@ -169,7 +170,7 @@ class Relation extends React.Component {
 
 
   render() {
-    const { form, relationDataObj,basicRow } = this.props;
+    const { form, relationDataObj, basicRow } = this.props;
     const { visible, selectedRowKeys, imageUrl, selectedRowObj, status } = this.state;
 
     const { getFieldDecorator } = form;
@@ -200,7 +201,7 @@ class Relation extends React.Component {
 
     const btnDisable = (relationDataObj.list && relationDataObj.list.length > 0) ? false : true;
     // 添加按钮disabled
-    const addBtnDisable = basicRow ? false : true;
+    const addBtnDisable = basicRow._id ? false : true;
 
     const uploadButton = (
       <div>

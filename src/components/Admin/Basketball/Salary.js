@@ -27,6 +27,9 @@ class Salary extends React.Component {
     selectedRowObj: {}, // 选中行对象
   };
 
+  queryInfo = { occupation: ['basketball'], category: ['player'] };
+
+
   componentWillReceiveProps(nextProps) {
     const { salaryDataObj } = nextProps;
     const { list = [] } = salaryDataObj || {};
@@ -86,7 +89,7 @@ class Salary extends React.Component {
         const { _id } = basicRow;
         // 添加
         if (status === 'add') {
-          payload = fieldsValue;
+          payload = { ...fieldsValue, ...this.queryInfo };
           payload.type = 'common/add';
           payload.basicId = _id;
         }
@@ -171,7 +174,7 @@ class Salary extends React.Component {
 
     const btnDisable = (salaryDataObj.list && salaryDataObj.list.length > 0) ? false : true;
     // 添加按钮disabled
-    const addBtnDisable = basicRow ? false : true;
+    const addBtnDisable = basicRow._id ? false : true;
 
     return (
       <div className={styles.salaryModal}>

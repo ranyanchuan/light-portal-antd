@@ -1,17 +1,5 @@
 import React from 'react';
-import {
-  Form,
-  DatePicker,
-  TimePicker,
-  Input,
-  Button,
-  Modal,
-  Select,
-  Row,
-  Col,
-  Table,
-  InputNumber,
-} from 'antd';
+import { Form, DatePicker, TimePicker, Input, Button, Modal, Select, Row, Col, Table, InputNumber } from 'antd';
 
 import moment from 'moment';
 import styles from './index.less';
@@ -29,6 +17,8 @@ class ScoreModal extends React.Component {
     selectedRowKeys: [], // 选中行key
     selectedRowObj: {}, // 选中行对象
   };
+
+  queryInfo = { occupation: ['basketball'], category: ['player'] };
 
 
   componentWillReceiveProps(nextProps) {
@@ -88,7 +78,7 @@ class ScoreModal extends React.Component {
         const { _id } = basicRow;
         // 添加类型
         if (status === 'add') {
-          payload = fieldsValue;
+          payload = { ...fieldsValue, ...this.queryInfo };
           payload.type = 'common/add';
           payload.basicId = _id;
         }
@@ -255,7 +245,7 @@ class ScoreModal extends React.Component {
   };
 
   render() {
-    const { form, scoreDataObj,basicRow } = this.props;
+    const { form, scoreDataObj, basicRow } = this.props;
 
 
     const { visible, selectedRowKeys, selectedRowObj, status } = this.state;
@@ -281,7 +271,7 @@ class ScoreModal extends React.Component {
 
     const btnDisable = (scoreDataObj.list && scoreDataObj.list.length > 0) ? false : true;
     // 添加按钮disabled
-    const addBtnDisable = basicRow ? false : true;
+    const addBtnDisable = basicRow._id ? false : true;
 
     return (
       <div className={styles.scoreModal}>
