@@ -86,11 +86,10 @@ class ScoreModal extends React.Component {
 
   //  提交form信息弹框
   handleSubmit = (e) => {
-    // this.props.hideModal();
-    const { selectedRowObj } = this.state;
+
     e.preventDefault();
     this.props.form.validateFields((err, fieldsValue) => {
-      console.log('fieldsValue', fieldsValue);
+
       if (!err) {
 
         // 日期格式
@@ -103,7 +102,7 @@ class ScoreModal extends React.Component {
         }
 
         const { status,selectedRowObj } = this.state;
-        const { basicRow,onSave } = this.props;
+        const { basicRow,onActionTable } = this.props;
 
         let payload = {};
         // 主表id
@@ -123,7 +122,7 @@ class ScoreModal extends React.Component {
         }
         // 添加操作表名
         payload.table = 'score';
-        onSave(payload);
+        onActionTable(payload);
 
         this.onClickClose();
       }

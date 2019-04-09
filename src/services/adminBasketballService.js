@@ -1,5 +1,5 @@
-import { request } from '../utils/request';
-import { api } from '../utils/config';
+import { request } from 'utils/request';
+import { api } from 'utils/config';
 
 export async function getStar(payload) {
   const {category,gql}=payload;

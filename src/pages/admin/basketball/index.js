@@ -41,7 +41,7 @@ class AdminBasketball extends React.Component {
 
     scoreDataObj: null, // 比分数据
 
-    relativeDataObj: null, // 关系数据
+    relationDataObj: null, // 关系数据
 
 
   };
@@ -75,8 +75,6 @@ class AdminBasketball extends React.Component {
                count${jsonStr}
              }
         `;
-
-
     this.props.dispatch({
       type: 'adminBasketball/queryBasic',
       payload: { gql, pageIndex, size },
@@ -85,10 +83,11 @@ class AdminBasketball extends React.Component {
         if (list && list.length > 0) {
           const { id } = list[0];
           this.setState({ selectedRowKeys: [id], selectedRowObj: list[0] });
-          // 获取比分数据
-          this.getScoreData({ basicId: id });
 
-          this.getTableData({ basicId: id ,table:'relation'})
+          // 获取比分
+          this.getTableData({ basicId: id, table: 'score' });
+          // 获取关系
+          this.getTableData({ basicId: id, table: 'relation' });
         }
       },
     });
@@ -102,18 +101,16 @@ class AdminBasketball extends React.Component {
       type: 'common/query',
       payload,
       callback: (response) => {
-        if (table === 'relation') {
-          this.setState({ relativeDataObj: response });
-        }
-
+        // 更新表格数据
+        this.setState({ [table + 'DataObj']: response });
       },
     });
   };
 
 
-  // 添加 || 更新
-  onSave=(payload)=>{
-    const { type } = payload;
+  // 添加 || 更新 || 删除
+  onActionTable = (payload) => {
+    const { type, table } = payload;
     delete  payload.type;
     // 添加或者更新明星基本数据
     this.props.dispatch({
@@ -121,38 +118,24 @@ class AdminBasketball extends React.Component {
       payload,
       callback: (res) => {
         this.setState({ loading: false });
+        const { selectedRowObj } = this.state;
         const { status } = res;
         if (status === 'success') {
-          const {table}=payload;
-          if(table==='relation'){
-            const {table}=payload;
-            this.getTableData({table});
+          // 获取table 数据
+          const param = { table };
+          // 非主表
+          if (table !== 'basic') {
+            param.basicId = selectedRowObj['id'];
           }
+          // 获取表格数据
+          this.getTableData(param);
         } else {
-          console.log('更新失败');
+          console.log(type, '失败');
         }
       },
     });
-
-  }
-
-
-  /**
-   * 获取比赛分数
-   */
-  getScoreData = (param = {}) => {
-    const { pageIndex = 0, size = 10, basicId } = param;
-    // 添加操作表名
-    const payload = { basicId, pageIndex, size, table: 'score' };
-    this.props.dispatch({
-      type: 'common/query',
-      payload,
-      callback: (response) => {
-        this.setState({ scoreDataObj: response });
-        // 获取比分数据
-      },
-    });
   };
+
 
 
   // 保存基本信息
@@ -202,40 +185,17 @@ class AdminBasketball extends React.Component {
   };
 
 
-  //  保存更新数据
-  onSaveScore = (payload) => {
-    const { type } = payload;
-    delete  payload.type;
-    // 添加或者更新明星基本数据
-    this.props.dispatch({
-      type,
-      payload,
-      callback: (res) => {
-        this.setState({ loading: false });
-        const { status } = res;
-        if (status === 'success') {
-          this.getScoreData({});
-        } else {
-          console.log('更新失败');
-        }
-      },
-    });
-  };
 
   // 改变tab
-  onChangeTab = (param) => {
-
+  onChangeTab = (table) => {
     const { selectedRowObj } = this.state;
     const { id: basicId } = selectedRowObj;
-    const payload = { pageIndex: 0, size: 10, basicId };
-    // 获取关系数据
-    if (param === '2') {
-      payload.table = 'relative';
-      this.getTableData(payload);
-    }
-
-
+    const payload = { basicId, table };
+    // 获取table 数据
+    this.getTableData(payload);
   };
+
+
 
   columns = [
     {
@@ -307,7 +267,6 @@ class AdminBasketball extends React.Component {
 
   // 删除弹框确认
   showDelCon = (payload) => {
-
     const _this = this;
     confirm({
       title: '您确定要删除吗',
@@ -316,18 +275,13 @@ class AdminBasketball extends React.Component {
       okType: 'danger',
       cancelText: 'No',
       onOk() {
-        const { table } = _this.state;
-        if (table === 'score') {
-          _this.onSaveScore(payload);
-        }
-
+        // 删除数据
+        _this.getTableData(payload);
       },
       onCancel() {
-        console.log('Cancel');
+        console.log('取消删除');
       },
     });
-
-
   };
 
 
@@ -395,7 +349,7 @@ class AdminBasketball extends React.Component {
     const { basicObj = {} } = this.props.adminBasketball;
     const { pageIndex, count, size } = basicObj;
 
-    const { basModVis, selectedRowKeys, basModStatus, selectedRowObj, scoreDataObj,relativeDataObj } = this.state;
+    const { basModVis, selectedRowKeys, basModStatus, selectedRowObj, scoreDataObj, relationDataObj } = this.state;
     const rowSelection = {
       selectedRowKeys,
       onChange: this.onSelectChange,
@@ -403,46 +357,7 @@ class AdminBasketball extends React.Component {
     };
 
 
-    console.log("relativeDataObj",relativeDataObj)
-
-    const relationData = [
-      {
-        key: '1',
-        name: 'Stephen Curry',
-        name_cn: '斯蒂芬-库里',
-        avatar: 'http://www.stat-nba.com/image/playerImage/526.jpg',
-        relation: ['朋友', '队友'],
-      }, {
-        key: '2',
-        name: 'Kevin Durant',
-        name_cn: '凯文-杜兰特',
-        avatar: 'http://www.stat-nba.com/image/playerImage/779.jpg',
-        relation: ['朋友', '队友'],
-      }, {
-        key: '3',
-        name: 'James Harden',
-        name_cn: '詹姆斯-哈登',
-        avatar: 'http://www.stat-nba.com/image/playerImage/1628.jpg',
-        relation: ['朋友', '队友'],
-      }, {
-        key: '4',
-        name: 'Russell Westbrook',
-        name_cn: '拉塞尔-威斯布鲁克',
-        avatar: 'http://www.stat-nba.com/image/playerImage/3920.jpg',
-        relation: ['朋友', '队友'],
-      }, {
-        key: '5',
-        name: 'Michael Jordan ',
-        name_cn: '迈克尔-乔丹',
-        avatar: 'http://www.stat-nba.com/image/playerImage/1717.jpg',
-        relation: ['朋友', '队友'],
-      }, {
-        key: '6',
-        name: 'Shaquille O\'Neal ',
-        name_cn: '沙奎尔-奥尼尔',
-        avatar: 'http://www.stat-nba.com/image/playerImage/2716.jpg',
-        relation: ['朋友', '队友'],
-      }];
+    console.log('relationDataObj', relationDataObj);
 
 
     const honorData = [{
@@ -556,28 +471,27 @@ class AdminBasketball extends React.Component {
 
 
           {/*子表数据*/}
-          <Tabs defaultActiveKey="2" onChange={this.onChangeTab}>
-            <TabPane tab="比分数据" key="1">
+          <Tabs defaultActiveKey="relation" onChange={this.onChangeTab}>
+            <TabPane tab="比分数据" key="score">
               <Score
                 scoreDataObj={scoreDataObj}
-                onSave={this.onSaveScore}
+                onActionTable={this.onActionTable}
                 basicRow={selectedRowObj}
                 showDelCon={this.showDelCon}
               />
             </TabPane>
-            <TabPane tab="查看关系" key="2">
+            <TabPane tab="查看关系" key="relation">
               <Relation
-                relativeDataObj={relativeDataObj}
+                relationDataObj={relationDataObj}
                 basicRow={selectedRowObj}
                 showDelCon={this.showDelCon}
-                onSave={this.onSave}
-
+                onActionTable={this.onActionTable}
               />
             </TabPane>
-            <TabPane tab="查看荣誉" key="3">
+            <TabPane tab="查看荣誉" key="honor">
               <Honor honorDataArray={honorData} basicRow={selectedRowObj}/>
             </TabPane>
-            <TabPane tab="生涯薪金" key="4">
+            <TabPane tab="生涯薪金" key="salary">
               <Salary salaryDataArray={salaryData} basicRow={selectedRowObj}/>
             </TabPane>
           </Tabs>

@@ -5,6 +5,8 @@
 module.exports = {
   api: {
 
+    addFile:'http://127.0.0.1:27000/api/file/add/',
+
     addCommon: '/api/common/add/:table',
     delCommon: '/api/common/del/:table',
     updCommon: '/api/common/update/:table',
