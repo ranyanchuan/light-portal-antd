@@ -36,7 +36,6 @@ class Relation extends React.Component {
     // 更新 table 数据
     if (list.length > 0) {
       const { _id, imageUrl } = list[0];
-      console.log("_id",_id);
       this.setState({ selectedRowKeys: [_id], selectedRowObj: list[0], imageUrl });
     }
   }
@@ -76,24 +75,25 @@ class Relation extends React.Component {
   };
 
 
-  // 打开弹框
-  onClickAdd = () => {
-    this.setState({ visible: true, status: 'add' });
-  };
-
-  // 编辑弹框
-  onClickEdit = () => {
-    this.setState({ visible: true, status: 'edit' });
-  };
-  // 详情弹框
-  onClickDesc = () => {
-    this.setState({ visible: true, status: 'desc' });
+  // 展示弹框
+  onShowModal = (status) => {
+    this.setState({ visible: true, status });
   };
 
   // 关闭弹框
   onClickClose = () => {
     this.setState({ visible: false, status: '' });
     this.props.form.resetFields();
+  };
+
+
+  // 修改分页
+  onChangePage = (data) => {
+    const { getTableData, basicRow } = this.props;
+    const { current, pageSize } = data;
+    const { _id: basicId } = basicRow;
+    const param = { pageIndex: current - 1, size: pageSize, table: 'relation', basicId };
+    getTableData(param);
   };
 
 
@@ -108,13 +108,13 @@ class Relation extends React.Component {
 
         let payload = {};
         // 主表id
-        const { id } = basicRow;
+        const { _id } = basicRow;
         fieldsValue.imageUrl = imageUrl;
         // 添加类型
         if (status === 'add') {
           payload = fieldsValue;
           payload.type = 'common/add';
-          payload.basicId = id;
+          payload.basicId = _id;
         }
 
         // 编辑操作
@@ -132,14 +132,12 @@ class Relation extends React.Component {
   };
 
   // 删除
-  onClickDel=()=>{
-    const {showDelCon}=this.props;
+  onClickDel = () => {
+    const { showDelCon } = this.props;
     const { selectedRowObj } = this.state;
-    let payload = {type:'common/del',_id:selectedRowObj['_id'],table:'ralation'};
+    let payload = { type: 'common/del', _id: selectedRowObj['_id'], table: 'relation' };
     showDelCon(payload);
-  }
-
-
+  };
 
 
   columns = [
@@ -148,8 +146,7 @@ class Relation extends React.Component {
       dataIndex: 'avatar',
       key: 'avatar',
       render: avatar => (<Avatar src={avatar}/>),
-    }
-    ,
+    },
     {
       title: '名字',
       dataIndex: 'name',
@@ -161,17 +158,19 @@ class Relation extends React.Component {
       dataIndex: 'relation',
       render: relation => (
         <span>
-      {relation.map(item => <Tag color="blue" key={item}>{item}</Tag>)}
-    </span>
+          {relation.map(item => <Tag color="blue" key={item}>{item}</Tag>)}
+        </span>
       ),
+    }, {
+      title: '备注',
+      dataIndex: 'remark',
+      key: 'remark',
     }];
 
 
   render() {
     const { form, relationDataObj } = this.props;
     const { visible, selectedRowKeys, imageUrl, selectedRowObj, status } = this.state;
-
-    console.log("selectedRowKeys",selectedRowKeys)
 
     const { getFieldDecorator } = form;
 
@@ -211,9 +210,9 @@ class Relation extends React.Component {
       <div className={styles.raltionModal}>
 
         <div className="table-operations">
-          <Button onClick={this.onClickAdd}>添加</Button>
-          <Button onClick={this.onClickEdit}>编辑</Button>
-          <Button onClick={this.onClickDesc}>详情</Button>
+          <Button onClick={this.onShowModal.bind(this, 'add')}>添加</Button>
+          <Button onClick={this.onShowModal.bind(this, 'edit')}>编辑</Button>
+          <Button onClick={this.onShowModal.bind(this, 'desc')}>详情</Button>
           <Button onClick={this.onClickDel}>删除</Button>
         </div>
         <Modal
@@ -227,6 +226,30 @@ class Relation extends React.Component {
         >
           <Form onSubmit={this.handleSubmit}>
             <Row>
+
+
+              <Col span={24}>
+                <Form.Item
+                  {...formItemLayout}
+                  label="头像"
+                >
+                  <Upload
+                    name="avatar"
+                    listType="picture-card"
+                    className="avatar-uploader"
+                    showUploadList={false}
+                    action={api.addFile}
+                    beforeUpload={this.beforeUpload}
+                    onChange={this.handleChange}
+                    disabled={status === 'desc' ? true : false}
+                  >
+                    {imageUrl && status !== 'add' ?
+                      <img src={imageUrl} alt="avatar" style={{ width: 90, height: 90 }}/> : uploadButton}
+                  </Upload>
+
+                </Form.Item>
+              </Col>
+
               <Col span={24}>
                 <Form.Item
                   {...formItemLayout}
@@ -276,24 +299,17 @@ class Relation extends React.Component {
               <Col span={24}>
                 <Form.Item
                   {...formItemLayout}
-                  label="头像"
+                  label="备注"
                 >
-                  <Upload
-                    name="avatar"
-                    listType="picture-card"
-                    className="avatar-uploader"
-                    showUploadList={false}
-                    action={api.addFile}
-                    beforeUpload={this.beforeUpload}
-                    onChange={this.handleChange}
-                    disabled={status === 'desc' ? true : false}
-                  >
-                    {imageUrl && status !== 'add' ?
-                      <img src={imageUrl} alt="avatar" style={{ width: 90, height: 90 }}/> : uploadButton}
-                  </Upload>
-
+                  {getFieldDecorator('remark', {
+                    initialValue: relationData.remark || '',
+                  })(
+                    <Input placeholder="请输入英文名" disabled={disabled}/>,
+                  )}
                 </Form.Item>
               </Col>
+
+
             </Row>
           </Form>
         </Modal>
@@ -304,6 +320,12 @@ class Relation extends React.Component {
           rowKey={record => record._id}
           dataSource={(relationDataObj && relationDataObj.list) ? relationDataObj.list : []}
           rowSelection={rowSelection}
+          pagination={{
+            current: relationDataObj.pageIndex + 1,
+            total: relationDataObj.count,
+            pageSize: relationDataObj.size,
+          }}
+          onChange={this.onChangePage}
           size="small"
           style={{ marginTop: '15px' }}/>
 

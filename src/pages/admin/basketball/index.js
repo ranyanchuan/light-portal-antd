@@ -18,7 +18,6 @@ import BasicModal from 'components/Admin/Basketball/BasicModal';
 import { clearQuotationMark } from 'utils';
 
 
-
 import styles from './index.less';
 import moment from 'moment';
 
@@ -43,8 +42,8 @@ class AdminBasketball extends React.Component {
     basModVis: false,
     basModStatus: 'add',
 
-    scoreDataObj: null, // 比分数据
-    relationDataObj: null, // 关系数据
+    scoreDataObj: {}, // 比分数据
+    relationDataObj: {}, // 关系数据
     starDataObj: {}, // 基本数据
 
   };
@@ -213,8 +212,6 @@ class AdminBasketball extends React.Component {
       key: 'team',
       render: text => <span>{text && Array.isArray(text) ? text.join(' | ') : ''}</span>,
     },
-
-
     {
       title: '学校',
       dataIndex: 'school',
@@ -227,6 +224,12 @@ class AdminBasketball extends React.Component {
   // 更新选中的数据
   onSelectChange = (selectedRowKeys, selectedRowObjs) => {
     this.setState({ selectedRowKeys, selectedRowObj: selectedRowObjs[0] });
+
+    //  更改主表信息
+    const { defaultActiveKey } = this.state;
+    const param = { table: defaultActiveKey, basicId: selectedRowObjs[0]._id };
+    this.getTableData(param);
+
   };
 
 
@@ -241,7 +244,7 @@ class AdminBasketball extends React.Component {
       cancelText: 'No',
       onOk() {
         // 删除数据
-        _this.getTableData(payload);
+        _this.onActionTable(payload);
       },
       onCancel() {
         console.log('取消删除');
@@ -414,6 +417,7 @@ class AdminBasketball extends React.Component {
                 onActionTable={this.onActionTable}
                 basicRow={selectedRowObj}
                 showDelCon={this.showDelCon}
+                getTableData={this.getTableData}
               />
             </TabPane>
             <TabPane tab="查看关系" key="relation">
@@ -422,6 +426,7 @@ class AdminBasketball extends React.Component {
                 basicRow={selectedRowObj}
                 showDelCon={this.showDelCon}
                 onActionTable={this.onActionTable}
+                getTableData={this.getTableData}
               />
             </TabPane>
             <TabPane tab="查看荣誉" key="honor">

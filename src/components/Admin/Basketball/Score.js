@@ -25,10 +25,10 @@ const ruleTime = 'HH:mm';
 const ruleDate = 'YYYY-MM-DD';
 
 @Form.create()
-@connect((state) => ({
-  adminBasketball: state.adminBasketball,
-  common: state.common,
-}))
+// @connect((state) => ({
+//   adminBasketball: state.adminBasketball,
+//   common: state.common,
+// }))
 
 class ScoreModal extends React.Component {
   state = {
@@ -54,28 +54,19 @@ class ScoreModal extends React.Component {
     this.setState({ selectedRowKeys, selectedRowObj: selectedRowObjs[0] });
   };
 
-  // 打开弹框
-  onClickAdd = () => {
-    this.setState({ visible: true, status: 'add' });
-  };
 
-
-  // 编辑弹框
-  onClickEdit = () => {
-    this.setState({ visible: true, status: 'edit' });
-  };
-  // 详情弹框
-  onClickDesc = () => {
-    this.setState({ visible: true, status: 'desc' });
+  // 展示弹框
+  onShowModal = (status) => {
+    this.setState({ visible: true, status });
   };
 
   // 删除
-  onClickDel=()=>{
-    const {showDelCon}=this.props;
+  onClickDel = () => {
+    const { showDelCon } = this.props;
     const { selectedRowObj } = this.state;
-    let payload = {type:'common/del',_id:selectedRowObj['_id'],table:'score'};
+    let payload = { type: 'common/del', _id: selectedRowObj['_id'], table: 'score' };
     showDelCon(payload);
-  }
+  };
 
 
   // 关闭弹框
@@ -86,12 +77,9 @@ class ScoreModal extends React.Component {
 
   //  提交form信息弹框
   handleSubmit = (e) => {
-
     e.preventDefault();
     this.props.form.validateFields((err, fieldsValue) => {
-
       if (!err) {
-
         // 日期格式
         if (fieldsValue.date) {
           fieldsValue.date = moment(fieldsValue.birthday).format(ruleDate);
@@ -101,19 +89,19 @@ class ScoreModal extends React.Component {
           fieldsValue.time = moment(fieldsValue.time).format(ruleTime);
         }
 
-        const { status,selectedRowObj } = this.state;
-        const { basicRow,onActionTable } = this.props;
+        const { status, selectedRowObj } = this.state;
+        const { basicRow, onActionTable } = this.props;
 
         let payload = {};
-        // 主表id
-        const { id } = basicRow;
+        // 主表_id
+        const { _id } = basicRow;
         // 添加类型
         if (status === 'add') {
-          payload=fieldsValue;
+          payload = fieldsValue;
           payload.type = 'common/add';
-          payload.basicId = id;
+          payload.basicId = _id;
         }
-
+        // 编辑得分
         if (status === 'edit') {
           payload.type = 'common/upd';
           payload.condition = { _id: selectedRowObj['_id'] };
@@ -123,16 +111,22 @@ class ScoreModal extends React.Component {
         // 添加操作表名
         payload.table = 'score';
         onActionTable(payload);
-
         this.onClickClose();
       }
     });
 
   };
 
-  onChangeTags = (value) => {
-    console.log(`selected ${value}`);
+
+  // 修改分页
+  onChangeBasicPage = (data) => {
+    const { getTableData, basicRow } = this.props;
+    const { current, pageSize } = data;
+    const { _id: basicId } = basicRow;
+    const param = { pageIndex: current - 1, size: pageSize, table: 'score', basicId };
+    getTableData(param);
   };
+
 
   columns = [
     {
@@ -298,9 +292,9 @@ class ScoreModal extends React.Component {
     return (
       <div className={styles.scoreModal}>
         <div className="table-operations">
-          <Button onClick={this.onClickAdd}>添加</Button>
-          <Button onClick={this.onClickEdit}>编辑</Button>
-          <Button onClick={this.onClickDesc}>详情</Button>
+          <Button onClick={this.onShowModal.bind(this, 'add')}>添加</Button>
+          <Button onClick={this.onShowModal.bind(this, 'edit')}>编辑</Button>
+          <Button onClick={this.onShowModal.bind(this, 'desc')}>详情</Button>
           <Button onClick={this.onClickDel}>删除</Button>
         </div>
 
@@ -636,6 +630,12 @@ class ScoreModal extends React.Component {
           rowSelection={rowSelection}
           columns={this.columns}
           dataSource={(scoreDataObj && scoreDataObj.list) ? scoreDataObj.list : []}
+          pagination={{
+            current: scoreDataObj.pageIndex + 1,
+            total: scoreDataObj.count,
+            pageSize: scoreDataObj.size,
+          }}
+          onChange={this.onChangeBasicPage}
           scroll={{ x: 1700, y: 300 }}
         />
       </div>

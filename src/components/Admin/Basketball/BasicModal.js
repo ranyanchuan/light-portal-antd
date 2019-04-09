@@ -27,6 +27,7 @@ class BasicModal extends React.Component {
   state = {
     expand: false,
     loading: false,
+    imageUrl:'',
   };
 
   componentWillReceiveProps(nextProps, nextState) {
