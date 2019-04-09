@@ -10,7 +10,6 @@ import Nationality from 'components/Nationality';
 import City from 'components/City';
 
 
-
 import styles from './index.less';
 
 
@@ -24,50 +23,36 @@ class SearchBasketball extends React.Component {
     expand: false,
   };
 
-  // To generate mock Form.Item
-  getFields() {
-    const count = this.state.expand ? 10 : 6;
-    const { getFieldDecorator } = this.props.form;
-    const children = [];
-    for (let i = 0; i < 10; i++) {
-      children.push(
-        <Col span={8} key={i} style={{ display: i < count ? 'block' : 'none' }}>
-          <Form.Item label={`Field ${i}`}>
-            {getFieldDecorator(`field-${i}`, {
-              rules: [{
-                required: true,
-                message: 'Input something!',
-              }],
-            })(
-              <Input placeholder="placeholder"/>,
-            )}
-          </Form.Item>
-        </Col>,
-      );
-    }
-    return children;
-  }
 
   handleSearch = (e) => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
-      console.log('Received values of form: ', values);
+      if (!err) {
+        const param = {};
+        for (const key in values) {
+          if (values[key]) {
+            param[key] = values[key];
+          }
+        }
+        this.props.onSearch(param);
+      }
     });
   };
 
   handleReset = () => {
     this.props.form.resetFields();
+    this.props.onClear();
+
   };
 
 
-
   render() {
-    const {form}=this.props;
+    const { form } = this.props;
     const formItemLayout = {
       labelCol: { sm: { span: 4 } },
       wrapperCol: { sm: { span: 19 } },
     };
-    const { getFieldDecorator } =form;
+    const { getFieldDecorator } = form;
     return (
       <div className={styles.basketballSearch}>
         <Form
@@ -86,10 +71,10 @@ class SearchBasketball extends React.Component {
               </Form.Item>
             </Col>
             <Col span={8}>
-              <Gender formItemLayout={formItemLayout} form={form} />
+              <Gender formItemLayout={formItemLayout} form={form}/>
             </Col>
             <Col span={8}>
-              <City formItemLayout={formItemLayout}  form={form}/>
+              <City formItemLayout={formItemLayout} form={form}/>
             </Col>
 
             <Col span={8}>
@@ -106,7 +91,7 @@ class SearchBasketball extends React.Component {
               />
             </Col>
             <Col span={8}>
-              <Nationality formItemLayout={formItemLayout}  form={form}/>
+              <Nationality formItemLayout={formItemLayout} form={form}/>
             </Col>
 
           </Row>

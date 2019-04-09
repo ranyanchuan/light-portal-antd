@@ -4,8 +4,8 @@
  */
 import React from 'react';
 import { connect } from 'dva';
-
-import { Button, Modal, Tabs, Menu, Table, Divider, Tag, Avatar, Pagination } from 'antd';
+import moment from 'moment';
+import { Button, Modal, Tabs, Table, Avatar } from 'antd';
 
 import LayoutAdmin from 'components/Admin/LayoutAdmin';
 import Search from 'components/Admin/Basketball/Search';
@@ -15,16 +15,12 @@ import Honor from 'components/Admin/Basketball/Honor';
 import Salary from 'components/Admin/Basketball/Salary';
 import BasicModal from 'components/Admin/Basketball/BasicModal';
 
-import { clearQuotationMark } from 'utils';
-
-
 import styles from './index.less';
-import moment from 'moment';
+
 
 const { TabPane } = Tabs;
 const confirm = Modal.confirm;
 const ruleDate = 'YYYY-MM-DD';
-
 
 @connect((state) => ({
   adminBasketball: state.adminBasketball,
@@ -34,6 +30,7 @@ const ruleDate = 'YYYY-MM-DD';
 class AdminBasketball extends React.Component {
 
   state = {
+    searchObj: {}, //搜索面板数据
     defaultActiveKey: 'salary', // 默认选中tab
     selectedRowKeys: [], // 选中行key
     selectedRowObj: {}, // 选中行对象
@@ -47,12 +44,26 @@ class AdminBasketball extends React.Component {
     starDataObj: {}, // 基本数据
     honorDataObj: {}, // 荣誉数据
     salaryDataObj: {}, // 资薪数据
-
   };
 
+  starQueryInfo = { table: 'star', occupation: ['basketball'], category: ['player'] };
+
+
   componentDidMount() {
-    this.getTableData({ table: 'star', occupation: ['basketball'], category: ['player'] });
+    const { searchObj } = this.state;
+    this.getTableData({ ...this.starQueryInfo, ...searchObj });
   }
+
+  // 搜索面板值
+  onSearchPannel = (param) => {
+    this.setState({ searchObj: param });
+    this.getTableData({ ...this.starQueryInfo, ...param });
+  };
+
+  // 清空搜索面板值
+  onClearPannel = () => {
+    this.setState({ searchObj: {} });
+  };
 
   // 获取表格数据
   getTableData = (payload) => {
@@ -276,15 +287,13 @@ class AdminBasketball extends React.Component {
   // 修改分页
   onChangeBasicPage = (data) => {
     const { current, pageSize } = data;
+    const { searchObj } = this.state;
     const param = {
       pageIndex: current - 1,
       size: pageSize,
-      table: 'star',
-      occupation: ['basketball'],
-      category: ['player'],
     };
     // 获取分页数据
-    this.getTableData(param);
+    this.getTableData({ ...param, ...this.starQueryInfo, ...searchObj });
   };
 
 
@@ -312,7 +321,7 @@ class AdminBasketball extends React.Component {
     return (
       <LayoutAdmin {...this.props} selectKey={['basketball']}>
         <div className={styles.adminBasketball}>
-          <Search/>
+          <Search onSearch={this.onSearchPannel} onClear={this.onClearPannel}/>
           <div className="table-operations">
             <Button onClick={this.onShowModal.bind(this, 'add')}>添加</Button>
             <Button onClick={this.onShowModal.bind(this, 'edit')} disabled={btnDisable}>编辑</Button>
