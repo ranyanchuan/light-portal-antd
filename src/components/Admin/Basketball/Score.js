@@ -32,7 +32,6 @@ const ruleDate = 'YYYY-MM-DD';
 
 class ScoreModal extends React.Component {
   state = {
-    expand: false,
     visible: false,
     status: '',
     selectedRowKeys: [], // 选中行key
@@ -119,7 +118,7 @@ class ScoreModal extends React.Component {
 
 
   // 修改分页
-  onChangeBasicPage = (data) => {
+  onChangePage = (data) => {
     const { getTableData, basicRow } = this.props;
     const { current, pageSize } = data;
     const { _id: basicId } = basicRow;
@@ -635,7 +634,7 @@ class ScoreModal extends React.Component {
             total: scoreDataObj.count,
             pageSize: scoreDataObj.size,
           }}
-          onChange={this.onChangeBasicPage}
+          onChange={this.onChangePage}
           scroll={{ x: 1700, y: 300 }}
         />
       </div>

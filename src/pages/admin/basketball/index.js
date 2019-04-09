@@ -45,6 +45,7 @@ class AdminBasketball extends React.Component {
     scoreDataObj: {}, // 比分数据
     relationDataObj: {}, // 关系数据
     starDataObj: {}, // 基本数据
+    honorDataObj: {}, // 荣誉数据
 
   };
 
@@ -290,51 +291,12 @@ class AdminBasketball extends React.Component {
 
   render() {
 
-    const { basModVis, selectedRowKeys, basModStatus, defaultActiveKey, selectedRowObj, starDataObj, scoreDataObj, relationDataObj } = this.state;
+    const { basModVis, selectedRowKeys, basModStatus, defaultActiveKey, selectedRowObj, starDataObj, scoreDataObj, relationDataObj,honorDataObj } = this.state;
     const rowSelection = {
       selectedRowKeys,
       onChange: this.onSelectChange,
       type: 'radio',
     };
-
-
-    const honorData = [{
-      key: '1',
-      date: '2018-11-01',
-      title: '11-12赛季总冠军(迈阿密热火)',
-      comment: 'xxxxxxxxx',
-    }, {
-      key: '2',
-      date: '2018-11-01',
-      title: '11-12赛季总冠军(迈阿密热火)',
-      comment: 'xxxxxxxxx',
-
-    }, {
-      key: '3',
-      date: '2018-11-01',
-      title: '11-12赛季总冠军(迈阿密热火)',
-      comment: 'xxxxxxxxx',
-
-    }, {
-      key: '4',
-      date: '2018-11-01',
-      title: '11-12赛季总冠军(迈阿密热火)',
-      comment: 'xxxxxxxxx',
-
-    }, {
-      key: '5',
-      date: '2018-11-01',
-      title: '11-12赛季总冠军(迈阿密热火)',
-      comment: 'xxxxxxxxx',
-
-    }, {
-      key: '6',
-      date: '2018-11-01',
-      title: '11-12赛季总冠军(迈阿密热火)',
-      comment: 'xxxxxxxxx',
-
-    }];
-
 
     const salaryData = [
       {
@@ -430,7 +392,13 @@ class AdminBasketball extends React.Component {
               />
             </TabPane>
             <TabPane tab="查看荣誉" key="honor">
-              <Honor honorDataArray={honorData} basicRow={selectedRowObj}/>
+              <Honor
+                honorDataObj={honorDataObj}
+                basicRow={selectedRowObj}
+                showDelCon={this.showDelCon}
+                onActionTable={this.onActionTable}
+                getTableData={this.getTableData}
+              />
             </TabPane>
             <TabPane tab="生涯薪金" key="salary">
               <Salary salaryDataArray={salaryData} basicRow={selectedRowObj}/>

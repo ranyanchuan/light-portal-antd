@@ -4,13 +4,11 @@ import { Form, DatePicker, Icon, Input, Button, Modal, Select, Row, Col, Table, 
 
 import { uuid } from 'utils';
 
-import styles from './index.less';
 import { Upload } from 'antd/lib/upload';
 import moment from 'moment';
 
-const { MonthPicker, RangePicker } = DatePicker;
-const Option = Select.Option;
-const { TextArea } = Input;
+
+const ruleDate = 'YYYY-MM-DD';
 
 
 @Form.create()
@@ -20,8 +18,8 @@ const { TextArea } = Input;
 
 class Honor extends React.Component {
   state = {
-    expand: false,
     visible: false,
+    status: '',
     selectedRowKeys: [], // 选中行key
     selectedRowObj: {}, // 选中行对象
 
@@ -29,8 +27,8 @@ class Honor extends React.Component {
 
 
   componentWillReceiveProps(nextProps) {
-    const { scoreDataObj } = nextProps;
-    const { list = [] } = scoreDataObj || {};
+    const { honorDataObj } = nextProps;
+    const { list = [] } = honorDataObj || {};
     if (list.length > 0) {
       const { _id } = list[0];
       this.setState({ selectedRowKeys: [_id], selectedRowObj: list[0] });
@@ -38,25 +36,24 @@ class Honor extends React.Component {
   }
 
 
-  onSelectChange = (selectedRowKeys) => {
-    console.log('selectedRowKeys changed: ', selectedRowKeys);
-    this.setState({ selectedRowKeys });
+  onSelectChange = (selectedRowKeys,selectedRowObjs) => {
+    this.setState({ selectedRowKeys, selectedRowObj: selectedRowObjs[0] });
   };
 
-  // 打开弹框
-  onClickAdd = () => {
-    this.setState({ visible: true, status: 'add' });
+  // 展示弹框
+  onShowModal = (status) => {
+    this.setState({ visible: true, status });
   };
 
 
-  // 编辑弹框
-  onClickEdit = () => {
-    this.setState({ visible: true, status: 'edit' });
+  onClickDel = () => {
+    const { showDelCon } = this.props;
+    const { selectedRowObj } = this.state;
+    let payload = { type: 'common/del', _id: selectedRowObj['_id'], table: 'honor' };
+    showDelCon(payload);
   };
-  // 详情弹框
-  onClickDesc = () => {
-    this.setState({ visible: true, status: 'desc' });
-  };
+
+
 
   // 关闭弹框
   onClickClose = () => {
@@ -69,24 +66,57 @@ class Honor extends React.Component {
     // this.props.hideModal();
     e.preventDefault();
     this.props.form.validateFields((err, fieldsValue) => {
-      console.log('fieldsValue', fieldsValue);
+      if (!err) {
+        // 日期格式
+        if (fieldsValue.date) {
+          fieldsValue.date = moment(fieldsValue.birthday).format(ruleDate);
+        }
 
-      if (err) {
-        return;
+        const { status, selectedRowObj } = this.state;
+        const { basicRow, onActionTable } = this.props;
+
+        let payload = {};
+        // 主表_id
+        const { _id } = basicRow;
+        // 添加类型
+        if (status === 'add') {
+          payload = fieldsValue;
+          payload.type = 'common/add';
+          payload.basicId = _id;
+        }
+        // 编辑得分
+        if (status === 'edit') {
+          payload.type = 'common/upd';
+          payload.condition = { _id: selectedRowObj['_id'] };
+          payload.content = fieldsValue;
+
+        }
+        // 添加操作表名
+        payload.table = 'honor';
+        onActionTable(payload);
+        this.onClickClose();
       }
     });
-    this.setState({ visible: false });
   };
 
-  onChangeTags = (value) => {
-    console.log(`selected ${value}`);
+  // 修改分页
+  onChangePage = (data) => {
+    const { getTableData, basicRow } = this.props;
+    const { current, pageSize } = data;
+    const { _id: basicId } = basicRow;
+    const param = { pageIndex: current - 1, size: pageSize, table: 'honor', basicId };
+    getTableData(param);
   };
+
 
   columns = [
     {
-      title: '时间',
+      title: '日期',
       dataIndex: 'date',
       key: 'date',
+      render: (text) => {
+        return text ? moment(text).format(ruleDate) : '';
+      },
     }, {
       title: '荣誉',
       key: 'title',
@@ -99,9 +129,18 @@ class Honor extends React.Component {
   ];
 
 
+  // 标题对象
+  titleObj = {
+    add: '添加荣誉数据',
+    edit: '编辑荣誉数据',
+    desc: '查看荣誉数据',
+  };
+
+
   render() {
-    const { form, honorDataArray } = this.props;
-    const { selectedRowKeys, visible, status } = this.state;
+    const { form, honorDataObj } = this.props;
+    const { visible, selectedRowKeys, selectedRowObj, status } = this.state;
+
     const { getFieldDecorator } = form;
 
     const rowSelection = {
@@ -117,21 +156,21 @@ class Honor extends React.Component {
 
 
     const disabled = status === 'desc' ? true : false;
-    const honorData = status !== 'add' ? honorDataArray[0] : {};
+    const honorData = status !== 'add' ? selectedRowObj : {};
 
 
     return (
       <div>
 
         <div className="table-operations">
-          <Button onClick={this.onClickAdd}>添加</Button>
-          <Button onClick={this.onClickEdit}>编辑</Button>
-          <Button onClick={this.onClickDesc}>详情</Button>
-          <Button onClick={this.clearFilters}>删除</Button>
+          <Button onClick={this.onShowModal.bind(this, 'add')}>添加</Button>
+          <Button onClick={this.onShowModal.bind(this, 'edit')}>编辑</Button>
+          <Button onClick={this.onShowModal.bind(this, 'desc')}>详情</Button>
+          <Button onClick={this.onClickDel}>删除</Button>
         </div>
 
         <Modal
-          title="查看荣誉"
+          title={this.titleObj[status]}
           visible={visible}
           onOk={this.handleSubmit}
           onCancel={this.onClickClose}
@@ -139,7 +178,6 @@ class Honor extends React.Component {
           okText="确认"
           cancelText="取消"
         >
-
           <Form onSubmit={this.handleSubmit}>
             <Row>
               <Col span={24}>
@@ -185,10 +223,18 @@ class Honor extends React.Component {
           </Form>
         </Modal>
         <Table
+          rowKey={record => record._id}
           columns={this.columns}
-          dataSource={honorDataArray}
+          dataSource={(honorDataObj && honorDataObj.list) ? honorDataObj.list : []}
           size="small"
           rowSelection={rowSelection}
+          pagination={{
+            current: honorDataObj.pageIndex + 1,
+            total: honorDataObj.count,
+            pageSize: honorDataObj.size,
+          }}
+          onChange={this.onChangePage}
+
         />
       </div>
     );
