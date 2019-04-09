@@ -18,10 +18,13 @@ import BasicModal from 'components/Admin/Basketball/BasicModal';
 import { clearQuotationMark } from 'utils';
 
 
+
 import styles from './index.less';
+import moment from 'moment';
 
 const { TabPane } = Tabs;
 const confirm = Modal.confirm;
+const ruleDate = 'YYYY-MM-DD';
 
 
 @connect((state) => ({
@@ -32,6 +35,7 @@ const confirm = Modal.confirm;
 class AdminBasketball extends React.Component {
 
   state = {
+    defaultActiveKey: 'score', // 默认选中tab
     selectedRowKeys: [], // 选中行key
     selectedRowObj: {}, // 选中行对象
 
@@ -40,59 +44,14 @@ class AdminBasketball extends React.Component {
     basModStatus: 'add',
 
     scoreDataObj: null, // 比分数据
-
     relationDataObj: null, // 关系数据
-
+    starDataObj: {}, // 基本数据
 
   };
-
 
   componentDidMount() {
-    this.getStarData({});
+    this.getTableData({ table: 'star', occupation: ['basketball'], category: ['player'] });
   }
-
-  /**
-   * 获取最热球星
-   */
-  getStarData = (param = {}) => {
-    const { pageIndex = 0, size = 10 } = param;
-    const jsonStr = `(pageIndex:${pageIndex},size:${size})`;
-    const gql = `
-        query {
-               list${jsonStr}{
-                 id:_id,
-                 avatar,
-                 name,
-                 name_cn,
-                 gender,
-                 birthday,
-                 nationality,
-                 city,
-                 school,
-                 organization,
-                 team,
-               }
-               count${jsonStr}
-             }
-        `;
-    this.props.dispatch({
-      type: 'adminBasketball/queryBasic',
-      payload: { gql, pageIndex, size },
-      callback: (response) => {
-        const { list } = response;
-        if (list && list.length > 0) {
-          const { id } = list[0];
-          this.setState({ selectedRowKeys: [id], selectedRowObj: list[0] });
-
-          // 获取比分
-          this.getTableData({ basicId: id, table: 'score' });
-          // 获取关系
-          this.getTableData({ basicId: id, table: 'relation' });
-        }
-      },
-    });
-  };
-
 
   // 获取表格数据
   getTableData = (payload) => {
@@ -101,12 +60,26 @@ class AdminBasketball extends React.Component {
       type: 'common/query',
       payload,
       callback: (response) => {
+
+        const { list = [] } = response;
+        const stateTemp = {};
+        // 更新 table 数据
+        if (list.length > 0 && table === 'star') {
+          const { _id } = list[0];
+          stateTemp.selectedRowKeys = [_id];
+          stateTemp.selectedRowObj = list[0];
+
+          const { defaultActiveKey } = this.state;
+          const param = { table: defaultActiveKey, basicId: _id };
+          this.getTableData(param);
+
+        }
+        stateTemp[table + 'DataObj'] = response;
         // 更新表格数据
-        this.setState({ [table + 'DataObj']: response });
+        this.setState(stateTemp);
       },
     });
   };
-
 
   // 添加 || 更新 || 删除
   onActionTable = (payload) => {
@@ -124,8 +97,8 @@ class AdminBasketball extends React.Component {
           // 获取table 数据
           const param = { table };
           // 非主表
-          if (table !== 'basic') {
-            param.basicId = selectedRowObj['id'];
+          if (table !== 'star') {
+            param.basicId = selectedRowObj['_id'];
           }
           // 获取表格数据
           this.getTableData(param);
@@ -137,64 +110,53 @@ class AdminBasketball extends React.Component {
   };
 
 
-
   // 保存基本信息
   onClickSaveBasic = (data) => {
 
     const { basModStatus, selectedRowObj } = this.state;
-
     let payload = data;
-    let type = '';
-
     if (basModStatus === 'edit') {
       payload = {};
-      type = 'common/upd';
+      payload.type = 'common/upd';
       payload.condition = { _id: selectedRowObj['id'] };
       payload.content = data;
     }
     // 添加类型
     if (basModStatus === 'add') {
-      type = 'common/add';
+      payload.type = 'common/add';
       payload.occupation = ['basketball'];
       payload.category = ['player'];
     }
 
     // 删除类型
     if (basModStatus === 'del') {
-      type = 'common/del';
+      payload.type = 'common/del';
       payload['_id'] = selectedRowObj['id'];
     }
-
     // 添加操作表名
     payload.table = 'star';
+    // 获取表格数据
+    this.onActionTable(payload);
 
-    // 添加或者更新明星基本数据
-    this.props.dispatch({
-      type,
-      payload,
-      callback: (res) => {
-        this.setState({ loading: false });
-        const { status } = res;
-        if (status === 'success') {
-          this.getStarData({});
-        } else {
-          console.log('更新失败');
-        }
-      },
-    });
+
   };
-
 
 
   // 改变tab
   onChangeTab = (table) => {
     const { selectedRowObj } = this.state;
-    const { id: basicId } = selectedRowObj;
-    const payload = { basicId, table };
-    // 获取table 数据
-    this.getTableData(payload);
-  };
+    const { _id: basicId } = selectedRowObj;
 
+    // 子表必须添加
+    if (basicId) {
+      const payload = { basicId, table };
+      // 获取table 数据
+      this.getTableData(payload);
+    }
+    // 更新tabs
+    this.setState({ defaultActiveKey: table });
+
+  };
 
 
   columns = [
@@ -224,6 +186,9 @@ class AdminBasketball extends React.Component {
       title: '出生日期',
       dataIndex: 'birthday',
       key: 'birthday',
+      render: (text) => {
+        return text ? moment(text).format(ruleDate) : '';
+      },
     },
 
     {
@@ -285,38 +250,17 @@ class AdminBasketball extends React.Component {
   };
 
 
-  // 删除基本确定弹框
-  showDeleteConfirm = () => {
-    this.setState({ basModStatus: 'del' });
-    const _this = this;
-    confirm({
-      title: '您确定要删除吗',
-      content: '',
-      okText: 'Yes',
-      okType: 'danger',
-      cancelText: 'No',
-      onOk() {
-        _this.onClickSaveBasic({});
-      },
-      onCancel() {
-        console.log('Cancel');
-      },
-    });
+  // 展示弹框
+  onShowModal = (basModStatus) => {
+    this.setState({ basModVis: true, basModStatus });
   };
 
+  //  删除弹框
+  onClickDel = () => {
+    const { selectedRowObj } = this.state;
+    let payload = { type: 'common/del', _id: selectedRowObj['_id'], table: 'star' };
+    this.showDelCon(payload);
 
-  // 添加弹框
-  onClickAdd = () => {
-    this.setState({ basModVis: true, basModStatus: 'add' });
-  };
-
-  // 编辑弹框
-  onClickEdit = () => {
-    this.setState({ basModVis: true, basModStatus: 'edit' });
-  };
-  // 详情弹框
-  onClickDesc = () => {
-    this.setState({ basModVis: true, basModStatus: 'desc' });
   };
 
   // 关闭弹框
@@ -340,24 +284,15 @@ class AdminBasketball extends React.Component {
     this.setState({ modalVisible });
   };
 
-  onChange = () => {
-    console.log('00000');
-  };
 
   render() {
 
-    const { basicObj = {} } = this.props.adminBasketball;
-    const { pageIndex, count, size } = basicObj;
-
-    const { basModVis, selectedRowKeys, basModStatus, selectedRowObj, scoreDataObj, relationDataObj } = this.state;
+    const { basModVis, selectedRowKeys, basModStatus, defaultActiveKey, selectedRowObj, starDataObj, scoreDataObj, relationDataObj } = this.state;
     const rowSelection = {
       selectedRowKeys,
       onChange: this.onSelectChange,
       type: 'radio',
     };
-
-
-    console.log('relationDataObj', relationDataObj);
 
 
     const honorData = [{
@@ -442,36 +377,37 @@ class AdminBasketball extends React.Component {
     ];
 
 
+    console.log('basicDateObj', starDataObj);
+
+
     return (
       <LayoutAdmin {...this.props} selectKey={['basketball']}>
         <div className={styles.adminBasketball}>
           <Search/>
           <div className="table-operations">
-            <Button onClick={this.onClickAdd}>添加</Button>
-            <Button onClick={this.onClickEdit}>编辑</Button>
-            <Button onClick={this.onClickDesc}>详情</Button>
-            <Button onClick={this.showDeleteConfirm}>删除</Button>
+            <Button onClick={this.onShowModal.bind(this, 'add')}>添加</Button>
+            <Button onClick={this.onShowModal.bind(this, 'edit')}>编辑</Button>
+            <Button onClick={this.onShowModal.bind(this, 'desc')}>详情</Button>
+            <Button onClick={this.onClickDel}>删除</Button>
           </div>
-          {basicObj &&
           <Table
             size="small"
-            rowKey={record => record.id}
+            rowKey={record => record._id}
             rowSelection={rowSelection}
             columns={this.columns}
-            dataSource={(basicObj && basicObj.list) ? basicObj.list : []}
+            dataSource={starDataObj.list && starDataObj.list.length > 0 ? starDataObj.list : []}
             pagination={{
-              current: pageIndex + 1,
-              total: count,
-              pageSize: size,
+              current: starDataObj.pageIndex + 1,
+              total: starDataObj.count,
+              pageSize: starDataObj.size,
             }}
             onChange={this.onChangeBasicPage}
             className={styles.newsTable}
           />
-          }
 
 
           {/*子表数据*/}
-          <Tabs defaultActiveKey="relation" onChange={this.onChangeTab}>
+          <Tabs defaultActiveKey={defaultActiveKey} onChange={this.onChangeTab}>
             <TabPane tab="比分数据" key="score">
               <Score
                 scoreDataObj={scoreDataObj}

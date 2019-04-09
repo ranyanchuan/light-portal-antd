@@ -11,6 +11,10 @@ import Nationality from 'components/Nationality';
 import City from 'components/City';
 import Shirt from 'components/PoloShirt/Basketball';
 
+import { api } from 'utils/config';
+
+
+
 import styles from './index.less';
 
 const Option = Select.Option;
@@ -365,7 +369,7 @@ class BasicModal extends React.Component {
                     listType="picture-card"
                     className="avatar-uploader"
                     showUploadList={false}
-                    action="http://127.0.0.1:27000/api/file/add/"
+                    action={api.addFile}
                     beforeUpload={this.beforeUpload}
                     onChange={this.handleChange}
                     disabled={status==='desc'?true:false}
