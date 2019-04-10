@@ -11,7 +11,6 @@ import Footer from 'components/footer';
 
 import styles from './LayoutAdmin.less';
 
-
 const { Sider, Content } = Layout;
 const SubMenu = Menu.SubMenu;
 

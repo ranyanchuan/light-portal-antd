@@ -3,9 +3,15 @@
   <component name="ChangeListManager">
     <list default="true" id="059cf7d0-ef89-48cb-9855-11b2eeca7f89" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Admin/Common/Salary.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Admin/Common/Salary.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Admin/Common/index.less" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Admin/Common/index.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Admin/Computer/Search.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Admin/scholar/Search.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Admin/Computer/index.less" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Admin/scholar/index.less" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Admin/LayoutAdmin.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Admin/LayoutAdmin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/computer/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/scholar/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/computer/index.less" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/scholar/index.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Admin/News/index.less" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Admin/News/index.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/global.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/global.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/scholar/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/scholar/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/scholar/index.less" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/scholar/index.less" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -38,7 +44,7 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="css" value="11" />
+          <entry key="css" value="12" />
           <entry key="editorconfig" value="3" />
           <entry key="env" value="1" />
           <entry key="eslintrc" value="5" />
@@ -46,9 +52,9 @@
           <entry key="gitkeep" value="2" />
           <entry key="html" value="3" />
           <entry key="jpg" value="2" />
-          <entry key="js" value="711" />
+          <entry key="js" value="715" />
           <entry key="json" value="11" />
-          <entry key="less" value="154" />
+          <entry key="less" value="162" />
           <entry key="lock" value="2" />
           <entry key="prettierignore" value="1" />
           <entry key="prettierrc" value="3" />
@@ -58,12 +64,12 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="CSS" value="11" />
+          <entry key="CSS" value="12" />
           <entry key="HTML" value="3" />
           <entry key="Image" value="2" />
           <entry key="JSON" value="19" />
-          <entry key="JavaScript" value="711" />
-          <entry key="Less" value="154" />
+          <entry key="JavaScript" value="715" />
+          <entry key="Less" value="162" />
           <entry key="PLAIN_TEXT" value="13" />
           <entry key="TypeScript" value="1" />
           <entry key="yarn.lock" value="2" />
@@ -77,19 +83,19 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="css" value="3" />
+          <entry key="css" value="4" />
           <entry key="js" value="35399" />
           <entry key="json" value="13" />
-          <entry key="less" value="4079" />
+          <entry key="less" value="4103" />
           <entry key="txt" value="22" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="CSS" value="3" />
+          <entry key="CSS" value="4" />
           <entry key="JSON" value="13" />
           <entry key="JavaScript" value="35399" />
-          <entry key="Less" value="4079" />
+          <entry key="Less" value="4103" />
           <entry key="PLAIN_TEXT" value="22" />
         </counts>
       </usages-collector>
@@ -98,22 +104,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/Admin/Common/Honor.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="24" selection-start-line="24" selection-end-line="32" />
-              <folding>
-                <element signature="e#0#26#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pages/admin/scholar/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="50" selection-start-line="50" selection-end-line="50" />
+            <state relative-caret-position="196">
+              <caret line="327" column="43" selection-start-line="327" selection-start-column="31" selection-end-line="327" selection-end-column="43" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="e#82#108#0" expanded="true" />
@@ -122,35 +116,73 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/components/Admin/LayoutAdmin.js">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/pages/admin/news/index.less">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="28" column="33" lean-forward="true" selection-start-line="26" selection-start-column="7" selection-end-line="28" selection-end-column="33" />
+            <state relative-caret-position="225">
+              <caret line="15" column="3" lean-forward="true" selection-end-line="41" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/UploadPicture/index.js">
+        <entry file="file://$PROJECT_DIR$/src/components/Admin/Basketball/index.less">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="16" column="2" selection-start-line="16" selection-start-column="2" selection-end-line="19" selection-end-column="3" />
+            <state relative-caret-position="195">
+              <caret line="13" column="1" lean-forward="true" selection-start-line="13" selection-start-column="1" selection-end-line="13" selection-end-column="1" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/starDesc/artist/$id.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-702" />
-          </provider>
+        <entry file="file://$PROJECT_DIR$/src/components/Admin/Common/index.less">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/test/index.js">
+        <entry file="file://$PROJECT_DIR$/src/components/Admin/News/index.less">
           <provider selected="true" editor-type-id="text-editor">
             <state>
+              <caret lean-forward="true" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/pages/admin/scholar/index.less">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/pages/admin/news/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="228">
+              <caret line="70" column="12" lean-forward="true" selection-start-line="70" selection-start-column="12" selection-end-line="70" selection-end-column="12" />
+              <folding>
+                <element signature="e#82#108#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/global.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/Admin/Common/Salary.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="143">
+              <caret line="180" column="40" selection-start-line="180" selection-start-column="24" selection-end-line="180" selection-end-column="40" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -159,33 +191,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/index.js">
+        <entry file="file://$PROJECT_DIR$/src/pages/index.less">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-595">
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/starDesc/player/$id.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-315" />
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/starDesc/scholar/$id.js">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/Admin/Common/Salary.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" column="1" selection-start-line="3" selection-start-column="1" selection-end-line="3" selection-end-column="1" />
+            <state relative-caret-position="315">
+              <caret line="21" column="34" lean-forward="true" selection-start-line="21" selection-start-column="34" selection-end-line="21" selection-end-column="34" />
             </state>
           </provider>
         </entry>
@@ -203,7 +212,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>onChange</find>
       <find>starDateObj</find>
       <find>basicRow</find>
       <find>defaultActiveKey</find>
@@ -233,6 +241,7 @@
       <find>onSearchPannel</find>
       <find>ruleDate</find>
       <find>param</find>
+      <find>defaultSelectedKeys</find>
     </findStrings>
     <replaceStrings>
       <replace>直接访问</replace>
@@ -260,9 +269,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/components/Admin/LayoutAdmin.less" />
-        <option value="$PROJECT_DIR$/src/components/Organization/basketball.js" />
-        <option value="$PROJECT_DIR$/src/components/Team/basketball.js" />
         <option value="$PROJECT_DIR$/src/components/Tag/basketball.js" />
         <option value="$PROJECT_DIR$/src/components/Position/basketball.js" />
         <option value="$PROJECT_DIR$/src/components/PoloShirt/basketball.js" />
@@ -299,18 +305,21 @@
         <option value="$PROJECT_DIR$/src/components/Admin/News/Search.js" />
         <option value="$PROJECT_DIR$/src/components/Admin/Basketball/Search.js" />
         <option value="$PROJECT_DIR$/src/pages/admin/news/index.js" />
-        <option value="$PROJECT_DIR$/src/pages/admin/scholar/index.less" />
-        <option value="$PROJECT_DIR$/src/components/Admin/Common/index.less" />
         <option value="$PROJECT_DIR$/src/components/Admin/Common/Relation.js" />
-        <option value="$PROJECT_DIR$/src/components/Admin/Common/Salary.js" />
         <option value="$PROJECT_DIR$/src/pages/admin/basketball/index.js" />
         <option value="$PROJECT_DIR$/src/pages/admin/basketball/grapqlCopy.js" />
         <option value="$PROJECT_DIR$/src/components/Admin/Common/Honor.js" />
-        <option value="$PROJECT_DIR$/src/pages/admin/scholar/index.js" />
         <option value="$PROJECT_DIR$/src/components/Admin/Computer/Paper.js" />
         <option value="$PROJECT_DIR$/src/components/Admin/Computer/index.less" />
         <option value="$PROJECT_DIR$/src/components/Admin/Computer/Search.js" />
         <option value="$PROJECT_DIR$/src/components/Admin/LayoutAdmin.js" />
+        <option value="$PROJECT_DIR$/src/pages/admin/scholar/index.js" />
+        <option value="$PROJECT_DIR$/src/components/Admin/Common/Salary.js" />
+        <option value="$PROJECT_DIR$/src/global.css" />
+        <option value="$PROJECT_DIR$/src/components/Admin/Common/index.less" />
+        <option value="$PROJECT_DIR$/src/components/Admin/News/index.less" />
+        <option value="$PROJECT_DIR$/src/components/Admin/Basketball/index.less" />
+        <option value="$PROJECT_DIR$/src/pages/admin/scholar/index.less" />
       </list>
     </option>
   </component>
@@ -331,8 +340,8 @@
     </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="352" />
-    <option name="y" value="69" />
+    <option name="x" value="376" />
+    <option name="y" value="89" />
     <option name="width" value="1636" />
     <option name="height" value="931" />
   </component>
@@ -373,7 +382,23 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
               <item name="Admin" type="462c0819:PsiDirectoryNode" />
+              <item name="Basketball" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="yaoyan-antd" type="b2602c69:ProjectViewProjectNode" />
+              <item name="yaoyan-antd" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="Admin" type="462c0819:PsiDirectoryNode" />
               <item name="Common" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="yaoyan-antd" type="b2602c69:ProjectViewProjectNode" />
+              <item name="yaoyan-antd" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="Admin" type="462c0819:PsiDirectoryNode" />
+              <item name="News" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="yaoyan-antd" type="b2602c69:ProjectViewProjectNode" />
@@ -394,6 +419,14 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="pages" type="462c0819:PsiDirectoryNode" />
               <item name="admin" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="yaoyan-antd" type="b2602c69:ProjectViewProjectNode" />
+              <item name="yaoyan-antd" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
+              <item name="news" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="yaoyan-antd" type="b2602c69:ProjectViewProjectNode" />
@@ -634,15 +667,15 @@
       <workItem from="1554789164164" duration="14166000" />
       <workItem from="1554857636459" duration="25328000" />
       <workItem from="1554895864528" duration="160000" />
-      <workItem from="1554898687871" duration="2450000" />
+      <workItem from="1554898687871" duration="3809000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="535288000" />
+    <option name="totallyTimeSpent" value="536647000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="352" y="69" width="1636" height="931" extended-state="0" />
+    <frame x="376" y="89" width="1636" height="931" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.8659696" visible="true" weight="0.2656347" />
@@ -659,7 +692,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.3298893" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.14541121" />
+      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.20858164" />
       <window_info anchor="bottom" id="TypeScript" order="11" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -694,34 +727,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/models/adminBasketballModel.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="7" lean-forward="true" selection-start-line="3" selection-start-column="7" selection-end-line="3" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.umirc.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="31" column="14" selection-start-line="31" selection-start-column="4" selection-end-line="31" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/services/starService.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="35" lean-forward="true" selection-start-line="4" selection-end-line="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/services/adminBasketballService.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="15" lean-forward="true" selection-start-line="12" selection-start-column="15" selection-end-line="12" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/utils/config.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
@@ -824,20 +829,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/admin/news/index.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="2" selection-start-line="1" selection-start-column="2" selection-end-line="1" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/admin/basketball/index.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="18" selection-start-column="18" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/DateCon/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
@@ -859,9 +850,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/admin/scholar/index.less">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/star/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="268">
@@ -876,16 +864,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/admin/news/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="70" column="12" lean-forward="true" selection-start-line="70" selection-start-column="12" selection-end-line="70" selection-end-column="12" />
-          <folding>
-            <element signature="e#82#108#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Admin/News/Search.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="24">
@@ -893,34 +871,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Admin/Basketball/index.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" column="32" lean-forward="true" selection-end-line="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Admin/Common/index.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
-          <caret line="37" lean-forward="true" selection-start-line="37" selection-end-line="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Admin/Basketball/Score.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="34" lean-forward="true" selection-start-line="4" selection-end-line="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Admin/Common/Paper.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Admin/Computer/Search.js">
+    <entry file="file://$PROJECT_DIR$/src/components/Admin/scholar/Search.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Admin/Computer/index.less">
+    <entry file="file://$PROJECT_DIR$/src/components/Admin/scholar/index.less">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Admin/Common/Relation.js">
@@ -930,38 +887,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/admin/basketball/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" selection-start-line="14" selection-end-line="16" selection-end-column="52" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/admin/basketball/grapqlCopy.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="7545">
           <caret line="503" column="15" selection-start-line="503" selection-start-column="15" selection-end-line="503" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Admin/Common/Salary.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="1" selection-start-line="3" selection-start-column="1" selection-end-line="3" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/admin/scholar/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="50" selection-start-line="50" selection-end-line="50" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#82#108#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1013,10 +942,116 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Admin/LayoutAdmin.less">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Admin/LayoutAdmin.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="28" column="33" lean-forward="true" selection-start-line="26" selection-start-column="7" selection-end-line="28" selection-end-column="33" />
+        <state relative-caret-position="75">
+          <caret line="12" selection-start-line="12" selection-end-line="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/admin/basketball/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" selection-start-line="14" selection-end-line="16" selection-end-column="52" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/admin/basketball/index.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" lean-forward="true" selection-end-line="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Admin/Basketball/Score.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3641">
+          <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Admin/Common/Salary.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="143">
+          <caret line="180" column="40" selection-start-line="180" selection-start-column="24" selection-end-line="180" selection-end-column="40" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/index.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" column="34" lean-forward="true" selection-start-line="21" selection-start-column="34" selection-end-line="21" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/admin/news/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="70" column="12" lean-forward="true" selection-start-line="70" selection-start-column="12" selection-end-line="70" selection-end-column="12" />
+          <folding>
+            <element signature="e#82#108#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/global.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Admin/Common/index.less">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Admin/News/index.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret lean-forward="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Admin/Basketball/index.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" column="1" lean-forward="true" selection-start-line="13" selection-start-column="1" selection-end-line="13" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/admin/news/index.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="3" lean-forward="true" selection-end-line="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/admin/scholar/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="196">
+          <caret line="327" column="43" selection-start-line="327" selection-start-column="31" selection-end-line="327" selection-end-column="43" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#82#108#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/admin/scholar/index.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
         </state>
       </provider>
     </entry>

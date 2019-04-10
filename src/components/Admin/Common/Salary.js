@@ -178,7 +178,6 @@ class Salary extends React.Component {
 
     return (
       <div className={styles.salaryModal}>
-
         <div className="table-operations">
           <Button onClick={this.onShowModal.bind(this, 'add')} disabled={addBtnDisable}>添加</Button>
           <Button onClick={this.onShowModal.bind(this, 'edit')} disabled={btnDisable}>编辑</Button>

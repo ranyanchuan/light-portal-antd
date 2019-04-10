@@ -324,8 +324,8 @@ class AdminScholar extends React.Component {
 
 
     return (
-      <LayoutAdmin {...this.props} selectKey={['basketball']}>
-        <div className={styles.adminBasketball}>
+      <LayoutAdmin {...this.props}>
+        <div className={styles.adminScholar}>
           <Search
             onSearch={this.onSearchPannel}
             // 设置ref属性

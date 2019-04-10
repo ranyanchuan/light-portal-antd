@@ -6,3 +6,15 @@ html, body, #root {
 body {
   margin: 0;
 }
+
+.table-operations {
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+.table-operations > button {
+  margin-right: 8px;
+}
+.ant-tabs-bar{
+  margin-bottom: 0px;
+}
