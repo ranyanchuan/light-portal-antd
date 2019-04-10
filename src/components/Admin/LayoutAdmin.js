@@ -18,25 +18,36 @@ const SubMenu = Menu.SubMenu;
 
 class LayoutAdmin extends React.Component {
 
+
   state = {
-    selectKey: 'news',
+    selectKey: 'scholar',
   };
 
+  componentDidMount() {
+    // const { path } = this.props.match;
+    // const selectKey=path.split("/").pop();
+    // this.setState({selectKey})
+  }
 
-  onClickMenu=(param)=>{
-    const { key } = param;
-    this.setState({ selectKey: key });
-    this.props.history.push('/admin/'+key);
+  componentWillMount(){
+    const { path } = this.props.match;
+    const selectKey=path.split("/").pop();
+    this.setState({selectKey})
   }
 
 
-
-
+  onClickMenu = (param) => {
+    const { key } = param;
+    // this.setState({ selectKey: key });
+    this.props.history.push('/admin/' + key);
+  };
 
 
   render() {
 
-    const { selectKey } = this.props;
+    const { selectKey } = this.state;
+
+
 
     return (
       <div className={styles.admin}>
@@ -50,11 +61,13 @@ class LayoutAdmin extends React.Component {
                 <Menu
                   onClick={this.onClickMenu}
                   style={{ width: 256 }}
-                  defaultSelectedKeys={selectKey}
-                  defaultOpenKeys={['scholar']}
+                  defaultSelectedKeys={[selectKey]}
+                  defaultOpenKeys={['player']}
                   mode="inline"
                 >
                   <Menu.Item key="news"><Icon type="fire"/>新闻</Menu.Item>
+                  <Menu.Item key="scholar"><span className="iconfont icon-zhuanjiaxuezhe"/>学者</Menu.Item>
+
                   <SubMenu key="player" title={<span><span className="iconfont icon-yundong"/><span>远动员</span></span>}>
                     <Menu.Item key="basketball"><span className="iconfont icon-lanqiu"/>篮球</Menu.Item>
                     <Menu.Item key="足球"><span className="iconfont icon-svggeshi-"/>足球</Menu.Item>
@@ -73,20 +86,6 @@ class LayoutAdmin extends React.Component {
                     <Menu.Item key="柔道"><span className="iconfont icon-roudao"/>柔道</Menu.Item>
                     <Menu.Item key="举重"><span className="iconfont icon-juzhong"/>举重</Menu.Item>
                     <Menu.Item key="拳道"><span className="iconfont icon-quanji"/>拳道</Menu.Item>
-                  </SubMenu>
-
-
-                  <SubMenu key="scholar"
-                           title={<span><span className="iconfont icon-zhuanjiaxuezhe"/><span>学者</span></span>}>
-                    <Menu.Item key="computer"><span className="iconfont icon-jisuanji"/>计算机</Menu.Item>
-                    <Menu.Item key="生物"><span className="iconfont icon-shengwu"/>生物</Menu.Item>
-                    <Menu.Item key="化学"><span className="iconfont icon-chem"/>化学</Menu.Item>
-                    <Menu.Item key="物理"><span className="iconfont icon-icon17"/>物理</Menu.Item>
-                    <Menu.Item key="机械"><span className="iconfont icon-jiqiren"/>机械</Menu.Item>
-                    <Menu.Item key="电子"><span className="iconfont icon-dianzi"/>电子</Menu.Item>
-                    <Menu.Item key="自动化"><span className="iconfont icon-zidonghua"/>自动化</Menu.Item>
-                    <Menu.Item key="考古"><span className="iconfont icon-kaogufajue"/>考古</Menu.Item>
-                    <Menu.Item key="电力"><span className="iconfont icon-dianli"/>电力</Menu.Item>
                   </SubMenu>
 
 
