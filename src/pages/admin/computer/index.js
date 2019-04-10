@@ -28,7 +28,7 @@ const ruleDate = 'YYYY-MM-DD';
   common: state.common,
 }))
 
-class AdminBasketball extends React.Component {
+class AdminScholar extends React.Component {
 
   state = {
     searchObj: {}, //搜索面板数据
@@ -40,14 +40,13 @@ class AdminBasketball extends React.Component {
     basModVis: false,
     basModStatus: 'add',
 
-    scoreDataObj: {}, // 比分数据
     relationDataObj: {}, // 关系数据
     starDataObj: {}, // 基本数据
     honorDataObj: {}, // 荣誉数据
     salaryDataObj: {}, // 资薪数据
   };
 
-  starQueryInfo = { table: 'star', occupation: ['basketball'], category: ['player'] };
+  starQueryInfo = { table: 'star', occupation: ['scholar'], category: ['computer'] };
 
 
   componentDidMount() {
@@ -126,7 +125,7 @@ class AdminBasketball extends React.Component {
           if (table !== 'star') {
             param.basicId = selectedRowObj['_id'];
           }
-           // 如果是主表请求 添加搜索信息
+          // 如果是主表请求 添加搜索信息
           if (table === 'star') {
             const searchObj = this.child.getSearchValue();
             param = searchObj;
@@ -358,7 +357,7 @@ class AdminBasketball extends React.Component {
 
           {/*子表数据*/}
           <Tabs defaultActiveKey={defaultActiveKey} onChange={this.onChangeTab}>
-            <TabPane tab="比分数据" key="score">
+            <TabPane tab="查看论文" key="paper">
               <Score
                 scoreDataObj={scoreDataObj}
                 onActionTable={this.onActionTable}
@@ -408,5 +407,5 @@ class AdminBasketball extends React.Component {
   }
 }
 
-export default AdminBasketball;
+export default AdminScholar;
 

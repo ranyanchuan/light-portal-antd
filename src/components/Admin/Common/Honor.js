@@ -1,20 +1,15 @@
 import React from 'react';
+import moment from 'moment';
 
-import { Form, DatePicker, Icon, Input, Button, Modal, Select, Row, Col, Table, Tag, Divider, Avatar } from 'antd';
+import { Form, DatePicker, Input, Button, Modal, Row, Col, Table } from 'antd';
 
 import { uuid } from 'utils';
-
-import { Upload } from 'antd/lib/upload';
-import moment from 'moment';
+import styles from './index.less';
 
 
 const ruleDate = 'YYYY-MM-DD';
 
-
 @Form.create()
-// @connect((state) => ({
-//   homePage: state.homePage,
-// }))
 
 class Honor extends React.Component {
   state = {

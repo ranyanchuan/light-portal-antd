@@ -24,11 +24,13 @@ class LayoutAdmin extends React.Component {
 
 
   onClickMenu=(param)=>{
-    console.log('param',param)
     const { key } = param;
     this.setState({ selectKey: key });
     this.props.history.push('/admin/'+key);
   }
+
+
+
 
 
 
@@ -49,7 +51,7 @@ class LayoutAdmin extends React.Component {
                   onClick={this.onClickMenu}
                   style={{ width: 256 }}
                   defaultSelectedKeys={selectKey}
-                  defaultOpenKeys={['player']}
+                  defaultOpenKeys={['scholar']}
                   mode="inline"
                 >
                   <Menu.Item key="news"><Icon type="fire"/>新闻</Menu.Item>
@@ -76,7 +78,7 @@ class LayoutAdmin extends React.Component {
 
                   <SubMenu key="scholar"
                            title={<span><span className="iconfont icon-zhuanjiaxuezhe"/><span>学者</span></span>}>
-                    <Menu.Item key="计算机"><span className="iconfont icon-jisuanji"/>计算机</Menu.Item>
+                    <Menu.Item key="computer"><span className="iconfont icon-jisuanji"/>计算机</Menu.Item>
                     <Menu.Item key="生物"><span className="iconfont icon-shengwu"/>生物</Menu.Item>
                     <Menu.Item key="化学"><span className="iconfont icon-chem"/>化学</Menu.Item>
                     <Menu.Item key="物理"><span className="iconfont icon-icon17"/>物理</Menu.Item>
