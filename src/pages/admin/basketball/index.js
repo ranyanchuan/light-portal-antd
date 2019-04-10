@@ -63,9 +63,14 @@ class AdminBasketball extends React.Component {
   getTableData = (payload) => {
     const { table } = payload;
     // 清空主表信息
-    const tempState = { starDataObj: {} };
-    //  清空子表数据
+    const tempState = {};
+    // 如果子表请求清空子表
+    if (table !== 'star') {
+      tempState[table + 'DataObj'] = {};
+    }
+    //  如果主表表请求清 主表 和 空子表
     if (table === 'star') {
+      tempState.starDataObj = {};
       tempState.scoreDataObj = {};
       tempState.relationDataObj = {};
       tempState.honorDataObj = {};
@@ -120,7 +125,7 @@ class AdminBasketball extends React.Component {
           if (table !== 'star') {
             param.basicId = selectedRowObj['_id'];
           }
-
+           // 如果是主表请求 添加搜索信息
           if (table === 'star') {
             const searchObj = this.child.getSearchValue();
             param = searchObj;
