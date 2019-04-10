@@ -50,24 +50,32 @@ class AdminBasketball extends React.Component {
 
 
   componentDidMount() {
-    const { searchObj } = this.state;
-    this.getTableData({ ...this.starQueryInfo, ...searchObj });
+    this.getTableData({ ...this.starQueryInfo });
   }
 
   // 搜索面板值
   onSearchPannel = (param) => {
-    this.setState({ searchObj: param });
     this.getTableData({ ...this.starQueryInfo, ...param });
   };
 
-  // 清空搜索面板值
-  onClearPannel = () => {
-    this.setState({ searchObj: {} });
-  };
 
   // 获取表格数据
   getTableData = (payload) => {
     const { table } = payload;
+    // 清空主表信息
+    const tempState = { starDataObj: {} };
+    //  清空子表数据
+    if (table === 'star') {
+      tempState.scoreDataObj = {};
+      tempState.relationDataObj = {};
+      tempState.honorDataObj = {};
+      tempState.scoreDataObj = {};
+      tempState.salaryDataObj = {};
+      tempState.selectedRowKeys = []; // 选中行key
+      tempState.selectedRowObj = {}; // 选中行对象
+    }
+    this.setState(tempState);
+
     this.props.dispatch({
       type: 'common/query',
       payload,
@@ -107,11 +115,18 @@ class AdminBasketball extends React.Component {
         const { status } = res;
         if (status === 'success') {
           // 获取table 数据
-          const param = { table };
+          let param = {};
           // 非主表
           if (table !== 'star') {
             param.basicId = selectedRowObj['_id'];
           }
+
+          if (table === 'star') {
+            const searchObj = this.child.getSearchValue();
+            param = searchObj;
+          }
+          param.table = table;
+
           // 获取表格数据
           this.getTableData(param);
         } else {
@@ -134,7 +149,7 @@ class AdminBasketball extends React.Component {
     }
     // 添加类型
     if (basModStatus === 'add') {
-      payload=data;
+      payload = data;
       payload.type = 'common/add';
       payload.occupation = ['basketball'];
       payload.category = ['player'];
@@ -273,7 +288,6 @@ class AdminBasketball extends React.Component {
   };
 
 
-
   // 关闭弹框
   onClickClose = () => {
     this.setState({ basModVis: false, basModStatus: 'add' });
@@ -282,7 +296,7 @@ class AdminBasketball extends React.Component {
   // 修改分页
   onChangeBasicPage = (data) => {
     const { current, pageSize } = data;
-    const { searchObj } = this.state;
+    const searchObj = this.child.getSearchValue();
     const param = {
       pageIndex: current - 1,
       size: pageSize,
@@ -290,7 +304,6 @@ class AdminBasketball extends React.Component {
     // 获取分页数据
     this.getTableData({ ...param, ...this.starQueryInfo, ...searchObj });
   };
-
 
 
   render() {
@@ -308,7 +321,13 @@ class AdminBasketball extends React.Component {
     return (
       <LayoutAdmin {...this.props} selectKey={['basketball']}>
         <div className={styles.adminBasketball}>
-          <Search onSearch={this.onSearchPannel} onClear={this.onClearPannel}/>
+          <Search
+            onSearch={this.onSearchPannel}
+            // 设置ref属性
+            onRef={(ref) => {
+              this.child = ref;
+            }}
+          />
           <div className="table-operations">
             <Button onClick={this.onShowModal.bind(this, 'add')}>添加</Button>
             <Button onClick={this.onShowModal.bind(this, 'edit')} disabled={btnDisable}>编辑</Button>

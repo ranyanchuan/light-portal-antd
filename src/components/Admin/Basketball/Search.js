@@ -1,8 +1,6 @@
 import React from 'react';
 
-import {
-  Form, Row, Col, Input, Button, Icon, Select,
-} from 'antd';
+import { Form, Row, Col, Input, Button } from 'antd';
 import Organization from 'components/Organization/basketball';
 import Team from 'components/Team/basketball';
 import Gender from 'components/Gender';
@@ -14,35 +12,43 @@ import styles from './index.less';
 
 
 @Form.create()
-// @connect((state) => ({
-//   homePage: state.homePage,
-// }))
+
 
 class SearchBasketball extends React.Component {
-  state = {
-    expand: false,
-  };
+
+  componentDidMount() {
+    // 在父组件上绑定子组件方法
+    this.props.onRef(this);
+  }
 
 
   handleSearch = (e) => {
     e.preventDefault();
+    const param = this.getSearchValue();
+    this.props.onSearch(param);
+  };
+
+
+  // 获取表单内容
+  getSearchValue = () => {
+    const param = {};
     this.props.form.validateFields((err, values) => {
-      if (!err) {
-        const param = {};
-        for (const key in values) {
-          if (values[key]) {
-            param[key] = values[key];
-          }
+      for (const key in values) {
+        if (values[key] && Array.isArray(values[key]) && values[key].length === 0) {
+          break;
         }
-        this.props.onSearch(param);
+
+        if (values[key]) {
+          param[key] = values[key];
+        }
       }
     });
+    return param;
   };
+
 
   handleReset = () => {
     this.props.form.resetFields();
-    this.props.onClear();
-
   };
 
 

@@ -67,6 +67,11 @@ class AdminNews extends React.Component {
 
   // 获取表格数据
   getTableData = (payload) => {
+
+    // 清空表信息
+    this.setState({ newsDataObj: {} });
+
+
     this.props.dispatch({
       type: 'common/query',
       payload,
