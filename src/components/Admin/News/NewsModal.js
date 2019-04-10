@@ -1,19 +1,15 @@
 import React from 'react';
-
-import { Form, DatePicker, TimePicker, Input, InputNumber, Upload, Icon, Modal, Select, Row, Col } from 'antd';
+import moment from 'moment';
+import { Form, Input, Modal, Select, Row, Col } from 'antd';
 import Occupation from 'components/Occupation';
 import Category from 'components/Category';
 import Tag from 'components/Tag/news';
 import DateCon from 'components/DateCon';
-
-import { uuid } from 'utils';
-
-
+import UploadPicture from 'components/UploadPicture';
 
 import styles from './index.less';
 
-const { MonthPicker, RangePicker } = DatePicker;
-const Option = Select.Option;
+const ruleDate = 'YYYY-MM-DD';
 const { TextArea } = Input;
 
 
@@ -24,69 +20,59 @@ const { TextArea } = Input;
 
 class newsModal extends React.Component {
   state = {
-    expand: false,
+    imageUrl: 'http://i2.w.hjfile.cn/news/201606/201606142495515859.jpg',
   };
 
   //  关闭添加信息弹框
   hideModal = () => {
-    this.props.hideModal('basModVis');
+    this.props.hideModal();
   };
 
   //  提交form信息弹框
   handleSubmit = (e) => {
-    // this.props.hideModal();
-    console.log('-----');
     e.preventDefault();
-
     this.props.form.validateFields((err, fieldsValue) => {
-      console.log('fieldsValue', fieldsValue);
-
-      if (err) {
-        return;
+      if (!err) {
+        const { imageUrl } = this.state;
+        // 添加图片url
+        if (imageUrl) {
+          fieldsValue.avatar = imageUrl;
+        }
+        // 日期格式
+        if (fieldsValue.birthday) {
+          fieldsValue.birthday = moment(fieldsValue.birthday).format(ruleDate);
+        }
+        this.props.onSave(fieldsValue);
+        this.hideModal();
       }
     });
   };
 
-  onChangeTags = (value) => {
-    console.log(`selected ${value}`);
+
+  // 更新封面图片
+  updatePicture = (imgUrl) => {
+    this.setState({ imgUrl });
   };
 
-
-  normFile = (e) => {
-    console.log('Upload event:', e);
-    if (Array.isArray(e)) {
-      return e;
-    }
-    return e && e.fileList;
-  };
 
   render() {
-    const { visible, form } = this.props;
+    const { visible, form, status } = this.props;
     const { getFieldDecorator } = form;
+    const { imageUrl } = this.state;
+
+    const disabled = false;
+
+
     const formItemLayout = {
       labelCol: { sm: { span: 4 } },
       wrapperCol: { sm: { span: 20 } },
     };
 
+    // 新闻内容
     const formItemLayoutDesc = {
       labelCol: { sm: { span: 2 } },
       wrapperCol: { sm: { span: 22 } },
     };
-
-
-    const config = {
-      birthday: { rules: [{ type: 'object', required: true, message: '请选择日期' }] },
-      name_cn: { rules: [{ required: true, message: '请输入中文姓名' }] },
-      name: { rules: [{ required: true, message: '请输入英文姓名' }] },
-      gender: { rules: [{ required: true, message: '请选择性别' }] },
-      height: { rules: [{ type: 'number' }] },
-      width: { rules: [{ type: 'number' }] },
-    };
-
-    const children = [];
-    for (let i = 10; i < 36; i++) {
-      children.push(<Option key={i.toString(36) + i}>{i.toString(36) + i}</Option>);
-    }
 
 
     return (
@@ -103,11 +89,14 @@ class newsModal extends React.Component {
           <Form onSubmit={this.handleSubmit}>
             <Row>
               <Col span={12}>
-                <Category formItemLayout={formItemLayout} form={form} required={true}/>
+                <Category formItemLayout={formItemLayout} form={form} required={true} disabled={disabled}/>
               </Col>
               <Col span={12}>
-                <Occupation formItemLayout={formItemLayout} form={form} required={true}/>
+                <Occupation formItemLayout={formItemLayout} form={form} required={true} disabled={disabled}/>
               </Col>
+
+            </Row>
+            <Row>
 
               <Col span={12}>
                 <Form.Item
@@ -123,6 +112,7 @@ class newsModal extends React.Component {
                       mode="tags"
                       style={{ width: '100%' }}
                       placeholder="请输入作者姓名"
+                      disabled={disabled}
                     >
                     </Select>,
                   )}
@@ -134,45 +124,41 @@ class newsModal extends React.Component {
                   {...formItemLayout}
                   label="标题"
                 >
-                  {getFieldDecorator('title',{
+                  {getFieldDecorator('title', {
                     initialValue: '',
                     rules: [{ required: true, message: '请输入标题' }],
 
                   })(
-                    <Input placeholder="请输入标题"/>,
+                    <Input placeholder="请输入标题" disabled={disabled}/>,
                   )}
                 </Form.Item>
               </Col>
 
+            </Row>
+            <Row>
               <Col span={12}>
-                <DateCon formItemLayout={formItemLayout} form={form} required={true} />
+                <DateCon formItemLayout={formItemLayout} form={form} required={true} disabled={disabled}/>
               </Col>
 
               <Col span={12}>
-                <Tag formItemLayout={formItemLayout} form={form}/>
+                <Tag formItemLayout={formItemLayout} form={form} disabled={disabled}/>
               </Col>
-
+            </Row>
+            <Row>
               <Col span={12}>
                 <Form.Item
                   {...formItemLayout}
                   label="封面"
                 >
-                  <div className="dropbox">
-                    {getFieldDecorator('dragger', {
-                      valuePropName: 'fileList',
-                      getValueFromEvent: this.normFile,
-                    })(
-                      <Upload.Dragger name="files" action="/upload.do">
-                        <p className="ant-upload-drag-icon" style={{ marginBottom: 25 }}>
-                          <Icon type="inbox"/>
-                        </p>
-                        <p className="ant-upload-text">单击或拖动文件到此区域进行上载</p>
-                      </Upload.Dragger>,
-                    )}
-                  </div>
+                  <UploadPicture
+                    title="上传封面"
+                    imageUrl={imageUrl}
+                    disabled={disabled}
+                    updatePicture={this.updatePicture}
+
+                  />
                 </Form.Item>
               </Col>
-
             </Row>
 
             <Row>
@@ -187,6 +173,7 @@ class newsModal extends React.Component {
                 </Form.Item>
               </Col>
             </Row>
+
           </Form>
         </Modal>
       </div>

@@ -25,7 +25,6 @@ const ruleDate = 'YYYY-MM-DD';
 @Form.create()
 class BasicModal extends React.Component {
   state = {
-    expand: false,
     loading: false,
     imageUrl:'',
   };
