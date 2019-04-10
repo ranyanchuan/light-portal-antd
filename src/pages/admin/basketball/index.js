@@ -126,24 +126,18 @@ class AdminBasketball extends React.Component {
   onClickSaveBasic = (data) => {
 
     const { basModStatus, selectedRowObj } = this.state;
-    let payload = data;
+    let payload = {};
     if (basModStatus === 'edit') {
-      payload = {};
       payload.type = 'common/upd';
       payload.condition = { _id: selectedRowObj['id'] };
       payload.content = data;
     }
     // 添加类型
     if (basModStatus === 'add') {
+      payload=data;
       payload.type = 'common/add';
       payload.occupation = ['basketball'];
       payload.category = ['player'];
-    }
-
-    // 删除类型
-    if (basModStatus === 'del') {
-      payload.type = 'common/del';
-      payload['_id'] = selectedRowObj['id'];
     }
     // 添加操作表名
     payload.table = 'star';
@@ -265,19 +259,20 @@ class AdminBasketball extends React.Component {
     });
   };
 
+  //  删除弹框
+  onClickDel = () => {
+    const { selectedRowObj } = this.state;
+    let payload = { type: 'common/del', _id: selectedRowObj['_id'], table: 'star' };
+    this.showDelCon(payload);
+  };
+
 
   // 展示弹框
   onShowModal = (basModStatus) => {
     this.setState({ basModVis: true, basModStatus });
   };
 
-  //  删除弹框
-  onClickDel = () => {
-    const { selectedRowObj } = this.state;
-    let payload = { type: 'common/del', _id: selectedRowObj['_id'], table: 'star' };
-    this.showDelCon(payload);
 
-  };
 
   // 关闭弹框
   onClickClose = () => {
@@ -296,14 +291,6 @@ class AdminBasketball extends React.Component {
     this.getTableData({ ...param, ...this.starQueryInfo, ...searchObj });
   };
 
-
-  hideModal = () => {
-    const { modalVisible } = this.state;
-    for (let item in modalVisible) {
-      modalVisible[item] = false;
-    }
-    this.setState({ modalVisible });
-  };
 
 
   render() {

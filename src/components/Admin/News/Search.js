@@ -16,12 +16,36 @@ class Search extends React.Component {
     expand: false,
   };
 
+  componentDidMount() {
+    // 在父组件上绑定子组件方法
+    this.props.onRef(this);
+  }
+
+
   handleSearch = (e) => {
     e.preventDefault();
-    this.props.form.validateFields((err, values) => {
-      console.log('Received values of form: ', values);
-    });
+    const param=this.getSearchValue();
+    this.props.onSearch(param);
   };
+
+
+  // 获取表单内容
+  getSearchValue = () => {
+    const param = {};
+    this.props.form.validateFields((err, values) => {
+      for (const key in values) {
+        if (values[key] && Array.isArray(values[key]) && values[key].length === 0) {
+          break;
+        }
+
+        if (values[key]) {
+          param[key] = values[key];
+        }
+      }
+    });
+    return param;
+  };
+
 
   handleReset = () => {
     this.props.form.resetFields();

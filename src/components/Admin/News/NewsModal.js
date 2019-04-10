@@ -1,5 +1,4 @@
 import React from 'react';
-import moment from 'moment';
 import { Form, Input, Modal, Select, Row, Col } from 'antd';
 import Occupation from 'components/Occupation';
 import Category from 'components/Category';
@@ -9,23 +8,21 @@ import UploadPicture from 'components/UploadPicture';
 
 import styles from './index.less';
 
-const ruleDate = 'YYYY-MM-DD';
 const { TextArea } = Input;
 
 
 @Form.create()
-// @connect((state) => ({
-//   homePage: state.homePage,
-// }))
 
 class newsModal extends React.Component {
   state = {
-    imageUrl: 'http://i2.w.hjfile.cn/news/201606/201606142495515859.jpg',
+    imageUrl: '',
   };
 
   //  关闭添加信息弹框
   hideModal = () => {
-    this.props.hideModal();
+    this.setState({ imageUrl: '' });
+    this.props.onClose();
+    this.props.form.resetFields();
   };
 
   //  提交form信息弹框
@@ -36,11 +33,7 @@ class newsModal extends React.Component {
         const { imageUrl } = this.state;
         // 添加图片url
         if (imageUrl) {
-          fieldsValue.avatar = imageUrl;
-        }
-        // 日期格式
-        if (fieldsValue.birthday) {
-          fieldsValue.birthday = moment(fieldsValue.birthday).format(ruleDate);
+          fieldsValue.cover = imageUrl;
         }
         this.props.onSave(fieldsValue);
         this.hideModal();
@@ -55,13 +48,18 @@ class newsModal extends React.Component {
   };
 
 
+  // 标题对象
+  titleObj = {
+    add: '添加新闻信息',
+    edit: '编辑新闻信息',
+    desc: '查看新闻信息',
+  };
+
+
+
   render() {
-    const { visible, form, status } = this.props;
+    const { visible, form, status,basicData = {} } = this.props;
     const { getFieldDecorator } = form;
-    const { imageUrl } = this.state;
-
-    const disabled = false;
-
 
     const formItemLayout = {
       labelCol: { sm: { span: 4 } },
@@ -74,11 +72,12 @@ class newsModal extends React.Component {
       wrapperCol: { sm: { span: 22 } },
     };
 
+    const disabled=(status==='desc')? true:false;
 
     return (
       <div className={styles.basicModal}>
         <Modal
-          title="添加新闻"
+          title={this.titleObj[status]}
           visible={visible}
           onOk={this.handleSubmit}
           onCancel={this.hideModal}
@@ -89,10 +88,10 @@ class newsModal extends React.Component {
           <Form onSubmit={this.handleSubmit}>
             <Row>
               <Col span={12}>
-                <Category formItemLayout={formItemLayout} form={form} required={true} disabled={disabled}/>
+                <Category defValue={basicData.category} formItemLayout={formItemLayout} form={form} required={true} disabled={disabled}/>
               </Col>
               <Col span={12}>
-                <Occupation formItemLayout={formItemLayout} form={form} required={true} disabled={disabled}/>
+                <Occupation defValue={basicData.occupation} formItemLayout={formItemLayout} form={form} required={true} disabled={disabled}/>
               </Col>
 
             </Row>
@@ -104,7 +103,7 @@ class newsModal extends React.Component {
                   label="作者"
                 >
                   {getFieldDecorator('author', {
-                    initialValue: undefined,
+                    initialValue: basicData.author,
                     rules: [{ required: true, message: '请输入作者姓名' }],
 
                   })(
@@ -125,7 +124,7 @@ class newsModal extends React.Component {
                   label="标题"
                 >
                   {getFieldDecorator('title', {
-                    initialValue: '',
+                    initialValue: basicData.title || '',
                     rules: [{ required: true, message: '请输入标题' }],
 
                   })(
@@ -137,11 +136,11 @@ class newsModal extends React.Component {
             </Row>
             <Row>
               <Col span={12}>
-                <DateCon formItemLayout={formItemLayout} form={form} required={true} disabled={disabled}/>
+                <DateCon defValue={basicData.date} formItemLayout={formItemLayout} form={form} required={true} disabled={disabled}/>
               </Col>
 
               <Col span={12}>
-                <Tag formItemLayout={formItemLayout} form={form} disabled={disabled}/>
+                <Tag defValue={basicData.tags} formItemLayout={formItemLayout} form={form} disabled={disabled}/>
               </Col>
             </Row>
             <Row>
@@ -152,10 +151,9 @@ class newsModal extends React.Component {
                 >
                   <UploadPicture
                     title="上传封面"
-                    imageUrl={imageUrl}
+                    imageUrl={basicData.cover}
                     disabled={disabled}
                     updatePicture={this.updatePicture}
-
                   />
                 </Form.Item>
               </Col>
@@ -167,8 +165,10 @@ class newsModal extends React.Component {
                   {...formItemLayoutDesc}
                   label="详情"
                 >
-                  {getFieldDecorator('desc')(
-                    <TextArea style={{ height: 260 }}/>,
+                  {getFieldDecorator('desc',{
+                    initialValue: basicData.desc || '',
+                  })(
+                    <TextArea style={{ height: 210 }} disabled={disabled}/>,
                   )}
                 </Form.Item>
               </Col>

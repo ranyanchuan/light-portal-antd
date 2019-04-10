@@ -76,7 +76,7 @@ class UploadPicture extends React.Component {
           disabled={disabled}
           style={{ width: '100%' }}
         >
-          {imageUrl ? <img src={imageUrl} alt="avatar" style={{ height: 90 }}/> : uploadButton}
+          {imageUrl ? <img src={imageUrl} alt={title} style={{ height: 90 }}/> : uploadButton}
         </Upload>
       </div>
     );
