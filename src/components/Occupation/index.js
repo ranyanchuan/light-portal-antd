@@ -14,7 +14,7 @@ const Option = Select.Option;
 
 class Occupation extends React.Component {
   render() {
-    const { formItemLayout, form ,defValue,disabled=false} = this.props;
+    const { formItemLayout, form ,defValue,disabled=false,required=false} = this.props;
     const { getFieldDecorator } = form;
 
     const tags = [
@@ -35,14 +35,15 @@ class Occupation extends React.Component {
           label="领域"
         >
           {getFieldDecorator('occupation',{
-            initialValue:defValue
+            initialValue:defValue,
+            rules: [{ required, message: '请选择性别' }],
 
           })(
             <Select
               disabled={disabled}
               mode="tags"
               style={{ width: '100%' }}
-              placeholder="请为明星选择兴趣领域"
+              placeholder="请选择兴趣领域"
             >
               {children}
             </Select>,

@@ -11,7 +11,7 @@ import styles from './index.less';
 
 class DateCon extends React.Component {
   render() {
-    const { formItemLayout, form ,defValue,disabled=false} = this.props;
+    const { formItemLayout, form ,defValue,disabled=false,required=false} = this.props;
     const { getFieldDecorator } = form;
 
     return (
@@ -22,6 +22,8 @@ class DateCon extends React.Component {
         >
           {getFieldDecorator('date', {
             initialValue: defValue ? moment(defValue) : null,
+            rules: [{ required, message: '请选择日期' }],
+
           })(
             <DatePicker placeholder="请选择日期" style={{ width: '100%' }} disabled={disabled}/>,
           )}

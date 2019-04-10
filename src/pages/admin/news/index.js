@@ -7,6 +7,7 @@ import { Button, Input, Dropdown, Menu, Table, Divider, Tag } from 'antd';
 
 import LayoutAdmin from 'components/Admin/LayoutAdmin';
 import Search from 'components/Admin/News/Search';
+import NewsModal from 'components/Admin/News/NewsModal';
 
 import styles from './index.less';
 
@@ -157,7 +158,7 @@ class AdminNews extends React.Component {
             <Button onClick={this.onShowModal.bind(this, 'desc')} disabled={btnDisable}>详情</Button>
             <Button onClick={this.onClickDel} disabled={btnDisable}>删除</Button>
           </div>
-          {/*<NewsModal hideModal={this.hideModal} visible={visible}/>*/}
+          <NewsModal hideModal={this.hideModal} visible={visible}/>
           <Table
             rowSelection={rowSelection}
             columns={this.columns}

@@ -14,13 +14,13 @@ const Option = Select.Option;
 
 class Category extends React.Component {
   render() {
-    const { formItemLayout, form ,defValue,disabled=false} = this.props;
+    const { formItemLayout, form, defValue, disabled = false,required=false } = this.props;
     const { getFieldDecorator } = form;
 
     const tags = [
-      {value:'player',title:'运动员'},
-      {value:'artist',title:'艺人'},
-      {value:'scholar',title:'学者'}
+      { value: 'player', title: '运动员' },
+      { value: 'artist', title: '艺人' },
+      { value: 'scholar', title: '学者' },
     ];
     const children = [];
     for (const item of tags) {
@@ -33,15 +33,16 @@ class Category extends React.Component {
           {...formItemLayout}
           label="类型"
         >
-          {getFieldDecorator('category',{
-            initialValue:defValue
+          {getFieldDecorator('category', {
+            initialValue: defValue,
+            rules: [{ required, message: '请选择性别' }],
 
           })(
             <Select
               disabled={disabled}
               mode="tags"
               style={{ width: '100%' }}
-              placeholder="请选择明星类型"
+              placeholder="请选择类型"
             >
               {children}
             </Select>,
