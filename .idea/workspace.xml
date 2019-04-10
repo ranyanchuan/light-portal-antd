@@ -2,16 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="059cf7d0-ef89-48cb-9855-11b2eeca7f89" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/Admin/Common/index.less" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/admin/computer/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/admin/computer/index.less" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Admin/Common/Paper.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Admin/Computer/Search.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Admin/Computer/index.less" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Admin/Basketball/Honor.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Admin/Common/Honor.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Admin/Basketball/Relation.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Admin/Common/Relation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Admin/Basketball/Salary.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Admin/Common/Salary.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Admin/LayoutAdmin.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Admin/LayoutAdmin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/basketball/grapqlCopy.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/basketball/grapqlCopy.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/basketball/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/basketball/index.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -26,7 +20,7 @@
     <session id="180003795">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="111" />
+          <entry key="project.closed" value="112" />
           <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.1" value="30" />
           <entry key="project.open.time.11" value="2" />
@@ -52,9 +46,9 @@
           <entry key="gitkeep" value="2" />
           <entry key="html" value="3" />
           <entry key="jpg" value="2" />
-          <entry key="js" value="702" />
+          <entry key="js" value="704" />
           <entry key="json" value="11" />
-          <entry key="less" value="153" />
+          <entry key="less" value="154" />
           <entry key="lock" value="2" />
           <entry key="prettierignore" value="1" />
           <entry key="prettierrc" value="3" />
@@ -68,8 +62,8 @@
           <entry key="HTML" value="3" />
           <entry key="Image" value="2" />
           <entry key="JSON" value="19" />
-          <entry key="JavaScript" value="702" />
-          <entry key="Less" value="153" />
+          <entry key="JavaScript" value="704" />
+          <entry key="Less" value="154" />
           <entry key="PLAIN_TEXT" value="13" />
           <entry key="TypeScript" value="1" />
           <entry key="yarn.lock" value="2" />
@@ -112,10 +106,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/pages/admin/computer/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
+            <state relative-caret-position="-4075">
               <caret line="48" column="80" selection-start-line="48" selection-start-column="72" selection-end-line="48" selection-end-column="80" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
@@ -125,13 +119,28 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/Admin/LayoutAdmin.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="262">
-              <caret line="52" column="49" lean-forward="true" selection-start-line="52" selection-start-column="49" selection-end-line="52" selection-end-column="49" />
+            <state relative-caret-position="354">
+              <caret line="62" column="40" selection-start-line="62" selection-start-column="40" selection-end-line="62" selection-end-column="40" />
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/Admin/Common/Paper.js">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/Admin/Computer/Search.js">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/Admin/Computer/index.less">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
@@ -165,40 +174,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/Admin/Basketball/Score.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="34" lean-forward="true" selection-start-line="4" selection-end-line="5" />
-              <folding>
-                <element signature="e#0#26#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/Admin/Common/Salary.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="45">
               <caret line="3" column="1" lean-forward="true" selection-start-line="3" selection-start-column="1" selection-end-line="3" selection-end-column="1" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/Admin/Common/index.less">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="555">
-              <caret line="37" lean-forward="true" selection-start-line="37" selection-end-line="37" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/Admin/Basketball/index.less">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="22" column="32" lean-forward="true" selection-end-line="37" />
             </state>
           </provider>
         </entry>
@@ -209,8 +188,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="TypeScript File" />
-        <option value="JavaScript File" />
         <option value="Less File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -273,9 +252,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/components/Admin/Basketball/Basic.js" />
-        <option value="$PROJECT_DIR$/src/components/Admin/Basketball/basicModal.js" />
-        <option value="$PROJECT_DIR$/src/components/Admin/Basketball/index.less" />
         <option value="$PROJECT_DIR$/src/components/Admin/LayoutAdmin.less" />
         <option value="$PROJECT_DIR$/src/components/Organization/basketball.js" />
         <option value="$PROJECT_DIR$/src/components/Team/basketball.js" />
@@ -324,6 +300,9 @@
         <option value="$PROJECT_DIR$/src/components/Admin/Common/Honor.js" />
         <option value="$PROJECT_DIR$/src/pages/admin/scholar/index.js" />
         <option value="$PROJECT_DIR$/src/components/Admin/LayoutAdmin.js" />
+        <option value="$PROJECT_DIR$/src/components/Admin/Computer/Paper.js" />
+        <option value="$PROJECT_DIR$/src/components/Admin/Computer/index.less" />
+        <option value="$PROJECT_DIR$/src/components/Admin/Computer/Search.js" />
       </list>
     </option>
   </component>
@@ -380,22 +359,6 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
               <item name="Admin" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="yaoyan-antd" type="b2602c69:ProjectViewProjectNode" />
-              <item name="yaoyan-antd" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="Admin" type="462c0819:PsiDirectoryNode" />
-              <item name="Basketball" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="yaoyan-antd" type="b2602c69:ProjectViewProjectNode" />
-              <item name="yaoyan-antd" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="Admin" type="462c0819:PsiDirectoryNode" />
-              <item name="Common" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="yaoyan-antd" type="b2602c69:ProjectViewProjectNode" />
@@ -615,16 +578,15 @@
       <workItem from="1554766133620" duration="1725000" />
       <workItem from="1554773931405" duration="9555000" />
       <workItem from="1554789164164" duration="14166000" />
-      <workItem from="1554857636459" duration="24849000" />
+      <workItem from="1554857636459" duration="25328000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="532199000" />
+    <option name="totallyTimeSpent" value="532678000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="139" y="23" width="1636" height="931" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.8659696" visible="true" weight="0.26625386" />
       <window_info id="Structure" order="1" sideWeight="0.13403042" side_tool="true" weight="0.15152858" />
@@ -640,7 +602,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.3298893" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.08462455" />
+      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.28605482" />
       <window_info anchor="bottom" id="TypeScript" order="11" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -675,23 +637,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/pages/star/models/basketball.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="3" lean-forward="true" selection-start-column="3" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/starModel.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/homePageModel.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="6" lean-forward="true" selection-start-line="9" selection-start-column="4" selection-end-line="12" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="335">
@@ -1022,21 +967,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Admin/LayoutAdmin.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="354">
+          <caret line="62" column="40" selection-start-line="62" selection-start-column="40" selection-end-line="62" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Admin/Computer/index.less">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Admin/Computer/Search.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Admin/Common/Paper.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/admin/computer/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
+        <state relative-caret-position="-4075">
           <caret line="48" column="80" selection-start-line="48" selection-start-column="72" selection-end-line="48" selection-end-column="80" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="e#82#108#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Admin/LayoutAdmin.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="262">
-          <caret line="52" column="49" lean-forward="true" selection-start-line="52" selection-start-column="49" selection-end-line="52" selection-end-column="49" />
         </state>
       </provider>
     </entry>
