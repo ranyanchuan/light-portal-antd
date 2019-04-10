@@ -56,19 +56,19 @@ class newModal extends React.Component {
   };
 
   render() {
-    const { visible,form } = this.props;
-    const { getFieldDecorator } =form;
+    const { visible, form } = this.props;
+    const { getFieldDecorator } = form;
     const formItemLayout = {
       labelCol: { sm: { span: 4 } },
       wrapperCol: { sm: { span: 19 } },
     };
     const config = {
       birthday: { rules: [{ type: 'object', required: true, message: '请选择日期' }] },
-      name_cn: { rules: [{ required: true, message: '请输入中文姓名' }]},
+      name_cn: { rules: [{ required: true, message: '请输入中文姓名' }] },
       name: { rules: [{ required: true, message: '请输入英文姓名' }] },
       gender: { rules: [{ required: true, message: '请选择性别' }] },
-      height: { rules: [{ type: 'number'}] },
-      width: { rules: [{ type: 'number'}] },
+      height: { rules: [{ type: 'number' }] },
+      width: { rules: [{ type: 'number' }] },
     };
 
     const children = [];
@@ -94,8 +94,13 @@ class newModal extends React.Component {
               {...formItemLayout}
               label="作者"
             >
-              {getFieldDecorator('birthday')(
-                <Input placeholder="请输入中文姓名"/>,
+              {getFieldDecorator('position')(
+                <Select
+                  mode="tags"
+                  style={{ width: '100%' }}
+                  placeholder="请输入作者姓名"
+                >
+                </Select>,
               )}
             </Form.Item>
 
@@ -103,8 +108,8 @@ class newModal extends React.Component {
               {...formItemLayout}
               label="标题"
             >
-              {getFieldDecorator('name_cn', config.name_cn)(
-                <Input placeholder="请输入中文姓名"/>,
+              {getFieldDecorator('title')(
+                <Input placeholder="请输入标题"/>,
               )}
             </Form.Item>
 
@@ -113,12 +118,21 @@ class newModal extends React.Component {
               label="类型"
               hasFeedback
             >
-              {getFieldDecorator('gender', config.gender)(
-                <Select placeholder="请选择性别">
-                  <Option value="male">男</Option>
-                  <Option value="female">女</Option>
+              {getFieldDecorator('position')(
+                <Select
+                  mode="tags"
+                  style={{ width: '100%' }}
+                  placeholder="请选择明类型"
+                  onChange={this.onChangeTags}
+                >
+                  <Option value="player">运动员</Option>
+                  <Option value="后卫">后卫</Option>
+                  <Option value="中锋">中锋</Option>
                 </Select>,
-              )}
+              )
+              }
+
+
             </Form.Item>
 
 
@@ -132,8 +146,7 @@ class newModal extends React.Component {
             </Form.Item>
 
 
-
-            <Tag formItemLayout={formItemLayout}  form={form}/>
+            <Tag formItemLayout={formItemLayout} form={form}/>
 
             <Form.Item
               {...formItemLayout}
@@ -159,7 +172,7 @@ class newModal extends React.Component {
               label="详情"
             >
               {getFieldDecorator('abstract')(
-                  <TextArea />
+                <TextArea/>,
               )}
             </Form.Item>
 

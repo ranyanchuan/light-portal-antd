@@ -1,46 +1,20 @@
 import React from 'react';
 
-import {
-  Form, Row, Col, Input, Button, Icon,
-} from 'antd';
-import { connect } from 'dva';
+import { Form, Row, Col, Input, Button, Select } from 'antd';
+
+import Occupation from 'components/Occupation';
+import Category from 'components/Category';
+import Tag from 'components/Tag/news';
+import DateCon from 'components/DateCon';
 
 import styles from './index.less';
 
-
 @Form.create()
-// @connect((state) => ({
-//   homePage: state.homePage,
-// }))
 
 class Search extends React.Component {
   state = {
     expand: false,
   };
-
-  // To generate mock Form.Item
-  getFields() {
-    const count = this.state.expand ? 10 : 6;
-    const { getFieldDecorator } = this.props.form;
-    const children = [];
-    for (let i = 0; i < 10; i++) {
-      children.push(
-        <Col span={8} key={i} style={{ display: i < count ? 'block' : 'none' }}>
-          <Form.Item label={`Field ${i}`}>
-            {getFieldDecorator(`field-${i}`, {
-              rules: [{
-                required: true,
-                message: 'Input something!',
-              }],
-            })(
-              <Input placeholder="placeholder"/>,
-            )}
-          </Form.Item>
-        </Col>,
-      );
-    }
-    return children;
-  }
 
   handleSearch = (e) => {
     e.preventDefault();
@@ -77,32 +51,20 @@ class Search extends React.Component {
                 {...formItemLayout}
                 label="作者"
               >
-                {getFieldDecorator('author')(
-                  <Input placeholder="请输入中文姓名"/>,
-                )}
+                <Select
+                  mode="tags"
+                  style={{ width: '100%' }}
+                  placeholder="请输入作者姓名"
+                >
+                </Select>
               </Form.Item>
             </Col>
 
             <Col span={8}>
-              <Form.Item
-                {...formItemLayout}
-                label="类型"
-              >
-                {getFieldDecorator('occupation')(
-                  <Input placeholder="请输入中文姓名"/>,
-                )}
-              </Form.Item>
+              <Category formItemLayout={formItemLayout} form={form}/>
             </Col>
-
             <Col span={8}>
-              <Form.Item
-                {...formItemLayout}
-                label="职业"
-              >
-                {getFieldDecorator('occupation')(
-                  <Input placeholder="请输入中文姓名"/>,
-                )}
-              </Form.Item>
+              <Occupation formItemLayout={formItemLayout} form={form}/>
             </Col>
 
             <Col span={8}>
@@ -110,32 +72,18 @@ class Search extends React.Component {
                 {...formItemLayout}
                 label="标题"
               >
-                {getFieldDecorator('name_cn')(
-                  <Input placeholder="请输入中文姓名"/>,
+                {getFieldDecorator('title')(
+                  <Input placeholder="请输入标题"/>,
                 )}
               </Form.Item>
             </Col>
 
             <Col span={8}>
-              <Form.Item
-                {...formItemLayout}
-                label="日期"
-              >
-                {getFieldDecorator('name_cn')(
-                  <Input placeholder="请输入中文姓名"/>,
-                )}
-              </Form.Item>
+              <DateCon formItemLayout={formItemLayout} form={form}/>
             </Col>
 
             <Col span={8}>
-              <Form.Item
-                {...formItemLayout}
-                label="标签"
-              >
-                {getFieldDecorator('name_cn')(
-                  <Input placeholder="请输入中文姓名"/>,
-                )}
-              </Form.Item>
+              <Tag formItemLayout={formItemLayout} form={form}/>
             </Col>
           </Row>
 
