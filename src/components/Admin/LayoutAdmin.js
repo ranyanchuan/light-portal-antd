@@ -19,34 +19,54 @@ class LayoutAdmin extends React.Component {
 
 
   state = {
-    selectKey: 'scholar',
+    selectKey: this.props.selectKey,
+    openKeys: this.props.openKeys,
   };
 
-  componentDidMount() {
+  // componentDidMount() {
+  //   // const { path } = this.props.match;
+  //   // const selectKey=path.split("/").pop();
+  //   // this.setState({selectKey})
+  //   const { openKeys, selectKey } = this.props;
+  //   if (this.props.selectKey !== selectKey) {
+  //     this.setState({ selectKey,openKeys });
+  //   }
+  // }
+  //
+  componentWillMount() {
     // const { path } = this.props.match;
-    // const selectKey=path.split("/").pop();
-    // this.setState({selectKey})
+    // const selectKey = [path.split('/').pop()];
+    // this.setState({ selectKey });
+
+    const { openKeys, selectKey } = this.props;
+    if (this.props.selectKey !== selectKey) {
+      this.setState({ selectKey,openKeys });
+    }
+
   }
 
-  componentWillMount(){
-    const { path } = this.props.match;
-    const selectKey=path.split("/").pop();
-    this.setState({selectKey})
-  }
+  //
+  // componentWillReceiveProps(nextProps) {
+  //   const { openKeys, selectKey } = nextProps;
+  //   if (this.props.selectKey !== selectKey) {
+  //     this.setState({ selectKey,openKeys });
+  //   }
+  // }
 
 
   onClickMenu = (param) => {
-    const { key } = param;
-    // this.setState({ selectKey: key });
+    const { key,keyPath } = param;
+    // this.setState({ selectKey: [key],openKeys:[keyPath[1]] });
     this.props.history.push('/admin/' + key);
   };
 
 
   render() {
 
-    const { selectKey } = this.state;
+    // const { selectKey } = this.state;
+    const { openKeys, selectKey } = this.state;
 
-
+    console.log('openKeys,selectKey', openKeys, selectKey);
 
     return (
       <div className={styles.admin}>
@@ -60,8 +80,8 @@ class LayoutAdmin extends React.Component {
                 <Menu
                   onClick={this.onClickMenu}
                   style={{ width: 256 }}
-                  defaultSelectedKeys={[selectKey]}
-                  defaultOpenKeys={['player']}
+                  defaultSelectedKeys={selectKey}
+                  defaultOpenKeys={openKeys}
                   mode="inline"
                 >
                   <Menu.Item key="news"><Icon type="fire"/>新闻</Menu.Item>
@@ -69,7 +89,7 @@ class LayoutAdmin extends React.Component {
 
                   <SubMenu key="player" title={<span><span className="iconfont icon-yundong"/><span>远动员</span></span>}>
                     <Menu.Item key="basketball"><span className="iconfont icon-lanqiu"/>篮球</Menu.Item>
-                    <Menu.Item key="足球"><span className="iconfont icon-svggeshi-"/>足球</Menu.Item>
+                    <Menu.Item key="football"><span className="iconfont icon-svggeshi-"/>足球</Menu.Item>
                     <Menu.Item key="乒乓球"><span className="iconfont icon-PingPong"/>乒乓球</Menu.Item>
                     <Menu.Item key="羽毛球"><span className="iconfont icon-yumaoqiu"/>羽毛球</Menu.Item>
                     <Menu.Item key="橄榄球"><span className="iconfont icon-ganlanqiu"/>橄榄球</Menu.Item>
@@ -89,9 +109,9 @@ class LayoutAdmin extends React.Component {
 
 
                   <SubMenu key="artist" title={<span><span className="iconfont icon-yiren"/><span>艺人</span></span>}>
-                    <Menu.Item key="电影"><span className="iconfont icon-movie_df"/>电影</Menu.Item>
-                    <Menu.Item key="音乐"><span className="iconfont icon-yinyue"/>音乐</Menu.Item>
-                    <Menu.Item key="模特"><span className="iconfont icon-moteshezhi-"/>模特</Menu.Item>
+                    <Menu.Item key="film"><span className="iconfont icon-movie_df"/>电影</Menu.Item>
+                    <Menu.Item key="music"><span className="iconfont icon-yinyue"/>音乐</Menu.Item>
+                    <Menu.Item key="model"><span className="iconfont icon-moteshezhi-"/>模特</Menu.Item>
                   </SubMenu>
                   <SubMenu key="company" title={<span><span className="iconfont icon-qi"/><span>企业</span></span>}>
                     <Menu.Item key="互联网"><span className="iconfont icon-hulianwang"/>互联网</Menu.Item>

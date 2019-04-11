@@ -8,7 +8,7 @@ import moment from 'moment';
 import { Button, Modal, Tabs, Table, Avatar, Tag } from 'antd';
 
 import LayoutAdmin from 'components/Admin/LayoutAdmin';
-import Search from 'components/Admin/Basketball/Search';
+import Search from 'components/Admin/Scholar/Search';
 import BasicModal from 'components/Admin/Scholar/BasicModal';
 import Relation from 'components/Admin/Common/Relation';
 import Honor from 'components/Admin/Common/Honor';
@@ -23,7 +23,6 @@ const confirm = Modal.confirm;
 const ruleDate = 'YYYY-MM-DD';
 
 @connect((state) => ({
-  adminBasketball: state.adminBasketball,
   common: state.common,
 }))
 
@@ -334,7 +333,7 @@ class AdminScholar extends React.Component {
 
 
     return (
-      <LayoutAdmin {...this.props}>
+      <LayoutAdmin {...this.props} selectKey={['scholar']} openKeys={["player"]}>
         <div className={styles.adminScholar}>
           <Search
             onSearch={this.onSearchPannel}

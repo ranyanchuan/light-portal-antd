@@ -79,9 +79,7 @@ class SearchBasketball extends React.Component {
             <Col span={8}>
               <Gender formItemLayout={formItemLayout} form={form}/>
             </Col>
-            <Col span={8}>
-              <City formItemLayout={formItemLayout} form={form}/>
-            </Col>
+
 
             <Col span={8}>
               <Organization
@@ -98,6 +96,10 @@ class SearchBasketball extends React.Component {
             </Col>
             <Col span={8}>
               <Nationality formItemLayout={formItemLayout} form={form}/>
+            </Col>
+
+            <Col span={8}>
+              <City formItemLayout={formItemLayout} form={form}/>
             </Col>
 
           </Row>

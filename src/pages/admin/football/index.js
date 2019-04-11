@@ -24,11 +24,10 @@ const confirm = Modal.confirm;
 const ruleDate = 'YYYY-MM-DD';
 
 @connect((state) => ({
-  adminBasketball: state.adminBasketball,
   common: state.common,
 }))
 
-class AdminBasketball extends React.Component {
+class AdminFootball extends React.Component {
 
   state = {
     searchObj: {}, //搜索面板数据
@@ -324,7 +323,7 @@ class AdminBasketball extends React.Component {
 
 
     return (
-      <LayoutAdmin {...this.props} selectKey={['basketball']} openKeys={["player"]}>
+      <LayoutAdmin {...this.props} selectKey={['football']} openKeys={["player"]}>
         <div className={styles.adminBasketball}>
           <Search
             onSearch={this.onSearchPannel}
@@ -357,7 +356,7 @@ class AdminBasketball extends React.Component {
 
           {/*子表数据*/}
           <Tabs defaultActiveKey={defaultActiveKey} onChange={this.onChangeTab}>
-            <TabPane tab="比分数据" key="score">
+            <TabPane tab="个人数据" key="score">
               <Score
                 scoreDataObj={scoreDataObj}
                 onActionTable={this.onActionTable}
@@ -407,5 +406,5 @@ class AdminBasketball extends React.Component {
   }
 }
 
-export default AdminBasketball;
+export default AdminFootball;
 
