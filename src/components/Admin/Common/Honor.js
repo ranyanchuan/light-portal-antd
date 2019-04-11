@@ -25,7 +25,7 @@ class Honor extends React.Component {
   componentWillReceiveProps(nextProps) {
     const { honorDataObj } = nextProps;
     const { list = [] } = honorDataObj || {};
-    if (list.length > 0) {
+    if (list.length > 0 && this.props.honorDataObj !== honorDataObj) {
       const { _id } = list[0];
       this.setState({ selectedRowKeys: [_id], selectedRowObj: list[0] });
     }

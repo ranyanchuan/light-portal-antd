@@ -2,10 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="059cf7d0-ef89-48cb-9855-11b2eeca7f89" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/components/Admin/Scholar/BasicModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Admin/Scholar/BasicModal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/City/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/City/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Education/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Education/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Nationality/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Nationality/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Admin/Common/Honor.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Admin/Common/Honor.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Admin/Common/Relation.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Admin/Common/Relation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Admin/Common/Salary.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Admin/Common/Salary.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/basketball/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/basketball/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/admin/scholar/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/scholar/index.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -47,7 +48,7 @@
           <entry key="gitkeep" value="2" />
           <entry key="html" value="3" />
           <entry key="jpg" value="2" />
-          <entry key="js" value="755" />
+          <entry key="js" value="759" />
           <entry key="json" value="11" />
           <entry key="less" value="165" />
           <entry key="lock" value="2" />
@@ -64,7 +65,7 @@
           <entry key="HTML" value="3" />
           <entry key="Image" value="3" />
           <entry key="JSON" value="19" />
-          <entry key="JavaScript" value="755" />
+          <entry key="JavaScript" value="759" />
           <entry key="Less" value="165" />
           <entry key="PLAIN_TEXT" value="13" />
           <entry key="TypeScript" value="1" />
@@ -80,7 +81,7 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="css" value="4" />
-          <entry key="js" value="35861" />
+          <entry key="js" value="36010" />
           <entry key="json" value="13" />
           <entry key="less" value="4118" />
           <entry key="txt" value="22" />
@@ -90,7 +91,7 @@
         <counts>
           <entry key="CSS" value="4" />
           <entry key="JSON" value="13" />
-          <entry key="JavaScript" value="35861" />
+          <entry key="JavaScript" value="36010" />
           <entry key="Less" value="4118" />
           <entry key="PLAIN_TEXT" value="22" />
         </counts>
@@ -98,7 +99,7 @@
     </session>
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.4034582">
+    <splitter split-orientation="horizontal" split-proportion="0.35007384">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="false">
@@ -161,11 +162,36 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/pages/admin/scholar/index.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="412">
-                  <caret line="134" lean-forward="true" selection-start-line="134" selection-end-line="134" />
+                <state relative-caret-position="-1025">
+                  <caret line="43" column="15" selection-start-line="43" selection-start-column="4" selection-end-line="43" selection-end-column="15" />
+                  <folding>
+                    <element signature="n#!!doc" expanded="true" />
+                    <element signature="e#82#108#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/components/Admin/Common/Honor.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="468">
+                  <caret line="45" column="38" lean-forward="true" selection-start-line="45" selection-start-column="38" selection-end-line="45" selection-end-column="38" />
+                  <folding>
+                    <element signature="e#0#26#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/pages/admin/basketball/index.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="1590">
+                  <caret line="111" selection-start-line="111" selection-end-line="111" />
                   <folding>
                     <element signature="n#!!doc" expanded="true" />
                     <element signature="e#82#108#0" expanded="true" />
@@ -186,39 +212,15 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/components/Domain/scholar.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="110">
-                  <caret line="9" column="29" lean-forward="true" selection-start-line="9" selection-start-column="29" selection-end-line="9" selection-end-column="29" />
-                  <folding>
-                    <element signature="e#48#74#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/components/Domain/index.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="389">
-                  <caret line="45" column="35" lean-forward="true" selection-start-line="45" selection-start-column="13" selection-end-line="45" selection-end-column="35" />
-                  <folding>
-                    <element signature="e#48#74#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
         </leaf>
       </split-first>
       <split-second>
         <leaf>
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/pages/admin/scholar/index.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-636">
-                  <caret line="58" column="45" selection-start-line="58" selection-start-column="24" selection-end-line="58" selection-end-column="45" />
+                <state relative-caret-position="-875">
+                  <caret line="38" lean-forward="true" selection-start-line="38" selection-end-line="38" />
                   <folding>
                     <element signature="n#!!doc" expanded="true" />
                     <element signature="e#82#108#0" expanded="true" />
@@ -227,13 +229,37 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/pages/admin/news/index.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="871">
-                  <caret line="146" column="23" lean-forward="true" selection-start-line="146" selection-start-column="23" selection-end-line="146" selection-end-column="23" />
+                <state relative-caret-position="151">
+                  <caret line="98" column="11" lean-forward="true" selection-start-line="98" selection-start-column="11" selection-end-line="98" selection-end-column="11" />
                   <folding>
                     <element signature="e#82#108#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/components/Admin/Common/Salary.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="196">
+                  <caret line="35" column="69" selection-start-line="35" selection-start-column="24" selection-end-line="35" selection-end-column="69" />
+                  <folding>
+                    <element signature="e#0#26#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/components/Admin/Common/Relation.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="221">
+                  <caret line="23" column="17" lean-forward="true" selection-start-line="23" selection-start-column="17" selection-end-line="23" selection-end-column="17" />
+                  <folding>
+                    <element signature="e#0#26#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -254,7 +280,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>defaultActiveKey</find>
       <find>onChangeTags</find>
       <find>expand</find>
       <find>honorDataObj</find>
@@ -275,7 +300,6 @@
       <find>hideModal</find>
       <find>onClickSaveBasic</find>
       <find>confirm</find>
-      <find>selectedRowObj</find>
       <find>searchObj</find>
       <find>onActionTable</find>
       <find>onSearchPannel</find>
@@ -284,6 +308,8 @@
       <find>defaultSelectedKeys</find>
       <find>occupation</find>
       <find>getTableData</find>
+      <find>selectedRowObj</find>
+      <find>starQueryInfo</find>
     </findStrings>
     <replaceStrings>
       <replace>直接访问</replace>
@@ -331,10 +357,7 @@
         <option value="$PROJECT_DIR$/src/components/Admin/News/NewsModal.js" />
         <option value="$PROJECT_DIR$/src/components/Admin/Basketball/Search.js" />
         <option value="$PROJECT_DIR$/src/pages/admin/news/index.js" />
-        <option value="$PROJECT_DIR$/src/components/Admin/Common/Relation.js" />
-        <option value="$PROJECT_DIR$/src/pages/admin/basketball/index.js" />
         <option value="$PROJECT_DIR$/src/pages/admin/basketball/grapqlCopy.js" />
-        <option value="$PROJECT_DIR$/src/components/Admin/Common/Honor.js" />
         <option value="$PROJECT_DIR$/src/components/Admin/Computer/Paper.js" />
         <option value="$PROJECT_DIR$/src/components/Admin/Computer/index.less" />
         <option value="$PROJECT_DIR$/src/components/Admin/Computer/Search.js" />
@@ -353,7 +376,6 @@
         <option value="$PROJECT_DIR$/src/pages/dataMining/CSRankings.js" />
         <option value="$PROJECT_DIR$/src/components/Admin/News/Search.js" />
         <option value="$PROJECT_DIR$/src/components/Occupation/index.js" />
-        <option value="$PROJECT_DIR$/src/components/Admin/Common/Salary.js" />
         <option value="$PROJECT_DIR$/src/utils/mockData.js" />
         <option value="$PROJECT_DIR$/src/components/Domain/scholar.js" />
         <option value="$PROJECT_DIR$/src/components/Education/index.less" />
@@ -361,7 +383,11 @@
         <option value="$PROJECT_DIR$/src/components/Nationality/index.js" />
         <option value="$PROJECT_DIR$/src/components/Admin/Scholar/BasicModal.js" />
         <option value="$PROJECT_DIR$/src/components/Education/index.js" />
+        <option value="$PROJECT_DIR$/src/components/Admin/Common/Salary.js" />
+        <option value="$PROJECT_DIR$/src/components/Admin/Common/Relation.js" />
+        <option value="$PROJECT_DIR$/src/components/Admin/Common/Honor.js" />
         <option value="$PROJECT_DIR$/src/pages/admin/scholar/index.js" />
+        <option value="$PROJECT_DIR$/src/pages/admin/basketball/index.js" />
       </list>
     </option>
   </component>
@@ -382,8 +408,8 @@
     </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="63" />
-    <option name="y" value="77" />
+    <option name="x" value="283" />
+    <option name="y" value="40" />
     <option name="width" value="1680" />
     <option name="height" value="937" />
   </component>
@@ -423,6 +449,22 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
               <item name="Admin" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="yaoyan-antd" type="b2602c69:ProjectViewProjectNode" />
+              <item name="yaoyan-antd" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="Admin" type="462c0819:PsiDirectoryNode" />
+              <item name="Basketball" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="yaoyan-antd" type="b2602c69:ProjectViewProjectNode" />
+              <item name="yaoyan-antd" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="Admin" type="462c0819:PsiDirectoryNode" />
+              <item name="Common" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="yaoyan-antd" type="b2602c69:ProjectViewProjectNode" />
@@ -480,7 +522,7 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="pages" type="462c0819:PsiDirectoryNode" />
               <item name="admin" type="462c0819:PsiDirectoryNode" />
-              <item name="news" type="462c0819:PsiDirectoryNode" />
+              <item name="basketball" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="yaoyan-antd" type="b2602c69:ProjectViewProjectNode" />
@@ -676,18 +718,18 @@
       <workItem from="1554857636459" duration="25328000" />
       <workItem from="1554895864528" duration="160000" />
       <workItem from="1554898687871" duration="5134000" />
-      <workItem from="1554944516247" duration="10836000" />
+      <workItem from="1554944516247" duration="15141000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="548808000" />
+    <option name="totallyTimeSpent" value="553113000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="63" y="77" width="1680" height="937" extended-state="0" />
+    <frame x="283" y="40" width="1680" height="937" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.8659696" visible="true" weight="0.16335142" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.8659696" visible="true" weight="0.18384568" />
       <window_info id="Structure" order="1" sideWeight="0.13403042" side_tool="true" weight="0.15152858" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -701,7 +743,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.3298893" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.10650887" />
+      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.0852071" />
       <window_info anchor="bottom" id="TypeScript" order="11" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -773,16 +815,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="16" column="2" selection-start-line="16" selection-start-column="2" selection-end-line="19" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Admin/Common/Honor.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" selection-start-line="24" selection-end-line="32" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -861,16 +893,6 @@
     <entry file="file://$PROJECT_DIR$/src/components/Admin/Scholar/index.less">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Admin/Common/Relation.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="18" column="40" selection-end-line="343" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/distribution/athlete/china.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -939,27 +961,6 @@
           <caret line="14" column="4" lean-forward="true" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="4" />
           <folding>
             <element signature="e#48#74#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/admin/basketball/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="438">
-          <caret line="49" column="41" selection-start-line="49" selection-start-column="36" selection-end-line="49" selection-end-column="41" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#82#108#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Admin/Common/Salary.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1088,9 +1089,50 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/admin/news/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="871">
-          <caret line="146" column="23" lean-forward="true" selection-start-line="146" selection-start-column="23" selection-end-line="146" selection-end-column="23" />
+        <state relative-caret-position="151">
+          <caret line="98" column="11" lean-forward="true" selection-start-line="98" selection-start-column="11" selection-end-line="98" selection-end-column="11" />
           <folding>
+            <element signature="e#82#108#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Admin/Common/Salary.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="196">
+          <caret line="35" column="69" selection-start-line="35" selection-start-column="24" selection-end-line="35" selection-end-column="69" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Admin/Common/Relation.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="23" column="17" lean-forward="true" selection-start-line="23" selection-start-column="17" selection-end-line="23" selection-end-column="17" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Admin/Common/Honor.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="468">
+          <caret line="45" column="38" lean-forward="true" selection-start-line="45" selection-start-column="38" selection-end-line="45" selection-end-column="38" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/admin/basketball/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1590">
+          <caret line="111" selection-start-line="111" selection-end-line="111" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
             <element signature="e#82#108#0" expanded="true" />
           </folding>
         </state>
@@ -1098,8 +1140,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/admin/scholar/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="412">
-          <caret line="134" lean-forward="true" selection-start-line="134" selection-end-line="134" />
+        <state relative-caret-position="-875">
+          <caret line="38" lean-forward="true" selection-start-line="38" selection-end-line="38" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="e#82#108#0" expanded="true" />

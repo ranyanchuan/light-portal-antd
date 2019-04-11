@@ -33,7 +33,7 @@ class Salary extends React.Component {
   componentWillReceiveProps(nextProps) {
     const { salaryDataObj } = nextProps;
     const { list = [] } = salaryDataObj || {};
-    if (list.length > 0) {
+    if (list.length > 0 && this.props.salaryDataObj !== salaryDataObj) {
       const { _id } = list[0];
       this.setState({ selectedRowKeys: [_id], selectedRowObj: list[0] });
     }
@@ -100,6 +100,9 @@ class Salary extends React.Component {
           payload.content = fieldsValue;
 
         }
+
+        console.log('selectedRowObj', selectedRowObj);
+        debugger;
         // 添加操作表名
         payload.table = 'salary';
         onActionTable(payload);

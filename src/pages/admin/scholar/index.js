@@ -41,8 +41,8 @@ class AdminScholar extends React.Component {
     basModVis: false,
     basModStatus: 'add',
 
-    relationDataObj: {}, // 关系数据
     starDataObj: {}, // 基本数据
+    relationDataObj: {}, // 关系数据
     honorDataObj: {}, // 荣誉数据
     salaryDataObj: {}, // 资薪数据
   };
@@ -111,6 +111,8 @@ class AdminScholar extends React.Component {
   onActionTable = (payload) => {
     const { type, table } = payload;
     delete  payload.type;
+
+
     // 添加或者更新明星基本数据
     this.props.dispatch({
       type,

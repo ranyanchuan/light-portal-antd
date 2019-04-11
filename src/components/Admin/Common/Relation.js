@@ -36,7 +36,7 @@ class Relation extends React.Component {
     const { list = [] } = relationDataObj || {};
 
     // 更新 table 数据
-    if (list.length > 0) {
+    if (list.length > 0 && this.props.relationDataObj !== relationDataObj) {
       const { _id, imageUrl } = list[0];
       this.setState({ selectedRowKeys: [_id], selectedRowObj: list[0], imageUrl });
     }

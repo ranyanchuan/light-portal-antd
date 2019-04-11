@@ -47,16 +47,14 @@ class AdminBasketball extends React.Component {
     salaryDataObj: {}, // 资薪数据
   };
 
-  starQueryInfo = { table: 'star', domain: ['basketball'], category: ['player'] };
-
 
   componentDidMount() {
-    this.getTableData({ ...this.starQueryInfo });
+    this.getTableData({ table: 'star' });
   }
 
   // 搜索面板值
   onSearchPannel = (param) => {
-    this.getTableData({ ...this.starQueryInfo, ...param });
+    this.getTableData({ ...param, table: 'star' });
   };
 
 
@@ -111,6 +109,7 @@ class AdminBasketball extends React.Component {
   onActionTable = (payload) => {
     const { type, table } = payload;
     delete  payload.type;
+
     // 添加或者更新明星基本数据
     this.props.dispatch({
       type,
@@ -126,7 +125,7 @@ class AdminBasketball extends React.Component {
           if (table !== 'star') {
             param.basicId = selectedRowObj['_id'];
           }
-           // 如果是主表请求 添加搜索信息
+          // 如果是主表请求 添加搜索信息
           if (table === 'star') {
             const searchObj = this.child.getSearchValue();
             param = searchObj;
@@ -308,7 +307,7 @@ class AdminBasketball extends React.Component {
       size: pageSize,
     };
     // 获取分页数据
-    this.getTableData({ ...param, ...this.starQueryInfo, ...searchObj });
+    this.getTableData({ ...param, ...searchObj, table: 'star' });
   };
 
 
