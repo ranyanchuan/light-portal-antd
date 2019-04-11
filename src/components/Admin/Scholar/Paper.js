@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Form, Icon, Input, Button, Modal, Select, Row, Col, Table, Tag, Upload, Avatar } from 'antd';
+import { Form, Icon, Input, Button, Modal, Select, Row, Col, Table, Tag, Avatar, InputNumber } from 'antd';
 
 import { uuid } from 'utils';
 import { api } from 'utils/config';
@@ -9,6 +9,7 @@ import styles from './index.less';
 
 
 const Option = Select.Option;
+const { TextArea } = Input;
 
 
 @Form.create()
@@ -24,16 +25,15 @@ class Paper extends React.Component {
 
   };
 
-  queryInfo = { domain: ['basketball'], category: ['player'] };
 
 
   componentWillReceiveProps(nextProps) {
 
-    const { relationDataObj } = nextProps;
-    const { list = [] } = relationDataObj || {};
+    const { paperDataObj } = nextProps;
+    const { list = [] } = paperDataObj || {};
 
     // 更新 table 数据
-    if (list.length > 0) {
+    if (list.length > 0 && this.props.paperDataObj !== paperDataObj) {
       const { _id, imageUrl } = list[0];
       this.setState({ selectedRowKeys: [_id], selectedRowObj: list[0], imageUrl });
     }
@@ -47,30 +47,9 @@ class Paper extends React.Component {
 
   // 标题对象
   titleObj = {
-    add: '添加关系',
-    edit: '编辑关系',
-    desc: '查看关系',
-  };
-
-  // 文件上传请处理
-  beforeUpload = () => {
-
-  };
-
-
-  // 文件上传成处理
-  handleChange = (info) => {
-    if (info.file.status === 'uploading') {
-      this.setState({ loading: true });
-      return;
-    }
-    if (info.file.status === 'done') {
-      // Get this url from response in real world.
-      const { response } = info.fileList[0];
-      const { url } = response;
-      // 服务器端 头像地址
-      this.setState({ imageUrl: url[0], loading: false });
-    }
+    add: '添加论文',
+    edit: '编辑论文',
+    desc: '查看论文',
   };
 
 
@@ -91,7 +70,7 @@ class Paper extends React.Component {
     const { getTableData, basicRow } = this.props;
     const { current, pageSize } = data;
     const { _id: basicId } = basicRow;
-    const param = { pageIndex: current - 1, size: pageSize, table: 'relation', basicId };
+    const param = { pageIndex: current - 1, size: pageSize, table: 'paper', basicId };
     getTableData(param);
   };
 
@@ -102,16 +81,15 @@ class Paper extends React.Component {
     e.preventDefault();
     this.props.form.validateFields((err, fieldsValue) => {
       if (!err) {
-        const { status, selectedRowObj, imageUrl } = this.state;
+        const { status, selectedRowObj } = this.state;
         const { basicRow, onActionTable } = this.props;
 
         let payload = {};
         // 主表id
         const { _id } = basicRow;
-        fieldsValue.imageUrl = imageUrl;
         // 添加类型
         if (status === 'add') {
-          payload = { ...fieldsValue, ...this.queryInfo };
+          payload = fieldsValue;
           payload.type = 'common/add';
           payload.basicId = _id;
         }
@@ -123,53 +101,92 @@ class Paper extends React.Component {
           payload.content = fieldsValue;
         }
         // 添加操作表名
-        payload.table = 'relation';
+        payload.table = 'paper';
         onActionTable(payload);
+        this.onClickClose();
       }
     });
-    this.setState({ visible: false });
   };
 
   // 删除
   onClickDel = () => {
     const { showDelCon } = this.props;
     const { selectedRowObj } = this.state;
-    let payload = { type: 'common/del', _id: selectedRowObj['_id'], table: 'relation' };
+    let payload = { type: 'common/del', _id: selectedRowObj['_id'], table: 'paper' };
     showDelCon(payload);
   };
 
 
   columns = [
     {
-      title: '头像',
-      dataIndex: 'avatar',
-      key: 'avatar',
-      render: avatar => (<Avatar src={avatar}/>),
+      title: '标题',
+      dataIndex: 'title',
+      key: 'title',
+      render: (title, rec) => <a href="javascript:;">{title.slice(0,30)}</a>,
     },
     {
-      title: '名字',
-      dataIndex: 'name',
-      key: 'name',
-      render: (name, rec) => <a href="javascript:;">{name + ' (' + rec.name_cn + ')'}</a>,
-    }, {
-      title: '关系',
-      key: 'relation',
-      dataIndex: 'relation',
-      render: relation => (
+      title: '年份',
+      dataIndex: 'year',
+      key: 'year',
+    },
+    {
+      title: '阅读量',
+      dataIndex: 'view',
+      key: 'view',
+    },{
+      title: '被引量',
+      dataIndex: 'cited',
+      key: 'cited',
+    },{
+      title: '点赞量',
+      dataIndex: 'like',
+      key: 'like',
+    },
+    {
+      title: '收藏量',
+      dataIndex: 'like',
+      key: 'like',
+    },
+    {
+      title: '点赞量',
+      dataIndex: 'collect',
+      key: 'collect',
+    },
+    {
+      title: '期刊',
+      dataIndex: 'periodical',
+      key: 'periodical',
+      render: periodical => (
         <span>
-          {relation.map(item => <Tag color="blue" key={item}>{item}</Tag>)}
+        {periodical && periodical.length > 0 && periodical.slice(0, 3).map(tag => <Tag key={tag}>{tag}</Tag>)}
+        </span>
+      ),
+    },
+    {
+      title: '作者',
+      dataIndex: 'author',
+      key: 'author',
+      render: author => (
+        <span>
+        {author && author.length > 0 && author.slice(0, 3).map(tag => <Tag color="blue" key={tag}>{tag}</Tag>)}
         </span>
       ),
     }, {
-      title: '备注',
-      dataIndex: 'remark',
-      key: 'remark',
-    }];
+      title: '关键词',
+      dataIndex: 'keyword',
+      key: 'keyword',
+      render: keyword => (
+        <span>
+        {keyword && keyword.length > 0 && keyword.slice(0, 3).map(tag => <Tag color="blue" key={tag}>{tag}</Tag>)}
+        </span>
+      ),
+    },
+  ];
 
 
   render() {
-    const { form, relationDataObj, basicRow } = this.props;
-    const { visible, selectedRowKeys, imageUrl, selectedRowObj, status } = this.state;
+    const { form, paperDataObj, basicRow } = this.props;
+    const { visible, selectedRowKeys, selectedRowObj, status } = this.state;
 
     const { getFieldDecorator } = form;
 
@@ -179,38 +196,32 @@ class Paper extends React.Component {
       type: 'radio',
     };
 
-
-    // 下拉处理
-    const relationSelect = ['朋友', '队友'];
-    const relationChildren = relationSelect.map((item) => {
-      return <Option key={item} value={item}>{item}</Option>;
-    });
+    // DOI(文献身份证) 期刊(ELSCI)
 
 
     const formItemLayout = {
-      labelCol: { sm: { span: 4 } },
-      wrapperCol: { sm: { span: 19 } },
+      labelCol: { sm: { span: 6 } },
+      wrapperCol: { sm: { span: 16 } },
+    };
+
+
+    const formItemLayoutLine = {
+      labelCol: { sm: { span: 3 } },
+      wrapperCol: { sm: { span: 20 } },
     };
 
 
     const disabled = status === 'desc' ? true : false;
     //  选中的数据
-    const relationData = status !== 'add' ? selectedRowObj : {};
+    const paperData = status !== 'add' ? selectedRowObj : {};
 
-    const btnDisable = (relationDataObj.list && relationDataObj.list.length > 0) ? false : true;
+    const btnDisable = (paperDataObj.list && paperDataObj.list.length > 0) ? false : true;
     // 添加按钮disabled
     const addBtnDisable = basicRow._id ? false : true;
 
-    const uploadButton = (
-      <div>
-        <Icon type={this.state.loading ? 'loading' : 'plus'}/>
-        <div className="ant-upload-text">上传头像</div>
-      </div>
-    );
-
 
     return (
-      <div className={styles.relationModal}>
+      <div className={styles.paperModal}>
 
         <div className="table-operations">
           <Button onClick={this.onShowModal.bind(this, 'add')} disabled={addBtnDisable}>添加</Button>
@@ -225,95 +236,199 @@ class Paper extends React.Component {
           onCancel={this.onClickClose}
           okText="确认"
           cancelText="取消"
-          width="760px"
+          width="960px"
         >
           <Form onSubmit={this.handleSubmit}>
             <Row>
-
-
-              <Col span={24}>
+              <Col span={12}>
                 <Form.Item
                   {...formItemLayout}
-                  label="头像"
+                  label="标题"
                 >
-                  <Upload
-                    name="avatar"
-                    listType="picture-card"
-                    className="avatar-uploader"
-                    showUploadList={false}
-                    action={api.addFile}
-                    beforeUpload={this.beforeUpload}
-                    onChange={this.handleChange}
-                    disabled={status === 'desc' ? true : false}
-                  >
-                    {imageUrl && status !== 'add' ?
-                      <img src={imageUrl} alt="avatar" style={{ width: 90, height: 90 }}/> : uploadButton}
-                  </Upload>
-
-                </Form.Item>
-              </Col>
-
-              <Col span={24}>
-                <Form.Item
-                  {...formItemLayout}
-                  label="中文名"
-                >
-                  {getFieldDecorator('name_cn', {
-                    initialValue: relationData.name_cn || '',
+                  {getFieldDecorator('title', {
+                    initialValue: paperData.title || '',
+                    rules: [{ required: true, message: '请输入论文标题' }],
                   })(
-                    <Input placeholder="请输入中文名" disabled={disabled}/>,
+                    <Input placeholder="请输入论文标题" disabled={disabled}/>,
                   )}
                 </Form.Item>
               </Col>
 
-              <Col span={24}>
+              <Col span={12}>
                 <Form.Item
                   {...formItemLayout}
-                  label="英文名"
+                  label="作者"
                 >
-                  {getFieldDecorator('name', {
-                    initialValue: relationData.name || '',
-                  })(
-                    <Input placeholder="请输入英文名" disabled={disabled}/>,
-                  )}
-                </Form.Item>
-              </Col>
-
-              <Col span={24}>
-                <Form.Item
-                  {...formItemLayout}
-                  label="关系"
-                >
-                  {getFieldDecorator('relation', {
-                    rules: [{ required: true, message: '请选择关系' }],
-                    initialValue: relationData.relation,
+                  {getFieldDecorator('author', {
+                    rules: [{ required: true, message: '请输入作者' }],
+                    initialValue: paperData.author,
                   })(
                     <Select
                       disabled={disabled}
                       mode="tags"
-                      placeholder="请选择或关系"
+                      placeholder="请输入作者"
                     >
-                      {relationChildren}
                     </Select>,
                   )}
                 </Form.Item>
               </Col>
 
-              <Col span={24}>
+            </Row>
+            <Row>
+
+              <Col span={12}>
                 <Form.Item
                   {...formItemLayout}
-                  label="备注"
+                  label="关键词"
                 >
-                  {getFieldDecorator('remark', {
-                    initialValue: relationData.remark || '',
+                  {getFieldDecorator('keyword', {
+                    rules: [{ required: true, message: '请输入关键词' }],
+                    initialValue: paperData.keyword,
                   })(
-                    <Input placeholder="请输入英文名" disabled={disabled}/>,
+                    <Select
+                      disabled={disabled}
+                      mode="tags"
+                      placeholder="请输入关键词"
+                    >
+                    </Select>,
+                  )}
+                </Form.Item>
+              </Col>
+
+              <Col span={12}>
+                <Form.Item
+                  {...formItemLayout}
+                  label="年份"
+                >
+                  {getFieldDecorator('year', {
+                    initialValue: paperData.year,
+                  })(
+                    <InputNumber disabled={disabled} min={1990} max={2019} style={{ width: '100%' }}/>,
+                  )}
+                </Form.Item>
+              </Col>
+            </Row>
+            <Row>
+              <Col span={12}>
+                <Form.Item
+                  {...formItemLayout}
+                  label="期刊"
+                >
+                  {getFieldDecorator('periodical', {
+                    initialValue: paperData.periodical,
+                  })(
+                    <Select
+                      disabled={disabled}
+                      mode="tags"
+                      placeholder="请输入或者选择论文期刊"
+                    >
+                      <Option value="WOS">WOS</Option>
+                      <Option value="EI">EI</Option>
+                    </Select>,
+                  )}
+                </Form.Item>
+              </Col>
+
+              <Col span={12}>
+                <Form.Item
+                  {...formItemLayout}
+                  label="DOI"
+                >
+                  {getFieldDecorator('doi', {
+                    initialValue: paperData.doi,
+                  })(
+                    <Input placeholder="请输入论文DOI" disabled={disabled}/>,
+                  )}
+                </Form.Item>
+              </Col>
+            </Row>
+            <Row>
+              <Col span={12}>
+                <Form.Item
+                  {...formItemLayout}
+                  label="论文URL"
+                >
+                  {getFieldDecorator('url', {
+                    initialValue: paperData.url,
+                  })(
+                    <Input placeholder="请输入论文URL" disabled={disabled}/>,
                   )}
                 </Form.Item>
               </Col>
 
 
+              <Col span={12}>
+                <Form.Item
+                  {...formItemLayout}
+                  label="阅读量"
+                >
+                  {getFieldDecorator('view', {
+                    initialValue: paperData.view || '0',
+                  })(
+                    <InputNumber disabled={disabled} min={0} style={{ width: '100%' }}/>,
+                  )}
+                </Form.Item>
+              </Col>
             </Row>
+            <Row>
+              <Col span={12}>
+                <Form.Item
+                  {...formItemLayout}
+                  label="被引量"
+                >
+                  {getFieldDecorator('cited', {
+                    initialValue: paperData.cited || '0',
+                  })(
+                    <InputNumber disabled={disabled} min={0} style={{ width: '100%' }}/>,
+                  )}
+                </Form.Item>
+              </Col>
+
+              <Col span={12}>
+                <Form.Item
+                  {...formItemLayout}
+                  label="点赞量"
+                >
+                  {getFieldDecorator('like', {
+                    initialValue: paperData.like || '0',
+                  })(
+                    <InputNumber disabled={disabled} min={0} style={{ width: '100%' }}/>,
+                  )}
+                </Form.Item>
+              </Col>
+            </Row>
+
+            <Row>
+              <Col span={12}>
+                <Form.Item
+                  {...formItemLayout}
+                  label="收藏量"
+                >
+                  {getFieldDecorator('collect', {
+                    initialValue: paperData.collect || '0',
+                  })(
+                    <InputNumber disabled={disabled} min={0} style={{ width: '100%' }}/>,
+                  )}
+                </Form.Item>
+              </Col>
+            </Row>
+
+            <Row>
+              <Col span={24}>
+                <Form.Item
+                  {...formItemLayoutLine}
+                  label="摘要"
+                >
+                  {getFieldDecorator('abstract', {
+                    initialValue: paperData.abstract || '',
+                  })(
+                    <TextArea style={{ height: 210 }} disabled={disabled}/>,
+                  )}
+                </Form.Item>
+              </Col>
+            </Row>
+
+
           </Form>
         </Modal>
 
@@ -321,12 +436,12 @@ class Paper extends React.Component {
         <Table
           columns={this.columns}
           rowKey={record => record._id}
-          dataSource={(relationDataObj && relationDataObj.list) ? relationDataObj.list : []}
+          dataSource={(paperDataObj && paperDataObj.list) ? paperDataObj.list : []}
           rowSelection={rowSelection}
           pagination={{
-            current: relationDataObj.pageIndex + 1,
-            total: relationDataObj.count,
-            pageSize: relationDataObj.size,
+            current: paperDataObj.pageIndex + 1,
+            total: paperDataObj.count,
+            pageSize: paperDataObj.size,
           }}
           onChange={this.onChangePage}
           size="small"

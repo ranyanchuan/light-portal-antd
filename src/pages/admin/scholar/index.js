@@ -9,13 +9,11 @@ import { Button, Modal, Tabs, Table, Avatar, Tag } from 'antd';
 
 import LayoutAdmin from 'components/Admin/LayoutAdmin';
 import Search from 'components/Admin/Basketball/Search';
-import Score from 'components/Admin/Basketball/Score';
-
 import BasicModal from 'components/Admin/Scholar/BasicModal';
-
 import Relation from 'components/Admin/Common/Relation';
 import Honor from 'components/Admin/Common/Honor';
 import Salary from 'components/Admin/Common/Salary';
+import Paper from 'components/Admin/Scholar/Paper';
 
 import styles from './index.less';
 
@@ -33,7 +31,7 @@ class AdminScholar extends React.Component {
 
   state = {
     searchObj: {}, //搜索面板数据
-    defaultActiveKey: 'salary', // 默认选中tab
+    defaultActiveKey: 'paper', // 默认选中tab
     selectedRowKeys: [], // 选中行key
     selectedRowObj: {}, // 选中行对象
 
@@ -41,6 +39,7 @@ class AdminScholar extends React.Component {
     basModVis: false,
     basModStatus: 'add',
 
+    paperDataObj: {}, // 论文数据
     starDataObj: {}, // 基本数据
     relationDataObj: {}, // 关系数据
     honorDataObj: {}, // 荣誉数据
@@ -72,10 +71,9 @@ class AdminScholar extends React.Component {
     //  如果主表表请求清 主表 和 空子表
     if (table === 'star') {
       tempState.starDataObj = {};
-      tempState.scoreDataObj = {};
+      tempState.paperDataObj = {};
       tempState.relationDataObj = {};
       tempState.honorDataObj = {};
-      tempState.scoreDataObj = {};
       tempState.salaryDataObj = {};
       tempState.selectedRowKeys = []; // 选中行key
       tempState.selectedRowObj = {}; // 选中行对象
@@ -323,7 +321,7 @@ class AdminScholar extends React.Component {
 
   render() {
 
-    const { basModVis, selectedRowKeys, basModStatus, defaultActiveKey, selectedRowObj, starDataObj, scoreDataObj, relationDataObj, honorDataObj, salaryDataObj } = this.state;
+    const { basModVis, selectedRowKeys, basModStatus, defaultActiveKey, selectedRowObj, starDataObj, paperDataObj, relationDataObj, honorDataObj, salaryDataObj } = this.state;
     const rowSelection = {
       selectedRowKeys,
       onChange: this.onSelectChange,
@@ -368,8 +366,8 @@ class AdminScholar extends React.Component {
           {/*子表数据*/}
           <Tabs defaultActiveKey={defaultActiveKey} onChange={this.onChangeTab}>
             <TabPane tab="查看论文" key="paper">
-              <Score
-                scoreDataObj={scoreDataObj}
+              <Paper
+                paperDataObj={paperDataObj}
                 onActionTable={this.onActionTable}
                 basicRow={selectedRowObj}
                 showDelCon={this.showDelCon}

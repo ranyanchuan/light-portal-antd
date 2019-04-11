@@ -87,6 +87,8 @@ class BasicModal extends React.Component {
       wrapperCol: { sm: { span: 16 } },
     };
 
+
+
     const formItemLayoutLine = {
       labelCol: { sm: { span: 3 } },
       wrapperCol: { sm: { span: 20 } },
@@ -225,9 +227,6 @@ class BasicModal extends React.Component {
                 </Form.Item>
               </Col>
             </Row>
-
-
-
 
 
             <Row>

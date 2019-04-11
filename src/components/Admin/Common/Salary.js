@@ -100,9 +100,6 @@ class Salary extends React.Component {
           payload.content = fieldsValue;
 
         }
-
-        console.log('selectedRowObj', selectedRowObj);
-        debugger;
         // 添加操作表名
         payload.table = 'salary';
         onActionTable(payload);
