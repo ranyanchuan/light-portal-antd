@@ -118,13 +118,13 @@ class Basketball extends React.Component {
 
 
   IconText = ({ type, text }) => {
-    
+
     const data = {
       tagList: [
         '勒布朗-詹姆斯', 'King James', 'LBJ', '天选之子', 'Lecarry', '勒布朗多',
         '划水詹', '帮主', '三旬老汉', '天之骄子', '小皇帝', '詹皇', '全能詹', '旧主杀手', '六步朗', '一星四射', '一猩四射',
       ],
-      occupation: ['篮球'],
+      domain: ['篮球'],
       hometown: '俄亥俄州阿克伦',
       numObj: {
         popularity: 10,
@@ -139,7 +139,7 @@ class Basketball extends React.Component {
       },
     };
 
-    const { tagList, occupation, hometown, numObj } = data;
+    const { tagList, domain, hometown, numObj } = data;
 
     const result = [];
     for (const numItem in numObj) {
@@ -179,7 +179,7 @@ class Basketball extends React.Component {
       </div>
       <div>
         <Icon type="appstore" className={styles.iconPic}/>
-        <span>{occupation.join('--')}</span>
+        <span>{domain.join('--')}</span>
       </div>
       <div className={styles.tags}>
         {tagList && tagList.length > 0 && tagList.map((item) => {

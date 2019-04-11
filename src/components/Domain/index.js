@@ -12,7 +12,7 @@ const Option = Select.Option;
 
 @Form.create()
 
-class Occupation extends React.Component {
+class Domain extends React.Component {
   render() {
     const { formItemLayout, form ,defValue,disabled=false,required=false} = this.props;
     const { getFieldDecorator } = form;
@@ -29,14 +29,14 @@ class Occupation extends React.Component {
     }
 
     return (
-      <div className={styles.occupation}>
+      <div className={styles.domain}>
         <Form.Item
           {...formItemLayout}
           label="领域"
         >
-          {getFieldDecorator('occupation',{
+          {getFieldDecorator('domain',{
             initialValue:defValue,
-            rules: [{ required, message: '请选择性别' }],
+            rules: [{ required, message: '请选择领域' }],
 
           })(
             <Select
@@ -54,4 +54,4 @@ class Occupation extends React.Component {
   }
 }
 
-export default Occupation;
+export default Domain;

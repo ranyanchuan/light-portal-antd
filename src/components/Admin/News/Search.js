@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Form, Row, Col, Input, Button, Select } from 'antd';
 
-import Occupation from 'components/Occupation';
+import Domain from 'components/Domain';
 import Category from 'components/Category';
 import Tag from 'components/Tag/news';
 import DateCon from 'components/DateCon';
@@ -88,7 +88,7 @@ class Search extends React.Component {
               <Category formItemLayout={formItemLayout} form={form}/>
             </Col>
             <Col span={8}>
-              <Occupation formItemLayout={formItemLayout} form={form}/>
+              <Domain formItemLayout={formItemLayout} form={form}/>
             </Col>
 
             <Col span={8}>

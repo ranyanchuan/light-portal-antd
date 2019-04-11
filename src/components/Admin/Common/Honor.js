@@ -20,7 +20,7 @@ class Honor extends React.Component {
 
   };
 
-  queryInfo = { occupation: ['basketball'], category: ['player'] };
+  queryInfo = { domain: ['basketball'], category: ['player'] };
 
   componentWillReceiveProps(nextProps) {
     const { honorDataObj } = nextProps;

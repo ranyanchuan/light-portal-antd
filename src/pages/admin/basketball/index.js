@@ -47,7 +47,7 @@ class AdminBasketball extends React.Component {
     salaryDataObj: {}, // 资薪数据
   };
 
-  starQueryInfo = { table: 'star', occupation: ['basketball'], category: ['player'] };
+  starQueryInfo = { table: 'star', domain: ['basketball'], category: ['player'] };
 
 
   componentDidMount() {
@@ -157,7 +157,7 @@ class AdminBasketball extends React.Component {
     if (basModStatus === 'add') {
       payload = data;
       payload.type = 'common/add';
-      payload.occupation = ['basketball'];
+      payload.domain = ['basketball'];
       payload.category = ['player'];
     }
     // 添加操作表名

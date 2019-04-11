@@ -18,7 +18,7 @@ class ScoreModal extends React.Component {
     selectedRowObj: {}, // 选中行对象
   };
 
-  queryInfo = { occupation: ['basketball'], category: ['player'] };
+  queryInfo = { Domain: ['basketball'], category: ['player'] };
 
 
   componentWillReceiveProps(nextProps) {

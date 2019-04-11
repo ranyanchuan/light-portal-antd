@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form, Input, Modal, Select, Row, Col } from 'antd';
-import Occupation from 'components/Occupation';
+import Domain from 'components/Domain';
 import Category from 'components/Category';
 import Tag from 'components/Tag/news';
 import DateCon from 'components/DateCon';
@@ -91,7 +91,7 @@ class newsModal extends React.Component {
                 <Category defValue={basicData.category} formItemLayout={formItemLayout} form={form} required={true} disabled={disabled}/>
               </Col>
               <Col span={12}>
-                <Occupation defValue={basicData.occupation} formItemLayout={formItemLayout} form={form} required={true} disabled={disabled}/>
+                <Domain defValue={basicData.domain} formItemLayout={formItemLayout} form={form} required={true} disabled={disabled}/>
               </Col>
 
             </Row>

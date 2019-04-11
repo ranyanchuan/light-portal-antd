@@ -27,7 +27,7 @@ class Salary extends React.Component {
     selectedRowObj: {}, // 选中行对象
   };
 
-  queryInfo = { occupation: ['basketball'], category: ['player'] };
+  queryInfo = { domain: ['basketball'], category: ['player'] };
 
 
   componentWillReceiveProps(nextProps) {

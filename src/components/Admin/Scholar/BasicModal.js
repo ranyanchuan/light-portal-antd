@@ -241,7 +241,29 @@ class BasicModal extends React.Component {
               <Col span={12}>
                 <Tag formItemLayout={formItemLayout} form={form} disabled={disabled} defValue={basicData.tags}/>
               </Col>
+              <Col span={12}>
+                <Form.Item
+                  {...formItemLayout}
+                  label="单位"
+                >
+                  {getFieldDecorator('affiliation',{
+                    initialValue:basicData.affiliation || ''
+                  })(
+                    <Input placeholder="请输入单位" disabled={disabled}/>,
+                  )}
+                </Form.Item>
+              </Col>
             </Row>
+
+            <Row>
+              <Col span={12}>
+                <Nationality formItemLayout={formItemLayout} form={form} disabled={disabled} defValue={basicData.nationality}/>
+              </Col>
+              <Col span={12}>
+                <City formItemLayout={formItemLayout} form={form} disabled={disabled} defValue={basicData.city}/>
+              </Col>
+            </Row>
+
 
             <Row>
               <Col span={12}>
@@ -262,14 +284,6 @@ class BasicModal extends React.Component {
               </Col>
             </Row>
 
-            <Row>
-              <Col span={12}>
-                <Nationality formItemLayout={formItemLayout} form={form} disabled={disabled} defValue={basicData.nationality}/>
-              </Col>
-              <Col span={12}>
-                <City formItemLayout={formItemLayout} form={form} disabled={disabled} defValue={basicData.city}/>
-              </Col>
-            </Row>
 
             <Row>
               <Col span={12}>
