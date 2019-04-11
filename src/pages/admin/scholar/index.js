@@ -10,7 +10,8 @@ import { Button, Modal, Tabs, Table, Avatar } from 'antd';
 import LayoutAdmin from 'components/Admin/LayoutAdmin';
 import Search from 'components/Admin/Basketball/Search';
 import Score from 'components/Admin/Basketball/Score';
-import BasicModal from 'components/Admin/Basketball/BasicModal';
+
+import BasicModal from 'components/Admin/Scholar/BasicModal';
 
 import Relation from 'components/Admin/Common/Relation';
 import Honor from 'components/Admin/Common/Honor';
