@@ -10,7 +10,7 @@ const Option = Select.Option;
 
 class Education extends React.Component {
   render() {
-    const { formItemLayout, defValue, form, required = false } = this.props;
+    const { formItemLayout, defValue,disabled, form, required = false } = this.props;
     const { getFieldDecorator } = form;
     return (
       <div>
@@ -25,7 +25,7 @@ class Education extends React.Component {
               initialValue: defValue,
             },
           )(
-            <Select placeholder="请选择学历">
+            <Select placeholder="请选择学历" disabled={disabled}>
               <Option value="初中">初中</Option>
               <Option value="高中">高中</Option>
               <Option value="高中">专科</Option>

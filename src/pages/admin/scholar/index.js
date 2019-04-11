@@ -5,7 +5,7 @@
 import React from 'react';
 import { connect } from 'dva';
 import moment from 'moment';
-import { Button, Modal, Tabs, Table, Avatar } from 'antd';
+import { Button, Modal, Tabs, Table, Avatar, Tag } from 'antd';
 
 import LayoutAdmin from 'components/Admin/LayoutAdmin';
 import Search from 'components/Admin/Basketball/Search';
@@ -47,7 +47,7 @@ class AdminScholar extends React.Component {
     salaryDataObj: {}, // 资薪数据
   };
 
-  starQueryInfo = { table: 'star', domain: ['scholar'], category: ['computer'] };
+  starQueryInfo = { table: 'star', category: ['scholar'] };
 
 
   componentDidMount() {
@@ -129,7 +129,7 @@ class AdminScholar extends React.Component {
           // 如果是主表请求 添加搜索信息
           if (table === 'star') {
             const searchObj = this.child.getSearchValue();
-            param = searchObj;
+            param = { ...this.starQueryInfo, ...searchObj };
           }
           param.table = table;
 
@@ -157,14 +157,12 @@ class AdminScholar extends React.Component {
     if (basModStatus === 'add') {
       payload = data;
       payload.type = 'common/add';
-      payload.domain = ['basketball'];
-      payload.category = ['player'];
+      payload.category = ['scholar'];
     }
     // 添加操作表名
     payload.table = 'star';
     // 获取表格数据
     this.onActionTable(payload);
-
 
   };
 
@@ -217,6 +215,21 @@ class AdminScholar extends React.Component {
         return text ? moment(text).format(ruleDate) : '';
       },
     },
+    {
+      title: '学历',
+      dataIndex: 'education',
+      key: 'education',
+    },
+    {
+      title: '领域',
+      dataIndex: 'domain',
+      key: 'domain',
+      render: tags => (
+        <span>
+        {tags && tags.length > 0 && tags.slice(0, 3).map(tag => <Tag color="blue" key={tag}>{tag}</Tag>)}
+        </span>
+      ),
+    },
 
     {
       title: '国籍',
@@ -229,22 +242,16 @@ class AdminScholar extends React.Component {
       key: 'city',
     },
     {
-      title: '组织',
-      dataIndex: 'organization',
-      key: 'organization',
-      render: text => <span>{text && Array.isArray(text) ? text.join(' | ') : ''}</span>,
-    },
-    {
-      title: '球队',
-      dataIndex: 'team',
-      key: 'team',
-      render: text => <span>{text && Array.isArray(text) ? text.join(' | ') : ''}</span>,
-    },
-    {
       title: '学校',
       dataIndex: 'school',
       key: 'school',
-      render: text => <span>{text && Array.isArray(text) ? text.join(' | ') : ''}</span>,
+      render: text => <span>{text && Array.isArray(text) ? [...text].pop() : ''}</span>,
+    },
+    {
+      title: '单位',
+      dataIndex: 'affiliation',
+      key: 'affiliation',
+      render: text => <a href="javascript:;">{text}</a>,
     },
 
   ];

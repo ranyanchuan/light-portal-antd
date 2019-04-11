@@ -2,7 +2,7 @@
  * Created by ranyanchuan on 2018/3/11.
  */
 import React from 'react';
-import { Form,AutoComplete } from 'antd';
+import { Form, AutoComplete, Select } from 'antd';
 
 import styles from './index.less';
 
@@ -25,6 +25,7 @@ class City extends React.Component {
             initialValue:defValue || ''
           })(
             <AutoComplete
+              placeholder="请选择城市"
               disabled={disabled}
               style={{ width: '100%' }}
               dataSource={dataSource}

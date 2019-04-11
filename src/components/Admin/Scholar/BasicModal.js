@@ -45,6 +45,12 @@ class BasicModal extends React.Component {
     this.props.form.resetFields();
   };
 
+
+  // 更新图片
+  updatePicture = (imgUrl) => {
+    this.setState({ imgUrl });
+  };
+
   //  提交form信息弹框
   handleSubmit = (e) => {
     e.preventDefault();
@@ -52,13 +58,9 @@ class BasicModal extends React.Component {
       console.log('fieldsValue', fieldsValue);
       if (!err) {
         const { imageUrl } = this.state;
-        // 添加头像url
+        // 添加图片url
         if (imageUrl) {
-          fieldsValue.avatar = imageUrl;
-        }
-        // 日期格式
-        if (fieldsValue.birthday) {
-          fieldsValue.birthday = moment(fieldsValue.birthday).format(ruleDate);
+          fieldsValue.cover = imageUrl;
         }
         this.props.onSave(fieldsValue);
         this.hideModal();
@@ -287,9 +289,6 @@ class BasicModal extends React.Component {
             </Row>
 
 
-
-
-
             <Row>
               <Col span={24}>
                 <Form.Item
@@ -320,7 +319,6 @@ class BasicModal extends React.Component {
                 </Form.Item>
               </Col>
             </Row>
-
 
           </Form>
         </Modal>

@@ -26,6 +26,7 @@ class Nationality extends React.Component {
             initialValue:defValue || ''
           })(
             <AutoComplete
+              placeholder="请选择国籍"
               style={{ width: '100%' }}
               disabled={disabled}
               dataSource={dataSource}
