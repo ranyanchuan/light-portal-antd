@@ -171,7 +171,7 @@ class Home extends React.Component {
 
                   <div className={styles.commonItem}>
                     <Badge dot>
-                      <Icon type="team" />
+                      <Icon type="team"/>
                     </Badge>
                     <a href="distribution/athlete/china">全国运动员分布</a>
                   </div>
@@ -179,18 +179,18 @@ class Home extends React.Component {
 
                   <div className={styles.commonItem}>
                     <Badge dot>
-                      <Icon type="team" />
+                      <Icon type="team"/>
                     </Badge>
                     <a href="distribution/athlete/world">全球运动员分布</a>
                   </div>
 
                   <div className={styles.commonItem}>
                     <Icon type="file-text"/>
-                    <a href="">AI and Communication </a>
+                    <a href="dataMining/AIHistory">人工智能历史 </a>
                   </div>
                   <div className={styles.commonItem}>
                     <Icon type="file-text"/>
-                    <a href="">AI and Communication </a>
+                    <a href="dataMining/CSRankings">CSRankings全球计算机科学权威榜单</a>
                   </div>
                   <div className={styles.commonItem}>
                     <Icon type="file-text"/>
