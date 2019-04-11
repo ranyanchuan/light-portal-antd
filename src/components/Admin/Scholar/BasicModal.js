@@ -1,18 +1,17 @@
 import React from 'react';
 import moment from 'moment';
 
-import { Form, DatePicker, Input, InputNumber, Upload, Icon, Modal, Select, Row, Col } from 'antd';
-import Organization from 'components/Organization/basketball';
-import Team from 'components/Team/basketball';
+import { Form, DatePicker, Input, Modal, Select, Row, Col } from 'antd';
+
 import Tag from 'components/Tag/basketball';
-import Position from 'components/Position/basketball';
+import Domain from 'components/Domain/scholar';
 import School from 'components/School';
 import Nationality from 'components/Nationality';
 import City from 'components/City';
 import UploadPicture from 'components/UploadPicture';
+import Education from 'components/Education';
 
 import { api } from 'utils/config';
-
 
 
 import styles from './index.less';
@@ -26,7 +25,7 @@ const ruleDate = 'YYYY-MM-DD';
 class BasicModal extends React.Component {
   state = {
     loading: false,
-    imageUrl:'',
+    imageUrl: '',
   };
 
   componentWillReceiveProps(nextProps, nextState) {
@@ -74,48 +73,26 @@ class BasicModal extends React.Component {
     desc: '查看基本信息',
   };
 
-  // 文件上传请处理
-  beforeUpload = () => {
-
-  };
-
-
-  // 文件上传成处理
-  handleChange = (info) => {
-    if (info.file.status === 'uploading') {
-      this.setState({ loading: true });
-      return;
-    }
-    if (info.file.status === 'done') {
-      // Get this url from response in real world.
-      const { response } = info.fileList[0];
-      const { url } = response;
-      // 服务器端 头像地址
-      this.setState({ imageUrl: url[0] });
-    }
-  };
-
 
   render() {
     const { visible, form, status, basicData = {} } = this.props;
 
     const { getFieldDecorator } = form;
-    // 获取头像
-    const { imageUrl } = this.state;
+
     //label 和输入框比例
     const formItemLayout = {
-      labelCol: { sm: { span: 4 } },
-      wrapperCol: { sm: { span: 19 } },
+      labelCol: { sm: { span: 6 } },
+      wrapperCol: { sm: { span: 16 } },
     };
 
-    const disabled=status==='desc'? true:false;
+    const formItemLayoutLine = {
+      labelCol: { sm: { span: 3 } },
+      wrapperCol: { sm: { span: 20 } },
+    };
 
-    const uploadButton = (
-      <div>
-        <Icon type={this.state.loading ? 'loading' : 'plus'}/>
-        <div className="ant-upload-text">上传头像</div>
-      </div>
-    );
+
+    const disabled = status === 'desc' ? true : false;
+
 
     return (
       <div className={styles.basicModal}>
@@ -126,31 +103,9 @@ class BasicModal extends React.Component {
           onCancel={this.hideModal}
           okText="确认"
           cancelText="取消"
-          width="860px"
+          width="960px"
         >
           <Form onSubmit={this.handleSubmit}>
-
-            {/*<Row>*/}
-              {/*<Col span={12}>*/}
-                {/*<Organization*/}
-                  {/*formItemLayout={formItemLayout}*/}
-                  {/*required={true}*/}
-                  {/*form={form}*/}
-                  {/*defValue={basicData.organization}*/}
-                  {/*disabled={disabled}*/}
-                {/*/>*/}
-              {/*</Col>*/}
-              {/*<Col span={12}>*/}
-                {/*<Team*/}
-                  {/*formItemLayout={formItemLayout}*/}
-                  {/*required={true}*/}
-                  {/*form={form}*/}
-                  {/*defValue={basicData.team}*/}
-                  {/*disabled={disabled}*/}
-                {/*/>*/}
-              {/*</Col>*/}
-            {/*</Row>*/}
-
             <Row>
               <Col span={12}>
                 <Form.Item
@@ -159,6 +114,7 @@ class BasicModal extends React.Component {
                 >
                   {getFieldDecorator('name_cn', {
                     initialValue: basicData.name_cn || '',
+                    rules: [{ required: true, message: '请输入中文名' }],
                   })(
                     <Input placeholder="请输入中文姓名" disabled={disabled}/>,
                   )}
@@ -171,6 +127,7 @@ class BasicModal extends React.Component {
                 >
                   {getFieldDecorator('name', {
                     initialValue: basicData.name || '',
+                    rules: [{ required: true, message: '请输入英文名' }],
                   })(
                     <Input placeholder="请输入英文姓名" disabled={disabled}/>,
                   )}
@@ -216,8 +173,8 @@ class BasicModal extends React.Component {
                   {...formItemLayout}
                   label="邮箱"
                 >
-                  {getFieldDecorator('email',{
-                    initialValue:basicData.email || ''
+                  {getFieldDecorator('email', {
+                    initialValue: basicData.email || '',
                   })(
                     <Input placeholder="请输入Email" disabled={disabled}/>,
                   )}
@@ -228,8 +185,8 @@ class BasicModal extends React.Component {
                   {...formItemLayout}
                   label="手机号"
                 >
-                  {getFieldDecorator('phone',{
-                    initialValue:basicData.phone || ''
+                  {getFieldDecorator('phone', {
+                    initialValue: basicData.phone || '',
                   })(
                     <Input placeholder="请输入手机号" disabled={disabled}/>,
                   )}
@@ -239,15 +196,27 @@ class BasicModal extends React.Component {
 
             <Row>
               <Col span={12}>
+                <Education formItemLayout={formItemLayout} form={form} disabled={disabled} defValue={basicData.education}/>
+              </Col>
+              <Col span={12}>
                 <Tag formItemLayout={formItemLayout} form={form} disabled={disabled} defValue={basicData.tags}/>
               </Col>
+            </Row>
+
+            <Row>
+
+              <Col span={12}>
+                <Domain defValue={basicData.domain} formItemLayout={formItemLayout} form={form} required={true}
+                        disabled={disabled}/>
+              </Col>
+
               <Col span={12}>
                 <Form.Item
                   {...formItemLayout}
                   label="单位"
                 >
-                  {getFieldDecorator('affiliation',{
-                    initialValue:basicData.affiliation || ''
+                  {getFieldDecorator('affiliation', {
+                    initialValue: basicData.affiliation || '',
                   })(
                     <Input placeholder="请输入单位" disabled={disabled}/>,
                   )}
@@ -255,9 +224,14 @@ class BasicModal extends React.Component {
               </Col>
             </Row>
 
+
+
+
+
             <Row>
               <Col span={12}>
-                <Nationality formItemLayout={formItemLayout} form={form} disabled={disabled} defValue={basicData.nationality}/>
+                <Nationality formItemLayout={formItemLayout} form={form} disabled={disabled}
+                             defValue={basicData.nationality}/>
               </Col>
               <Col span={12}>
                 <City formItemLayout={formItemLayout} form={form} disabled={disabled} defValue={basicData.city}/>
@@ -276,7 +250,7 @@ class BasicModal extends React.Component {
                 label="家乡"
               >
                 {getFieldDecorator('hometown', {
-                  initialValue:basicData.hometown || ''
+                  initialValue: basicData.hometown || '',
                 })(
                   <Input placeholder="请输入家乡" disabled={disabled}/>,
                 )}
@@ -292,7 +266,7 @@ class BasicModal extends React.Component {
                   label="百科"
                 >
                   {getFieldDecorator('wiki_baidu', {
-                    initialValue:basicData.wiki_baidu || ''
+                    initialValue: basicData.wiki_baidu || '',
                   })(
                     <Input placeholder="请输入百度百科地址" disabled={disabled}/>,
                   )}
@@ -304,7 +278,7 @@ class BasicModal extends React.Component {
                   label="wiki"
                 >
                   {getFieldDecorator('wiki', {
-                    initialValue:basicData.wiki || ''
+                    initialValue: basicData.wiki || '',
                   })(
                     <Input placeholder="请输入wiki百科地址" disabled={disabled}/>,
                   )}
@@ -312,37 +286,40 @@ class BasicModal extends React.Component {
               </Col>
             </Row>
 
-            <Row>
-              <Col span={12}>
-                <Form.Item
-                  {...formItemLayout}
-                  label="摘要"
-                >
-                  {getFieldDecorator('abstract',{
-                    initialValue:basicData.abstract || ''
-                  })(
-                    <TextArea style={{minHeight:102}} placeholder="请输入明星摘要信息" disabled={disabled}/>,
-                  )}
-                </Form.Item>
-              </Col>
 
-              <Col span={12}>
+
+
+
+            <Row>
+              <Col span={24}>
                 <Form.Item
-                  {...formItemLayout}
+                  {...formItemLayoutLine}
                   label="头像"
                 >
                   <UploadPicture
-                    title="上传封面"
                     imageUrl={basicData.cover}
                     disabled={disabled}
                     updatePicture={this.updatePicture}
                   />
-
                 </Form.Item>
               </Col>
 
             </Row>
 
+            <Row>
+              <Col span={24}>
+                <Form.Item
+                  {...formItemLayoutLine}
+                  label="摘要"
+                >
+                  {getFieldDecorator('abstract', {
+                    initialValue: basicData.abstract || '',
+                  })(
+                    <TextArea style={{ minHeight: 102 }} placeholder="请输入明星摘要信息" disabled={disabled}/>,
+                  )}
+                </Form.Item>
+              </Col>
+            </Row>
 
 
           </Form>
