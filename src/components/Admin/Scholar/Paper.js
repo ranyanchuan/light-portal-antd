@@ -12,9 +12,6 @@ const Option = Select.Option;
 
 
 @Form.create()
-// @connect((state) => ({
-//   homePage: state.homePage,
-// }))
 
 class Paper extends React.Component {
   state = {

@@ -12,9 +12,6 @@ const Option = Select.Option;
 
 
 @Form.create()
-// @connect((state) => ({
-//   homePage: state.homePage,
-// }))
 
 class Relation extends React.Component {
   state = {
@@ -26,9 +23,6 @@ class Relation extends React.Component {
     selectedRowObj: {}, // 选中行对象
 
   };
-
-  queryInfo = { domain: ['basketball'], category: ['player'] };
-
 
   componentWillReceiveProps(nextProps) {
 
@@ -114,7 +108,7 @@ class Relation extends React.Component {
         fieldsValue.imageUrl = imageUrl;
         // 添加类型
         if (status === 'add') {
-          payload = { ...fieldsValue, ...this.queryInfo };
+          payload = fieldsValue;
           payload.type = 'common/add';
           payload.basicId = _id;
         }

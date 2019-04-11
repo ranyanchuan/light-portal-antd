@@ -89,7 +89,7 @@ class Salary extends React.Component {
         const { _id } = basicRow;
         // 添加
         if (status === 'add') {
-          payload = { ...fieldsValue, ...this.queryInfo };
+          payload = fieldsValue;
           payload.type = 'common/add';
           payload.basicId = _id;
         }

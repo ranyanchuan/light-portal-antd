@@ -20,7 +20,6 @@ class Honor extends React.Component {
 
   };
 
-  queryInfo = { domain: ['basketball'], category: ['player'] };
 
   componentWillReceiveProps(nextProps) {
     const { honorDataObj } = nextProps;
@@ -75,7 +74,7 @@ class Honor extends React.Component {
         const { _id } = basicRow;
         // 添加类型
         if (status === 'add') {
-          payload = { ...fieldsValue, ...this.queryInfo };
+          payload = fieldsValue;
           payload.type = 'common/add';
           payload.basicId = _id;
         }
