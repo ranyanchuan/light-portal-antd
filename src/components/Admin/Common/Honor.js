@@ -60,13 +60,19 @@ class Honor extends React.Component {
     // this.props.hideModal();
     e.preventDefault();
     this.props.form.validateFields((err, fieldsValue) => {
+
+      const { status, selectedRowObj } = this.state;
+      if (status === 'desc') {
+        this.onClickClose();
+        return;
+      }
+
       if (!err) {
         // 日期格式
         if (fieldsValue.date) {
           fieldsValue.date = moment(fieldsValue.birthday).format(ruleDate);
         }
 
-        const { status, selectedRowObj } = this.state;
         const { basicRow, onActionTable } = this.props;
 
         let payload = {};

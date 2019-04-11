@@ -29,6 +29,11 @@ class newsModal extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFields((err, fieldsValue) => {
+      const { status } = this.props;
+      if (status === 'desc') {
+        this.onClickClose();
+        return;
+      }
       if (!err) {
         const { imageUrl } = this.state;
         // 添加图片url

@@ -18,7 +18,7 @@ import styles from './index.less';
 
 const Option = Select.Option;
 const { TextArea } = Input;
-const ruleDate = 'YYYY-MM-DD';
+
 
 // 篮球运动员基本信息 添加 删除 详情
 @Form.create()
@@ -55,7 +55,12 @@ class BasicModal extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFields((err, fieldsValue) => {
-      console.log('fieldsValue', fieldsValue);
+
+      const { status } = this.props;
+      if (status === 'desc') {
+        this.onClickClose();
+        return;
+      }
       if (!err) {
         const { imageUrl } = this.state;
         // 添加图片url
@@ -208,7 +213,6 @@ class BasicModal extends React.Component {
             </Row>
 
             <Row>
-
               <Col span={12}>
                 <Domain defValue={basicData.domain} formItemLayout={formItemLayout} form={form} required={true}
                         disabled={disabled}/>

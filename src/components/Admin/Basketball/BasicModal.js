@@ -50,7 +50,11 @@ class BasicModal extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFields((err, fieldsValue) => {
-      console.log('fieldsValue', fieldsValue);
+      const { status } = this.props;
+      if (status === 'desc') {
+        this.onClickClose();
+        return;
+      }
       if (!err) {
         const { imageUrl } = this.state;
         // 添加头像url

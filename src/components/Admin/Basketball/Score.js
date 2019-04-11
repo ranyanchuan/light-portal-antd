@@ -60,6 +60,13 @@ class ScoreModal extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFields((err, fieldsValue) => {
+
+      const { status, selectedRowObj } = this.state;
+      if (status === 'desc') {
+        this.onClickClose();
+        return;
+      }
+
       if (!err) {
         // 日期格式
         if (fieldsValue.date) {
@@ -70,7 +77,6 @@ class ScoreModal extends React.Component {
           fieldsValue.time = moment(fieldsValue.time).format(ruleTime);
         }
 
-        const { status, selectedRowObj } = this.state;
         const { basicRow, onActionTable } = this.props;
 
         let payload = {};

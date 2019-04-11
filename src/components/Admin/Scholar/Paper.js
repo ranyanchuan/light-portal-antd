@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Form, Icon, Input, Button, Modal, Select, Row, Col, Table, Tag, Avatar, InputNumber } from 'antd';
+import { Form, Input, Button, Modal, Select, Row, Col, Table, Tag, InputNumber } from 'antd';
 
 import { uuid } from 'utils';
 import { api } from 'utils/config';
@@ -24,7 +24,6 @@ class Paper extends React.Component {
     selectedRowObj: {}, // 选中行对象
 
   };
-
 
 
   componentWillReceiveProps(nextProps) {
@@ -80,8 +79,16 @@ class Paper extends React.Component {
     // this.props.hideModal();
     e.preventDefault();
     this.props.form.validateFields((err, fieldsValue) => {
+
+      const { status, selectedRowObj } = this.state;
+      if (status === 'desc') {
+        this.onClickClose();
+        return;
+      }
+
+
       if (!err) {
-        const { status, selectedRowObj } = this.state;
+
         const { basicRow, onActionTable } = this.props;
 
         let payload = {};
@@ -122,7 +129,8 @@ class Paper extends React.Component {
       title: '标题',
       dataIndex: 'title',
       key: 'title',
-      render: (title, rec) => <a href="javascript:;">{title.slice(0,30)}</a>,
+      render: (title, rec) => <a
+        href="javascript:;">{(title && title.length > 30) ? title.slice(0, 30) + '...' : title}</a>,
     },
     {
       title: '年份',
@@ -133,22 +141,17 @@ class Paper extends React.Component {
       title: '阅读量',
       dataIndex: 'view',
       key: 'view',
-    },{
+    }, {
       title: '被引量',
       dataIndex: 'cited',
       key: 'cited',
-    },{
+    }, {
       title: '点赞量',
       dataIndex: 'like',
       key: 'like',
     },
     {
       title: '收藏量',
-      dataIndex: 'like',
-      key: 'like',
-    },
-    {
-      title: '点赞量',
       dataIndex: 'collect',
       key: 'collect',
     },
@@ -234,7 +237,7 @@ class Paper extends React.Component {
           visible={visible}
           onOk={this.handleSubmit}
           onCancel={this.onClickClose}
-          okText="确认"
+          okText="确定"
           cancelText="取消"
           width="960px"
         >

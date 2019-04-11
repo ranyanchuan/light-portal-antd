@@ -149,7 +149,7 @@ class AdminBasketball extends React.Component {
     let payload = {};
     if (basModStatus === 'edit') {
       payload.type = 'common/upd';
-      payload.condition = { _id: selectedRowObj['id'] };
+      payload.condition = { _id: selectedRowObj['_id'] };
       payload.content = data;
     }
     // 添加类型

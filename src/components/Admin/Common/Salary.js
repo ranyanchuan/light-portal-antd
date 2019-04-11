@@ -70,7 +70,13 @@ class Salary extends React.Component {
     // this.props.hideModal();
     e.preventDefault();
     this.props.form.validateFields((err, fieldsValue) => {
-      console.log('fieldsValue', fieldsValue);
+
+      const { status, selectedRowObj } = this.state;
+      if (status === 'desc') {
+        this.onClickClose();
+        return;
+      }
+
       if (!err) {
         // 日期格式
         if (fieldsValue.eDate) {
@@ -81,7 +87,6 @@ class Salary extends React.Component {
           fieldsValue.sDate = moment(fieldsValue.sDate).format(ruleDate);
         }
 
-        const { status, selectedRowObj } = this.state;
         const { basicRow, onActionTable } = this.props;
 
         let payload = {};

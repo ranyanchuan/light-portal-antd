@@ -150,7 +150,7 @@ class AdminScholar extends React.Component {
     let payload = {};
     if (basModStatus === 'edit') {
       payload.type = 'common/upd';
-      payload.condition = { _id: selectedRowObj['id'] };
+      payload.condition = { _id: selectedRowObj['_id'] };
       payload.content = data;
     }
     // 添加类型
@@ -220,16 +220,7 @@ class AdminScholar extends React.Component {
       dataIndex: 'education',
       key: 'education',
     },
-    {
-      title: '领域',
-      dataIndex: 'domain',
-      key: 'domain',
-      render: tags => (
-        <span>
-        {tags && tags.length > 0 && tags.slice(0, 3).map(tag => <Tag color="blue" key={tag}>{tag}</Tag>)}
-        </span>
-      ),
-    },
+
 
     {
       title: '国籍',
@@ -252,6 +243,17 @@ class AdminScholar extends React.Component {
       dataIndex: 'affiliation',
       key: 'affiliation',
       render: text => <a href="javascript:;">{text}</a>,
+    },
+
+    {
+      title: '领域',
+      dataIndex: 'domain',
+      key: 'domain',
+      render: tags => (
+        <span>
+        {tags && tags.length > 0 && tags.slice(0, 3).map(tag => <Tag color="blue" key={tag}>{tag}</Tag>)}
+        </span>
+      ),
     },
 
   ];

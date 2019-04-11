@@ -2,9 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="059cf7d0-ef89-48cb-9855-11b2eeca7f89" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/src/components/Admin/Basketball/BasicModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Admin/Basketball/BasicModal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Admin/Basketball/Score.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Admin/Basketball/Score.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Admin/Common/Honor.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Admin/Common/Honor.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Admin/Common/Relation.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Admin/Common/Relation.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Admin/Common/Salary.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Admin/Common/Salary.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Admin/News/NewsModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Admin/News/NewsModal.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Admin/Scholar/BasicModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Admin/Scholar/BasicModal.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Admin/Scholar/Paper.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Admin/Scholar/Paper.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/basketball/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/basketball/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/admin/scholar/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/scholar/index.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -46,7 +52,7 @@
           <entry key="gitkeep" value="2" />
           <entry key="html" value="3" />
           <entry key="jpg" value="2" />
-          <entry key="js" value="772" />
+          <entry key="js" value="784" />
           <entry key="json" value="11" />
           <entry key="less" value="165" />
           <entry key="lock" value="2" />
@@ -63,7 +69,7 @@
           <entry key="HTML" value="3" />
           <entry key="Image" value="3" />
           <entry key="JSON" value="19" />
-          <entry key="JavaScript" value="772" />
+          <entry key="JavaScript" value="784" />
           <entry key="Less" value="165" />
           <entry key="PLAIN_TEXT" value="13" />
           <entry key="TypeScript" value="1" />
@@ -79,7 +85,7 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="css" value="4" />
-          <entry key="js" value="36389" />
+          <entry key="js" value="36488" />
           <entry key="json" value="13" />
           <entry key="less" value="4118" />
           <entry key="txt" value="22" />
@@ -89,7 +95,7 @@
         <counts>
           <entry key="CSS" value="4" />
           <entry key="JSON" value="13" />
-          <entry key="JavaScript" value="36389" />
+          <entry key="JavaScript" value="36488" />
           <entry key="Less" value="4118" />
           <entry key="PLAIN_TEXT" value="22" />
         </counts>
@@ -97,149 +103,126 @@
     </session>
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5">
-      <split-first>
-        <leaf>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/components/Admin/Scholar/BasicModal.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-30">
-                  <caret line="109" column="22" selection-start-line="109" selection-start-column="17" selection-end-line="109" selection-end-column="22" />
-                  <folding>
-                    <element signature="e#0#26#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/components/Admin/Scholar/Paper.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="538">
-                  <caret line="170" column="88" selection-start-line="170" selection-start-column="88" selection-end-line="170" selection-end-column="88" />
-                  <folding>
-                    <element signature="e#0#26#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/pages/admin/news/index.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="266">
-                  <caret line="180" column="90" lean-forward="true" selection-start-line="180" selection-end-line="181" />
-                  <folding>
-                    <element signature="e#82#108#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/pages/admin/scholar/index.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-3914">
-                  <caret line="33" column="28" selection-start-line="33" selection-start-column="28" selection-end-line="33" selection-end-column="28" />
-                  <folding>
-                    <element signature="n#!!doc" expanded="true" />
-                    <element signature="e#82#108#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/components/Education/index.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="435">
-                  <caret line="29" column="44" lean-forward="true" selection-start-line="28" selection-start-column="12" selection-end-line="29" selection-end-column="44" />
-                  <folding>
-                    <element signature="e#48#74#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/components/Admin/Common/Honor.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-2412">
-                  <caret line="37" column="9" lean-forward="true" selection-start-line="37" selection-start-column="9" selection-end-line="37" selection-end-column="9" />
-                  <folding>
-                    <element signature="e#0#26#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/components/Admin/Common/Relation.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-1133">
-                  <caret line="14" selection-start-line="14" selection-end-line="14" />
-                  <folding>
-                    <element signature="e#0#26#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/components/Admin/Basketball/Score.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="227">
-                  <caret line="598" column="57" selection-start-line="598" selection-start-column="50" selection-end-line="598" selection-end-column="57" />
-                  <folding>
-                    <element signature="e#0#26#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/components/Admin/Common/Salary.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="407">
-                  <caret line="102" column="8" selection-start-line="102" selection-start-column="8" selection-end-line="105" selection-end-column="28" />
-                  <folding>
-                    <element signature="e#0#26#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/components/Admin/News/NewsModal.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="562">
-                  <caret line="130" column="69" lean-forward="true" selection-start-line="130" selection-end-line="131" />
-                  <folding>
-                    <element signature="e#0#26#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/components/Admin/Scholar/Paper.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="538">
-                  <caret line="418" column="41" lean-forward="true" selection-start-line="418" selection-start-column="41" selection-end-line="418" selection-end-column="41" />
-                  <folding>
-                    <element signature="e#0#26#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/Admin/Scholar/BasicModal.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="271">
+              <caret line="62" column="7" lean-forward="true" selection-start-line="58" selection-start-column="5" selection-end-line="62" selection-end-column="7" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/pages/admin/scholar/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-3015">
+              <caret line="152" column="50" selection-start-line="152" selection-start-column="50" selection-end-line="152" selection-end-column="50" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+                <element signature="e#82#108#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/Admin/Scholar/Paper.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="221">
+              <caret line="82" column="5" lean-forward="true" selection-start-line="82" selection-start-column="5" selection-end-line="87" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/Admin/News/Search.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="18" column="23" lean-forward="true" selection-start-line="18" selection-start-column="23" selection-end-line="18" selection-end-column="23" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/Admin/Common/Relation.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="164">
+              <caret line="105" column="7" lean-forward="true" selection-start-line="101" selection-start-column="5" selection-end-line="105" selection-end-column="7" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/Admin/Common/Salary.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="412">
+              <caret line="88" selection-start-line="88" selection-end-line="88" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/Admin/Basketball/Score.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="347">
+              <caret line="78" selection-start-line="78" selection-end-line="78" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/Admin/News/NewsModal.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="232">
+              <caret line="35" column="7" selection-start-line="35" selection-start-column="7" selection-end-line="35" selection-end-column="7" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/components/Admin/Basketball/BasicModal.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="390">
+              <caret line="56" column="7" selection-start-line="56" selection-start-column="7" selection-end-line="56" selection-end-column="7" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/Admin/Common/Honor.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="207">
+              <caret line="67" column="7" lean-forward="true" selection-start-line="63" selection-start-column="6" selection-end-line="67" selection-end-column="7" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -252,7 +235,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>expand</find>
       <find>honorDataObj</find>
       <find>starDataObj</find>
       <find>getStarData</find>
@@ -269,7 +251,6 @@
       <find>onSelectChange</find>
       <find>onClickClose</find>
       <find>hideModal</find>
-      <find>onClickSaveBasic</find>
       <find>confirm</find>
       <find>searchObj</find>
       <find>onActionTable</find>
@@ -282,6 +263,8 @@
       <find>starQueryInfo</find>
       <find>selectedRowObj</find>
       <find>queryInfo</find>
+      <find>onClickSaveBasic</find>
+      <find>like</find>
     </findStrings>
     <replaceStrings>
       <replace>直接访问</replace>
@@ -312,7 +295,6 @@
         <option value="$PROJECT_DIR$/src/components/Admin/Basketball/Relation.js" />
         <option value="$PROJECT_DIR$/src/components/Admin/Basketball/Honor.js" />
         <option value="$PROJECT_DIR$/src/components/Admin/Basketball/Salary.js" />
-        <option value="$PROJECT_DIR$/src/components/Admin/Basketball/Score.js" />
         <option value="$PROJECT_DIR$/src/components/Admin/News/newModal.js" />
         <option value="$PROJECT_DIR$/src/components/Occupation/index.less" />
         <option value="$PROJECT_DIR$/src/components/Category/index.less" />
@@ -321,12 +303,10 @@
         <option value="$PROJECT_DIR$/src/components/DateCon/index.less" />
         <option value="$PROJECT_DIR$/src/components/Category/index.js" />
         <option value="$PROJECT_DIR$/src/components/DateCon/index.js" />
-        <option value="$PROJECT_DIR$/src/components/Admin/Basketball/BasicModal.js" />
         <option value="$PROJECT_DIR$/src/components/UploadPicture/index.less" />
         <option value="$PROJECT_DIR$/src/components/UploadPicture/index.js" />
         <option value="$PROJECT_DIR$/src/pages/admin/news/index.less" />
         <option value="$PROJECT_DIR$/src/pages/admin/basketball/index.less" />
-        <option value="$PROJECT_DIR$/src/components/Admin/News/NewsModal.js" />
         <option value="$PROJECT_DIR$/src/components/Admin/Basketball/Search.js" />
         <option value="$PROJECT_DIR$/src/pages/admin/news/index.js" />
         <option value="$PROJECT_DIR$/src/pages/admin/basketball/grapqlCopy.js" />
@@ -353,13 +333,16 @@
         <option value="$PROJECT_DIR$/src/components/City/index.js" />
         <option value="$PROJECT_DIR$/src/components/Nationality/index.js" />
         <option value="$PROJECT_DIR$/src/components/Education/index.js" />
+        <option value="$PROJECT_DIR$/src/pages/admin/scholar/index.js" />
         <option value="$PROJECT_DIR$/src/pages/admin/basketball/index.js" />
+        <option value="$PROJECT_DIR$/src/components/Admin/Scholar/BasicModal.js" />
+        <option value="$PROJECT_DIR$/src/components/Admin/Scholar/Paper.js" />
         <option value="$PROJECT_DIR$/src/components/Admin/Common/Honor.js" />
         <option value="$PROJECT_DIR$/src/components/Admin/Common/Relation.js" />
-        <option value="$PROJECT_DIR$/src/components/Admin/Scholar/BasicModal.js" />
         <option value="$PROJECT_DIR$/src/components/Admin/Common/Salary.js" />
-        <option value="$PROJECT_DIR$/src/pages/admin/scholar/index.js" />
-        <option value="$PROJECT_DIR$/src/components/Admin/Scholar/Paper.js" />
+        <option value="$PROJECT_DIR$/src/components/Admin/Basketball/Score.js" />
+        <option value="$PROJECT_DIR$/src/components/Admin/News/NewsModal.js" />
+        <option value="$PROJECT_DIR$/src/components/Admin/Basketball/BasicModal.js" />
       </list>
     </option>
   </component>
@@ -380,8 +363,8 @@
     </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="180" />
-    <option name="y" value="69" />
+    <option name="x" value="217" />
+    <option name="y" value="23" />
     <option name="width" value="1680" />
     <option name="height" value="937" />
   </component>
@@ -698,15 +681,15 @@
       <workItem from="1554857636459" duration="25328000" />
       <workItem from="1554895864528" duration="160000" />
       <workItem from="1554898687871" duration="5134000" />
-      <workItem from="1554944516247" duration="22315000" />
+      <workItem from="1554944516247" duration="23634000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="560287000" />
+    <option name="totallyTimeSpent" value="561606000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="180" y="69" width="1680" height="937" extended-state="0" />
+    <frame x="217" y="23" width="1680" height="937" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.8659696" visible="true" weight="0.18384568" />
@@ -723,7 +706,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.3298893" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.027218934" />
+      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.28994083" />
       <window_info anchor="bottom" id="TypeScript" order="11" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -989,24 +972,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/admin/basketball/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#82#108#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Admin/Basketball/BasicModal.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-506">
-          <caret line="43" column="36" lean-forward="true" selection-start-line="43" selection-start-column="36" selection-end-line="43" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Nationality/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
@@ -1021,22 +986,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Admin/News/Search.js">
+    <entry file="file://$PROJECT_DIR$/src/pages/admin/news/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="23" lean-forward="true" selection-start-line="18" selection-start-column="23" selection-end-line="18" selection-end-column="23" />
+        <state relative-caret-position="266">
+          <caret line="180" column="90" lean-forward="true" selection-start-line="180" selection-end-line="181" />
           <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Admin/News/NewsModal.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="562">
-          <caret line="130" column="69" lean-forward="true" selection-start-line="130" selection-end-line="131" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
+            <element signature="e#82#108#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1051,61 +1006,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Admin/Basketball/Score.js">
+    <entry file="file://$PROJECT_DIR$/src/pages/admin/basketball/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="227">
-          <caret line="598" column="57" selection-start-line="598" selection-start-column="50" selection-end-line="598" selection-end-column="57" />
+        <state relative-caret-position="290">
+          <caret line="158" column="38" lean-forward="true" selection-start-line="158" selection-start-column="38" selection-end-line="158" selection-end-column="38" />
           <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Admin/Common/Relation.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1133">
-          <caret line="14" selection-start-line="14" selection-end-line="14" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Admin/Common/Honor.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2412">
-          <caret line="37" column="9" lean-forward="true" selection-start-line="37" selection-start-column="9" selection-end-line="37" selection-end-column="9" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Admin/Common/Salary.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="407">
-          <caret line="102" column="8" selection-start-line="102" selection-start-column="8" selection-end-line="105" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Admin/Scholar/BasicModal.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-30">
-          <caret line="109" column="22" selection-start-line="109" selection-start-column="17" selection-end-line="109" selection-end-column="22" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/admin/news/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="180" column="90" lean-forward="true" selection-start-line="180" selection-end-line="181" />
-          <folding>
+            <element signature="n#!!doc" expanded="true" />
             <element signature="e#82#108#0" expanded="true" />
           </folding>
         </state>
@@ -1113,8 +1019,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/admin/scholar/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3914">
-          <caret line="33" column="28" selection-start-line="33" selection-start-column="28" selection-end-line="33" selection-end-column="28" />
+        <state relative-caret-position="-3015">
+          <caret line="152" column="50" selection-start-line="152" selection-start-column="50" selection-end-line="152" selection-end-column="50" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="e#82#108#0" expanded="true" />
@@ -1124,11 +1030,88 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Admin/Scholar/Paper.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="538">
-          <caret line="418" column="41" lean-forward="true" selection-start-line="418" selection-start-column="41" selection-end-line="418" selection-end-column="41" />
+        <state relative-caret-position="221">
+          <caret line="82" column="5" lean-forward="true" selection-start-line="82" selection-start-column="5" selection-end-line="87" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Admin/News/Search.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="23" lean-forward="true" selection-start-line="18" selection-start-column="23" selection-end-line="18" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Admin/Common/Honor.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="67" column="7" lean-forward="true" selection-start-line="63" selection-start-column="6" selection-end-line="67" selection-end-column="7" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Admin/Common/Relation.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="164">
+          <caret line="105" column="7" lean-forward="true" selection-start-line="101" selection-start-column="5" selection-end-line="105" selection-end-column="7" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Admin/Common/Salary.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="412">
+          <caret line="88" selection-start-line="88" selection-end-line="88" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Admin/Basketball/Score.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="347">
+          <caret line="78" selection-start-line="78" selection-end-line="78" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Admin/Scholar/BasicModal.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="271">
+          <caret line="62" column="7" lean-forward="true" selection-start-line="58" selection-start-column="5" selection-end-line="62" selection-end-column="7" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Admin/News/NewsModal.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="232">
+          <caret line="35" column="7" selection-start-line="35" selection-start-column="7" selection-end-line="35" selection-end-column="7" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Admin/Basketball/BasicModal.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="56" column="7" selection-start-line="56" selection-start-column="7" selection-end-line="56" selection-end-column="7" />
         </state>
       </provider>
     </entry>

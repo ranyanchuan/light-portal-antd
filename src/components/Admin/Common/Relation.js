@@ -98,8 +98,13 @@ class Relation extends React.Component {
     // this.props.hideModal();
     e.preventDefault();
     this.props.form.validateFields((err, fieldsValue) => {
+
+      const { status, selectedRowObj,imageUrl } = this.state;
+      if (status === 'desc') {
+        this.onClickClose();
+        return;
+      }
       if (!err) {
-        const { status, selectedRowObj, imageUrl } = this.state;
         const { basicRow, onActionTable } = this.props;
 
         let payload = {};
