@@ -7,12 +7,20 @@
   }
   .layout {
     background-color: #fff;
+    overflow: hidden;
 
     .leftMenu {
       margin-top: 55px;
       position: fixed;
       z-index: 10;
+      overflow-y: scroll;
     }
+
+    .leftMenu:hover{
+      height: 100%;
+      overflow: scroll;
+    }
+
 
     :global {
       .ant-layout-sider {

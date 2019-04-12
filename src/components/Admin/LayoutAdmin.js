@@ -76,6 +76,7 @@ class LayoutAdmin extends React.Component {
           </div>
           <Layout className={styles.layout}>
             <div className={styles.leftMenu}>
+              <div>
               <Sider>
                 <Menu
                   onClick={this.onClickMenu}
@@ -116,6 +117,7 @@ class LayoutAdmin extends React.Component {
                   </SubMenu>
                 </Menu>
               </Sider>
+              </div>
             </div>
             <Content>
               <div className={styles.content}>
