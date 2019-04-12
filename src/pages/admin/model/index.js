@@ -323,7 +323,7 @@ class AdminFootball extends React.Component {
 
     return (
       <LayoutAdmin {...this.props}  selectKey={['model']} openKeys={["artist"]} >
-        <div className={styles.adminBasketball}>
+        <div className={styles.adminModel}>
           <Search
             onSearch={this.onSearchPannel}
             // 设置ref属性

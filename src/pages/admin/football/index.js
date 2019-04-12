@@ -8,9 +8,9 @@ import moment from 'moment';
 import { Button, Modal, Tabs, Table, Avatar } from 'antd';
 
 import LayoutAdmin from 'components/Admin/LayoutAdmin';
-import Search from 'components/Admin/Basketball/Search';
+import Search from 'components/Admin/Football/Search';
 import Score from 'components/Admin/Basketball/Score';
-import BasicModal from 'components/Admin/Basketball/BasicModal';
+import BasicModal from 'components/Admin/Football/BasicModal';
 
 import Relation from 'components/Admin/Common/Relation';
 import Honor from 'components/Admin/Common/Honor';
@@ -324,7 +324,7 @@ class AdminFootball extends React.Component {
 
     return (
       <LayoutAdmin {...this.props} selectKey={['football']} openKeys={["player"]}>
-        <div className={styles.adminBasketball}>
+        <div className={styles.adminSearchPannel}>
           <Search
             onSearch={this.onSearchPannel}
             // 设置ref属性

@@ -321,10 +321,9 @@ class AdminFile extends React.Component {
 
     const btnDisable = (starDataObj.list && starDataObj.list.length > 0) ? false : true;
 
-
     return (
       <LayoutAdmin {...this.props}  selectKey={['film']} openKeys={["artist"]}>
-        <div className={styles.adminBasketball}>
+        <div className={styles.adminFootball}>
           <Search
             onSearch={this.onSearchPannel}
             // 设置ref属性

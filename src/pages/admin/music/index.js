@@ -324,7 +324,7 @@ class AdminMusic extends React.Component {
 
     return (
       <LayoutAdmin {...this.props} selectKey={['music']} openKeys={["artist"]}>
-        <div className={styles.adminBasketball}>
+        <div className={styles.adminMusic}>
           <Search
             onSearch={this.onSearchPannel}
             // 设置ref属性
