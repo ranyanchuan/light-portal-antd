@@ -251,7 +251,7 @@ class ScoreModal extends React.Component {
   };
 
   render() {
-    const { form, scoreDataObj, basicRow } = this.props;
+    const { form, scoreDataObj, basicRow,loading } = this.props;
 
 
     const { visible, selectedRowKeys, selectedRowObj, status } = this.state;
@@ -615,6 +615,7 @@ class ScoreModal extends React.Component {
 
 
         <Table
+          loading={loading}
           size="small"
           rowKey={record => record._id}
           rowSelection={rowSelection}

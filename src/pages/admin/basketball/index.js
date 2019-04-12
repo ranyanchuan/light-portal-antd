@@ -35,6 +35,8 @@ class AdminBasketball extends React.Component {
     defaultActiveKey: 'salary', // 默认选中tab
     selectedRowKeys: [], // 选中行key
     selectedRowObj: {}, // 选中行对象
+    starTableLoading:false,
+
 
     loading: false,
     basModVis: false,
@@ -63,6 +65,8 @@ class AdminBasketball extends React.Component {
     const { table } = payload;
     // 清空主表信息
     const tempState = {};
+    const {defaultActiveKey}=this.state;
+    tempState[defaultActiveKey+'TableLoading']=true;
     // 如果子表请求清空子表
     if (table !== 'star') {
       tempState[table + 'DataObj'] = {};
@@ -77,7 +81,10 @@ class AdminBasketball extends React.Component {
       tempState.salaryDataObj = {};
       tempState.selectedRowKeys = []; // 选中行key
       tempState.selectedRowObj = {}; // 选中行对象
+      tempState[table+'TableLoading']=true;
+
     }
+
     this.setState(tempState);
 
     this.props.dispatch({
@@ -99,6 +106,8 @@ class AdminBasketball extends React.Component {
 
         }
         stateTemp[table + 'DataObj'] = response;
+        stateTemp[table+'TableLoading']=false;
+
         // 更新表格数据
         this.setState(stateTemp);
       },
@@ -313,7 +322,7 @@ class AdminBasketball extends React.Component {
 
   render() {
 
-    const { basModVis, selectedRowKeys, basModStatus, defaultActiveKey, selectedRowObj, starDataObj, scoreDataObj, relationDataObj, honorDataObj, salaryDataObj } = this.state;
+    const { starTableLoading,basModVis, selectedRowKeys, basModStatus, defaultActiveKey, selectedRowObj, starDataObj, scoreDataObj, relationDataObj, honorDataObj, salaryDataObj } = this.state;
     const rowSelection = {
       selectedRowKeys,
       onChange: this.onSelectChange,
@@ -340,6 +349,7 @@ class AdminBasketball extends React.Component {
             <Button onClick={this.onClickDel} disabled={btnDisable}>删除</Button>
           </div>
           <Table
+            loading={starTableLoading}
             size="small"
             rowKey={record => record._id}
             rowSelection={rowSelection}
@@ -364,6 +374,8 @@ class AdminBasketball extends React.Component {
                 basicRow={selectedRowObj}
                 showDelCon={this.showDelCon}
                 getTableData={this.getTableData}
+                loading={this.state.scoreTableLoading}
+
               />
             </TabPane>
             <TabPane tab="查看关系" key="relation">
@@ -373,6 +385,8 @@ class AdminBasketball extends React.Component {
                 showDelCon={this.showDelCon}
                 onActionTable={this.onActionTable}
                 getTableData={this.getTableData}
+                loading={this.state.relationTableLoading}
+
               />
             </TabPane>
             <TabPane tab="查看荣誉" key="honor">
@@ -382,6 +396,8 @@ class AdminBasketball extends React.Component {
                 showDelCon={this.showDelCon}
                 onActionTable={this.onActionTable}
                 getTableData={this.getTableData}
+                loading={this.state.honorTableLoading}
+
               />
             </TabPane>
             <TabPane tab="生涯薪金" key="salary">
@@ -391,6 +407,7 @@ class AdminBasketball extends React.Component {
                 showDelCon={this.showDelCon}
                 onActionTable={this.onActionTable}
                 getTableData={this.getTableData}
+                loading={this.state.salaryTableLoading}
               />
             </TabPane>
           </Tabs>

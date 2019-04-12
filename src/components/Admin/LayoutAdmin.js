@@ -80,7 +80,7 @@ class LayoutAdmin extends React.Component {
               <Sider>
                 <Menu
                   onClick={this.onClickMenu}
-                  style={{ width: 256 }}
+                  style={{ width: 200 }}
                   defaultSelectedKeys={selectKey}
                   defaultOpenKeys={openKeys}
                   mode="inline"

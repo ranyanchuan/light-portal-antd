@@ -34,6 +34,7 @@ class AdminFootball extends React.Component {
     defaultActiveKey: 'salary', // 默认选中tab
     selectedRowKeys: [], // 选中行key
     selectedRowObj: {}, // 选中行对象
+    starTableLoading:false,
 
     loading: false,
     basModVis: false,
@@ -77,6 +78,7 @@ class AdminFootball extends React.Component {
       tempState.selectedRowKeys = []; // 选中行key
       tempState.selectedRowObj = {}; // 选中行对象
     }
+    tempState[table+'TableLoading']=true;
     this.setState(tempState);
 
     this.props.dispatch({
@@ -98,6 +100,7 @@ class AdminFootball extends React.Component {
 
         }
         stateTemp[table + 'DataObj'] = response;
+        tempState[table+'TableLoading']=false;
         // 更新表格数据
         this.setState(stateTemp);
       },
@@ -312,7 +315,7 @@ class AdminFootball extends React.Component {
 
   render() {
 
-    const { basModVis, selectedRowKeys, basModStatus, defaultActiveKey, selectedRowObj, starDataObj, scoreDataObj, relationDataObj, honorDataObj, salaryDataObj } = this.state;
+    const { basModVis, selectedRowKeys, basModStatus, defaultActiveKey, selectedRowObj, starDataObj, scoreDataObj, relationDataObj, honorDataObj, salaryDataObj,starTableLoading } = this.state;
     const rowSelection = {
       selectedRowKeys,
       onChange: this.onSelectChange,
@@ -339,6 +342,7 @@ class AdminFootball extends React.Component {
             <Button onClick={this.onClickDel} disabled={btnDisable}>删除</Button>
           </div>
           <Table
+            loading={starTableLoading}
             size="small"
             rowKey={record => record._id}
             rowSelection={rowSelection}

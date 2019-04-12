@@ -158,7 +158,7 @@ class Salary extends React.Component {
 
 
   render() {
-    const { form, salaryDataObj, basicRow } = this.props;
+    const { form, salaryDataObj, basicRow,loading } = this.props;
     const { visible, selectedRowKeys, selectedRowObj, status } = this.state;
     const { getFieldDecorator } = form;
 
@@ -279,6 +279,7 @@ class Salary extends React.Component {
         <Table
           rowKey={record => record._id}
           columns={this.columns}
+          loading={loading}
           dataSource={salaryDataObj.list ? salaryDataObj.list : []}
           pagination={{
             current: salaryDataObj.pageIndex + 1,

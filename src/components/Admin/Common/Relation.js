@@ -170,7 +170,7 @@ class Relation extends React.Component {
 
 
   render() {
-    const { form, relationDataObj, basicRow } = this.props;
+    const { form, relationDataObj, basicRow,loading } = this.props;
     const { visible, selectedRowKeys, imageUrl, selectedRowObj, status } = this.state;
 
     const { getFieldDecorator } = form;
@@ -321,6 +321,7 @@ class Relation extends React.Component {
 
 
         <Table
+          loading={loading}
           columns={this.columns}
           rowKey={record => record._id}
           dataSource={(relationDataObj && relationDataObj.list) ? relationDataObj.list : []}

@@ -138,7 +138,7 @@ class Honor extends React.Component {
 
 
   render() {
-    const { form, honorDataObj, basicRow } = this.props;
+    const { form, honorDataObj, basicRow,loading } = this.props;
     const { visible, selectedRowKeys, selectedRowObj, status } = this.state;
 
     const { getFieldDecorator } = form;
@@ -227,6 +227,7 @@ class Honor extends React.Component {
           </Form>
         </Modal>
         <Table
+          loading={loading}
           rowKey={record => record._id}
           columns={this.columns}
           dataSource={(honorDataObj && honorDataObj.list) ? honorDataObj.list : []}
