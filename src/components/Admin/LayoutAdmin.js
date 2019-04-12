@@ -90,21 +90,16 @@ class LayoutAdmin extends React.Component {
                   <SubMenu key="player" title={<span><span className="iconfont icon-yundong"/><span>远动员</span></span>}>
                     <Menu.Item key="basketball"><span className="iconfont icon-lanqiu"/>篮球</Menu.Item>
                     <Menu.Item key="football"><span className="iconfont icon-svggeshi-"/>足球</Menu.Item>
-                    <Menu.Item key="乒乓球"><span className="iconfont icon-PingPong"/>乒乓球</Menu.Item>
-                    <Menu.Item key="羽毛球"><span className="iconfont icon-yumaoqiu"/>羽毛球</Menu.Item>
-                    <Menu.Item key="橄榄球"><span className="iconfont icon-ganlanqiu"/>橄榄球</Menu.Item>
-                    <Menu.Item key="网球"><span className="iconfont icon-wangqiu"/>网球</Menu.Item>
-                    <Menu.Item key="田径"><span className="iconfont icon-tianjing"/>田径</Menu.Item>
-                    <Menu.Item key="排球"><span className="iconfont icon-paiqiu"/>排球</Menu.Item>
-                    <Menu.Item key="棒球"><span className="iconfont icon-bangqiu"/>棒球</Menu.Item>
-                    <Menu.Item key="台球"><span className="iconfont icon-taiqiu"/>台球</Menu.Item>
-                    <Menu.Item key="游泳"><span className="iconfont icon-youyong"/>游泳</Menu.Item>
-                    <Menu.Item key="骑行"><span className="iconfont icon-qixing"/>骑行</Menu.Item>
-                    <Menu.Item key="射击"><span className="iconfont icon-sheji"/>射击</Menu.Item>
-                    <Menu.Item key="体操"><span className="iconfont icon-ticao"/>体操</Menu.Item>
-                    <Menu.Item key="柔道"><span className="iconfont icon-roudao"/>柔道</Menu.Item>
-                    <Menu.Item key="举重"><span className="iconfont icon-juzhong"/>举重</Menu.Item>
-                    <Menu.Item key="拳道"><span className="iconfont icon-quanji"/>拳道</Menu.Item>
+                    <Menu.Item key="pingpong"><span className="iconfont icon-PingPong"/>乒乓球</Menu.Item>
+                    <Menu.Item key="badminton"><span className="iconfont icon-yumaoqiu"/>羽毛球</Menu.Item>
+                    <Menu.Item key="rugby"><span className="iconfont icon-ganlanqiu"/>橄榄球</Menu.Item>
+                    <Menu.Item key="tennis"><span className="iconfont icon-wangqiu"/>网球</Menu.Item>
+                    <Menu.Item key="volleyball"><span className="iconfont icon-paiqiu"/>排球</Menu.Item>
+                    <Menu.Item key="baseball"><span className="iconfont icon-bangqiu"/>棒球</Menu.Item>
+                    <Menu.Item key="billiardball"><span className="iconfont icon-taiqiu"/>台球</Menu.Item>
+                    <Menu.Item key="swim"><span className="iconfont icon-youyong"/>游泳</Menu.Item>
+                    <Menu.Item key="shoot"><span className="iconfont icon-sheji"/>射击</Menu.Item>
+                    <Menu.Item key="weightlifting"><span className="iconfont icon-juzhong"/>举重</Menu.Item>
                   </SubMenu>
 
 
@@ -115,9 +110,9 @@ class LayoutAdmin extends React.Component {
                   </SubMenu>
                   <SubMenu key="company" title={<span><span className="iconfont icon-qi"/><span>企业</span></span>}>
                     <Menu.Item key="互联网"><span className="iconfont icon-hulianwang"/>互联网</Menu.Item>
-                    <Menu.Item key="金融"><span className="iconfont icon-jinrong"/>金融</Menu.Item>
-                    <Menu.Item key="智能制造"><span className="iconfont icon-zhinengzhizao"/>智能制造</Menu.Item>
-                    <Menu.Item key="土木工程"><span className="iconfont icon-jianzhu"/>土木工程</Menu.Item>
+                    {/*<Menu.Item key="金融"><span className="iconfont icon-jinrong"/>金融</Menu.Item>*/}
+                    {/*<Menu.Item key="智能制造"><span className="iconfont icon-zhinengzhizao"/>智能制造</Menu.Item>*/}
+                    {/*<Menu.Item key="土木工程"><span className="iconfont icon-jianzhu"/>土木工程</Menu.Item>*/}
                   </SubMenu>
                 </Menu>
               </Sider>

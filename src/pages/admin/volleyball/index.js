@@ -8,9 +8,9 @@ import moment from 'moment';
 import { Button, Modal, Tabs, Table, Avatar } from 'antd';
 
 import LayoutAdmin from 'components/Admin/LayoutAdmin';
-import Search from 'components/Admin/Film/Search';
+import Search from 'components/Admin/Football/Search';
 import Score from 'components/Admin/Basketball/Score';
-import BasicModal from 'components/Admin/Film/BasicModal';
+import BasicModal from 'components/Admin/Football/BasicModal';
 
 import Relation from 'components/Admin/Common/Relation';
 import Honor from 'components/Admin/Common/Honor';
@@ -27,7 +27,7 @@ const ruleDate = 'YYYY-MM-DD';
   common: state.common,
 }))
 
-class AdminFile extends React.Component {
+class AdminFootball extends React.Component {
 
   state = {
     searchObj: {}, //搜索面板数据
@@ -321,9 +321,10 @@ class AdminFile extends React.Component {
 
     const btnDisable = (starDataObj.list && starDataObj.list.length > 0) ? false : true;
 
+
     return (
-      <LayoutAdmin {...this.props}  selectKey={['film']} openKeys={["artist"]}>
-        <div className={styles.adminFootball}>
+      <LayoutAdmin {...this.props} selectKey={['volleyball']} openKeys={["player"]}>
+        <div className={styles.adminSearchPannel}>
           <Search
             onSearch={this.onSearchPannel}
             // 设置ref属性
@@ -405,5 +406,5 @@ class AdminFile extends React.Component {
   }
 }
 
-export default AdminFile;
+export default AdminFootball;
 
