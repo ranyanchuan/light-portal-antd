@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { Form, Row, Col, Input, Button } from 'antd';
+import { Form, Row, Col, Input, Button, InputNumber } from 'antd';
 import Organization from 'components/Organization/football';
-import Team from 'components/Team/football';
+import Constellation from 'components/Constellation';
 import Gender from 'components/Gender';
 import Nationality from 'components/Nationality';
 import City from 'components/City';
@@ -65,14 +65,14 @@ class SearchPannel extends React.Component {
           className="ant-advanced-search-form"
           onSubmit={this.handleSearch}
         >
-          <Row gutter={24}>
+          <Row>
             <Col span={8}>
               <Form.Item
                 {...formItemLayout}
                 label="名字"
               >
                 {getFieldDecorator('name_cn')(
-                  <Input placeholder="请输入中文姓名"/>,
+                  <Input placeholder="请输入名字"/>,
                 )}
               </Form.Item>
             </Col>
@@ -82,14 +82,20 @@ class SearchPannel extends React.Component {
 
 
             <Col span={8}>
-              <Organization
-                formItemLayout={formItemLayout}
-                form={form}
-              />
+              <Form.Item
+                {...formItemLayout}
+                label="年龄"
+              >
+                {getFieldDecorator('age')(
+                  <InputNumber min={15} max={100} placeholder="请输入或者选择年龄" style={{ width: '100%' }}/>,
+                )}
+              </Form.Item>
             </Col>
+          </Row>
 
+          <Row>
             <Col span={8}>
-              <Team
+              <Constellation
                 formItemLayout={formItemLayout}
                 form={form}
               />
@@ -101,8 +107,8 @@ class SearchPannel extends React.Component {
             <Col span={8}>
               <City formItemLayout={formItemLayout} form={form}/>
             </Col>
-
           </Row>
+
           <Row>
             <Col span={24} style={{ textAlign: 'right' }}>
               <Button type="primary" htmlType="submit">查询</Button>

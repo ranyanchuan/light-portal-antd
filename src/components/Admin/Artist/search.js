@@ -1,20 +1,18 @@
 import React from 'react';
 
-import { Form, Row, Col, Input, Button, Select } from 'antd';
+import { Form, Row, Col, Input, Button } from 'antd';
+import Domain from 'components/Domain/artist';
+import Constellation from 'components/Constellation';
+import Gender from 'components/Gender';
+import Nationality from 'components/Nationality';
+import City from 'components/City';
 
-import Domain from 'components/Domain';
-import Category from 'components/Category';
-import Tag from 'components/Tag/news';
-import DateCon from 'components/DateCon';
 
 import styles from './index.less';
 
 @Form.create()
 
-class Search extends React.Component {
-  state = {
-    expand: false,
-  };
+class SearchPannel extends React.Component {
 
   componentDidMount() {
     // 在父组件上绑定子组件方法
@@ -53,64 +51,52 @@ class Search extends React.Component {
 
 
   render() {
-
     const { form } = this.props;
-    const { getFieldDecorator } = form;
-
     const formItemLayout = {
       labelCol: { sm: { span: 4 } },
       wrapperCol: { sm: { span: 19 } },
     };
-
+    const { getFieldDecorator } = form;
     return (
-      <div className={styles.newSearch}>
+      <div className={styles.adminSearchPannel}>
         <Form
           className="ant-advanced-search-form"
           onSubmit={this.handleSearch}
         >
-
-          <Row gutter={24}>
-            <Col span={8}>
-              <Form.Item
-                {...formItemLayout}
-                label="作者"
-              >
-                <Select
-                  mode="tags"
-                  style={{ width: '100%' }}
-                  placeholder="请输入作者姓名"
-                >
-                </Select>
-              </Form.Item>
-            </Col>
-
-            <Col span={8}>
-              <Category formItemLayout={formItemLayout} form={form}/>
-            </Col>
-
-            <Col span={8}>
-              <Domain formItemLayout={formItemLayout} form={form}/>
-            </Col>
-          </Row>
-
-
           <Row>
             <Col span={8}>
               <Form.Item
                 {...formItemLayout}
-                label="标题"
+                label="名字"
               >
-                {getFieldDecorator('title')(
-                  <Input placeholder="请输入标题"/>,
+                {getFieldDecorator('name_cn')(
+                  <Input placeholder="请输入名字"/>,
                 )}
               </Form.Item>
             </Col>
             <Col span={8}>
-              <DateCon formItemLayout={formItemLayout} form={form}/>
+              <Gender formItemLayout={formItemLayout} form={form}/>
+            </Col>
+
+
+            <Col span={8}>
+              <Domain formItemLayout={formItemLayout} form={form} />
+            </Col>
+          </Row>
+
+          <Row>
+            <Col span={8}>
+              <Constellation
+                formItemLayout={formItemLayout}
+                form={form}
+              />
+            </Col>
+            <Col span={8}>
+              <Nationality formItemLayout={formItemLayout} form={form}/>
             </Col>
 
             <Col span={8}>
-              <Tag formItemLayout={formItemLayout} form={form}/>
+              <City formItemLayout={formItemLayout} form={form}/>
             </Col>
           </Row>
 
@@ -126,4 +112,4 @@ class Search extends React.Component {
   }
 }
 
-export default Search;
+export default SearchPannel;

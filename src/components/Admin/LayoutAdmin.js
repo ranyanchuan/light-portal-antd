@@ -87,6 +87,7 @@ class LayoutAdmin extends React.Component {
                 >
                   <Menu.Item key="news"><Icon type="fire"/>新闻</Menu.Item>
                   <Menu.Item key="scholar"><span className="iconfont icon-zhuanjiaxuezhe"/>学者</Menu.Item>
+                  <Menu.Item key="artist"><span className="iconfont icon-yiren"/>艺人</Menu.Item>
 
                   <SubMenu key="player" title={<span><span className="iconfont icon-yundong"/><span>远动员</span></span>}>
                     <Menu.Item key="basketball"><span className="iconfont icon-lanqiu"/>篮球</Menu.Item>
@@ -104,11 +105,11 @@ class LayoutAdmin extends React.Component {
                   </SubMenu>
 
 
-                  <SubMenu key="artist" title={<span><span className="iconfont icon-yiren"/><span>艺人</span></span>}>
-                    <Menu.Item key="film"><span className="iconfont icon-movie_df"/>电影</Menu.Item>
-                    <Menu.Item key="music"><span className="iconfont icon-yinyue"/>音乐</Menu.Item>
-                    <Menu.Item key="model"><span className="iconfont icon-moteshezhi-"/>模特</Menu.Item>
-                  </SubMenu>
+                  {/*<SubMenu key="artist" title={<span><span className="iconfont icon-yiren"/><span>艺人</span></span>}>*/}
+                    {/*<Menu.Item key="film"><span className="iconfont icon-movie_df"/>电影</Menu.Item>*/}
+                    {/*<Menu.Item key="music"><span className="iconfont icon-yinyue"/>音乐</Menu.Item>*/}
+                    {/*<Menu.Item key="model"><span className="iconfont icon-moteshezhi-"/>模特</Menu.Item>*/}
+                  {/*</SubMenu>*/}
                   <SubMenu key="company" title={<span><span className="iconfont icon-qi"/><span>企业</span></span>}>
                     <Menu.Item key="互联网"><span className="iconfont icon-hulianwang"/>互联网</Menu.Item>
                     {/*<Menu.Item key="金融"><span className="iconfont icon-jinrong"/>金融</Menu.Item>*/}
