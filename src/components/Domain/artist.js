@@ -18,11 +18,11 @@ class Domain extends React.Component {
     const { getFieldDecorator } = form;
 
     const tags = [
-      {value:'actor',title:'演员'},
-      {value:'singer',title:'歌手'},
-      {value:'host',title:'主持人'},
-      {value:'director',title:'导演'},
-      {value:'model',title:'模特'},
+      {value:'演员',title:'演员'},
+      {value:'歌手',title:'歌手'},
+      {value:'主持人',title:'主持人'},
+      {value:'导演',title:'导演'},
+      {value:'模特',title:'模特'},
     ];
     const children = [];
     for (const item of tags) {

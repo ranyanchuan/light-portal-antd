@@ -5,7 +5,7 @@
 import React from 'react';
 import { connect } from 'dva';
 import moment from 'moment';
-import { Button, Modal, Tabs, Table, Avatar } from 'antd';
+import { Button, Modal, Tabs, Table, Avatar, Tag } from 'antd';
 
 import LayoutAdmin from 'components/Admin/LayoutAdmin';
 import Search from 'components/Admin/Artist/Search';
@@ -48,12 +48,12 @@ class AdminArtist extends React.Component {
 
 
   componentDidMount() {
-    this.getTableData({ table: 'star' });
+    this.getTableData({ table: 'star',category:['artist'] });
   }
 
   // 搜索面板值
   onSearchPannel = (param) => {
-    this.getTableData({ ...param, table: 'star' });
+    this.getTableData({ ...param, table: 'star',category:['artist'] });
   };
 
 
@@ -62,6 +62,8 @@ class AdminArtist extends React.Component {
     const { table } = payload;
     // 清空主表信息
     const tempState = {};
+    const {defaultActiveKey}=this.state;
+    tempState[defaultActiveKey+'TableLoading']=true;
     // 如果子表请求清空子表
     if (table !== 'star') {
       tempState[table + 'DataObj'] = {};
@@ -76,6 +78,7 @@ class AdminArtist extends React.Component {
       tempState.salaryDataObj = {};
       tempState.selectedRowKeys = []; // 选中行key
       tempState.selectedRowObj = {}; // 选中行对象
+      tempState[table+'TableLoading']=true;
     }
     this.setState(tempState);
 
@@ -98,6 +101,7 @@ class AdminArtist extends React.Component {
 
         }
         stateTemp[table + 'DataObj'] = response;
+        stateTemp[table+'TableLoading']=false;
         // 更新表格数据
         this.setState(stateTemp);
       },
@@ -128,6 +132,7 @@ class AdminArtist extends React.Component {
           if (table === 'star') {
             const searchObj = this.child.getSearchValue();
             param = searchObj;
+            param.category=['artist'];
           }
           param.table = table;
 
@@ -155,8 +160,7 @@ class AdminArtist extends React.Component {
     if (basModStatus === 'add') {
       payload = data;
       payload.type = 'common/add';
-      payload.domain = ['basketball'];
-      payload.category = ['player'];
+      payload.category = ['artist'];
     }
     // 添加操作表名
     payload.table = 'star';
@@ -232,10 +236,14 @@ class AdminArtist extends React.Component {
       key: 'constellation',
     },
     {
-      title: '球队',
-      dataIndex: 'team',
-      key: 'team',
-      render: text => <span>{text && Array.isArray(text) ? text.join(' | ') : ''}</span>,
+      title: '领域',
+      dataIndex: 'domain',
+      key: 'domain',
+      render: tags => (
+        <span>
+        {tags && tags.length > 0 && tags.slice(0, 3).map(tag => <Tag color="blue" key={tag}>{tag}</Tag>)}
+        </span>
+      ),
     },
     {
       title: '学校',
@@ -305,13 +313,13 @@ class AdminArtist extends React.Component {
       size: pageSize,
     };
     // 获取分页数据
-    this.getTableData({ ...param, ...searchObj, table: 'star' });
+    this.getTableData({ ...param, ...searchObj, table: 'star',category:['artist'] });
   };
 
 
   render() {
 
-    const { basModVis, selectedRowKeys, basModStatus, defaultActiveKey, selectedRowObj, starDataObj, scoreDataObj, relationDataObj, honorDataObj, salaryDataObj } = this.state;
+    const { starTableLoading,basModVis, selectedRowKeys, basModStatus, defaultActiveKey, selectedRowObj, starDataObj, scoreDataObj, relationDataObj, honorDataObj, salaryDataObj } = this.state;
     const rowSelection = {
       selectedRowKeys,
       onChange: this.onSelectChange,
@@ -337,6 +345,7 @@ class AdminArtist extends React.Component {
             <Button onClick={this.onClickDel} disabled={btnDisable}>删除</Button>
           </div>
           <Table
+            loading={starTableLoading}
             size="small"
             rowKey={record => record._id}
             rowSelection={rowSelection}
@@ -354,7 +363,7 @@ class AdminArtist extends React.Component {
 
           {/*子表数据*/}
           <Tabs defaultActiveKey={defaultActiveKey} onChange={this.onChangeTab}>
-            <TabPane tab="影视作品" key="score">
+            <TabPane tab="影视作品" key="film">
               <Score
                 scoreDataObj={scoreDataObj}
                 onActionTable={this.onActionTable}
@@ -363,6 +372,48 @@ class AdminArtist extends React.Component {
                 getTableData={this.getTableData}
               />
             </TabPane>
+            <TabPane tab="音乐作品" key="music">
+              <Score
+                scoreDataObj={scoreDataObj}
+                onActionTable={this.onActionTable}
+                basicRow={selectedRowObj}
+                showDelCon={this.showDelCon}
+                getTableData={this.getTableData}
+              />
+            </TabPane>
+
+            <TabPane tab="模特作品" key="model">
+              <Score
+                scoreDataObj={scoreDataObj}
+                onActionTable={this.onActionTable}
+                basicRow={selectedRowObj}
+                showDelCon={this.showDelCon}
+                getTableData={this.getTableData}
+              />
+            </TabPane>
+
+
+            <TabPane tab="主持节目" key="host">
+              <Score
+                scoreDataObj={scoreDataObj}
+                onActionTable={this.onActionTable}
+                basicRow={selectedRowObj}
+                showDelCon={this.showDelCon}
+                getTableData={this.getTableData}
+              />
+            </TabPane>
+
+            <TabPane tab="导演作品" key="director">
+              <Score
+                scoreDataObj={scoreDataObj}
+                onActionTable={this.onActionTable}
+                basicRow={selectedRowObj}
+                showDelCon={this.showDelCon}
+                getTableData={this.getTableData}
+              />
+            </TabPane>
+
+
             <TabPane tab="查看关系" key="relation">
               <Relation
                 relationDataObj={relationDataObj}
