@@ -10,6 +10,7 @@ import { Button, Modal, Tabs, Table, Avatar, Tag } from 'antd';
 import LayoutAdmin from 'components/Admin/LayoutAdmin';
 import Search from 'components/Admin/Artist/Search';
 import Actor from 'components/Admin/Artist/Actor';
+import Singer from 'components/Admin/Artist/Singer';
 import Model from 'components/Admin/Artist/Model';
 import BasicModal from 'components/Admin/Artist/BasicModal';
 
@@ -37,7 +38,7 @@ class AdminArtist extends React.Component {
 
   state = {
     searchObj: {}, //搜索面板数据
-    defaultActiveKey: 'model', // 默认选中tab
+    defaultActiveKey: 'honor', // 默认选中tab
     selectedRowKeys: [], // 选中行key
     selectedRowObj: {}, // 选中行对象
 
@@ -46,6 +47,8 @@ class AdminArtist extends React.Component {
     basModStatus: 'add',
 
     actorDataObj: {}, // 影视数据
+    modelDataObj: {}, // 模特数据
+    singerDataObj: {}, // 音乐数据
     scoreDataObj: {}, // 比分数据
     relationDataObj: {}, // 关系数据
     starDataObj: {}, // 基本数据
@@ -350,7 +353,7 @@ class AdminArtist extends React.Component {
 
     const { starTableLoading, basModVis, selectedRowKeys,
       basModStatus, defaultActiveKey, selectedRowObj,
-      starDataObj,actorDataObj, modelDataObj,scoreDataObj,
+      starDataObj,actorDataObj, modelDataObj,singerDataObj,scoreDataObj,
       relationDataObj, honorDataObj, salaryDataObj
     } = this.state;
     const rowSelection = {
@@ -413,12 +416,13 @@ class AdminArtist extends React.Component {
 
             {domain && domain.includes('歌手') &&
             <TabPane tab="音乐作品" key="singer">
-              <Score
-                scoreDataObj={scoreDataObj}
+              <Singer
+                singerDataObj={singerDataObj}
                 onActionTable={this.onActionTable}
                 basicRow={selectedRowObj}
-                showDelCon={this.showDelCon}
                 getTableData={this.getTableData}
+                showDelCon={this.showDelCon}
+                loading={this.state.singerTableLoading}
               />
             </TabPane>
             }
