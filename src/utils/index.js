@@ -35,17 +35,40 @@ export function randomNum(m, n) {
 }
 
 
-export  function clearQuotationMark(data) {
+export function clearQuotationMark(data) {
   // json的值将被临时储存在这个变量中
-  let keyValue = "";
+  let keyValue = '';
   // 处理好的json字符串
   for (let key in data) {
-    keyValue += key + ':' +  JSON.stringify(data[key]) + ',';
+    keyValue += key + ':' + JSON.stringify(data[key]) + ',';
   }
   // 去除最后一个逗号
-  keyValue = keyValue.substring(0,keyValue.length - 1);
-  return  "{" + keyValue + "}";
+  keyValue = keyValue.substring(0, keyValue.length - 1);
+  return '{' + keyValue + '}';
 
+}
+
+
+//
+export function domain2key(data) {
+  const artist = {
+    'actor': '演员',
+    'singer': '歌手',
+    'host': '主持人',
+    'director': '导演',
+    'model': '模特',
+  };
+
+  const result=[];
+  for (let domain of data) {
+    for (const item in artist) {
+      if (artist[item] === domain) {
+        domain = item;
+      }
+    }
+    result.push(domain);
+  }
+  return result;
 }
 
 

@@ -231,8 +231,6 @@ class Relation extends React.Component {
         >
           <Form onSubmit={this.handleSubmit}>
             <Row>
-
-
               <Col span={24}>
                 <Form.Item
                   {...formItemLayout}

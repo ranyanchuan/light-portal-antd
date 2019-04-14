@@ -36,6 +36,7 @@ class Honor extends React.Component {
   };
 
   // 展示弹框
+  // 展示弹框
   onShowModal = (status) => {
     this.setState({ visible: true, status });
   };

@@ -66,8 +66,6 @@ class LayoutAdmin extends React.Component {
     // const { selectKey } = this.state;
     const { openKeys, selectKey } = this.state;
 
-    console.log('openKeys,selectKey', openKeys, selectKey);
-
     return (
       <div className={styles.admin}>
         <Layout>

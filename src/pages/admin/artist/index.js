@@ -9,12 +9,17 @@ import { Button, Modal, Tabs, Table, Avatar, Tag } from 'antd';
 
 import LayoutAdmin from 'components/Admin/LayoutAdmin';
 import Search from 'components/Admin/Artist/Search';
-import Score from 'components/Admin/Basketball/Score';
+import Actor from 'components/Admin/Artist/Actor';
 import BasicModal from 'components/Admin/Artist/BasicModal';
 
 import Relation from 'components/Admin/Common/Relation';
 import Honor from 'components/Admin/Common/Honor';
 import Salary from 'components/Admin/Common/Salary';
+import Score from 'components/Admin/Basketball/Score';
+
+
+import { domain2key } from 'utils';
+
 
 import styles from './index.less';
 
@@ -31,7 +36,7 @@ class AdminArtist extends React.Component {
 
   state = {
     searchObj: {}, //搜索面板数据
-    defaultActiveKey: 'salary', // 默认选中tab
+    defaultActiveKey: 'honor', // 默认选中tab
     selectedRowKeys: [], // 选中行key
     selectedRowObj: {}, // 选中行对象
 
@@ -39,6 +44,7 @@ class AdminArtist extends React.Component {
     basModVis: false,
     basModStatus: 'add',
 
+    actorDataObj: {}, // 影视数据
     scoreDataObj: {}, // 比分数据
     relationDataObj: {}, // 关系数据
     starDataObj: {}, // 基本数据
@@ -48,12 +54,12 @@ class AdminArtist extends React.Component {
 
 
   componentDidMount() {
-    this.getTableData({ table: 'star',category:['artist'] });
+    this.getTableData({ table: 'star', category: ['artist'] });
   }
 
   // 搜索面板值
   onSearchPannel = (param) => {
-    this.getTableData({ ...param, table: 'star',category:['artist'] });
+    this.getTableData({ ...param, table: 'star', category: ['artist'] });
   };
 
 
@@ -62,8 +68,8 @@ class AdminArtist extends React.Component {
     const { table } = payload;
     // 清空主表信息
     const tempState = {};
-    const {defaultActiveKey}=this.state;
-    tempState[defaultActiveKey+'TableLoading']=true;
+    const { defaultActiveKey } = this.state;
+    tempState[defaultActiveKey + 'TableLoading'] = true;
     // 如果子表请求清空子表
     if (table !== 'star') {
       tempState[table + 'DataObj'] = {};
@@ -78,7 +84,7 @@ class AdminArtist extends React.Component {
       tempState.salaryDataObj = {};
       tempState.selectedRowKeys = []; // 选中行key
       tempState.selectedRowObj = {}; // 选中行对象
-      tempState[table+'TableLoading']=true;
+      tempState[table + 'TableLoading'] = true;
     }
     this.setState(tempState);
 
@@ -89,6 +95,7 @@ class AdminArtist extends React.Component {
 
         const { list = [] } = response;
         const stateTemp = {};
+
         // 更新 table 数据
         if (list.length > 0 && table === 'star') {
           const { _id } = list[0];
@@ -96,12 +103,13 @@ class AdminArtist extends React.Component {
           stateTemp.selectedRowObj = list[0];
 
           const { defaultActiveKey } = this.state;
-          const param = { table: defaultActiveKey, basicId: _id };
+          const param = { table:defaultActiveKey, basicId: _id };
+
           this.getTableData(param);
 
         }
         stateTemp[table + 'DataObj'] = response;
-        stateTemp[table+'TableLoading']=false;
+        stateTemp[table + 'TableLoading'] = false;
         // 更新表格数据
         this.setState(stateTemp);
       },
@@ -132,7 +140,7 @@ class AdminArtist extends React.Component {
           if (table === 'star') {
             const searchObj = this.child.getSearchValue();
             param = searchObj;
-            param.category=['artist'];
+            param.category = ['artist'];
           }
           param.table = table;
 
@@ -256,11 +264,31 @@ class AdminArtist extends React.Component {
 
   // 更新选中的数据
   onSelectChange = (selectedRowKeys, selectedRowObjs) => {
-    this.setState({ selectedRowKeys, selectedRowObj: selectedRowObjs[0] });
+
 
     //  更改主表信息
-    const { defaultActiveKey } = this.state;
-    const param = { table: defaultActiveKey, basicId: selectedRowObjs[0]._id };
+    let childrenTable = '';
+
+    let { defaultActiveKey } = this.state;
+    const {domain}=selectedRowObjs[0];
+    const commonTable = ['relation',"honor","salary"];
+    // 判断是否公有
+    if (commonTable.includes(defaultActiveKey)) {
+      childrenTable = defaultActiveKey;
+    } else {
+      // 判断职业
+      const tableNameArray = domain2key(domain);
+      if (tableNameArray.includes(defaultActiveKey)) {
+        childrenTable = defaultActiveKey;
+      } else {
+        // 默认第一个
+        childrenTable = tableNameArray[0];
+      }
+    }
+
+    this.setState({defaultActiveKey: childrenTable, selectedRowKeys, selectedRowObj: selectedRowObjs[0] });
+
+    const param = { table: childrenTable, basicId: selectedRowObjs[0]._id };
     this.getTableData(param);
 
   };
@@ -313,13 +341,13 @@ class AdminArtist extends React.Component {
       size: pageSize,
     };
     // 获取分页数据
-    this.getTableData({ ...param, ...searchObj, table: 'star',category:['artist'] });
+    this.getTableData({ ...param, ...searchObj, table: 'star', category: ['artist'] });
   };
 
 
   render() {
 
-    const { starTableLoading,basModVis, selectedRowKeys, basModStatus, defaultActiveKey, selectedRowObj, starDataObj, scoreDataObj, relationDataObj, honorDataObj, salaryDataObj } = this.state;
+    const { starTableLoading, basModVis, selectedRowKeys, basModStatus, defaultActiveKey, selectedRowObj, starDataObj,actorDataObj, scoreDataObj, relationDataObj, honorDataObj, salaryDataObj } = this.state;
     const rowSelection = {
       selectedRowKeys,
       onChange: this.onSelectChange,
@@ -328,8 +356,10 @@ class AdminArtist extends React.Component {
 
     const btnDisable = (starDataObj.list && starDataObj.list.length > 0) ? false : true;
 
+    const { domain } = selectedRowObj;
+
     return (
-      <LayoutAdmin {...this.props}  selectKey={['artist']} openKeys={["player"]}>
+      <LayoutAdmin {...this.props} selectKey={['artist']} openKeys={['player']}>
         <div className={styles.adminArtist}>
           <Search
             onSearch={this.onSearchPannel}
@@ -363,25 +393,30 @@ class AdminArtist extends React.Component {
 
           {/*子表数据*/}
           <Tabs defaultActiveKey={defaultActiveKey} onChange={this.onChangeTab}>
-            <TabPane tab="影视作品" key="film">
-              <Score
-                scoreDataObj={scoreDataObj}
+            {domain && domain.includes('演员') &&
+            <TabPane tab="影视作品" key="actor">
+              <Actor
+                actorDataObj={actorDataObj}
                 onActionTable={this.onActionTable}
                 basicRow={selectedRowObj}
-                showDelCon={this.showDelCon}
                 getTableData={this.getTableData}
               />
             </TabPane>
-            <TabPane tab="音乐作品" key="music">
-              <Score
-                scoreDataObj={scoreDataObj}
-                onActionTable={this.onActionTable}
-                basicRow={selectedRowObj}
-                showDelCon={this.showDelCon}
-                getTableData={this.getTableData}
-              />
-            </TabPane>
+            }
 
+            {domain && domain.includes('歌手') &&
+            <TabPane tab="音乐作品" key="singer">
+              <Score
+                scoreDataObj={scoreDataObj}
+                onActionTable={this.onActionTable}
+                basicRow={selectedRowObj}
+                showDelCon={this.showDelCon}
+                getTableData={this.getTableData}
+              />
+            </TabPane>
+            }
+
+            {domain && domain.includes('模特') &&
             <TabPane tab="模特作品" key="model">
               <Score
                 scoreDataObj={scoreDataObj}
@@ -391,8 +426,9 @@ class AdminArtist extends React.Component {
                 getTableData={this.getTableData}
               />
             </TabPane>
+            }
 
-
+            {domain && domain.includes('主持人') &&
             <TabPane tab="主持节目" key="host">
               <Score
                 scoreDataObj={scoreDataObj}
@@ -402,7 +438,10 @@ class AdminArtist extends React.Component {
                 getTableData={this.getTableData}
               />
             </TabPane>
+            }
 
+
+            {domain && domain.includes('导演') &&
             <TabPane tab="导演作品" key="director">
               <Score
                 scoreDataObj={scoreDataObj}
@@ -412,7 +451,7 @@ class AdminArtist extends React.Component {
                 getTableData={this.getTableData}
               />
             </TabPane>
-
+            }
 
             <TabPane tab="查看关系" key="relation">
               <Relation
