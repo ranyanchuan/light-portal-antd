@@ -10,6 +10,7 @@ import { Button, Modal, Tabs, Table, Avatar, Tag } from 'antd';
 import LayoutAdmin from 'components/Admin/LayoutAdmin';
 import Search from 'components/Admin/Artist/Search';
 import Actor from 'components/Admin/Artist/Actor';
+import Model from 'components/Admin/Artist/Model';
 import BasicModal from 'components/Admin/Artist/BasicModal';
 
 import Relation from 'components/Admin/Common/Relation';
@@ -36,7 +37,7 @@ class AdminArtist extends React.Component {
 
   state = {
     searchObj: {}, //搜索面板数据
-    defaultActiveKey: 'honor', // 默认选中tab
+    defaultActiveKey: 'model', // 默认选中tab
     selectedRowKeys: [], // 选中行key
     selectedRowObj: {}, // 选中行对象
 
@@ -347,7 +348,11 @@ class AdminArtist extends React.Component {
 
   render() {
 
-    const { starTableLoading, basModVis, selectedRowKeys, basModStatus, defaultActiveKey, selectedRowObj, starDataObj,actorDataObj, scoreDataObj, relationDataObj, honorDataObj, salaryDataObj } = this.state;
+    const { starTableLoading, basModVis, selectedRowKeys,
+      basModStatus, defaultActiveKey, selectedRowObj,
+      starDataObj,actorDataObj, modelDataObj,scoreDataObj,
+      relationDataObj, honorDataObj, salaryDataObj
+    } = this.state;
     const rowSelection = {
       selectedRowKeys,
       onChange: this.onSelectChange,
@@ -400,6 +405,8 @@ class AdminArtist extends React.Component {
                 onActionTable={this.onActionTable}
                 basicRow={selectedRowObj}
                 getTableData={this.getTableData}
+                showDelCon={this.showDelCon}
+                loading={this.state.actorTableLoading}
               />
             </TabPane>
             }
@@ -418,12 +425,14 @@ class AdminArtist extends React.Component {
 
             {domain && domain.includes('模特') &&
             <TabPane tab="模特作品" key="model">
-              <Score
-                scoreDataObj={scoreDataObj}
+              <Model
+                modelDataObj={modelDataObj}
                 onActionTable={this.onActionTable}
                 basicRow={selectedRowObj}
                 showDelCon={this.showDelCon}
                 getTableData={this.getTableData}
+                loading={this.state.modelTableLoading}
+
               />
             </TabPane>
             }

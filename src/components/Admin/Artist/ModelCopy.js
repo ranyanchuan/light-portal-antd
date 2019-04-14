@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 
-import { Form, Button, Modal, Row, Col, Table, Tag } from 'antd';
+import { Form, Button, Modal, Row, Col, Carousel, Tag, Card, Icon, Avatar } from 'antd';
 import ConSelect from 'components/ConSelect';
 import ConInput from 'components/ConInput';
 import ConInputNumber from 'components/ConInputNumber';
@@ -14,12 +14,13 @@ import { api, actorClassifyData, languageData } from 'utils/config';
 
 import styles from './index.less';
 
+const { Meta } = Card;
 const ruleDate = 'YYYY-MM-DD';
 const ruleTime = 'HH:mm';
 
 @Form.create()
 
-class Actor extends React.Component {
+class Honor extends React.Component {
   state = {
     visible: false,
     status: '',
@@ -31,9 +32,9 @@ class Actor extends React.Component {
 
 
   componentWillReceiveProps(nextProps) {
-    const { actorDataObj } = nextProps;
-    const { list = [] } = actorDataObj || {};
-    if (list.length > 0 && this.props.actorDataObj !== actorDataObj) {
+    const { modelDataObj } = nextProps;
+    const { list = [] } = modelDataObj || {};
+    if (list.length > 0 && this.props.modelDataObj !== modelDataObj) {
       const { _id, imageUrl } = list[0];
       this.setState({ selectedRowKeys: [_id], selectedRowObj: list[0], imageUrl });
     }
@@ -149,7 +150,7 @@ class Actor extends React.Component {
         {listItem && listItem.length > 0 && listItem.slice(0, 3).map(tag => <Tag key={tag}>{tag}</Tag>)}
         </span>
       ),
-    },{
+    }, {
       title: '导演',
       dataIndex: 'director',
       key: 'director',
@@ -178,7 +179,7 @@ class Actor extends React.Component {
         {actor && actor.length > 0 && actor.slice(0, 3).map(tag => <Tag color="blue" key={tag}>{tag}</Tag>)}
         </span>
       ),
-    }
+    },
   ];
 
   // 更新封面图片
@@ -195,7 +196,7 @@ class Actor extends React.Component {
 
 
   render() {
-    const { form, actorDataObj, basicRow, loading } = this.props;
+    const { form, modelDataObj, basicRow, loading } = this.props;
     const { visible, selectedRowKeys, selectedRowObj, status } = this.state;
     const rowSelection = {
       selectedRowKeys,
@@ -216,15 +217,16 @@ class Actor extends React.Component {
 
 
     const disabled = status === 'desc' ? true : false;
-    const actorData = status !== 'add' ? selectedRowObj : {};
+    const modelData = status !== 'add' ? selectedRowObj : {};
 
-    const btnDisable = (actorDataObj.list && actorDataObj.list.length > 0) ? false : true;
+    const btnDisable = (modelDataObj.list && modelDataObj.list.length > 0) ? false : true;
 
     // 添加按钮disabled
     const addBtnDisable = basicRow._id ? false : true;
 
+
     return (
-      <div>
+      <div className={styles.artistModel}>
 
         <div className="table-operations">
           <Button onClick={this.onShowModal.bind(this, 'add')} disabled={addBtnDisable}>添加</Button>
@@ -254,7 +256,7 @@ class Actor extends React.Component {
                   message='请输入影视作品标题'
                   disabled={disabled}
                   required={true}
-                  defValue={actorData.title}
+                  defValue={modelData.title}
                 />
               </Col>
               <Col span={12}>
@@ -268,7 +270,7 @@ class Actor extends React.Component {
                   disabled={disabled}
                   data={[]}
                   required={true}
-                  defValue={actorData.actor}
+                  defValue={modelData.actor}
                 />
               </Col>
             </Row>
@@ -282,7 +284,7 @@ class Actor extends React.Component {
                   label="年份"
                   placeholder="请选择或者输入影视年份"
                   disabled={disabled}
-                  defValue={actorData.year}
+                  defValue={modelData.year}
                   min={1990}
                   max={2019}
                 />
@@ -293,7 +295,7 @@ class Actor extends React.Component {
                   formItemLayout={formItemLayout}
                   label="时长"
                   disabled={disabled}
-                  defValue={actorData.time}
+                  defValue={modelData.time}
                 />
               </Col>
             </Row>
@@ -304,7 +306,7 @@ class Actor extends React.Component {
                   form={form}
                   formItemLayout={formItemLayout}
                   disabled={disabled}
-                  defValue={actorData.date}
+                  defValue={modelData.date}
                 />
               </Col>
               <Col span={12}>
@@ -315,7 +317,7 @@ class Actor extends React.Component {
                   label="产地"
                   placeholder="请输入影视产地"
                   disabled={disabled}
-                  defValue={actorData.place}
+                  defValue={modelData.place}
                 />
               </Col>
             </Row>
@@ -331,7 +333,7 @@ class Actor extends React.Component {
                   placeholder="请选择类型"
                   disabled={disabled}
                   data={actorClassifyData}
-                  defValue={actorData.classify}
+                  defValue={modelData.classify}
 
                 />
               </Col>
@@ -344,7 +346,7 @@ class Actor extends React.Component {
                   placeholder="请选择语言"
                   disabled={disabled}
                   data={languageData}
-                  defValue={actorData.language}
+                  defValue={modelData.language}
                 />
               </Col>
             </Row>
@@ -360,7 +362,7 @@ class Actor extends React.Component {
                   placeholder="请输入导演"
                   disabled={disabled}
                   data={[]}
-                  defValue={actorData.director}
+                  defValue={modelData.director}
                 />
               </Col>
               <Col span={12}>
@@ -373,7 +375,7 @@ class Actor extends React.Component {
                   placeholder="请输入编辑"
                   disabled={disabled}
                   data={[]}
-                  defValue={actorData.editor}
+                  defValue={modelData.editor}
 
                 />
               </Col>
@@ -388,7 +390,7 @@ class Actor extends React.Component {
                   label="影视URL"
                   placeholder="请输入影视URL"
                   disabled={disabled}
-                  defValue={actorData.url}
+                  defValue={modelData.url}
                 />
               </Col>
               <Col span={12}>
@@ -401,7 +403,7 @@ class Actor extends React.Component {
                   placeholder="请输入标签"
                   disabled={disabled}
                   data={[]}
-                  defValue={actorData.tags}
+                  defValue={modelData.tags}
                 />
               </Col>
             </Row>
@@ -411,7 +413,7 @@ class Actor extends React.Component {
                 <ConUploadOne
                   title="上传封面"
                   formItemLayout={formItemLayoutLine}
-                  imageUrl={actorData.cover}
+                  imageUrl={modelData.cover}
                   disabled={disabled}
                   label="封面"
                   updatePicture={this.updatePicture}
@@ -427,30 +429,49 @@ class Actor extends React.Component {
                 label="摘要"
                 placeholder="请输入摘要"
                 disabled={disabled}
-                defValue={actorData.abstract}
+                defValue={modelData.abstract}
               />
             </Row>
           </Form>
-
         </Modal>
-        <Table
-          loading={loading}
-          rowKey={record => record._id}
-          columns={this.columns}
-          dataSource={(actorDataObj && actorDataObj.list) ? actorDataObj.list : []}
-          size="small"
-          rowSelection={rowSelection}
-          pagination={{
-            current: actorDataObj.pageIndex + 1,
-            total: actorDataObj.count,
-            pageSize: actorDataObj.size,
-          }}
-          onChange={this.onChangePage}
 
-        />
+        <div className={styles.modelCard}>
+          <Card
+            style={{ marginTop: 16 }}
+            actions={[<Icon type="setting"/>, <Icon type="edit"/>, <Icon type="ellipsis"/>]}
+          >
+            <div style={{width:250}}>
+              <Carousel effect="fade">
+                <div>
+                  <img style={{width:250}} src="http://www.xgccm.com/upfile/star/guojingjing_s.jpg" alt="" />
+                </div>
+                <div>
+                  <img style={{width:250}} src="http://www.xgccm.com/upfile/star/2010liuxuan_s.jpg" alt=""/>
+                </div>
+              </Carousel>
+            </div>
+          </Card>
+          <Card
+            style={{ marginTop: 16 }}
+            actions={[<Icon type="setting"/>, <Icon type="edit"/>, <Icon type="ellipsis"/>]}
+          >
+            <div style={{width:250}}>
+              <Carousel effect="fade">
+                <div>
+                  <img style={{width:250}} src="http://www.xgccm.com/upfile/star/guojingjing_s.jpg" alt="" />
+                </div>
+                <div>
+                  <img style={{width:250}} src="http://www.xgccm.com/upfile/star/2010liuxuan_s.jpg" alt=""/>
+                </div>
+              </Carousel>
+            </div>
+          </Card>
+
+        </div>
+
       </div>
     );
   }
 }
 
-export default Actor;
+export default Honor;

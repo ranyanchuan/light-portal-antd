@@ -20,7 +20,7 @@ module.exports = {
 
   },
 
-  fileClassifyData:["喜剧","奇幻","古装",], // 电影类型
+  actorClassifyData:["喜剧","奇幻","古装",], // 电影类型
   languageData:["中文","英文"], // 语言类型
 
 

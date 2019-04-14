@@ -30,6 +30,19 @@ export function randomObjArray(obj, len) {
 }
 
 
+// 添加 status 和  uid
+export function  addUidList(fileUrlList)  {
+
+  if(!fileUrlList || !Array.isArray(fileUrlList)){
+    return fileUrlList
+  }
+  const filesUrl = fileUrlList.map((item, index) => {
+    return { status: 'done', uid: index, url: item };
+  });
+  return filesUrl;
+};
+
+
 export function randomNum(m, n) {
   return Math.floor(Math.random() * (m - n) + n);
 }
