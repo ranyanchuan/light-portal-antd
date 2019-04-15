@@ -5,16 +5,24 @@
 import React from 'react';
 import { connect } from 'dva';
 import moment from 'moment';
-import { Button, Modal, Tabs, Table, Avatar } from 'antd';
+import { Button, Modal, Tabs, Table, Avatar, Tag } from 'antd';
 
 import LayoutAdmin from 'components/Admin/LayoutAdmin';
-import Search from 'components/Admin/Football/Search';
-import Score from 'components/Admin/Basketball/Score';
-import BasicModal from 'components/Admin/Football/BasicModal';
+import Search from 'components/Admin/Player/Search';
+import Actor from 'components/Admin/Artist/Actor';
+import Singer from 'components/Admin/Artist/Singer';
+import Model from 'components/Admin/Artist/Model';
+import Host from 'components/Admin/Artist/Host';
+import BasicModal from 'components/Admin/Artist/BasicModal';
 
 import Relation from 'components/Admin/Common/Relation';
 import Honor from 'components/Admin/Common/Honor';
 import Salary from 'components/Admin/Common/Salary';
+import Score from 'components/Admin/Basketball/Score';
+
+
+import { domain2key } from 'utils';
+
 
 import styles from './index.less';
 
@@ -27,11 +35,11 @@ const ruleDate = 'YYYY-MM-DD';
   common: state.common,
 }))
 
-class AdminFootball extends React.Component {
+class AdminPlayer extends React.Component {
 
   state = {
     searchObj: {}, //搜索面板数据
-    defaultActiveKey: 'salary', // 默认选中tab
+    defaultActiveKey: 'honor', // 默认选中tab
     selectedRowKeys: [], // 选中行key
     selectedRowObj: {}, // 选中行对象
 
@@ -39,6 +47,10 @@ class AdminFootball extends React.Component {
     basModVis: false,
     basModStatus: 'add',
 
+    actorDataObj: {}, // 影视数据
+    modelDataObj: {}, // 模特数据
+    singerDataObj: {}, // 音乐数据
+    hostDataObj: {}, // 音乐数据
     scoreDataObj: {}, // 比分数据
     relationDataObj: {}, // 关系数据
     starDataObj: {}, // 基本数据
@@ -48,12 +60,12 @@ class AdminFootball extends React.Component {
 
 
   componentDidMount() {
-    this.getTableData({ table: 'star' });
+    this.getTableData({ table: 'star', category: ['player'] });
   }
 
   // 搜索面板值
   onSearchPannel = (param) => {
-    this.getTableData({ ...param, table: 'star' });
+    this.getTableData({ ...param, table: 'star', category: ['player'] });
   };
 
 
@@ -62,6 +74,8 @@ class AdminFootball extends React.Component {
     const { table } = payload;
     // 清空主表信息
     const tempState = {};
+    const { defaultActiveKey } = this.state;
+    tempState[defaultActiveKey + 'TableLoading'] = true;
     // 如果子表请求清空子表
     if (table !== 'star') {
       tempState[table + 'DataObj'] = {};
@@ -76,6 +90,7 @@ class AdminFootball extends React.Component {
       tempState.salaryDataObj = {};
       tempState.selectedRowKeys = []; // 选中行key
       tempState.selectedRowObj = {}; // 选中行对象
+      tempState[table + 'TableLoading'] = true;
     }
     this.setState(tempState);
 
@@ -86,6 +101,7 @@ class AdminFootball extends React.Component {
 
         const { list = [] } = response;
         const stateTemp = {};
+
         // 更新 table 数据
         if (list.length > 0 && table === 'star') {
           const { _id } = list[0];
@@ -93,11 +109,13 @@ class AdminFootball extends React.Component {
           stateTemp.selectedRowObj = list[0];
 
           const { defaultActiveKey } = this.state;
-          const param = { table: defaultActiveKey, basicId: _id };
+          const param = { table:defaultActiveKey, basicId: _id };
+
           this.getTableData(param);
 
         }
         stateTemp[table + 'DataObj'] = response;
+        stateTemp[table + 'TableLoading'] = false;
         // 更新表格数据
         this.setState(stateTemp);
       },
@@ -128,6 +146,7 @@ class AdminFootball extends React.Component {
           if (table === 'star') {
             const searchObj = this.child.getSearchValue();
             param = searchObj;
+            param.category = ['artist'];
           }
           param.table = table;
 
@@ -155,8 +174,7 @@ class AdminFootball extends React.Component {
     if (basModStatus === 'add') {
       payload = data;
       payload.type = 'common/add';
-      payload.domain = ['basketball'];
-      payload.category = ['player'];
+      payload.category = ['artist'];
     }
     // 添加操作表名
     payload.table = 'star';
@@ -227,33 +245,60 @@ class AdminFootball extends React.Component {
       key: 'city',
     },
     {
-      title: '组织',
-      dataIndex: 'organization',
-      key: 'organization',
-      render: text => <span>{text && Array.isArray(text) ? text.join(' | ') : ''}</span>,
+      title: '职业',
+      dataIndex: 'domain',
+      key: 'domain',
+      render: tags => (
+        <span>
+        {tags && tags.length > 0 && tags.map(tag => <Tag key={tag}>{tag}</Tag>)}
+        </span>
+      ),
     },
     {
       title: '球队',
       dataIndex: 'team',
       key: 'team',
-      render: text => <span>{text && Array.isArray(text) ? text.join(' | ') : ''}</span>,
+      render: tags => (
+        <span>
+        {tags && tags.length > 0 && tags.map(tag => <Tag key={tag}>{tag}</Tag>)}
+        </span>
+      ),
     },
     {
       title: '学校',
       dataIndex: 'school',
       key: 'school',
-      render: text => <span>{text && Array.isArray(text) ? text.join(' | ') : ''}</span>,
+      render: text => <span>{text && Array.isArray(text) ? [...text].pop() : ''}</span>,
     },
-
   ];
 
   // 更新选中的数据
   onSelectChange = (selectedRowKeys, selectedRowObjs) => {
-    this.setState({ selectedRowKeys, selectedRowObj: selectedRowObjs[0] });
+
 
     //  更改主表信息
-    const { defaultActiveKey } = this.state;
-    const param = { table: defaultActiveKey, basicId: selectedRowObjs[0]._id };
+    let childrenTable = '';
+
+    let { defaultActiveKey } = this.state;
+    const {domain}=selectedRowObjs[0];
+    const commonTable = ['relation',"honor","salary"];
+    // 判断是否公有
+    if (commonTable.includes(defaultActiveKey)) {
+      childrenTable = defaultActiveKey;
+    } else {
+      // 判断职业
+      const tableNameArray = domain2key(domain);
+      if (tableNameArray.includes(defaultActiveKey)) {
+        childrenTable = defaultActiveKey;
+      } else {
+        // 默认第一个
+        childrenTable = tableNameArray[0];
+      }
+    }
+
+    this.setState({defaultActiveKey: childrenTable, selectedRowKeys, selectedRowObj: selectedRowObjs[0] });
+
+    const param = { table: childrenTable, basicId: selectedRowObjs[0]._id };
     this.getTableData(param);
 
   };
@@ -306,13 +351,17 @@ class AdminFootball extends React.Component {
       size: pageSize,
     };
     // 获取分页数据
-    this.getTableData({ ...param, ...searchObj, table: 'star' });
+    this.getTableData({ ...param, ...searchObj, table: 'star', category: ['artist'] });
   };
 
 
   render() {
 
-    const { basModVis, selectedRowKeys, basModStatus, defaultActiveKey, selectedRowObj, starDataObj, scoreDataObj, relationDataObj, honorDataObj, salaryDataObj } = this.state;
+    const { starTableLoading, basModVis, selectedRowKeys,
+      basModStatus, defaultActiveKey, selectedRowObj,
+      starDataObj,actorDataObj, modelDataObj,singerDataObj,scoreDataObj,
+      relationDataObj, honorDataObj, salaryDataObj,hostDataObj
+    } = this.state;
     const rowSelection = {
       selectedRowKeys,
       onChange: this.onSelectChange,
@@ -321,10 +370,11 @@ class AdminFootball extends React.Component {
 
     const btnDisable = (starDataObj.list && starDataObj.list.length > 0) ? false : true;
 
+    const { domain } = selectedRowObj;
 
     return (
-      <LayoutAdmin {...this.props} selectKey={['pingpong']} openKeys={["player"]}>
-        <div className={styles.adminSearchPannel}>
+      <LayoutAdmin {...this.props} selectKey={['player']} openKeys={['player']}>
+        <div className={styles.adminPlayer}>
           <Search
             onSearch={this.onSearchPannel}
             // 设置ref属性
@@ -339,6 +389,7 @@ class AdminFootball extends React.Component {
             <Button onClick={this.onClickDel} disabled={btnDisable}>删除</Button>
           </div>
           <Table
+            loading={starTableLoading}
             size="small"
             rowKey={record => record._id}
             rowSelection={rowSelection}
@@ -356,7 +407,61 @@ class AdminFootball extends React.Component {
 
           {/*子表数据*/}
           <Tabs defaultActiveKey={defaultActiveKey} onChange={this.onChangeTab}>
-            <TabPane tab="个人数据" key="score">
+            {domain && domain.includes('演员') &&
+            <TabPane tab="影视作品" key="actor">
+              <Actor
+                actorDataObj={actorDataObj}
+                onActionTable={this.onActionTable}
+                basicRow={selectedRowObj}
+                getTableData={this.getTableData}
+                showDelCon={this.showDelCon}
+                loading={this.state.actorTableLoading}
+              />
+            </TabPane>
+            }
+
+            {domain && domain.includes('歌手') &&
+            <TabPane tab="音乐作品" key="singer">
+              <Singer
+                singerDataObj={singerDataObj}
+                onActionTable={this.onActionTable}
+                basicRow={selectedRowObj}
+                getTableData={this.getTableData}
+                showDelCon={this.showDelCon}
+                loading={this.state.singerTableLoading}
+              />
+            </TabPane>
+            }
+
+            {domain && domain.includes('模特') &&
+            <TabPane tab="模特作品" key="model">
+              <Model
+                modelDataObj={modelDataObj}
+                onActionTable={this.onActionTable}
+                basicRow={selectedRowObj}
+                showDelCon={this.showDelCon}
+                getTableData={this.getTableData}
+                loading={this.state.modelTableLoading}
+
+              />
+            </TabPane>
+            }
+
+            {domain && domain.includes('主持人') &&
+            <TabPane tab="主持节目" key="host">
+              <Host
+                hostDataObj={hostDataObj}
+                onActionTable={this.onActionTable}
+                basicRow={selectedRowObj}
+                showDelCon={this.showDelCon}
+                getTableData={this.getTableData}
+              />
+            </TabPane>
+            }
+
+
+            {domain && domain.includes('导演') &&
+            <TabPane tab="导演作品" key="director">
               <Score
                 scoreDataObj={scoreDataObj}
                 onActionTable={this.onActionTable}
@@ -365,6 +470,8 @@ class AdminFootball extends React.Component {
                 getTableData={this.getTableData}
               />
             </TabPane>
+            }
+
             <TabPane tab="查看关系" key="relation">
               <Relation
                 relationDataObj={relationDataObj}
@@ -406,5 +513,5 @@ class AdminFootball extends React.Component {
   }
 }
 
-export default AdminFootball;
+export default AdminPlayer;
 

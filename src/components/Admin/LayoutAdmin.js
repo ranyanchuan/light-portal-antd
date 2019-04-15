@@ -86,21 +86,22 @@ class LayoutAdmin extends React.Component {
                   <Menu.Item key="news"><Icon type="fire"/>新闻</Menu.Item>
                   <Menu.Item key="scholar"><span className="iconfont icon-zhuanjiaxuezhe"/>学者</Menu.Item>
                   <Menu.Item key="artist"><span className="iconfont icon-yiren"/>艺人</Menu.Item>
+                  <Menu.Item key="player"><span className="iconfont icon-yundong"/>远动员</Menu.Item>
 
-                  <SubMenu key="player" title={<span><span className="iconfont icon-yundong"/><span>远动员</span></span>}>
-                    <Menu.Item key="basketball"><span className="iconfont icon-lanqiu"/>篮球</Menu.Item>
-                    <Menu.Item key="football"><span className="iconfont icon-svggeshi-"/>足球</Menu.Item>
-                    <Menu.Item key="pingpong"><span className="iconfont icon-PingPong"/>乒乓球</Menu.Item>
-                    <Menu.Item key="badminton"><span className="iconfont icon-yumaoqiu"/>羽毛球</Menu.Item>
-                    <Menu.Item key="rugby"><span className="iconfont icon-ganlanqiu"/>橄榄球</Menu.Item>
-                    <Menu.Item key="tennis"><span className="iconfont icon-wangqiu"/>网球</Menu.Item>
-                    <Menu.Item key="volleyball"><span className="iconfont icon-paiqiu"/>排球</Menu.Item>
-                    <Menu.Item key="baseball"><span className="iconfont icon-bangqiu"/>棒球</Menu.Item>
-                    <Menu.Item key="billiardball"><span className="iconfont icon-taiqiu"/>台球</Menu.Item>
-                    <Menu.Item key="swim"><span className="iconfont icon-youyong"/>游泳</Menu.Item>
-                    <Menu.Item key="shoot"><span className="iconfont icon-sheji"/>射击</Menu.Item>
-                    <Menu.Item key="weightlifting"><span className="iconfont icon-juzhong"/>举重</Menu.Item>
-                  </SubMenu>
+                  {/*<SubMenu key="player" title={<span><span className="iconfont icon-yundong"/><span>远动员</span></span>}>*/}
+                    {/*<Menu.Item key="basketball"><span className="iconfont icon-lanqiu"/>篮球</Menu.Item>*/}
+                    {/*<Menu.Item key="football"><span className="iconfont icon-svggeshi-"/>足球</Menu.Item>*/}
+                    {/*<Menu.Item key="pingpong"><span className="iconfont icon-PingPong"/>乒乓球</Menu.Item>*/}
+                    {/*<Menu.Item key="badminton"><span className="iconfont icon-yumaoqiu"/>羽毛球</Menu.Item>*/}
+                    {/*<Menu.Item key="rugby"><span className="iconfont icon-ganlanqiu"/>橄榄球</Menu.Item>*/}
+                    {/*<Menu.Item key="tennis"><span className="iconfont icon-wangqiu"/>网球</Menu.Item>*/}
+                    {/*<Menu.Item key="volleyball"><span className="iconfont icon-paiqiu"/>排球</Menu.Item>*/}
+                    {/*<Menu.Item key="baseball"><span className="iconfont icon-bangqiu"/>棒球</Menu.Item>*/}
+                    {/*<Menu.Item key="billiardball"><span className="iconfont icon-taiqiu"/>台球</Menu.Item>*/}
+                    {/*<Menu.Item key="swim"><span className="iconfont icon-youyong"/>游泳</Menu.Item>*/}
+                    {/*<Menu.Item key="shoot"><span className="iconfont icon-sheji"/>射击</Menu.Item>*/}
+                    {/*<Menu.Item key="weightlifting"><span className="iconfont icon-juzhong"/>举重</Menu.Item>*/}
+                  {/*</SubMenu>*/}
 
 
                   {/*<SubMenu key="artist" title={<span><span className="iconfont icon-yiren"/><span>艺人</span></span>}>*/}
