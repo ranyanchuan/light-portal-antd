@@ -12,6 +12,7 @@ import Search from 'components/Admin/Artist/Search';
 import Actor from 'components/Admin/Artist/Actor';
 import Singer from 'components/Admin/Artist/Singer';
 import Model from 'components/Admin/Artist/Model';
+import Host from 'components/Admin/Artist/Host';
 import BasicModal from 'components/Admin/Artist/BasicModal';
 
 import Relation from 'components/Admin/Common/Relation';
@@ -49,6 +50,7 @@ class AdminArtist extends React.Component {
     actorDataObj: {}, // 影视数据
     modelDataObj: {}, // 模特数据
     singerDataObj: {}, // 音乐数据
+    hostDataObj: {}, // 音乐数据
     scoreDataObj: {}, // 比分数据
     relationDataObj: {}, // 关系数据
     starDataObj: {}, // 基本数据
@@ -354,7 +356,7 @@ class AdminArtist extends React.Component {
     const { starTableLoading, basModVis, selectedRowKeys,
       basModStatus, defaultActiveKey, selectedRowObj,
       starDataObj,actorDataObj, modelDataObj,singerDataObj,scoreDataObj,
-      relationDataObj, honorDataObj, salaryDataObj
+      relationDataObj, honorDataObj, salaryDataObj,hostDataObj
     } = this.state;
     const rowSelection = {
       selectedRowKeys,
@@ -443,8 +445,8 @@ class AdminArtist extends React.Component {
 
             {domain && domain.includes('主持人') &&
             <TabPane tab="主持节目" key="host">
-              <Score
-                scoreDataObj={scoreDataObj}
+              <Host
+                hostDataObj={hostDataObj}
                 onActionTable={this.onActionTable}
                 basicRow={selectedRowObj}
                 showDelCon={this.showDelCon}
