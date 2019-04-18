@@ -8,17 +8,11 @@ import moment from 'moment';
 import { Button, Modal, Tabs, Table, Avatar, Tag } from 'antd';
 
 import LayoutAdmin from 'components/Admin/LayoutAdmin';
-import Search from 'components/Admin/Player/Search';
-import Actor from 'components/Admin/Artist/Actor';
-import Singer from 'components/Admin/Artist/Singer';
-import Model from 'components/Admin/Artist/Model';
-import Host from 'components/Admin/Artist/Host';
-import BasicModal from 'components/Admin/Player/BasicModal';
+import Search from 'components/Admin/Artist/Search';
 
-import Relation from 'components/Admin/Common/Relation';
-import Honor from 'components/Admin/Common/Honor';
-import Salary from 'components/Admin/Common/Salary';
-import Score from 'components/Admin/Basketball/Score';
+import BasicModal from 'components/Admin/Artist/BasicModal';
+
+
 
 
 import { domain2key } from 'utils';
@@ -27,7 +21,6 @@ import { domain2key } from 'utils';
 import styles from './index.less';
 
 
-const { TabPane } = Tabs;
 const confirm = Modal.confirm;
 const ruleDate = 'YYYY-MM-DD';
 
@@ -35,7 +28,7 @@ const ruleDate = 'YYYY-MM-DD';
   common: state.common,
 }))
 
-class AdminPlayer extends React.Component {
+class AdminArtist extends React.Component {
 
   state = {
     searchObj: {}, //搜索面板数据
@@ -60,12 +53,12 @@ class AdminPlayer extends React.Component {
 
 
   componentDidMount() {
-    this.getTableData({ table: 'star', category: ['player'] });
+    this.getTableData({ table: 'star', category: ['artist'] });
   }
 
   // 搜索面板值
   onSearchPannel = (param) => {
-    this.getTableData({ ...param, table: 'star', category: ['player'] });
+    this.getTableData({ ...param, table: 'star', category: ['artist'] });
   };
 
 
@@ -130,7 +123,7 @@ class AdminPlayer extends React.Component {
     // 添加或者更新明星基本数据
     this.props.dispatch({
       type,
-      payload ,
+      payload,
       callback: (res) => {
         this.setState({ loading: false });
         const { selectedRowObj } = this.state;
@@ -245,22 +238,17 @@ class AdminPlayer extends React.Component {
       key: 'city',
     },
     {
-      title: '职业',
+      title: '星座',
+      dataIndex: 'constellation',
+      key: 'constellation',
+    },
+    {
+      title: '领域',
       dataIndex: 'domain',
       key: 'domain',
       render: tags => (
         <span>
-        {tags && tags.length > 0 && tags.map(tag => <Tag key={tag}>{tag}</Tag>)}
-        </span>
-      ),
-    },
-    {
-      title: '球队',
-      dataIndex: 'team',
-      key: 'team',
-      render: tags => (
-        <span>
-        {tags && tags.length > 0 && tags.map(tag => <Tag key={tag}>{tag}</Tag>)}
+        {tags && tags.length > 0 && tags.slice(0, 3).map(tag => <Tag color="blue" key={tag}>{tag}</Tag>)}
         </span>
       ),
     },
@@ -268,8 +256,9 @@ class AdminPlayer extends React.Component {
       title: '学校',
       dataIndex: 'school',
       key: 'school',
-      render: text => <span>{text && Array.isArray(text) ? [...text].pop() : ''}</span>,
+      render: text => <span>{text && Array.isArray(text) ? text.join(' | ') : ''}</span>,
     },
+
   ];
 
   // 更新选中的数据
@@ -358,9 +347,8 @@ class AdminPlayer extends React.Component {
   render() {
 
     const { starTableLoading, basModVis, selectedRowKeys,
-      basModStatus, defaultActiveKey, selectedRowObj,
-      starDataObj,actorDataObj, modelDataObj,singerDataObj,scoreDataObj,
-      relationDataObj, honorDataObj, salaryDataObj,hostDataObj
+      basModStatus, selectedRowObj,
+      starDataObj,
     } = this.state;
     const rowSelection = {
       selectedRowKeys,
@@ -370,11 +358,10 @@ class AdminPlayer extends React.Component {
 
     const btnDisable = (starDataObj.list && starDataObj.list.length > 0) ? false : true;
 
-    const { domain } = selectedRowObj;
 
     return (
-      <LayoutAdmin {...this.props} selectKey={['player']} openKeys={['player']}>
-        <div className={styles.adminPlayer}>
+      <LayoutAdmin {...this.props} selectKey={['artist']} openKeys={['player']}>
+        <div className={styles.adminArtist}>
           <Search
             onSearch={this.onSearchPannel}
             // 设置ref属性
@@ -404,102 +391,6 @@ class AdminPlayer extends React.Component {
             className={styles.newsTable}
           />
 
-
-          {/*子表数据*/}
-          <Tabs defaultActiveKey={defaultActiveKey} onChange={this.onChangeTab}>
-            {domain && domain.includes('演员') &&
-            <TabPane tab="影视作品" key="actor">
-              <Actor
-                actorDataObj={actorDataObj}
-                onActionTable={this.onActionTable}
-                basicRow={selectedRowObj}
-                getTableData={this.getTableData}
-                showDelCon={this.showDelCon}
-                loading={this.state.actorTableLoading}
-              />
-            </TabPane>
-            }
-
-            {domain && domain.includes('歌手') &&
-            <TabPane tab="音乐作品" key="singer">
-              <Singer
-                singerDataObj={singerDataObj}
-                onActionTable={this.onActionTable}
-                basicRow={selectedRowObj}
-                getTableData={this.getTableData}
-                showDelCon={this.showDelCon}
-                loading={this.state.singerTableLoading}
-              />
-            </TabPane>
-            }
-
-            {domain && domain.includes('模特') &&
-            <TabPane tab="模特作品" key="model">
-              <Model
-                modelDataObj={modelDataObj}
-                onActionTable={this.onActionTable}
-                basicRow={selectedRowObj}
-                showDelCon={this.showDelCon}
-                getTableData={this.getTableData}
-                loading={this.state.modelTableLoading}
-
-              />
-            </TabPane>
-            }
-
-            {domain && domain.includes('主持人') &&
-            <TabPane tab="主持节目" key="host">
-              <Host
-                hostDataObj={hostDataObj}
-                onActionTable={this.onActionTable}
-                basicRow={selectedRowObj}
-                showDelCon={this.showDelCon}
-                getTableData={this.getTableData}
-              />
-            </TabPane>
-            }
-
-
-            {domain && domain.includes('导演') &&
-            <TabPane tab="导演作品" key="director">
-              <Score
-                scoreDataObj={scoreDataObj}
-                onActionTable={this.onActionTable}
-                basicRow={selectedRowObj}
-                showDelCon={this.showDelCon}
-                getTableData={this.getTableData}
-              />
-            </TabPane>
-            }
-
-            <TabPane tab="查看关系" key="relation">
-              <Relation
-                relationDataObj={relationDataObj}
-                basicRow={selectedRowObj}
-                showDelCon={this.showDelCon}
-                onActionTable={this.onActionTable}
-                getTableData={this.getTableData}
-              />
-            </TabPane>
-            <TabPane tab="查看荣誉" key="honor">
-              <Honor
-                honorDataObj={honorDataObj}
-                basicRow={selectedRowObj}
-                showDelCon={this.showDelCon}
-                onActionTable={this.onActionTable}
-                getTableData={this.getTableData}
-              />
-            </TabPane>
-            <TabPane tab="生涯薪金" key="salary">
-              <Salary
-                salaryDataObj={salaryDataObj}
-                basicRow={selectedRowObj}
-                showDelCon={this.showDelCon}
-                onActionTable={this.onActionTable}
-                getTableData={this.getTableData}
-              />
-            </TabPane>
-          </Tabs>
           <BasicModal
             visible={basModVis}
             status={basModStatus}
@@ -513,5 +404,5 @@ class AdminPlayer extends React.Component {
   }
 }
 
-export default AdminPlayer;
+export default AdminArtist;
 

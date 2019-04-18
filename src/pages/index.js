@@ -6,8 +6,9 @@ import React from 'react';
 import { connect } from 'dva';
 import { Button, Input, Carousel, Form, Icon, Tabs, Badge, Divider, List, Avatar } from 'antd';
 import styles from './index.less';
-import Header from '../components/header/index';
+// import Header from '../components/header/index';
 import Footer from '../components/footer/index';
+import {uuid} from 'chuan-npm-test';
 
 const { TabPane } = Tabs;
 // const stars = [
@@ -91,6 +92,9 @@ class Home extends React.Component {
       },
     ];
     const { stars } = this.state;
+    console.log("xxxx",uuid());
+
+
 
     return (
       <div className={styles.home}>
