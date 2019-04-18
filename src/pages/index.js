@@ -6,9 +6,13 @@ import React from 'react';
 import { connect } from 'dva';
 import { Button, Input, Carousel, Form, Icon, Tabs, Badge, Divider, List, Avatar } from 'antd';
 import styles from './index.less';
-// import Header from '../components/header/index';
+import Header from '../components/header/index';
 import Footer from '../components/footer/index';
-import {uuid} from 'chuan-npm-test';
+import AcGodTable from 'ac-god-table';
+
+
+import { HotTable } from '@handsontable/react';
+
 
 const { TabPane } = Tabs;
 // const stars = [
@@ -76,6 +80,15 @@ class Home extends React.Component {
     });
   };
 
+
+  data = [
+    ["", "Ford", "Volvo", "Toyota", "Honda"],
+    ["2016", 10, 11, 12, 13],
+    ["2017", 20, 11, 14, 13],
+    ["2018", 30, 15, 12, 13]
+  ];
+
+
   render() {
     const { getFieldDecorator } = this.props.form;
     const operations = <a className={styles.tabMore}>更多</a>;
@@ -92,13 +105,22 @@ class Home extends React.Component {
       },
     ];
     const { stars } = this.state;
-    console.log("xxxx",uuid());
+    // console.log("xxxx",uuid());
+
+
 
 
 
     return (
       <div className={styles.home}>
         <Header/>
+
+        <AcGodTable></AcGodTable>
+
+
+        <HotTable data={this.data} colHeaders={true} rowHeaders={true} width="600" height="300" />
+
+
         <div className={styles.aim}>
           <div>Data</div>
           <div>▪</div>
