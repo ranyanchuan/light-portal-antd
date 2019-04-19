@@ -7,123 +7,99 @@ import { connect } from 'dva';
 import { Button } from 'antd';
 import styles from './index.less';
 
-// import { HotTable } from '@handsontable/react';
+import BasicTable from 'components/AcGodTable/basicTable';
+import 'handsontable/languages/zh-CN';
 
-import Handsontable from "handsontable";
-import 'handsontable/dist/handsontable.full.css';
-
-
-
-class Home extends React.Component {
+class AcGodTable extends React.Component {
 
   state = {
     stars: [],
   };
 
+  data = [
+    {id:1,year:'2019',category:'奔驰',price:500000},
+    {id:2,year:'2018',category:'奔驰',price:500000},
+    {id:3,year:'2017',category:'奔驰',price:500000},
+    {id:4,year:'2016',category:'奔驰',price:500000},
+  ];
 
-  componentDidMount() {
+  config = {
+    data: this.data,
+    colHeaders: ['年份','标题','类型',],
+    language:'zh-CN',
+    columns: [
+      {
+        data:'year',
+        type: 'autocomplete', // 表格类型
+        source: ['BMW', 'Chrysler', 'Nissan', 'Suzuki', 'Toyota', 'Volvo'],
+        strict: false,
+      },
+      {
+        data:"category",
+        type: 'autocomplete',
+        source: ['yellow', 'red', 'orange and another color', 'green', 'blue', 'gray', 'black', 'white', 'purple', 'lime', 'olive', 'cyan'],
+        strict: false,
+      },
+      {
+        type: 'numeric',
+        data:'price',
+      },
+    ],
 
-    const data = [
-      ['', 'Tesla', 'Volvo', 'Toyota', 'Ford'],
-      ['2019', 10, 11, 12, 13],
-      ['2020', 20, 11, 14, 13],
-      ['2021', 30, 15, 12, 13]
-    ];
-
-    const container = document.getElementById('example');
-    const hot = new Handsontable(container, {
-      data: data,
-      colHeaders: ['Car', 'Year', 'Chassis color', 'Bumper color'],
-      columns: [
-        {
-          type: 'autocomplete',
-          source: ['BMW', 'Chrysler', 'Nissan', 'Suzuki', 'Toyota', 'Volvo'],
-          strict: false
-        },
-        {type: 'numeric'},
-        {
-          type: 'autocomplete',
-          source: ['yellow', 'red', 'orange and another color', 'green', 'blue', 'gray', 'black', 'white', 'purple', 'lime', 'olive', 'cyan'],
-          strict: false,
-          visibleRows: 4
-        },
-        {
-          type: 'autocomplete',
-          source: ['yellow', 'red', 'orange and another color', 'green', 'blue', 'gray', 'black', 'white', 'purple', 'lime', 'olive', 'cyan'],
-          strict: false,
-          trimDropdown: false
-        }
-      ], // 使用自定义列头
-      rowHeaders: true,
-      filters: true,
-      manualColumnResize:true, // 表格表头是否可以拖动 false时禁止拖动
-      manualRowResize:true,   // 当值为true时，允许拖动，当为false时禁止拖动
-      manualColumnMove:true,  // false 当值为true时，列可拖拽移动到指定列
-      manualRowMove:true, //false 当值为true时，行可拖拽至指定行
-      customBorders: [
-        {
-          range: {//多个单元格
-            from: {//起始位置
-              row: 1,
-              col: 1
-            },
-            to: {
-              row: 3,
-              col: 4
-            }
-          },
-          top: {//结束位置
-            width: 2,
-            color: '#5292F7'
-          },
-          left: {
-            width: 2,
-            color: 'orange'
-          },
-          bottom: {
-            width: 2,
-            color: 'red'
-          },
-          right: {
-            width: 2,
-            color: 'magenta'
-          }
-        },
-        {//单一单元格
-          row: 2,
-          col: 2,
-          left: {
-            width: 2,
-            color: 'red'
-          },
-          right: {
-            width: 1,
-            color: 'green'
-          }
-        }],
-
-      dropdownMenu: true
-    });
+    // 使用自定义列头
+    rowHeaders: true, // false/数组 //当值为true时显示行头，当值为数组时，行头为数组的值
+    filters: true, // 表头过滤
+    manualColumnResize: true, // 表格表头是否可以拖动 false时禁止拖动
+    manualRowResize: true,   // 当值为true时，允许拖动，当为false时禁止拖动
+    manualColumnMove: true,  // false 当值为true时，列可拖拽移动到指定列
+    manualRowMove: true, //false 当值为true时，行可拖拽至指定行
+    // dropdownMenu: ['filter_by_condition', 'filter_action_bar']
+    // dropdownMenu: true,  // https://handsontable.com/docs/7.0.2/demo-dropdown-menu.html
+  };
 
 
+  // 多表头 https://handsontable.com/docs/7.0.2/demo-nested-headers.html
+  // 多表头隐藏 https://handsontable.com/docs/7.0.2/demo-collapsing-columns.html
+  // 固定row https://handsontable.com/docs/7.0.2/demo-fixing-bottom.html
+  // 固定例 https://handsontable.com/docs/7.0.2/demo-freezing.html
+  // 多余宽自适应 https://handsontable.com/docs/7.0.2/demo-stretching.html
+  // 表格宽自适应内容  https://handsontable.com/docs/7.0.2/demo-header-tooltips.html
+  // 自定义宽和高  https://handsontable.com/docs/7.0.2/demo-resizing.html
+  // fix 宽和高  https://handsontable.com/docs/7.0.2/demo-fixing.html
+  // 自定义表格内容，表头排序, https://handsontable.com/docs/7.0.2/demo-sorting.html
+  // 表头过滤 https://handsontable.com/docs/7.0.2/demo-filtering.html
+  // 表格验证 https://handsontable.com/docs/7.0.2/demo-data-validation.html
+  // 合并单元格 https://handsontable.com/docs/7.0.2/demo-merged-cells.html
+  // 自定义表头 https://handsontable.com/docs/7.0.2/demo-custom-renderers.html
+  // 行过滤  https://handsontable.com/docs/7.0.2/demo-filtering.html
+  // 字体颜色 https://handsontable.com/docs/7.0.2/demo-conditional-formatting.html
 
-    //  去掉 license
-    let hotDisplay = document.getElementById('hot-display-license-info');
-    const newDoc = document.createElement('span');
-    hotDisplay.parentNode.replaceChild(newDoc, hotDisplay);
-  }
 
-
+  goData = () => {
+    const updateData = this.child.getData();
+    debugger
+    console.log('updateData', updateData);
+  };
 
 
   render() {
 
     return (
-      <div className={styles.home}>
-        <div id="example"></div>
+      <div className={styles.acGodTable}>
+        <Button onClick={this.goData}>数据</Button>
+
+        <BasicTable
+          {...this.config}
+          id="example"
+          // 设置ref属性
+          onRef={(ref) => {
+            this.child = ref;
+          }}
+          multiSelect={true}
+        />
       </div>
     );
   }
 }
 
-export default Home;
+export default AcGodTable;
