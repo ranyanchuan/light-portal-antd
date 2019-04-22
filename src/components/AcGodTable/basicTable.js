@@ -30,11 +30,16 @@ class BasicTable extends React.Component {
 
     let { id, data, colHeaders } = this.props;
 
+
+    // maps function to lookup string
+
     const container = document.getElementById(id);
 
     const tempObj = this.dealData(this.props);
 
+
     this.onHandsonTable(container, tempObj);
+
 
     //  去掉 license
     let hotDisplay = document.getElementById('hot-display-license-info');
@@ -43,7 +48,6 @@ class BasicTable extends React.Component {
 
 
     Handsontable.dom.addEvent(container, 'mousedown', function(event) {
-
       if (event.target.nodeName === 'INPUT' && event.target.className == 'multiSelectChecker') {
         event.stopPropagation();
       }
@@ -67,42 +71,7 @@ class BasicTable extends React.Component {
           });
         }
         _this.hot.render();
-        // console.log('----',  _this.props);
-        // return;
       }
-
-      // const checkDate
-      //
-      //
-      // console.log('----',  _this.props);
-
-      // const { type, nodeName, } = event.target;
-      // console.log('type,nodeName', type, nodeName,event.target.getAttribute('data-row'));
-      // console.log('----',  _this.props);
-
-      // if (event.target.nodeName === 'INPUT' && event.target.type == 'multiSelectChecker') {
-      //   let checked = !event.target.checked;
-      //   // hot2.render();
-      //   event.stopPropagation();
-      //   if (checked) {
-      //     colHeaders[0] = `<input type='checkbox' class='multiSelectChecker' checked />`;
-      //     data.map((item) => {
-      //       return item['checkbox_status'] = true;
-      //     });
-      //   } else {
-      //     colHeaders[0] = `<input type='checkbox' class='multiSelectChecker' />`;
-      //     data.map((item) => {
-      //       return item['checkbox_status'] = false;
-      //     });
-      //   }
-      //   _this.hot.render();
-      // }
-
-      //
-
-
-      console.log('-----', event.target);
-
 
     });
 
@@ -110,24 +79,50 @@ class BasicTable extends React.Component {
 
 
   dealData = () => {
-    let { multiSelect, colHeaders, columns, data,dropdownMenu } = this.props;
+    let { multiSelect, colHeaders, columns, data, dropdownMenu, rowStyle } = this.props;
+    // 添加行样式
+    if (columns && columns.length > 0 && rowStyle) {
+      for (const column of columns) {
+        const { renderer } = column;
+        // 添加样式
+        if (!renderer) {
+          column.renderer = function(instance, td, row, col, prop, value) {
+            const styles = rowStyle(row, col, prop);
+            if (styles) {
+              // 修改行样式
+              for (const style in styles) {
+                td.style[style] = styles[style];
+              }
+            }
+
+            // 数字类型居右
+            if(typeof value ==='number'){
+              td.style.textAlign = 'right';
+            }
+
+            td.innerText = value;
+            return td;
+          };
+        }
+      }
+    }
+
     // 添加 多选框
     if (multiSelect) {
       const checkedHeader = `<input type='checkbox' class='multiSelectChecker' />`;
-
-      let className= 'htCenter htMiddle ';
-      if(dropdownMenu){
-        className+='menuCheckbox'
+      let className = 'htCenter htMiddle ';
+      if (dropdownMenu) {
+        className += 'menuCheckbox';
       }
       const checkboxCell = {
         data: 'checkbox_status',
         type: 'checkbox',
         className,
       };
-
       colHeaders.unshift(checkedHeader);
       columns.unshift(checkboxCell);
     }
+
     return { ...this.props };
   };
 

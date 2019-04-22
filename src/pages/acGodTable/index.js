@@ -17,33 +17,117 @@ class AcGodTable extends React.Component {
   };
 
   data = [
-    {id:1,year:'2019',category:'奔驰',price:500000},
-    {id:2,year:'2018',category:'奔驰',price:500000},
-    {id:3,year:'2017',category:'奔驰',price:500000},
-    {id:4,year:'2016',category:'奔驰',price:500000},
+    {
+      id: 1,
+      year: 2019,
+      name: { firstName: '张', lastName: '小贝' },
+      color: 'yellow',
+      num: 19,
+      price: 500000,
+      date: '2018-07-02',
+    },
+    {
+      id: 2,
+      year: 2018,
+      name: { firstName: '李', lastName: '小贝' },
+      color: 'green',
+      num: 10,
+      price: 500000,
+      date: '2018-07-02',
+    },
+    {
+      id: 3,
+      year: 2017,
+      name: { firstName: '王', lastName: '小维' },
+      color: 'black',
+      num: 20,
+      price: 500000,
+      date: '2018-07-02',
+    },
+    {
+      id: 4,
+      year: 2016,
+      name: { firstName: '孙', lastName: '大熊' },
+      color: 'purple',
+      num: 8,
+      price: 500000,
+      date: '2018-07-02',
+    },
   ];
+
 
   config = {
     data: this.data,
-    colHeaders: ['年份','标题','类型',],
-    language:'zh-CN',
+    colHeaders: ['年份', '姓', '名', '颜色', '价格', '数量', '日期'],
+    language: 'zh-CN',
+
+    rowStyle:function(row){
+      if(row===2){
+        return {background:'#CEC'};
+      }
+    },
+
     columns: [
       {
-        data:'year',
-        type: 'autocomplete', // 表格类型
-        source: ['BMW', 'Chrysler', 'Nissan', 'Suzuki', 'Toyota', 'Volvo'],
+        data: 'year',
+        type: 'dropdown', // 下拉菜单
+        source: [2019, 2018, 2017, 2016, 2015, 2014],
         strict: false,
+        // renderer: function(instance, td, row, col, prop, value) {
+        //   td.innerText = value;
+        //   // 行数据颜色
+        //   if (row === 2) {
+        //     td.style.background = '#CEC';
+        //   }
+        //   td.style.textAlign = 'end';
+        //   return td;
+        // }
+
       },
       {
-        data:"category",
+        data: 'name.firstName',
+        type: 'text', // 表格类型
+        readOnly: true, // 只读
+        editor: false, // 不可编辑
+        strict: false,
+        multiColumnSorting: { // 不用排序
+          indicator: false,
+          headerAction: false,
+        },
+      },
+
+      {
+        data: 'name.lastName',
+        type: 'text', // 表格类型
+        strict: false,
+      },
+
+      {
+        data: 'color',
         type: 'autocomplete',
-        source: ['yellow', 'red', 'orange and another color', 'green', 'blue', 'gray', 'black', 'white', 'purple', 'lime', 'olive', 'cyan'],
+        source: ['yellow', 'red', 'green', 'blue', 'gray', 'black', 'white', 'purple', 'lime', 'olive', 'cyan'],
         strict: false,
       },
       {
         type: 'numeric',
-        data:'price',
+        data: 'price',
+        numericFormat: {  // 价格格式
+          pattern: '$ 0,0.00',
+          culture: 'en-US',
+        },
       },
+      {
+        data: 'num',
+        type: 'numeric', // 数字类型
+      },
+      {
+        data: 'date',
+        type: 'date',
+        dateFormat: 'YYYY-MM-DD', // 日期格式
+        correctFormat: true,  //  当前值是否格式化
+        defaultDate: '1900-01-01', // 默认值
+      },
+
     ],
 
     // 使用自定义列头
@@ -53,11 +137,13 @@ class AcGodTable extends React.Component {
     manualRowResize: true,   // 当值为true时，允许拖动，当为false时禁止拖动
     manualColumnMove: true,  // false 当值为true时，列可拖拽移动到指定列
     manualRowMove: true, //false 当值为true时，行可拖拽至指定行
-    // dropdownMenu: ['filter_by_condition', 'filter_action_bar']
-    // dropdownMenu: true,  // https://handsontable.com/docs/7.0.2/demo-dropdown-menu.html
+    // dropdownMenu: ['filter_by_condition', 'filter_action_bar'],
+    multiColumnSorting: true, //表头排序，升或降序
+
+    dropdownMenu: true,  // https://handsontable.com/docs/7.0.2/demo-dropdown-menu.html
   };
 
-
+  // 表头固定，隐藏 https://handsontable.com/docs/7.0.2/frameworks-wrapper-for-react-simple-examples.html
   // 多表头 https://handsontable.com/docs/7.0.2/demo-nested-headers.html
   // 多表头隐藏 https://handsontable.com/docs/7.0.2/demo-collapsing-columns.html
   // 固定row https://handsontable.com/docs/7.0.2/demo-fixing-bottom.html
@@ -77,7 +163,7 @@ class AcGodTable extends React.Component {
 
   goData = () => {
     const updateData = this.child.getData();
-    debugger
+    debugger;
     console.log('updateData', updateData);
   };
 
@@ -95,6 +181,7 @@ class AcGodTable extends React.Component {
           onRef={(ref) => {
             this.child = ref;
           }}
+          // 单选框选中
           multiSelect={true}
         />
       </div>
