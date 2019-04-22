@@ -19,12 +19,13 @@ class AcGodTable extends React.Component {
   data = [
     {
       id: 1,
-      year: 2019,
+      year: '',
       name: { firstName: '张', lastName: '小贝' },
       color: 'yellow',
       num: 19,
       price: 500000,
       date: '2018-07-02',
+      handsontable:'handsontable',
     },
     {
       id: 2,
@@ -34,6 +35,8 @@ class AcGodTable extends React.Component {
       num: 10,
       price: 500000,
       date: '2018-07-02',
+      handsontable:'handsontable',
+
     },
     {
       id: 3,
@@ -43,6 +46,8 @@ class AcGodTable extends React.Component {
       num: 20,
       price: 500000,
       date: '2018-07-02',
+      handsontable:'handsontable',
+
     },
     {
       id: 4,
@@ -52,18 +57,32 @@ class AcGodTable extends React.Component {
       num: 8,
       price: 500000,
       date: '2018-07-02',
+      handsontable:'handsontable',
     },
   ];
 
 
+  manufacturerData = [
+    {name: 'BMW', country: 'Germany', owner: 'Bayerische Motoren Werke AG'},
+    {name: 'Chrysler', country: 'USA', owner: 'Chrysler Group LLC'},
+    {name: 'Nissan', country: 'Japan', owner: 'Nissan Motor Company Ltd'},
+    {name: 'Suzuki', country: 'Japan', owner: 'Suzuki Motor Corporation'},
+    {name: 'Toyota', country: 'Japan', owner: 'Toyota Motor Corporation'},
+    {name: 'Volvo', country: 'Sweden', owner: 'Zhejiang Geely Holding Group'}
+  ];
+
   config = {
     data: this.data,
-    colHeaders: ['年份', '姓', '名', '颜色', '价格', '数量', '日期'],
+    colHeaders: ['年份', '姓', '名', '颜色', '价格', '数量', '日期','handsontable'],
     language: 'zh-CN',
+    currentRowClassName: 'currentRow',
+    allowInsertRow: false,
+    activeHeaderClassName: 'currentRow',
 
-    rowStyle:function(row){
-      if(row===2){
-        return {background:'#CEC'};
+    rowStyle: function(row) {
+
+      if (row % 2 === 0) {
+        return { backgroundColor: '#CEC' };
       }
     },
 
@@ -73,16 +92,8 @@ class AcGodTable extends React.Component {
         type: 'dropdown', // 下拉菜单
         source: [2019, 2018, 2017, 2016, 2015, 2014],
         strict: false,
-        // renderer: function(instance, td, row, col, prop, value) {
-        //   td.innerText = value;
-        //   // 行数据颜色
-        //   if (row === 2) {
-        //     td.style.background = '#CEC';
-        //   }
-        //   td.style.textAlign = 'end';
-        //   return td;
-        // }
-
+        placeholder: 'Empty Cell',
+        tableClassName: 'currentRow',
       },
       {
         data: 'name.firstName',
@@ -127,7 +138,20 @@ class AcGodTable extends React.Component {
         correctFormat: true,  //  当前值是否格式化
         defaultDate: '1900-01-01', // 默认值
       },
-
+      {
+        type: 'handsontable',
+        data: 'handsontable',
+        handsontable: {
+          colHeaders: ['Marque', 'Country', 'Parent company'],
+          autoColumnSize: true,
+          data: this.manufacturerData,
+          getValue: function() {
+            const selection = this.getSelectedLast();
+            // Get always manufacture name of clicked row
+            return this.getSourceDataAtRow(selection[0]).name;
+          },
+        }
+      }
     ],
 
     // 使用自定义列头
@@ -159,7 +183,6 @@ class AcGodTable extends React.Component {
   // 自定义表头 https://handsontable.com/docs/7.0.2/demo-custom-renderers.html
   // 行过滤  https://handsontable.com/docs/7.0.2/demo-filtering.html
   // 字体颜色 https://handsontable.com/docs/7.0.2/demo-conditional-formatting.html
-
 
   goData = () => {
     const updateData = this.child.getData();

@@ -20,7 +20,6 @@ class BasicTable extends React.Component {
     });
   };
 
-
   componentDidMount() {
 
     // 在父组件上绑定子组件方法
@@ -28,31 +27,26 @@ class BasicTable extends React.Component {
 
     const _this = this;
 
-    let { id, data, colHeaders } = this.props;
-
-
-    // maps function to lookup string
+    let { id, data, colHeaders, rowStyle } = this.props;
 
     const container = document.getElementById(id);
-
+    // 数据处理满足 handsontable 格式
     const tempObj = this.dealData(this.props);
-
-
     this.onHandsonTable(container, tempObj);
-
 
     //  去掉 license
     let hotDisplay = document.getElementById('hot-display-license-info');
     const newDoc = document.createElement('span');
     hotDisplay.parentNode.replaceChild(newDoc, hotDisplay);
 
-
+    // 添加 mousedown
     Handsontable.dom.addEvent(container, 'mousedown', function(event) {
       if (event.target.nodeName === 'INPUT' && event.target.className == 'multiSelectChecker') {
         event.stopPropagation();
       }
     });
 
+    // 添加 mouseup
     Handsontable.dom.addEvent(container, 'mouseup', function(event) {
       // 多选操作
       if (event.target.nodeName === 'INPUT' && event.target.className == 'multiSelectChecker') {
@@ -72,40 +66,12 @@ class BasicTable extends React.Component {
         }
         _this.hot.render();
       }
-
     });
-
   }
 
 
   dealData = () => {
     let { multiSelect, colHeaders, columns, data, dropdownMenu, rowStyle } = this.props;
-    // 添加行样式
-    if (columns && columns.length > 0 && rowStyle) {
-      for (const column of columns) {
-        const { renderer } = column;
-        // 添加样式
-        if (!renderer) {
-          column.renderer = function(instance, td, row, col, prop, value) {
-            const styles = rowStyle(row, col, prop);
-            if (styles) {
-              // 修改行样式
-              for (const style in styles) {
-                td.style[style] = styles[style];
-              }
-            }
-
-            // 数字类型居右
-            if(typeof value ==='number'){
-              td.style.textAlign = 'right';
-            }
-
-            td.innerText = value;
-            return td;
-          };
-        }
-      }
-    }
 
     // 添加 多选框
     if (multiSelect) {
@@ -123,6 +89,41 @@ class BasicTable extends React.Component {
       columns.unshift(checkboxCell);
     }
 
+
+    // 添加行样式
+    if (columns && columns.length > 0 && rowStyle) {
+      for (const column of columns) {
+        const { renderer, data, type } = column;
+        // 添加样式
+        if (!renderer) {
+          column.renderer = function(instance, td, row, col, prop, value) {
+
+            switch (type) {
+              case 'date':Handsontable.renderers.DateRenderer.apply(this, arguments);break;
+              case 'numeric':Handsontable.renderers.NumericRenderer.apply(this, arguments);break;
+              case 'checkbox':Handsontable.renderers.CheckboxRenderer.apply(this, arguments);break;
+              case 'time':Handsontable.renderers.TimeRenderer.apply(this, arguments);break;
+              case 'base':Handsontable.renderers.BaseRenderer.apply(this, arguments);break;
+              case 'autocomplete':Handsontable.renderers.AutocompleteRenderer.apply(this, arguments);break;
+              case 'password':Handsontable.renderers.PasswordRenderer.apply(this, arguments);break;
+              case 'dropdown':Handsontable.renderers.DropdownRenderer.apply(this, arguments);break;
+              default: Handsontable.renderers.TextRenderer.apply(this, arguments);
+            }
+
+            const styles = rowStyle(row+1, col, prop);
+            if (styles) {
+              // 修改行样式
+              for (const style in styles) {
+                td.style[style] = styles[style];
+              }
+            }
+          };
+        }
+      }
+    }
+
+
+
     return { ...this.props };
   };
 
@@ -135,6 +136,7 @@ class BasicTable extends React.Component {
 
 
   render() {
+
     const { id } = this.props;
     return (
       <div id={id}></div>
