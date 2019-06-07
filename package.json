@@ -30,10 +30,7 @@
   },
   "dependencies": {
     "@handsontable/react": "^3.0.0",
-    "ac-editor-sany": "^0.2.0",
-    "ac-hand-table": "0.0.1",
     "antd": "latest",
-    "chuan-npm-test": "0.0.4",
     "components": "^0.1.0",
     "dva": "latest",
     "dva-logger": "^1.0.0",
