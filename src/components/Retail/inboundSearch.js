@@ -12,7 +12,6 @@ import ConAutoSelect from 'components/ConAutoSelect';
 import styles from './index.less';
 
 
-
 @Form.create()
 
 
@@ -76,7 +75,7 @@ class InboundSearch extends React.Component {
                 id="domain"
                 label="种类"
                 placeholder="请选择种类"
-                data={["电视机",'洗衣机','冰箱']}
+                data={['电视机', '洗衣机', '冰箱']}
               />
             </Col>
 
@@ -85,8 +84,8 @@ class InboundSearch extends React.Component {
               <ConInput
                 form={form}
                 formItemLayout={formItemLayout}
-                id="code"
-                label="编号"
+                id="model"
+                label="型号"
                 placeholder="请输入编号"
               />
             </Col>
@@ -95,7 +94,7 @@ class InboundSearch extends React.Component {
               <ConInput
                 form={form}
                 formItemLayout={formItemLayout}
-                id="name"
+                id="title"
                 label="名称"
                 placeholder="请输入名称"
               />
@@ -109,15 +108,13 @@ class InboundSearch extends React.Component {
                 id="brand"
                 label="品牌"
                 placeholder="请输入品牌"
-                data={["TCL",'九阳','火焰山']}
+                data={['TCL', '九阳', '火焰山']}
               />
             </Col>
 
-
-
             <Col span={8}>
               <ConDate
-                id="date"
+                id="createTime"
                 label="入库日期"
                 placeholder="请选择入库日期"
                 form={form}
@@ -132,7 +129,7 @@ class InboundSearch extends React.Component {
                 placeholder="请输入进货地址"
                 form={form}
                 formItemLayout={formItemLayout}
-                data={["沿河",'遵义','重庆']}
+                data={['沿河', '遵义', '重庆']}
               />
             </Col>
 

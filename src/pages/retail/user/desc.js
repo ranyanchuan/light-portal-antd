@@ -5,23 +5,24 @@
 import React from 'react';
 import { connect } from 'dva';
 import moment from 'moment';
-import { Button, Modal, Table } from 'antd';
+import { Button, Modal, Table, Tabs } from 'antd';
 
-import Search from 'components/Retail/inboundSearch';
+import Search from 'components/Retail/userSearch';
 
-import BasicModal from 'components/Retail/inBasicModal';
+import BasicModal from 'components/Retail/userBasicModel';
 
 import styles from './index.less';
 
 
 const confirm = Modal.confirm;
-const ruleDate = 'YYYY-MM-DD';
+const { TabPane } = Tabs;
+
 
 @connect((state) => ({
   common: state.common,
 }))
 
-class AdminArtist extends React.Component {
+class UserDesc extends React.Component {
 
   state = {
     searchObj: {}, //搜索面板数据
@@ -32,18 +33,18 @@ class AdminArtist extends React.Component {
     basModVis: false,
     basModStatus: 'add',
 
-    inboundDataObj: {}, // 影视数据
+    retailUserDataObj: {}, // 影视数据
 
   };
 
 
   componentDidMount() {
-    this.getTableData({ table: 'inbound' });
+    this.getTableData({ table: 'retailUser' });
   }
 
   // 搜索面板值
   onSearchPannel = (param) => {
-    this.getTableData({ ...param, table: 'inbound' });
+    this.getTableData({ ...param, table: 'retailUser' });
   };
 
 
@@ -53,7 +54,7 @@ class AdminArtist extends React.Component {
     // 清空主表信息
     const tempState = {};
     tempState.inboundTableLoading = true;
-    tempState.inboundDataObj = {};
+    tempState.retailUserDataObj = {};
 
     this.setState(tempState);
 
@@ -120,82 +121,45 @@ class AdminArtist extends React.Component {
       payload.type = 'common/add';
     }
     // 添加操作表名
-    payload.table = 'inbound';
+    payload.table = 'retailUser';
     // 获取表格数据
     this.onActionTable(payload);
   };
 
 
   columns = [
-    {
-      title: '图片',
-      dataIndex: 'fileList',
-      key: 'fileList',
-      render: (item) => {
-        return <img src={item[0]} alt="图片" style={{ height: 40 }}/>;
-      },
 
-    },
     {
-      title: '编号',
-      dataIndex: '_id',
-      key: '_id',
-    },
-    {
-      title: '种类',
-      dataIndex: 'domain',
-      key: 'domain',
+      title: '名字',
+      dataIndex: 'name',
+      key: 'name',
     },
 
     {
-      title: '名称',
-      dataIndex: 'title',
-      key: 'title',
+      title: '手机号',
+      dataIndex: 'phone',
+      key: 'phone',
     },
     {
-      title: '品牌',
-      dataIndex: 'brand',
-      key: 'brand',
+      title: '身份证号',
+      dataIndex: 'card',
+      key: 'card',
     },
     {
-      title: '型号',
-      dataIndex: 'model',
-      key: 'model',
+      title: '居住镇',
+      dataIndex: 'town',
+      key: 'town',
     },
     {
-      title: '进货',
-      dataIndex: 'total',
-      key: 'total',
+      title: '居住村',
+      dataIndex: 'village',
+      key: 'village',
     },
     {
-      title: '库存',
-      dataIndex: 'stock',
-      key: 'stock',
+      title: '居住组',
+      dataIndex: 'group',
+      key: 'group',
     },
-    {
-      title: '价格',
-      dataIndex: 'price',
-      key: 'price',
-    },
-    {
-      title: '入库日期',
-      dataIndex: 'createTime',
-      key: 'createTime',
-      render: (text) => {
-        return text ? moment(text).format(ruleDate) : '';
-      },
-    },
-    {
-      title: '来源',
-      dataIndex: 'source',
-      key: 'source',
-    },
-    {
-      title: '备注',
-      dataIndex: 'remark',
-      key: 'remark',
-    },
-
   ];
 
 
@@ -222,7 +186,7 @@ class AdminArtist extends React.Component {
   onClickDel = () => {
     const { selectedRowKeys } = this.state;
     if (selectedRowKeys && selectedRowKeys.length > 0) {
-      let payload = { type: 'common/del', _id: selectedRowKeys[0], table: 'inbound' };
+      let payload = { type: 'common/del', _id: selectedRowKeys[0], table: 'retailUser' };
       this.showDelCon(payload);
     }
 
@@ -249,11 +213,15 @@ class AdminArtist extends React.Component {
       size: pageSize,
     };
     // 获取分页数据
-    this.getTableData({ ...param, ...searchObj, table: 'inbound' });
+    this.getTableData({ ...param, ...searchObj, table: 'retailUser' });
   };
 
   onSelectChange = (value) => {
     this.setState({ selectedRowKeys: value });
+  };
+
+  onChangeTable = (value) => {
+
   };
 
 
@@ -261,22 +229,19 @@ class AdminArtist extends React.Component {
 
     const {
       starTableLoading, basModVis, selectedRowKeys,
-      basModStatus, selectedRowObj, inboundDataObj,
+      basModStatus, selectedRowObj, retailUserDataObj,
     } = this.state;
-
-    console.log('selectedRowKeys', selectedRowKeys);
-
     const rowSelection = {
       selectedRowKeys,
       onChange: this.onSelectChange,
       type: 'radio',
     };
 
-    const btnDisable = (inboundDataObj.list && inboundDataObj.list.length > 0) ? false : true;
+    const btnDisable = (retailUserDataObj.list && retailUserDataObj.list.length > 0) ? false : true;
 
 
     return (
-      <div className={styles.inbound}>
+      <div className={styles.user}>
         <Search
           onSearch={this.onSearchPannel}
           // 设置ref属性
@@ -284,40 +249,37 @@ class AdminArtist extends React.Component {
             this.child = ref;
           }}
         />
-        <div className="table-operations">
-          <Button onClick={this.onShowModal.bind(this, 'add')}>添加</Button>
-          <Button onClick={this.onShowModal.bind(this, 'edit')} disabled={btnDisable}>编辑</Button>
-          <Button onClick={this.onShowModal.bind(this, 'desc')} disabled={btnDisable}>详情</Button>
-          <Button onClick={this.onClickDel} disabled={btnDisable}>删除</Button>
-        </div>
-        <Table
-          loading={starTableLoading}
-          size="small"
-          rowKey={record => record._id}
-          rowSelection={rowSelection}
-          columns={this.columns}
-          dataSource={inboundDataObj.list ? inboundDataObj.list : []}
-          pagination={{
-            current: inboundDataObj.pageIndex + 1,
-            total: inboundDataObj.count,
-            pageSize: inboundDataObj.size,
-          }}
-          onChange={this.onChangeBasicPage}
-          className={styles.newsTable}
-        />
 
-        <BasicModal
-          visible={basModVis}
-          status={basModStatus}
-          onClose={this.onClickClose}
-          onSave={this.onClickSaveBasic}
-          basicData={basModStatus !== 'add' ? selectedRowObj : {}}
-        />
+        <Tabs defaultActiveKey="1" onChange={this.onChangeTable}>
+          <TabPane tab="消费明细" key="1">
+
+            <Table
+              loading={starTableLoading}
+              size="small"
+              rowKey={record => record._id}
+              rowSelection={rowSelection}
+              columns={this.columns}
+              dataSource={retailUserDataObj.list ? retailUserDataObj.list : []}
+              pagination={{
+                current: retailUserDataObj.pageIndex + 1,
+                total: retailUserDataObj.count,
+                pageSize: retailUserDataObj.size,
+              }}
+              onChange={this.onChangeBasicPage}
+              className={styles.newsTable}
+            />
+
+
+          </TabPane>
+          <TabPane tab="消费统计" key="2">
+            Content of Tab Pane 2
+          </TabPane>
+        </Tabs>
       </div>
 
     );
   }
 }
 
-export default AdminArtist;
+export default UserDesc;
 

@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "@handsontable/react": "^3.0.0",
+    "ac-hand-table": "0.0.24",
     "antd": "latest",
     "components": "^0.1.0",
     "dva": "latest",
@@ -42,6 +43,7 @@
     "moment": "latest",
     "path": "^0.12.7",
     "react": "latest",
+    "tinper-bee": "^2.0.13",
     "xiaoheizhaodemo": "^0.0.2"
   }
 }

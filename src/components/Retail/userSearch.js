@@ -5,7 +5,7 @@ import ConSelect from 'components/ConSelect';
 import ConDate from 'components/ConDate';
 import ConInputNumber from 'components/ConInputNumber';
 import ConInput from 'components/ConInput';
-import ConTextArea from 'components/ConTextArea';
+import ConAutoSelect from 'components/ConAutoSelect';
 
 
 import styles from './index.less';
@@ -67,7 +67,7 @@ class UserSearch extends React.Component {
         >
           <Row gutter={24}>
 
-            <Col span={12}>
+            <Col span={8}>
               <ConSelect
                 form={form}
                 formItemLayout={formItemLayout}
@@ -78,7 +78,7 @@ class UserSearch extends React.Component {
             </Col>
 
 
-            <Col span={12}>
+            <Col span={8}>
               <ConInput
                 form={form}
                 formItemLayout={formItemLayout}
@@ -88,7 +88,7 @@ class UserSearch extends React.Component {
               />
             </Col>
 
-            <Col span={12}>
+            <Col span={8}>
               <ConInput
                 form={form}
                 formItemLayout={formItemLayout}
@@ -99,24 +99,38 @@ class UserSearch extends React.Component {
             </Col>
 
 
-            <Col span={12}>
-              <ConInput
+            <Col span={8}>
+
+              <ConAutoSelect
                 form={form}
                 formItemLayout={formItemLayout}
-                id="address"
+                id="town"
                 label="居住镇"
-                placeholder="请选择居住村"
+                placeholder="请输入居住镇"
+                data={['客田镇']}
               />
             </Col>
 
-
-            <Col span={12}>
-              <ConDate
-                id="date"
-                label="出库日期"
-                placeholder="请选择入库日期"
+            <Col span={8}>
+              <ConAutoSelect
                 form={form}
                 formItemLayout={formItemLayout}
+                id="village"
+                label="居住村"
+                placeholder="请选择居住村"
+                data={['客田村', '百合村']}
+              />
+            </Col>
+
+            <Col span={8}>
+              <ConAutoSelect
+                form={form}
+                formItemLayout={formItemLayout}
+                id="group"
+                label="居住组"
+                placeholder="请选择居住组"
+                data={['杨家村组']}
+
               />
             </Col>
 
@@ -129,9 +143,6 @@ class UserSearch extends React.Component {
               <Button style={{ marginLeft: 8 }} onClick={this.handleReset}>清空</Button>
             </Col>
           </Row>
-
-
-
 
         </Form>
       </div>

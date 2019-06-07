@@ -1,24 +1,20 @@
 import React from 'react';
 import moment from 'moment';
 
-import { Form, Button, Modal, Row, Col, Table, Tag } from 'antd';
-import ConSelect from 'components/ConSelect';
+import { Form, Modal, Row, Col } from 'antd';
 import ConInput from 'components/ConInput';
 import ConDate from 'components/ConDate';
 import ConUploadMore from 'components/ConUploadMore';
 import ConInputNumber from 'components/ConInputNumber';
-import ConTextArea from 'components/ConTextArea';
 import ConAutoSelect from 'components/ConAutoSelect';
 
 import { api } from 'utils/config';
 import { uuid, addUidList } from 'utils';
 
-import styles from './index.less';
-
 
 @Form.create()
 
-class Model extends React.Component {
+class InBasicModel extends React.Component {
   state = {
     status: '',
     fileList: [],
@@ -35,16 +31,12 @@ class Model extends React.Component {
   }
 
 
-
-
   // 关闭添加信息弹框
   hideModal = () => {
     this.setState({ fileList: [] });
     this.props.onClose();
     this.props.form.resetFields();
   };
-
-
 
 
   //  提交form信息弹框
@@ -128,6 +120,7 @@ class Model extends React.Component {
                   data={['电视机', '洗衣机', '冰箱']}
                   defValue={basicData.domain}
                   disabled={disabled}
+                  message="请选择种类"
 
                 />
               </Col>
@@ -138,6 +131,8 @@ class Model extends React.Component {
                   id="title"
                   label="名称"
                   placeholder="请输入名称"
+                  message="请输入名称"
+
                   required={true}
                   defValue={basicData.title}
                   disabled={disabled}
@@ -241,6 +236,7 @@ class Model extends React.Component {
                   id="price"
                   label="单价"
                   placeholder="请输入单价"
+                  message="请输入单价"
                   form={form}
                   formItemLayout={formItemLayout}
                   min={0}
@@ -263,8 +259,6 @@ class Model extends React.Component {
               </Col>
 
 
-
-
             </Row>
 
             <Row>
@@ -282,7 +276,6 @@ class Model extends React.Component {
                 />
               </Col>
             </Row>
-
           </Form>
 
         </Modal>
@@ -292,4 +285,4 @@ class Model extends React.Component {
   }
 }
 
-export default Model;
+export default InBasicModel;
