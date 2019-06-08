@@ -5,7 +5,7 @@
 import React from 'react';
 import { connect } from 'dva';
 import moment from 'moment';
-import { Button, Modal, Table } from 'antd';
+import { Button, Icon, Modal, Table } from 'antd';
 
 import Search from 'components/Retail/userSearch';
 
@@ -132,6 +132,10 @@ class User extends React.Component {
       title: '名字',
       dataIndex: 'name',
       key: 'name',
+      render: (text, record) => {
+        const { phone } = record;
+        return <a href={'user/desc?phone=' + phone}>{text}</a>;
+      },
     },
 
     {
@@ -212,13 +216,12 @@ class User extends React.Component {
       size: pageSize,
     };
     // 获取分页数据
-    this.getTableData({ ...param, ...searchObj, table: 'retailUser'});
+    this.getTableData({ ...param, ...searchObj, table: 'retailUser' });
   };
 
   onSelectChange = (value) => {
     this.setState({ selectedRowKeys: value });
   };
-
 
 
   render() {

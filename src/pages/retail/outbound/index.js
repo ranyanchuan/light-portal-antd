@@ -9,7 +9,7 @@ import { Button, Modal, Table } from 'antd';
 
 import Search from 'components/Retail/inboundSearch';
 
-import BasicModal from 'components/Retail/inBasicModal';
+import BasicModal from 'components/Retail/outboundBasic';
 
 import styles from './index.less';
 
@@ -21,7 +21,7 @@ const ruleDate = 'YYYY-MM-DD';
   common: state.common,
 }))
 
-class AdminArtist extends React.Component {
+class Outbound extends React.Component {
 
   state = {
     searchObj: {}, //搜索面板数据
@@ -107,35 +107,47 @@ class AdminArtist extends React.Component {
   // 保存基本信息
   onClickSaveBasic = (data) => {
 
-    const { basModStatus, selectedRowObj } = this.state;
-    let payload = {};
-    if (basModStatus === 'edit') {
-      payload.type = 'common/upd';
-      payload.condition = { _id: selectedRowObj['_id'] };
-      payload.content = data;
-    }
-    // 添加类型
-    if (basModStatus === 'add') {
-      payload = data;
-      payload.type = 'common/add';
-    }
+    let payload = data;
     // 添加操作表名
-    payload.table = 'inbound';
-    // 获取表格数据
-    this.onActionTable(payload);
+    payload.table = 'logistics';
+    payload.status = 'distribution';
+
+    this.props.dispatch({
+      type: 'common/add',
+      payload,
+      callback: (res) => {
+        this.setState({ loading: false });
+        const { status } = res;
+        if (status === 'success') {
+          // todo 修改库存
+          // 获取table 数据
+          let param = this.child.getSearchValue();
+          param.table = 'inbound';
+          // 获取表格数据
+          this.getTableData(param);
+        } else {
+          console.log('失败');
+        }
+      },
+    });
   };
 
 
   onClickBuy = (value) => {
     console.log('value', value);
 
-  //  1.弹框 2.是否会员，3.库存, 4.购买清单
-
+    //  1.弹框 2.是否会员，3.库存, 4.购买清单
+    this.setState({ basModVis: true, selectedRowObj: value });
 
   };
 
 
   columns = [
+    {
+      title: '编码',
+      dataIndex: '_id',
+      key: '_id',
+    },
     {
       title: '图片',
       dataIndex: 'fileList',
@@ -259,14 +271,6 @@ class AdminArtist extends React.Component {
       basModStatus, selectedRowObj, inboundDataObj,
     } = this.state;
 
-    console.log('selectedRowKeys', selectedRowKeys);
-
-    const rowSelection = {
-      selectedRowKeys,
-      onChange: this.onSelectChange,
-      type: 'radio',
-    };
-
 
     return (
       <div className={styles.inbound}>
@@ -298,7 +302,7 @@ class AdminArtist extends React.Component {
           status={basModStatus}
           onClose={this.onClickClose}
           onSave={this.onClickSaveBasic}
-          basicData={basModStatus !== 'add' ? selectedRowObj : {}}
+          basicData={selectedRowObj}
         />
       </div>
 
@@ -306,5 +310,5 @@ class AdminArtist extends React.Component {
   }
 }
 
-export default AdminArtist;
+export default Outbound;
 
