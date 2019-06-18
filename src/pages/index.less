@@ -48,6 +48,9 @@
     }
   }
 
+
+
+
   .content {
     display: flex;
     justify-content: center;
@@ -58,6 +61,17 @@
       img {
         height: 380px;
         width: 580px;
+      }
+    }
+
+    :global {
+      .ant-carousel {
+        .slick-slide {
+          text-align: center;
+          height: 350px;
+          line-height: 350px;
+          overflow: hidden;
+        }
       }
     }
 
