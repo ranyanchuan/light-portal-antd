@@ -3,7 +3,7 @@
 function BasicLayout(props) {
   return (
     <div>
-      {/*<h1 className={styles.title}>Yay! Welcome to umi!</h1>*/}
+      {/*<h1>Yay! Welcome to umi!</h1>*/}
       { props.children }
     </div>
   );

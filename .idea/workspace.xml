@@ -2,28 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="059cf7d0-ef89-48cb-9855-11b2eeca7f89" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Retail/inBasicModal.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Retail/inboundSearch.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Retail/index.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Retail/logisticsSearch.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Retail/outboundBasic.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Retail/outboundSearch.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Retail/userBasicModel.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Retail/userSearch.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/index.less" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/retail/inbound/copy.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/retail/inbound/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/retail/inbound/index.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/retail/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/retail/index.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/retail/logistics/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/retail/logistics/index.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/retail/outbound/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/retail/outbound/index.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/retail/user/desc.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/retail/user/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/retail/user/index.less" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layouts/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/index.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -120,14 +103,144 @@
         </counts>
       </usages-collector>
     </session>
+    <session id="-706417929">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.open.time.4" value="1" />
+          <entry key="project.opened" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="env" value="1" />
+          <entry key="js" value="9" />
+          <entry key="json" value="1" />
+          <entry key="txt" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="JSON" value="1" />
+          <entry key="JavaScript" value="9" />
+          <entry key="PLAIN_TEXT" value="2" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.js.language.service.starts">
+        <counts>
+          <entry key="ESLintLanguageService" value="1" />
+        </counts>
+      </usages-collector>
+    </session>
+    <session id="-889802406">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.open.time.4" value="1" />
+          <entry key="project.opened" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.js.language.service.starts">
+        <counts>
+          <entry key="ESLintLanguageService" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="gitignore" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="PLAIN_TEXT" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="gitignore" value="6" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="PLAIN_TEXT" value="6" />
+        </counts>
+      </usages-collector>
+    </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/pages/index.less">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="192">
-              <caret line="66" column="13" lean-forward="true" selection-start-line="66" selection-start-column="13" selection-end-line="66" selection-end-column="13" />
+            <state relative-caret-position="234">
+              <caret line="13" column="40" selection-start-line="13" selection-start-column="40" selection-end-line="13" selection-end-column="40" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/README.txt">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/app.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="198">
+              <caret line="11" selection-start-line="11" selection-end-line="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="310">
+              <caret line="18" column="5" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/layouts/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="108">
+              <caret line="6" column="24" selection-start-line="6" selection-start-column="24" selection-end-line="6" selection-end-column="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/models/adminBasketballModel.js">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/models/commonModel.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="162">
+              <caret line="9" column="31" selection-start-line="9" selection-start-column="10" selection-end-line="9" selection-end-column="31" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/models/homePageModel.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="234">
+              <caret line="13" column="4" selection-start-line="13" selection-start-column="4" selection-end-line="13" selection-end-column="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/utils/config.js">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/pages/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2448">
+              <caret line="142" column="30" selection-start-line="142" selection-start-column="22" selection-end-line="142" selection-end-column="30" />
             </state>
           </provider>
         </entry>
@@ -145,7 +258,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>onClickClose</find>
       <find>handsontable.full.css</find>
       <find>@import</find>
       <find>multiSelect</find>
@@ -175,6 +287,7 @@
       <find>onActionTable</find>
       <find>selectedRowKeys</find>
       <find>getTableData</find>
+      <find>handso</find>
     </findStrings>
     <replaceStrings>
       <replace>直接访问</replace>
@@ -215,8 +328,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/components/Admin/Player/index.less" />
-        <option value="$PROJECT_DIR$/src/components/Tag/basketball.js" />
         <option value="$PROJECT_DIR$/src/components/Tag/player.js" />
         <option value="$PROJECT_DIR$/src/components/Admin/Player/Search.js" />
         <option value="$PROJECT_DIR$/src/components/Domain/player.js" />
@@ -246,7 +357,6 @@
         <option value="$PROJECT_DIR$/src/components/AcGodTable/basicTable.js" />
         <option value="$PROJECT_DIR$/src/pages/acGodTable/index.js" />
         <option value="$PROJECT_DIR$/.umirc.js" />
-        <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/src/pages/index.js" />
         <option value="$PROJECT_DIR$/src/pages/retail/inbound/copy.js" />
         <option value="$PROJECT_DIR$/node_modules/tinper-bee/environment.js" />
@@ -266,6 +376,9 @@
         <option value="$PROJECT_DIR$/src/pages/retail/user/index.js" />
         <option value="$PROJECT_DIR$/src/pages/retail/user/desc.js" />
         <option value="$PROJECT_DIR$/src/pages/index.less" />
+        <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/src/layouts/index.js" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -286,10 +399,10 @@
     </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="151" />
-    <option name="y" value="23" />
-    <option name="width" value="1449" />
-    <option name="height" value="937" />
+    <option name="x" value="299" />
+    <option name="y" value="40" />
+    <option name="width" value="1680" />
+    <option name="height" value="934" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -301,38 +414,13 @@
         <subPane>
           <expand>
             <path>
-              <item name="yaoyan-antd" type="b2602c69:ProjectViewProjectNode" />
-              <item name="yaoyan-antd" type="462c0819:PsiDirectoryNode" />
+              <item name="light-portal-antd" type="b2602c69:ProjectViewProjectNode" />
+              <item name="light-portal-antd" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="yaoyan-antd" type="b2602c69:ProjectViewProjectNode" />
-              <item name="yaoyan-antd" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="yaoyan-antd" type="b2602c69:ProjectViewProjectNode" />
-              <item name="yaoyan-antd" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="yaoyan-antd" type="b2602c69:ProjectViewProjectNode" />
-              <item name="yaoyan-antd" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="yaoyan-antd" type="b2602c69:ProjectViewProjectNode" />
-              <item name="yaoyan-antd" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="star" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="yaoyan-antd" type="b2602c69:ProjectViewProjectNode" />
-              <item name="yaoyan-antd" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
+              <item name="light-portal-antd" type="b2602c69:ProjectViewProjectNode" />
+              <item name="light-portal-antd" type="462c0819:PsiDirectoryNode" />
+              <item name="node_modules" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -560,14 +648,16 @@
       <workItem from="1559961710189" duration="14748000" />
       <workItem from="1560042708647" duration="419000" />
       <workItem from="1560846674966" duration="67000" />
+      <workItem from="1567830980713" duration="1669000" />
+      <workItem from="1567832910712" duration="106000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="767887000" />
+    <option name="totallyTimeSpent" value="769662000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1680" height="937" extended-state="6" />
+    <frame x="0" y="23" width="1680" height="934" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.8659696" visible="true" weight="0.18685955" />
@@ -583,8 +673,8 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.3298893" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50391805" side_tool="true" visible="true" weight="0.27455622" />
-      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49608198" visible="true" weight="0.27455622" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.2983725" side_tool="true" visible="true" weight="0.51187646" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.7016275" visible="true" weight="0.51187646" />
       <window_info anchor="bottom" id="TypeScript" order="11" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -630,43 +720,12 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/node_modules/@handsontable/formulajs/lib/database.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="1" lean-forward="true" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/@handsontable/formulajs/lib/engineering.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/@handsontable/formulajs/lib/date-time.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/admin/baseball/index.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/AcGodTable/basicTable.js" />
-    <entry file="file://$PROJECT_DIR$/src/pages/acGodTable/index.less" />
-    <entry file="file://$PROJECT_DIR$/src/components/AcGodTable/index.less" />
-    <entry file="file://$PROJECT_DIR$/node_modules/@handsontable/formulajs/lib/logical.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/@handsontable/formulajs/lib/information.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/@handsontable/formulajs/lib/information.js" />
     <entry file="file://$PROJECT_DIR$/src/pages/acGodTable/index.js" />
     <entry file="file://$PROJECT_DIR$/src/components/Admin/Basketball/Search.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1258">
           <caret line="84" column="27" selection-start-line="84" selection-start-column="27" selection-end-line="84" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/commonModel.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="31" selection-start-line="9" selection-start-column="10" selection-end-line="9" selection-end-column="31" />
         </state>
       </provider>
     </entry>
@@ -705,48 +764,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.umirc.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="25" column="94" lean-forward="true" selection-start-line="25" selection-start-column="94" selection-end-line="25" selection-end-column="94" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/ac-editor-sany/dist/index.css" />
-    <entry file="file://$PROJECT_DIR$/node_modules/ac-hand-table/dist/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-6774" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/tinper-bee/environment.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" selection-start-line="7" selection-end-line="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/ac-hand-table/dist/index.css">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/ac-hand-table/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-437" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="244">
-          <caret line="16" column="37" lean-forward="true" selection-start-line="16" selection-start-column="37" selection-end-line="16" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="613">
-          <caret line="142" column="30" selection-start-line="142" selection-start-column="22" selection-end-line="142" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/ac-hand-table/dist/index.js" />
+    <entry file="file://$PROJECT_DIR$/node_modules/tinper-bee/environment.js" />
+    <entry file="file://$PROJECT_DIR$/node_modules/ac-hand-table/dist/index.css" />
+    <entry file="file://$PROJECT_DIR$/node_modules/ac-hand-table/package.json" />
     <entry file="file://$PROJECT_DIR$/src/pages/retail/index.less" />
     <entry file="file://$PROJECT_DIR$/src/pages/retail/logistics/index.less" />
     <entry file="file://$PROJECT_DIR$/src/pages/retail/index.js" />
@@ -788,13 +810,6 @@
     <entry file="file://$PROJECT_DIR$/src/pages/retail/inbound/index.js" />
     <entry file="file://$PROJECT_DIR$/src/pages/retail/user/desc.js" />
     <entry file="file://$PROJECT_DIR$/src/components/Retail/logisticsSearch.js" />
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" selection-start-line="14" selection-end-line="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/utils/mockData.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
@@ -805,7 +820,76 @@
     <entry file="file://$PROJECT_DIR$/src/pages/index.less">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="192">
-          <caret line="66" column="13" lean-forward="true" selection-start-line="66" selection-start-column="13" selection-end-line="66" selection-end-column="13" />
+          <caret line="66" column="13" selection-start-line="66" selection-start-column="13" selection-end-line="66" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.env">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/config.js" />
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="13" column="40" selection-start-line="13" selection-start-column="40" selection-end-line="13" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/layouts/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="6" column="24" selection-start-line="6" selection-start-column="24" selection-end-line="6" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/models/adminBasketballModel.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/models/commonModel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="9" column="31" selection-start-line="9" selection-start-column="10" selection-end-line="9" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/models/homePageModel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="13" column="4" selection-start-line="13" selection-start-column="4" selection-end-line="13" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/utils/config.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2448">
+          <caret line="142" column="30" selection-start-line="142" selection-start-column="22" selection-end-line="142" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.umirc.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="19" column="8" lean-forward="true" selection-start-line="19" selection-start-column="8" selection-end-line="19" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="310">
+          <caret line="18" column="5" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
         </state>
       </provider>
     </entry>
